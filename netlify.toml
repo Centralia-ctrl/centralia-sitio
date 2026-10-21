@@ -1,0 +1,9 @@
+# Netlify publica solo dist/, que build.cjs arma con las páginas aprobadas
+# y los archivos que realmente usan. Estudios, muestras y originales
+# se quedan en el repositorio pero nunca se publican.
+[build]
+  command = "node build.cjs"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"

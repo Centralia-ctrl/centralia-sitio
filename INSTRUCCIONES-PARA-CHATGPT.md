@@ -1,224 +1,107 @@
-# Centralia Financiera · Cambios al sitio antes del lanzamiento (diciembre 2026)
+# Centralia Financiera · Estado del sitio y pendientes para el lanzamiento (diciembre 2026)
 
-Documento para aplicar sobre el paquete actual del sitio. Contiene:
+Documento para quien haga cambios en este repositorio (ChatGPT o Claude Code).
+Actualizado el 21 de octubre de 2026, revisado contra el código de este repositorio.
 
-- **Parte A:** cambios que debes ejecutar ya.
-- **Parte B:** cambios que dependen de una decisión o confirmación de Miguel Ángel. No los apliques hasta recibirla. Mientras tanto, deja el texto actual y no inventes datos.
 - **Parte C:** reglas que no se negocian.
+- **Parte E:** cómo se publica el sitio. Léela antes de agregar o mover archivos.
+- **Parte A:** lo que ya está hecho (no rehacer) y lo que falta.
+- **Parte B:** decisiones de Miguel Ángel. No apliques nada de esta parte hasta recibir su confirmación.
 - **Parte D:** criterios de aceptación.
 
-Archivos adjuntos que acompañan este documento: `pixel.js` y `_headers`.
-
----
+Trabaja siempre con cambios pequeños y revisables: un tema por propuesta, con vista previa antes de publicar.
 
 ## PARTE C · Reglas (aplican a todo)
 
 1. No uses la palabra "broker".
 2. No inventes instituciones aliadas, certificaciones, membresías, testimonios, garantías ni cifras.
-3. "Más de 10 años de experiencia" y "$4,500 millones de pesos colocados" son datos confirmados de Centralia como empresa. No los presentes como cifras auditadas.
+3. "Más de 10 años de experiencia" y "$4,500 millones de pesos colocados" son datos confirmados de Centralia. No los presentes como cifras auditadas.
 4. Nunca menciones nombres de fondeadores o instituciones en el sitio.
-5. La portada debe seguir siendo amplia y protagonista; no la comprimas para adelantar el video.
-6. Menos saturación de azul, conservando la identidad. Los verdes y el azul apagado fueron pruebas: no son identidad aprobada.
+5. Conserva el diseño aprobado y las animaciones actuales. No cambies colores, tipografía, composición ni animaciones sin aprobación.
+6. La portada sigue siendo amplia y protagonista.
 7. Las tarjetas de los tres productos en la portada van sin fotos.
-8. "Por qué Centralia" sale del inicio y del menú en todo el sitio. Las cifras de trayectoria permanecen en la portada.
-9. Factoraje es la referencia de calidad de las animaciones. Fondo blanco integrado, sin sonido, sin logo dentro de la animación, y texto en HTML (no dentro del video), nítido y bien ubicado.
+8. "Por qué Centralia" no se publica ni aparece en el menú.
+9. Factoraje es la referencia de calidad de las animaciones: fondo blanco integrado, sin sonido, sin logo dentro de la animación y texto en HTML.
+10. Nunca subas contraseñas, tokens ni claves de API a este repositorio.
 
----
+## PARTE E · Cómo se publica
 
-## PARTE A · Cambios a ejecutar
+- Netlify ejecuta `node build.cjs` y publica **solo** la carpeta `dist/` (ver `netlify.toml`).
+- `build.cjs` hace dos cosas:
+  1. Reconstruye `site.css` a partir de las capas de estilo.
+  2. Copia a `dist/` únicamente las páginas aprobadas y los archivos que esas páginas usan.
+- **Páginas aprobadas:** `index.html`, `credito-empresarial.html`, `factoraje.html`, `pago-a-proveedores.html` y `preguntas-frecuentes.html`. Para publicar una página nueva, agrégala a `PAGES` en `build.cjs`.
+- **Lo que se queda en el repositorio y nunca se publica:**
+  - Las muestras: `muestra-*.html`, `familia-visual-v10.html`, `welcome-studio-v9.html`, `propuestas-bienvenidas-v6.html` y `por-que-centralia.html`.
+  - Los videos e imágenes de prueba que no usa ninguna página.
+  - No los borres: son referencia.
+- **Después de editar cualquier CSS de capa:** ejecuta `node build.cjs`. No edites `site.css` a mano.
+- **Antes de proponer un cambio:** ejecuta `node build.cjs` y revisa que no aparezca la sección "Referenced but not found".
 
-### A1. La muestra se convierte en la portada
+## PARTE A · Estado
 
-1. `muestra-composicion-v22.html` pasa a ser el nuevo `index.html`. La `index.html` actual se archiva y no se publica.
-2. En la nueva `index.html`:
-   - Cambia `<title>` a `Crédito empresarial en México | Centralia Financiera`.
-   - Elimina `<meta name="robots" content="noindex,nofollow">`.
-   - Elimina el `<meta http-equiv="Content-Security-Policy" ...>`, que bloquea el píxel y HubSpot. La política se aplica desde `_headers`.
-   - Quita las clases de estudio `white-blue-study compact-study` del `<body>`. Integra en la hoja definitiva los estilos de `muestra-blanco-azul-v21.css` y `muestra-composicion-v22.css` que sí se aprueban, sin depender de esas clases.
-3. En todas las páginas, el logo y el enlace "Inicio" del breadcrumb deben apuntar a la nueva `index.html`.
-4. No publiques `muestra-composicion-v22.html`, `muestra-composicion-v22.css`, `muestra-blanco-azul-v21.css` ni `por-que-centralia.html`.
+### Ya aplicado (no rehacer)
 
-### A2. Menú unificado sin "Por qué Centralia"
+| Punto | Estado |
+|---|---|
+| A1 Portada | `index.html` es la composición aprobada (v22), sin noindex. |
+| A2 Menú | Soluciones · Preguntas frecuentes · Agendemos una reunión, igual en las 5 páginas, sin "Por qué Centralia". |
+| A3 Color | Sin restos verdes ni gris verdoso. Cifras en azul marino. Botón principal en azul `#315de8`. |
+| A4 Posicionamiento | "Te acompañamos a encontrar, comparar y contratar financiamiento para tu empresa. Exclusivo para personas morales." |
+| A5 WhatsApp | Mensaje neutral. El botón flotante se oculta cuando las condiciones o el pie están en pantalla (`contact-visibility.js`). |
+| A6 Medición | `pixel.js` está cargado en las 5 páginas y **apagado** (`enabled: false`). Solo se activará con consentimiento separado (ver A6 abajo). |
+| A7 Dominio y SEO | Todo apunta a `centraliafinanciera.com`. Las descripciones están sin errores de acentos. `sitemap.xml` y `robots.txt` están correctos. |
+| A10 Rendimiento | Una sola hoja `site.css` generada por `build.cjs`. Fuentes WOFF2. La publicación pesa unos 5.6 MB, sin archivos de prueba. |
+| Calidad | Sin errores de JavaScript y sin scroll horizontal en 390 px ni en 1440 px. |
 
-1. En `credito-empresarial.html`, `factoraje.html`, `pago-a-proveedores.html` y `preguntas-frecuentes.html`, elimina el enlace "Por qué Centralia" de `.desktop-nav` y de `#mobile-nav`.
-2. Renumera el menú móvil igual que en la portada: "Preguntas frecuentes 02".
-3. Quita `por-que-centralia.html` de `sitemap.xml` y elimina cualquier enlace interno hacia ella. Si el hosting lo permite, redirige `/por-que-centralia.html` a `/` (301).
+### Pendiente
 
-### A3. Color: quitar restos de paletas de prueba y bajar la saturación de azul
+**A8. Aviso de privacidad. EN ESPERA: no hacer todavía.**
+Se hará cuando exista la persona moral. Hoy los formularios enlazan a `https://centraliafinanciera.com/aviso-de-privacidad/`, la página del sitio anterior. Antes de lanzar hay que crear `aviso-de-privacidad.html` con el texto legal que entregue Centralia y apuntar ahí todos los enlaces. No redactes ni inventes texto legal.
 
-Define una sola fuente de color, por ejemplo en `:root`:
+**A9. Legibilidad. Requiere vista previa y aprobación antes de aplicar.**
 
-```css
---navy:#1b224e;   /* titulares, cifras, texto fuerte */
---blue:#315de8;   /* SOLO acción principal de cada pantalla y enlaces */
---blue-hover:#254bc6;
---ink:#303647;    /* texto */
---muted:#5d6470;  /* texto secundario y etiquetas */
---line:#e4e7ee;
-```
+1. Hay textos de 9 a 12 px en todas las páginas:
+   - Descripciones del menú Soluciones (11 px).
+   - Etiquetas en mayúsculas (11 a 12 px).
+   - "CONTACTO DIRECTO" (10 px).
+   - Pie de página (11 a 12 px).
+   - Pasos "01, 02, 03" (11 a 12 px).
+   Propuesta: mínimo 12 px para etiquetas en mayúsculas y 13 px para texto de lectura, sin cambiar la composición.
+2. En la portada, los números "01, 02, 03" tienen un contraste de 4.10:1. Deben llegar a 4.5:1.
 
-Reemplaza estos restos de pruebas:
+**A11. Botón principal de la portada. Requiere vista previa.**
+"Agendemos una reunión" aparece aproximadamente un segundo después de cargar, por la animación de entrada (`scroll-reveal` en `.hero-conversation`). Debe verse desde el primer instante. Se puede conservar la animación de las demás secciones.
 
-| Archivo | Selector | Valor actual | Cambiar a |
-|---|---|---|---|
-| `solution-film.css` | `.solution-welcome .product-actions .button` | `#303737` / hover `#46524d` | `--blue` / `--blue-hover` |
-| `solution-film.css` | `.solution-page .product-meeting .button` | `#303737` | `--blue` |
-| `solution-film.css` | `.solution-page .product-meeting h2` / `p` | `#303737` / `#69716f` | `--navy` / `--muted` |
-| `solution-film.css` | `.solution-welcome .film-message` | `#303737` | `--navy` |
-| `solution-film.css` | `.solution-welcome .product-text-link` | `#545f59`, borde `#bac2bd` | `--muted`, borde `--line` |
-| `factoraje-film.css` | Los mismos selectores con prefijo `.factoraje-` / `.factoraje-page` | `#303737`, `#46524d`, `#545f59`, `#bac2bd`, `#69716f` | Los mismos reemplazos |
-| `simulator.css` | `.sim-success` | fondo `#edf5e9`, texto `#354a30`, borde `#d2dfca` | fondo `#f3f6ff`, texto `--navy`, borde `#dce2ed` |
-| `simulator.css` | `.sim-summary` | `#f4f6f3` | `#f3f6ff` |
-| `simulator.css` | `.sim-lead-grid label span` | `#556950` | `--muted` |
-| `simulator.css` | `.sim-lead-grid input:focus` (primera regla) | `#6d805e` | `--blue` |
-| `audit-fixes.css` | `:focus-visible` | `#132f26` | `--blue` |
+**A6. Activación de la medición. No hacer hasta que Miguel Ángel lo indique.**
+Cuando se active, hace falta:
 
-Reglas para bajar la saturación de azul:
+1. Un aviso de cookies con opciones separadas de analítica y marketing, que dispare `centralia:measurement-consent`.
+2. Cambiar `enabled` a `true` en `pixel.js`.
+3. Agregar a `_headers` y a la `<meta http-equiv="Content-Security-Policy">` de cada página los dominios de Meta y HubSpot. Las dos políticas deben coincidir.
 
-- Azul sólido solo en el botón principal de cada pantalla.
-- Cifras grandes en `--navy`, no en azul: `$50 millones`, `85%`, `US$5 millones`. Esto aplica a `.direction-product .direction-terms>strong`, `.product-stat>strong` y `.solution-metric>strong`.
-- Etiquetas de sección (`.eyebrow`) en `--muted`, no en azul.
-- No toques el logo.
+## PARTE B · Pendiente de decisión de Miguel Ángel (no aplicar)
 
-### A4. Titular de la portada: decir qué es Centralia
+1. **Cifras y condiciones.** Deben confirmarse con los fondeadores:
+   - Crédito con garantía: hasta $50 M MXN, comisión por disposición de 1%, 2% o 4%.
+   - Crédito sin garantía: hasta $15 M MXN, comisión de apertura de 4.5%.
+   - Factoraje: anticipo de hasta 85%.
+   - Pago a proveedores: hasta US$5 M, 37 días, más de 150 países.
+   - Tasa ilustrativa del simulador: 2% mensual.
+   - **Inconsistencia vigente:** `app.js` dice "Modalidades de 6 a 36 meses", pero el simulador ofrece 12, 18, 24 y 30 meses. Deben coincidir.
+2. **Símbolo ® y razón social.** Dependen de la constitución de la persona moral y del registro ante el IMPI.
+3. **Formulario único en HubSpot.** Hoy hay dos: portada `68d091a6-…` y simulador `1da292ee-…`. No cambies los endpoints hasta que exista el formulario nuevo y su ID.
+4. **Mensaje de éxito.** Falta definir en cuánto tiempo y por qué medio se contacta al prospecto.
+5. **Simulador arriba de $15 M.** Elegir entre agregar un escenario con garantía o avisar del límite antes de que el usuario escriba el monto.
+6. **Video del almacén.** `assets/centralia-almacen-preview.mp4` y su póster tienen marca de agua de iStock. Son una muestra pendiente de reemplazo por la versión licenciada o por material propio. No se publica en producción con la marca de agua.
+7. **Animaciones de Crédito y Pago a proveedores.** Decidir si se rehacen con la línea de Factoraje antes o después del lanzamiento.
+8. **Titulares de producto.** "Tu siguiente compra pone todo en marcha." es poco claro. Proponer alternativas, sin aplicarlas.
 
-Debajo del H1 "Crédito empresarial para las empresas que mueven a México." agrega una línea breve, por ejemplo:
+## PARTE D · Criterios de aceptación de cada cambio
 
-> Te acompañamos a encontrar, comparar y contratar financiamiento para tu empresa con instituciones financieras. Exclusivo para personas morales.
-
-Debe ser una sola línea de apoyo, sin nombrar instituciones y sin comprimir el hero.
-
-### A5. WhatsApp: un solo mensaje y sin tapar contenido
-
-1. Los enlaces de WhatsApp del botón flotante (`.whatsapp-float`) y del pie (`.footer-whatsapp`) hoy dicen "Quiero agendar una reunión…", lo que choca con la agenda. Cámbialos a:
-   `https://wa.me/525548092849?text=Hola%2C%20Centralia.%20Quiero%20informaci%C3%B3n%20sobre%20financiamiento%20para%20mi%20empresa.`
-2. En escritorio (1440×900), `.whatsapp-float` tapa el texto derecho de `.direction-terms` en las tres páginas de producto. Ajusta su posición o tamaño, u ocúltalo mientras el recuadro de cifras está en pantalla, igual que ya hace `.capture-in-view`.
-
-### A6. Medición: Meta Pixel y HubSpot
-
-1. Agrega `pixel.js` (adjunto) en la raíz.
-2. En el `<head>` de las 5 páginas publicadas (`index.html`, `credito-empresarial.html`, `factoraje.html`, `pago-a-proveedores.html`, `preguntas-frecuentes.html`) y en `aviso-de-privacidad.html`, agrega:
-
-```html
-<script src="pixel.js" defer></script>
-<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/9145352.js"></script>
-```
-
-3. No pongas el píxel como script en línea.
-4. Reemplaza `_headers` por el adjunto. Agrega permisos para Meta y HubSpot y conserva todo lo demás.
-5. `pixel.js` depende de estos IDs. No los renombres:
-   - `#capture-success` (éxito del formulario de portada)
-   - `.sim-success` (éxito del simulador)
-
-### A7. Dominio definitivo y SEO técnico
-
-1. Reemplaza `https://centralia-empresarial.youngfern64.chatgpt.site` por `https://centraliafinanciera.com` en:
-   - `canonical`, `og:url` y `og:image` de todas las páginas.
-   - Todos los bloques `application/ld+json`, incluidos `@id`, `url` y `logo`.
-   - `sitemap.xml` y la línea `Sitemap:` de `robots.txt`.
-2. Corrige los acentos mal codificados en la `meta description` y `og:description`:
-   - `credito-empresarial.html`: «Explora crédito empresarial para expansión, inventario y equipo. Opciones con y sin garantía real para personas morales en México.»
-   - `pago-a-proveedores.html`: «Explora financiamiento para pagar a proveedores en México y el extranjero. Revisa tu operación, plazos y condiciones con Centralia Financiera.»
-3. Agrega `aviso-de-privacidad.html` al sitemap.
-
-### A8. Página de aviso de privacidad (estructura)
-
-1. Crea `aviso-de-privacidad.html` con el mismo encabezado, menú y pie que el resto del sitio.
-2. Deja el cuerpo con un marcador visible "TEXTO LEGAL PENDIENTE". El texto lo proporciona Centralia; no lo redactes ni lo inventes.
-3. Enlázala desde:
-   - El consentimiento del formulario de portada. Hoy apunta a `https://centraliafinanciera.com/aviso-de-privacidad/`; cámbialo a `aviso-de-privacidad.html`.
-   - El consentimiento del simulador (`#lead-consent`).
-   - El pie de página de todas las páginas.
-   - El diálogo "Datos y privacidad" (`info.privacy` en `app.js`).
-
-### A9. Legibilidad y accesibilidad
-
-1. Sube a mínimo 13 px (14 px en móvil) los textos de 11–12 px de contenido: `.showcase-note`, `.solution-metric>p`, `.direction-terms>small`, `.capture-note`, `.legal-note` y `.solution-secondary-actions>.solution-conditions`.
-2. Verifica contraste AA (4.5:1) en todos los grises sobre blanco.
-3. Que el foco del teclado sea visible en azul en todos los controles (ver A3).
-
-### A10. Rendimiento
-
-1. Convierte `assets/dm-sans-*.ttf` a WOFF2 y actualiza `@font-face`. Conserva `DM-Sans-OFL.txt`.
-2. No publiques `assets/centralia-operacion-v28.webp` (1.67 MB) si `por-que-centralia.html` no se publica.
-3. Consolida las hojas CSS de capas (`refinements`, `content-direction-v14`, `launch-readiness-v15`, `lead-capture-v17`, `home-products-v19`, `muestra-*`) en `site.css` mediante `build.cjs`, sin cambiar el resultado visual aprobado.
-
----
-
-## PARTE B · Pendiente de decisión o confirmación de Miguel Ángel (no aplicar todavía)
-
-### B1. Cifras y condiciones a confirmar
-
-Están en `app.js` (`routes`), las tarjetas, los recuadros de cada producto y las preguntas frecuentes. No las cambies hasta tener confirmación; si alguna no se confirma, se elimina del sitio.
-
-- **Crédito con garantía:** hasta $50 M MXN, línea de hasta 5 años, comisión por disposición de 1%, 2% o 4%.
-- **Crédito sin garantía:** hasta $15 M MXN, modalidades de 6 a 36 meses, comisión de apertura de 4.5%, aval según evaluación.
-  - **Inconsistencia a resolver:** los Costos y condiciones dicen 6 a 36 meses, pero el simulador ofrece 12, 18, 24 y 30 meses. Deben coincidir.
-- **Factoraje:** anticipo de hasta 85%, en MXN o USD, con y sin recurso.
-- **Pago a proveedores:** línea de hasta US$5 M, hasta 37 días, "más de 150 países", "pagos agrupados, programación de fechas y controles de autorización".
-- **Simulador:** tasa ilustrativa de 2% mensual. Hay que confirmar si es representativa o si conviene mostrar un rango.
-- **El símbolo ®:** en el logo (`.brand-registered`) y en "Centralia Financiera®" del pie y del diálogo. Si no hay registro ante el IMPI a nombre de la empresa, se elimina en todo el sitio.
-- **Razón social:** si se confirma, se agrega en el pie de página.
-
-### B2. Formulario único (estructura a definir en HubSpot primero)
-
-Hoy hay dos formularios de HubSpot distintos:
-
-| Formulario | ID | Campos |
-|---|---|---|
-| Portada (`lead-capture-v17.js`) | `68d091a6-92e3-4ca4-af92-9f87c41d140e` | Nombre, correo, WhatsApp, monto, solución |
-| Simulador (`simulator.js`) | `1da292ee-7ccc-42e4-a427-ece646e13e65` | Nombre, empresa, correo, teléfono y el escenario en un campo de texto `message` |
-
-Propuesta: un solo formulario con nombre, empresa, cargo, correo, WhatsApp, monto aproximado, solución, rango de ventas anuales y consentimiento. El simulador agrega su escenario (monto, plazo, mensualidad) en propiedades separadas.
-
-**No cambies los endpoints** hasta que Miguel Ángel cree el formulario nuevo en HubSpot y te dé su ID. Decisiones pendientes:
-- Mínimo de facturación anual atendido, y si se pregunta en el formulario.
-- Si el cargo es obligatorio. Hoy las opciones son solo "Representante legal / Director de finanzas / Otro cargo autorizado".
-
-### B3. Mensaje de éxito del formulario
-
-Hoy dice "El equipo de Centralia podrá contactarte". Falta definir:
-- En cuánto tiempo y por qué medio se contacta al prospecto (por ejemplo, "por WhatsApp en horario hábil").
-- Si en el mensaje de éxito se ofrece el botón "Agendemos una reunión".
-
-### B4. Simulador para montos mayores a $15 M
-
-Hoy, con más de $15 M no calcula y manda a agendar, mientras la portada destaca $50 M. Hay dos opciones:
-- **(a)** Agregar un escenario "con garantía" con sus supuestos confirmados.
-- **(b)** Dejarlo así, pero mostrar el mensaje antes de que el usuario escriba el monto.
-
-### B5. Video del almacén
-
-`assets/centralia-almacen-preview.mp4` y `assets/centralia-almacen-poster.png` tienen marca de agua de iStock. Además, el póster tiene una franja oscura a la izquierda. Hay dos opciones:
-- **(a)** Reemplazarlos por la versión licenciada (iStock ID 1273494455) con un póster limpio 16:9.
-- **(b)** Sustituir el video por una imagen libre de derechos o propia.
-
-No se publica con la marca de agua.
-
-### B6. Animaciones de Crédito y Pago a proveedores
-
-Deben tener la misma línea visual que Factoraje (render con volumen, esfera o forma azul, objeto blanco protagonista, acento dorado, órbitas finas, fondo blanco integrado, sin logo ni sonido, texto en HTML), con ilustración propia:
-
-- **Crédito:** tarjeta "CAPITAL" con barras que crecen sobre una forma azul.
-- **Pago a proveedores:** orden de compra que se marca como "PAGADA" y sale hacia un punto en órbita. La animación actual (aro azul sobre una pista, `supplier-track-v13.js`) no se entiende y en parte del ciclo deja la escena vacía.
-
-Pendiente de decisión: si se producen antes del lanzamiento o después. Si van después, se publican las actuales con el ajuste de color de A3.
-
-### B7. Titulares de producto
-
-"Tu siguiente compra pone todo en marcha." es poco claro. El segundo mensaje, "Financia el pago a tus proveedores.", sí lo es. Propón dos alternativas más directas por producto para que Miguel Ángel elija; no las apliques sin aprobación.
-
----
-
-## PARTE D · Criterios de aceptación
-
-1. Las 5 páginas publicadas tienen el mismo menú (Soluciones · Preguntas frecuentes · Agendemos una reunión) y ningún enlace a "Por qué Centralia".
-2. Los botones principales son azules en todas las páginas, y no queda ningún color verde ni gris verdoso: buscar `#303737`, `#46524d`, `#545f59`, `#bac2bd`, `#69716f`, `#edf5e9`, `#354a30`, `#f4f6f3`, `#556950`, `#6d805e` y `#132f26` debe dar cero resultados.
-3. No queda ninguna referencia a `chatgpt.site`.
-4. No hay acentos mal codificados (`&#195;`).
-5. No hay ningún `<meta http-equiv="Content-Security-Policy">` en el HTML.
-6. Al cargar cualquier página, la consola no muestra errores de CSP y existen `window.fbq` y el script de HubSpot.
-7. No hay marca de agua visible en ningún recurso.
-8. No hay scroll horizontal en 360 px ni en 390 px, y el botón de WhatsApp no tapa contenido.
-9. El enlace al aviso de privacidad funciona desde los dos formularios y desde el pie.
-10. Entrega una lista de los archivos modificados y de lo que quedó pendiente de la Parte B.
+1. `node build.cjs` termina sin "Referenced but not found".
+2. Las 5 páginas en `dist/` se ven igual que antes del cambio, salvo lo que el cambio pretendía modificar.
+3. Sin errores en la consola y sin scroll horizontal en 360 px, 390 px ni 1440 px.
+4. Ningún color nuevo fuera de la paleta: `#1b224e`, `#315de8`, `#254bc6`, `#303647`, `#5d6470` y `#e4e7ee`, más los neutros existentes.
+5. Ninguna referencia a `chatgpt.site`, ningún texto con acentos rotos y ninguna mención de fondeadores.
+6. Cada propuesta indica los archivos modificados y lo que queda pendiente.
