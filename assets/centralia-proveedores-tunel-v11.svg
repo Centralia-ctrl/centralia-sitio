@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="product-illustration supplier-tunnel" data-supplier-tunnel viewBox="0 0 620 520" aria-hidden="true" focusable="false">
+ <defs>
+  <radialGradient id="wheel-blue" cx="28%" cy="20%" r="95%"><stop stop-color="#7298FF"/><stop offset=".5" stop-color="#5678EF"/><stop offset="1" stop-color="#2033AE"/></radialGradient>
+  <linearGradient id="wheel-spoke" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#87A9FF"/><stop offset="1" stop-color="#3553C9"/></linearGradient>
+  <radialGradient id="wheel-hollow" cx="40%" cy="35%"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#DDE6F7"/></radialGradient>
+  <linearGradient id="tunnel-rim" x1="0" y1="0" x2=".95" y2="1"><stop offset=".12" stop-color="#FFFFFF"/><stop offset=".47" stop-color="#F3F6FC"/><stop offset=".78" stop-color="#E1E8F4"/><stop offset="1" stop-color="#AABBD5"/></linearGradient>
+  <linearGradient id="tunnel-shell" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#FFFFFF"/><stop offset=".5" stop-color="#F2F5FB"/><stop offset="1" stop-color="#D5DFEF"/></linearGradient>
+  <linearGradient id="tunnel-interior" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#D3DEEF"/><stop offset=".55" stop-color="#F6F8FD"/><stop offset="1" stop-color="#BBCBE1"/></linearGradient>
+  <linearGradient id="tunnel-gold" x1="0" y1="0" x2="1" y2="1"><stop offset=".25" stop-color="#FFEAB9"/><stop offset=".65" stop-color="#F2D497"/><stop offset="1" stop-color="#C58E43"/></linearGradient>
+  <linearGradient id="tunnel-path"><stop stop-color="#DEE5F5" stop-opacity="0"/><stop offset=".22" stop-color="#DEE5F5"/><stop offset=".78" stop-color="#DEE5F5"/><stop offset="1" stop-color="#DEE5F5" stop-opacity="0"/></linearGradient>
+  <filter id="tunnel-soft" x="-80%" y="-150%" width="260%" height="400%"><feGaussianBlur stdDeviation="9"/></filter>
+ </defs>
+ <g fill="none" stroke="url(#tunnel-path)" stroke-width="1.25"><path d="M25 361L565 454"/><path d="M28 335L590 432"/><path d="M40 311L613 410"/></g>
+ <ellipse cx="398" cy="398" rx="157" ry="17" fill="#B5C2DB" opacity=".19" filter="url(#tunnel-soft)"/>
+ <path d="M205 330L310 380H530L395 330Z" fill="#F7F9FD" stroke="#DFE6F2" stroke-width="1"/>
+ <path d="M205 330V337L310 387H530V380H310Z" fill="url(#tunnel-shell)"/>
+ <g transform="translate(300 222) scale(0.86)" data-tunnel-arch="rear">
+ <path d="M-110 126V-10A110 110 0 0 1 110-10V126H78V-10A78 78 0 0 0-78-10V126Z" fill="url(#tunnel-rim)" stroke="#E0E6F0" stroke-width=".8"/>
+ <path d="M-104 119V-10A104 104 0 0 1 104-10V119" fill="none" stroke="#FFFFFF" stroke-width="2" opacity=".9"/>
+</g>
+ <path d="M205 213C205 160 248 119 300 119C352 119 395 160 395 213L530 254C530 193 481 144 420 144C359 144 310 193 310 254Z" fill="url(#tunnel-shell)" stroke="#E2E8F2" stroke-width=".8"/>
+ <path d="M367 213C367 176 337 146 300 146L420 176C463 176 498 211 498 254V380L367 330Z" fill="url(#tunnel-interior)" opacity=".9"/>
+ <path d="M233 217C233 180 263 150 300 150L420 178C377 178 342 213 342 256" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+ <g data-wheel-shadow transform="translate(286 344)"><ellipse rx="57" ry="8" fill="#96A9CB" opacity=".23" filter="url(#tunnel-soft)"/></g>
+ <g data-wheel-far transform="translate(286 283) scale(.9)"><g data-wheel>
+ <path d="M56 0A56 56 0 1 1-56 0A56 56 0 1 1 56 0M34 0A34 34 0 1 0-34 0A34 34 0 1 0 34 0" fill="#233BB2" fill-rule="evenodd" transform="translate(7 4)"/>
+ <path d="M56 0A56 56 0 1 1-56 0A56 56 0 1 1 56 0M34 0A34 34 0 1 0-34 0A34 34 0 1 0 34 0" fill="url(#wheel-blue)" fill-rule="evenodd"/>
+ <circle r="34" fill="none" stroke="#A1B9F4" stroke-width="1"/>
+ <g data-wheel-spin><path d="M-8-44Q0-46 8-44" fill="none" stroke="url(#tunnel-gold)" stroke-width="5" stroke-linecap="round"/></g>
+ <path d="M-42-33A54 54 0 0 1 30-45" fill="none" stroke="#A6BEFF" stroke-width="1.2" opacity=".65" stroke-linecap="round"/>
+</g></g>
+ <g transform="translate(420 254) scale(1)" data-tunnel-arch="front">
+ <path d="M-110 126V-10A110 110 0 0 1 110-10V126H78V-10A78 78 0 0 0-78-10V126Z" fill="url(#tunnel-rim)" stroke="#E0E6F0" stroke-width=".8"/>
+ <path d="M-104 119V-10A104 104 0 0 1 104-10V119" fill="none" stroke="#FFFFFF" stroke-width="2" opacity=".9"/>
+</g>
+ <g data-wheel-near transform="translate(286 283) scale(.9)" opacity="0"><g data-wheel-copy>
+ <path d="M56 0A56 56 0 1 1-56 0A56 56 0 1 1 56 0M34 0A34 34 0 1 0-34 0A34 34 0 1 0 34 0" fill="#233BB2" fill-rule="evenodd" transform="translate(7 4)"/>
+ <path d="M56 0A56 56 0 1 1-56 0A56 56 0 1 1 56 0M34 0A34 34 0 1 0-34 0A34 34 0 1 0 34 0" fill="url(#wheel-blue)" fill-rule="evenodd"/>
+ <circle r="34" fill="none" stroke="#A1B9F4" stroke-width="1"/>
+ <g data-wheel-spin><path d="M-8-44Q0-46 8-44" fill="none" stroke="url(#tunnel-gold)" stroke-width="5" stroke-linecap="round"/></g>
+ <path d="M-42-33A54 54 0 0 1 30-45" fill="none" stroke="#A6BEFF" stroke-width="1.2" opacity=".65" stroke-linecap="round"/>
+</g></g>
+</svg>

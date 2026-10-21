@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="solution-editorial-art" data-editorial="supplier-flow" viewBox="95 85 490 410" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="volume-blue" x1=".12" y1="0" x2=".9" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#6A93FF"/><stop offset=".43" stop-color="#5678EF"/><stop offset="1" stop-color="#162BAB"/></linearGradient>
+  <linearGradient id="volume-top" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#91AEFF"/><stop offset="1" stop-color="#5276ED"/></linearGradient>
+  <linearGradient id="volume-side" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4565DA"/><stop offset="1" stop-color="#162BAB"/></linearGradient>
+  <linearGradient id="volume-gold" x1=".2" y1=".15" x2=".95" y2="1"><stop stop-color="#FFEAB9"/><stop offset=".5" stop-color="#F4D697"/><stop offset="1" stop-color="#C0883A"/></linearGradient>
+  <linearGradient id="volume-white" x1=".2" y1=".15" x2="1" y2="1"><stop offset=".35" stop-color="#FFFFFF"/><stop offset=".72" stop-color="#DCE4F1"/><stop offset="1" stop-color="#7D94B7"/></linearGradient>
+  <linearGradient id="path-fade"><stop stop-color="#E0E6F5" stop-opacity="0"/><stop offset=".3" stop-color="#E0E6F5"/><stop offset=".8" stop-color="#E0E6F5"/><stop offset="1" stop-color="#E0E6F5" stop-opacity="0"/></linearGradient>
+  <filter id="card-shadow" x="-25%" y="-25%" width="155%" height="165%" color-interpolation-filters="sRGB"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#192B47" flood-opacity=".17"/><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#192B47" flood-opacity=".12"/></filter>
+  <filter id="volume-shadow" x="-25%" y="-25%" width="155%" height="165%" color-interpolation-filters="sRGB"><feDropShadow dx="2" dy="9" stdDeviation="9" flood-color="#243E7A" flood-opacity=".09"/></filter>
+</defs>
+<g data-motion="next-order" transform="translate(155 190)"><g filter="url(#volume-shadow)">
+  <path d="M92 31L137 4Q144 1 144 11V101Q144 109 137 114L104 128Q96 132 91 127Z" fill="url(#volume-side)" />
+  <path d="M0 26L33 4Q40 0 49 0H129Q140 0 142 7L104 29Z" fill="url(#volume-top)" />
+  <rect y="26" width="104" height="105" rx="12" fill="url(#volume-blue)" />
+  <path d="M15 29H88Q101 29 101 41" fill="none" stroke="#B2C7FF" stroke-width="1.3" opacity=".7"/>
+  <path d="M45 26L85 0H99L59 26Z" fill="#FFEAB9"/>
+  <path d="M45 26H59V131H45Z" fill="url(#volume-gold)"/>
+  
+  </g></g>
+<g data-motion="paid-order" transform="translate(245 190)"><g filter="url(#volume-shadow)">
+  <path d="M183 41L243 4Q250 1 250 11V156Q250 164 243 169L195 193Q187 197 182 192Z" fill="#D6E0EF" stroke="#C5D1E2" stroke-width=".8"/>
+  <path d="M0 36L48 4Q55 0 64 0H235Q246 0 248 7L195 39Z" fill="#F4F7FC" stroke="#CFD9E8" stroke-width=".8"/>
+  <rect y="36" width="195" height="160" rx="16" fill="url(#volume-white)" stroke="#BBCADD" stroke-width="1.1"/>
+  <path d="M19 39H175Q192 39 192 55" fill="none" stroke="#FFFFFF" stroke-width="1.3" opacity=".7"/>
+  <path d="M85 36L140 0H164L109 36Z" fill="#7192FA"/>
+  <path d="M85 36H109V196H85Z" fill="url(#volume-blue)"/>
+  <path d="M24 159H54M24 171H43" fill="none" stroke="#A8B6CD" stroke-width="3.5" stroke-linecap="round"/><path data-payment-check d="M130 112L143 125L170 95" fill="none" stroke="#3158DB" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+  </g></g>
+</svg>

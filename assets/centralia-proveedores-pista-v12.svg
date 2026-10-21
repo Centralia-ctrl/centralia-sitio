@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="product-illustration supplier-track" data-supplier-track viewBox="0 0 620 520" aria-hidden="true" focusable="false">
+ <defs>
+  <linearGradient id="supplier-track-surface" x1="0" y1="0" x2=".15" y2="1"><stop stop-color="#FFFFFF"/><stop offset=".42" stop-color="#FBFCFF"/><stop offset="1" stop-color="#DCE5F4"/></linearGradient>
+  <linearGradient id="supplier-track-edge" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#D6E0F0"/><stop offset="1" stop-color="#AEBFD9"/></linearGradient>
+  <radialGradient id="supplier-track-blue" cx="28%" cy="20%" r="95%"><stop stop-color="#7298FF"/><stop offset=".5" stop-color="#5678EF"/><stop offset="1" stop-color="#2033AE"/></radialGradient>
+  <linearGradient id="supplier-track-inner" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2538AC"/><stop offset=".5" stop-color="#4D6FE0"/><stop offset="1" stop-color="#A9C0FF"/></linearGradient>
+  <linearGradient id="supplier-track-gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFEAB9"/><stop offset=".65" stop-color="#F2D497"/><stop offset="1" stop-color="#C58E43"/></linearGradient>
+  <filter id="supplier-track-soft" x="-65%" y="-130%" width="230%" height="360%"><feGaussianBlur stdDeviation="5"/></filter>
+ </defs>
+ <path data-track-path d="M54 340C171 340 201 248 316 248S453 326 566 252" fill="none" stroke="none"/>
+ <g data-track-pieces><g data-track-part="0.0250" transform="translate(67.594 339.573) rotate(-3.572)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.0750" transform="translate(94.537 335.963) rotate(-11.797)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.1250" transform="translate(120.677 328.507) rotate(-20.018)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.1750" transform="translate(145.579 317.589) rotate(-26.953)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.2250" transform="translate(169.281 304.245) rotate(-31.244)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.2750" transform="translate(192.361 289.84) rotate(-32.081)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.3250" transform="translate(215.677 275.826) rotate(-29.342)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.3750" transform="translate(239.993 263.649) rotate(-23.458)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.4250" transform="translate(265.621 254.584) rotate(-15.284)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.4750" transform="translate(292.298 249.376) rotate(-6.859)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.5250" transform="translate(319.451 248.024) rotate(0.856)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.5750" transform="translate(346.575 249.935) rotate(7.336)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.6250" transform="translate(373.289 255.006) rotate(14.069)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.6750" transform="translate(399.334 262.842) rotate(18.979)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.7250" transform="translate(424.919 272.094) rotate(19.808)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.7750" transform="translate(450.86 280.252) rotate(13.746)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.8250" transform="translate(477.763 283.875) rotate(0.638)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.8750" transform="translate(504.717 280.744) rotate(-13.644)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.9250" transform="translate(530.383 271.832) rotate(-24.003)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g>
+<g data-track-part="0.9750" transform="translate(554.47 259.216) rotate(-30.778)">
+ <rect x="-11.803" y="-1" width="27.607" height="24" rx="5" fill="url(#supplier-track-edge)"/>
+ <rect x="-13.803" y="-13" width="27.607" height="24" rx="5" fill="url(#supplier-track-surface)" stroke="#D6DFEF" stroke-width=".8"/>
+ <path d="M-8.803-9H8.803" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</g></g>
+ <g data-track-shadow transform="translate(305.852 242.245) rotate(-2.879)"><ellipse rx="36" ry="5" fill="#5B74AA" opacity=".24" filter="url(#supplier-track-soft)"/></g>
+ <g data-track-wheel transform="translate(302.989 191.317)">
+  <path d="M44 0A44 44 0 1 1-44 0A44 44 0 1 1 44 0M25 0A25 25 0 1 0-25 0A25 25 0 1 0 25 0" fill="#263DB3" fill-rule="evenodd" transform="translate(6 3)"/>
+  <path d="M44 0A44 44 0 1 1-44 0A44 44 0 1 1 44 0M25 0A25 25 0 1 0-25 0A25 25 0 1 0 25 0" fill="url(#supplier-track-blue)" fill-rule="evenodd"/>
+  <circle r="25" fill="none" stroke="url(#supplier-track-inner)" stroke-width="2"/>
+  <g data-track-spin><path d="M-5-34Q0-35 5-34" fill="none" stroke="url(#supplier-track-gold)" stroke-width="4" stroke-linecap="round"/></g>
+  <path d="M-32-28A43 43 0 0 1 22-37" fill="none" stroke="#BCCEFF" stroke-width="1" stroke-linecap="round" opacity=".8"/>
+ </g>
+</svg>

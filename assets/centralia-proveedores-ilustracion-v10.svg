@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="product-illustration" data-illustration="suppliers" viewBox="0 0 620 520" aria-hidden="true" focusable="false"><defs>
+ <radialGradient id="supplier-art-blue" cx="28%" cy="20%" r="95%"><stop stop-color="#7298FF"/><stop offset=".5" stop-color="#5678EF"/><stop offset="1" stop-color="#2033AE"/></radialGradient>
+ <linearGradient id="supplier-art-pale" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFFFF"/><stop offset=".55" stop-color="#EEF2FA"/><stop offset="1" stop-color="#BCCBE2"/></linearGradient>
+ <linearGradient id="supplier-art-gold" x1="0" y1="0" x2="1" y2="1"><stop offset=".25" stop-color="#FFEAB9"/><stop offset=".65" stop-color="#F2D497"/><stop offset="1" stop-color="#C58E43"/></linearGradient>
+ <linearGradient id="supplier-art-line"><stop stop-color="#DEE5F5" stop-opacity="0"/><stop offset=".25" stop-color="#DEE5F5"/><stop offset=".8" stop-color="#DEE5F5"/><stop offset="1" stop-color="#DEE5F5" stop-opacity="0"/></linearGradient>
+ <filter id="supplier-art-shadow" x="-35%" y="-30%" width="180%" height="180%" color-interpolation-filters="sRGB"><feDropShadow dx="1" dy="5" stdDeviation="5" flood-color="#344969" flood-opacity=".16"/><feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#344969" flood-opacity=".1"/></filter>
+</defs>
+ <g fill="none" stroke="url(#supplier-art-line)" stroke-width="1.25">
+  <path data-route d="M30 376H120C220 376 175 111 295 111H610"/>
+  <path d="M4 410H132C246 410 203 146 319 146H630"/>
+  <path d="M-22 444H145C271 444 231 181 343 181H650"/>
+ </g>
+ <g data-part="base" transform="translate(298 207) rotate(11 117 91)">
+  <rect width="234" height="182" rx="40" fill="url(#supplier-art-blue)"/>
+  <path d="M39 131H99M39 145H78" stroke="#B2C6FF" stroke-width="3" stroke-linecap="round" opacity=".65"/>
+ </g>
+ <g data-part="order" transform="translate(270 108) rotate(-12 82 110)">
+  <g filter="url(#supplier-art-shadow)"><rect width="164" height="218" rx="17" fill="#FFFFFF" stroke="#C9D3E2" stroke-width="1"/></g>
+  <text x="20" y="33" fill="#3158DB" font-family="'DM Sans',Arial,sans-serif" font-size="11.5" font-weight="600">COMPRA</text>
+  <path d="M21 60H127M21 77H101" fill="none" stroke="#A9B9D0" stroke-width="4" stroke-linecap="round"/>
+  <path d="M21 96H143" stroke="#D0DAE9"/>
+  <path d="M21 120H129M21 140H113M21 160H135" fill="none" stroke="#A9B9D0" stroke-width="4" stroke-linecap="round"/>
+  <rect x="20" y="180" width="124" height="22" rx="7" fill="#E5EBF9"/>
+  <path d="M70 191H96M91 186L96 191L91 196" stroke="#3158DB" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+ </g>
+ <g data-part="payment" transform="translate(445 153) rotate(9 55 65)" opacity="0">
+  <g filter="url(#supplier-art-shadow)"><rect width="110" height="133" rx="18" fill="#FFFFFF" stroke="#CCD6E5" stroke-width="1"/></g>
+  <text x="20" y="31" fill="#3158DB" font-family="'DM Sans',Arial,sans-serif" font-size="11" font-weight="600">PAGO</text>
+  <rect x="27" y="51" width="56" height="52" rx="15" fill="#E5ECFB"/>
+  <path data-part="check" d="M42 77L51 86L68 65" fill="none" stroke="#3158DB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1"/>
+ </g>
+ <g data-part="gold" transform="translate(238 368) rotate(-15 25 25)"><rect width="50" height="50" rx="15" fill="url(#supplier-art-gold)"/></g>
+ <g data-part="small" transform="translate(523 106) rotate(14 20 20)"><rect width="40" height="40" rx="12" fill="url(#supplier-art-pale)" stroke="#E5EAF4" stroke-width=".7"/></g>
+</svg>
