@@ -1,0 +1,23 @@
+/* Final shared tokens and launch corrections. The approved compositions remain. */
+:root{--navy:#1b224e;--blue:#315de8;--blue-hover:#254bc6;--ink:#303647;--muted:#5d6470;--line:#e4e7ee}
+.centralia-v23{--editorial-blue:var(--blue);--editorial-hover:var(--blue-hover);--editorial-navy:var(--navy);--editorial-ink:var(--muted);--editorial-line:var(--line)}
+.centralia-v23 .eyebrow{color:var(--muted)}
+.centralia-v23 .direction-terms>strong,.centralia-v23 .product-stat>strong,.centralia-v23 .solution-metric>strong{color:var(--navy)}
+.centralia-v23 .solution-index{color:var(--muted)}
+.centralia-v23 :focus-visible{outline:3px solid var(--blue)!important;outline-offset:4px}
+.centralia-v23 .showcase-note,.centralia-v23 .direction-terms>small,.centralia-v23 .capture-note,.centralia-v23 .legal-note,.centralia-v23 .solution-secondary-actions>.solution-conditions,.centralia-v23 .solution-metric>span,.centralia-v23 .content-case-story>small,.centralia-v23 .sim-consent,.centralia-v23 .sim-data-info,.centralia-v23 .sim-lead-grid small{font-size:13px;line-height:1.75;color:var(--muted)}
+.centralia-v23 .solution-metric>p{font-size:14px;color:var(--muted)}
+.centralia-v23 .sim-summary{font-size:14px}
+.home-v23 .hero-purpose{font-size:16px;line-height:1.75;max-width:640px;color:var(--muted);margin:24px 0 0;letter-spacing:0}
+.home-v23 .hero{min-height:560px}
+.solution-page .film-artwork{background:var(--solution-paper)}
+.factoraje-page .film-artwork{background:var(--factoraje-paper)}
+.centralia-v23 .footer-bottom>div{flex-wrap:wrap;row-gap:12px}
+.privacy-notice-link{display:inline-block;margin-top:20px;color:var(--blue);text-decoration:underline;text-underline-offset:4px}
+.terms-in-view .whatsapp-float,.footer-in-view .whatsapp-float,.modal-open .whatsapp-float{visibility:hidden;pointer-events:none}
+@media(max-width:760px){
+ .home-v23 .hero{min-height:0}
+ .home-v23 .hero-purpose{font-size:15px;line-height:1.75;margin-top:22px;max-width:34em}
+ .centralia-v23 .showcase-note,.centralia-v23 .direction-terms>small,.centralia-v23 .capture-note,.centralia-v23 .legal-note,.centralia-v23 .solution-secondary-actions>.solution-conditions,.centralia-v23 .solution-metric>span,.centralia-v23 .content-case-story>small,.centralia-v23 .sim-consent,.centralia-v23 .sim-data-info,.centralia-v23 .sim-lead-grid small,.centralia-v23 .product-text-link,.centralia-v23 .welcome-secondary .product-text-link{font-size:14px}
+ .centralia-v23 .footer-bottom>div{display:flex;flex-wrap:wrap;gap:14px 20px}
+}

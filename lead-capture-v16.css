@@ -1,0 +1,13 @@
+/* Centralia contact area; HubSpot remains the source of the form. */
+.capture-hubspot-panel{background:#fff;padding:32px;border-color:#e1e6ee}
+.capture-load-status{font-size:14px;line-height:1.8;color:#5d6470;margin:0 0 20px}
+#centralia-hubspot-form{min-height:490px}
+.capture-load-failed #centralia-hubspot-form:empty{min-height:0}
+#centralia-hubspot-form iframe{width:100%!important;max-width:100%;border:0}
+.capture-hubspot-footer{border-top:1px solid #e5e9f1;margin-top:22px;padding-top:18px}
+.capture-hubspot-footer>p{font-size:12px;line-height:1.8;color:#69717c;margin:0 0 12px}
+.capture-hubspot-footer .capture-privacy-links{column-gap:18px;row-gap:7px}
+.capture-hubspot-fallback{display:flex;flex-wrap:wrap;gap:7px 18px;margin-top:16px;font-size:12px;line-height:1.8}
+.capture-hubspot-fallback a{color:#315de8;text-underline-offset:3px}
+.capture-copy .capture-contact-note{font-size:13px!important}
+@media(max-width:760px){.capture-hubspot-panel{padding:24px 20px}.capture-hubspot-footer{margin-top:16px}#centralia-hubspot-form{min-height:550px}}

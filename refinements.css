@@ -1,0 +1,13 @@
+/* Scroll choreography: natural scrolling, decorative depth and restrained reveals. */
+@media(prefers-reduced-motion:no-preference){
+ .motion-enabled .scroll-reveal{transition:opacity .65s ease,translate .8s cubic-bezier(.22,1,.36,1);transition-delay:var(--reveal-delay,0ms)}
+ .motion-enabled .scroll-reveal:not(.is-visible){opacity:0;translate:0 26px}
+ .motion-enabled .scroll-reveal.is-visible,.motion-enabled .scroll-reveal:focus-within{opacity:1;translate:0 0}
+ .motion-enabled .finance-card.scroll-reveal{transition:opacity .65s ease,translate .8s cubic-bezier(.22,1,.36,1),transform .28s ease,box-shadow .28s ease,border-color .28s ease;transition-delay:var(--reveal-delay,0ms),var(--reveal-delay,0ms),0ms,0ms,0ms}
+ .motion-enabled .hero-photo img{transform:translateY(var(--photo-shift,0px)) scale(var(--photo-zoom,1.04));transition:filter .8s ease;will-change:transform}
+ .motion-enabled .hero-note{transform:translateY(var(--note-shift,0px));transition:box-shadow .3s ease}
+ .motion-enabled .hero-art:hover .hero-note{box-shadow:0 21px 55px #1919191c}
+ .motion-enabled .site-header:after{content:'';position:absolute;bottom:-1px;left:0;width:100%;height:2px;background:var(--ink);transform:scaleX(var(--reading-progress,0));transform-origin:left;pointer-events:none}
+}
+@media(prefers-reduced-motion:reduce){.scroll-reveal{opacity:1!important;translate:none!important}}
+@media print{.scroll-reveal{opacity:1!important;translate:none!important}.hero-photo img,.hero-note{transform:none!important}}

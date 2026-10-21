@@ -1,0 +1,6 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-FcdyycXuR5a0pJ4kMJeU2+oqH+G/OV8o0lrErh9w70M=' 'sha256-IYSnUsK5WCogR0rq4iP8UlDfE10VA5yWTs2ICaVRTis=' 'sha256-Msu/XKn0LgdpzdwtsiyrLQE8ndZwSgMZyXW9G/kLzR8=' 'sha256-NPJup6X3Co605qwX97NNanVLfOEfgm1E9LsAAOHbzpo=' 'sha256-Nlz1dqV+PGTQ240a4Os1NPaSw2Tdi+U5qie3aTUOCC8=' 'sha256-OnCj3BaiCBY/1HPSA5R9trr4N77UssteB65raMZlAvs=' 'sha256-UuM2t+uybzsiEfaqI1nSCVkevIMTh7ZgGeL9Q4Ca348=' 'sha256-ZkyYYNPvTw+tsnzi80DOxeywdSVndRkQXXiIU/APht4=' 'sha256-heEXninEOrLNakuG74N738wIef4AHjS/dbsbJoHMQVo=' 'sha256-hsHX8QhheXbByXeDFkYWp4e81KP6HgpaaNEcg3xFQLs=' 'sha256-iJL/shd4Q5+/MmHJ9sb/AyTjCizQYNTolgU8135ycRs=' 'sha256-rp9UzzeNGkAMXvln2cyygr/onZyPVKc+U8fm77ixzWA=' 'sha256-tITcZI2xs/eD+TSn2lvVp9ZC2gtce0dzCQ1CM84L1tE=' 'sha256-uHTlpIaLyLg0yhG1KfQvLRHRgO0UdDLvCoorGTIQhrM=' 'sha256-yJ6+SKEQzJAu8s1Y2FXAy55ur9L6EwzBLMnAmZZdpPs='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.hsforms.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'

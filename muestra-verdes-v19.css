@@ -1,0 +1,28 @@
+/* Isolated color studies. Only the two sample pages carry .color-study. */
+.color-study{--study-soft:#edf3ef;--study-line:#d4e1d8;--study-green:#315f4e;--study-deep:#204b3e}
+.color-study .solution-showcase{background:var(--study-soft);border-color:var(--study-line)}
+.color-study .solution-tile{border-color:#d4e0d8}
+.color-study .solution-tile:hover,.color-study .solution-tile:focus-within{border-color:#91b4a0;box-shadow:0 12px 30px #315f4e0c}
+.color-study .direction-home .solution-tile-heading .solution-category,.color-study .showcase-heading .eyebrow{color:var(--study-green)}
+.color-study .solution-metric{border-color:var(--study-line)}
+.color-study .solution-index{color:#668575}
+.color-study .business-story-video{background:var(--study-soft);border-color:var(--study-line)}
+.color-study .story-sequence{border-color:var(--study-line);background:#fff}
+.color-study .story-sequence>span{color:var(--study-green)}
+.color-study .home-proof,.color-study .business-stories,.color-study .business-needs a{border-color:var(--study-line)}
+.color-study .status-dot{background:#517e65;box-shadow:0 0 0 5px #517e6510}
+.color-study .capture-fields input,.color-study .capture-fields select{background:#f7faf8;border-color:#d6e1d9}
+.color-study .capture-form-meta{border-color:var(--study-line)}
+.color-study .closing-inner{background:#f5f8f5;border-color:var(--study-line)}
+.color-study--bosque{--study-soft:#eff5f1;--study-line:#d4e4d9;--study-green:#27644f;--study-deep:#173f34}
+.color-study--bosque .hero .hero-emphasis{color:var(--study-green)}
+.color-study--bosque .hero .hero-cta,.color-study--bosque .solution-primary-link,.color-study--bosque .home-capture .capture-submit,.color-study--bosque .closing-cta,.color-study--bosque .solution-secondary-actions>a[data-schedule]{background:var(--study-green);border-color:var(--study-green);color:#fff}
+.color-study--bosque .hero .hero-cta:hover,.color-study--bosque .solution-primary-link:hover,.color-study--bosque .home-capture .capture-submit:hover,.color-study--bosque .closing-cta:hover{background:var(--study-deep);border-color:var(--study-deep)}
+.color-study--bosque .hero .hero-secondary{border-color:var(--study-green);color:var(--study-green)}
+.color-study--bosque .hero .hero-secondary:hover{background:var(--study-soft)}
+.color-study--bosque .hero-contact-link,.color-study--bosque .home-proof>a,.color-study--bosque .need-index,.color-study--bosque .business-needs .icon,.color-study--bosque .solution-secondary-actions>button:not(.solution-conditions),.color-study--bosque .direction-text-link,.color-study--bosque .faq-indicator{color:var(--study-green)}
+.color-study--bosque .centralia-perspective{background:var(--study-deep)}
+.color-study--bosque .perspective-copy .eyebrow,.color-study--bosque .perspective-steps li>span{color:#c4ddce}
+.color-study--bosque .perspective-copy>p:not(.eyebrow),.color-study--bosque .perspective-steps p{color:#deebe3}
+.color-study--bosque .capture-consent input{accent-color:var(--study-green)}
+.color-study--bosque .capture-fields input:focus,.color-study--bosque .capture-fields select:focus{border-color:var(--study-green);box-shadow:0 0 0 3px #27644f18}

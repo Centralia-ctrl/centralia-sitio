@@ -1,0 +1,77 @@
+/* Editorial content only. Approved welcome animations keep their own styles. */
+.content-v14 .content-intro,.company-v14 .content-intro{max-width:650px;margin:22px 0 0;font-size:16px;line-height:1.8;color:#5d6470}
+.content-v14.content-uses .product-uses{gap:44px;margin-top:40px}
+.content-v14.content-uses .product-uses p{margin-top:14px;font-size:15px;line-height:1.8}
+.content-v14.content-case{display:grid;grid-template-columns:1fr 1fr;gap:72px;padding:52px 48px;background:#f7f8fa;border-radius:18px;margin:8px 0 64px}
+.content-v14 .content-case-story>p:not(.eyebrow){font-size:16px;line-height:1.85;color:#5d6470;margin:22px 0 0;max-width:460px}
+.content-v14 .content-case-story>small{display:block;font-size:12px;color:#69717c;margin-top:24px}
+.content-v14 .content-case-detail>h3{font-size:17px;line-height:1.5;margin:0 0 24px;color:#1b224e;font-weight:500}
+.content-v14 .content-facts{margin:0}
+.content-v14 .content-facts>div{padding:20px 0;border-top:1px solid #dce2eb}
+.content-v14 .content-facts>div:first-child{padding-top:0;border-top:0}
+.content-v14 .content-facts>div:last-child{padding-bottom:0}
+.content-v14 .content-facts dt{font-weight:500;font-size:17px;line-height:1.4;color:#1b224e}
+.content-v14 .content-facts dd{margin:8px 0 0;font-size:14px;line-height:1.8;color:#5d6470}
+.content-v14.product-process>div>p:not(.eyebrow){max-width:390px}
+.content-v14.product-process ol{gap:32px}
+.content-v14.product-process h3{font-size:21px}
+.content-v14.product-requirements .content-no-docs{color:#1b224e;margin-top:24px;font-size:14px}
+.content-v14.product-requirements .content-list-intro{margin-top:0}
+.content-v14 .content-prep-list{list-style:none;padding:0;margin:18px 0 24px}
+.content-v14 .content-prep-list li{position:relative;padding:13px 0 13px 23px;border-bottom:1px solid #e5e9f1;font-size:15px;line-height:1.65;color:#343b46}
+.content-v14 .content-prep-list li::before{content:"";position:absolute;left:0;top:23px;width:5px;height:5px;border-radius:50%;background:#315de8}
+.content-v14.product-requirements .content-requirement-note{font-size:13px;line-height:1.8;color:#69717c;margin:0}
+.content-v14.product-meeting{padding:40px 0;border:0;border-radius:0;border-top:1px solid #e5e9f1;gap:40px}
+.content-v14.product-meeting>div{max-width:660px}
+.content-v14.product-meeting h2{font-size:clamp(28px,2.7vw,36px)}
+.content-v14.product-meeting p{max-width:560px;font-size:15px;line-height:1.8}
+.content-v14.product-meeting .button{flex-shrink:0}
+.company-v14 .company-welcome{padding-bottom:56px}
+.company-v14 .company-welcome-copy>.product-text-link{display:inline-block;margin-top:24px}
+.company-v14 .company-track-record{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:center;padding:38px 0 46px;border-top:1px solid #e5e9f1;border-bottom:1px solid #e5e9f1}
+.company-v14 .company-track-heading h2{font-size:26px;line-height:1.3}
+.company-v14 .company-track-heading .eyebrow{font-size:11px}
+.company-v14 .company-metrics{display:grid;grid-template-columns:1fr 1fr;gap:38px;margin:0}
+.company-v14 .company-metrics>div{display:flex;flex-direction:column;justify-content:flex-end;min-width:0}
+.company-v14 .company-metrics>div+div{padding-left:38px;border-left:1px solid #e5e9f1}
+.company-v14 .company-metrics dt{order:2;font-size:14px;line-height:1.5;color:#5d6470;margin-top:12px}
+.company-v14 .company-metrics dd{order:1;margin:0;font-size:clamp(38px,4.6vw,60px);font-weight:500;line-height:1.05;letter-spacing:-.055em;color:#1b224e}
+.company-v14 .company-metrics dd>span{display:block;font-size:13px;letter-spacing:0;line-height:1.6;margin-bottom:6px;color:#5d6470}
+.company-v14 .company-approach{border-top:0;padding:72px 0;scroll-margin-top:100px}
+.company-v14 .company-number{color:#69717c}
+.company-v14 .company-proposal{display:grid;grid-template-columns:1fr 1fr;gap:80px;padding:52px 48px;background:#f7f8fa;border-radius:18px}
+.company-v14 .company-proposal .content-facts{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.company-v14 .company-proposal .content-facts>div{padding:18px 0 0;border-top:1px solid #dce2eb}
+.company-v14 .company-role{background:transparent;border-radius:0;padding:64px 0 0;margin:0;gap:80px;grid-template-columns:1fr 1fr}
+.company-v14 .company-conversation>.button{flex-shrink:0}
+@media(max-width:1000px){
+ .content-v14.content-case{gap:36px;padding:36px}
+ .content-v14.content-uses .product-uses{gap:28px}
+ .company-v14 .company-track-record{grid-template-columns:.9fr 2fr;gap:30px}
+ .company-v14 .company-metrics{gap:24px}
+ .company-v14 .company-metrics>div+div{padding-left:24px}
+ .company-v14 .company-proposal{gap:36px;padding:36px;grid-template-columns:.9fr 1.1fr}
+ .company-v14 .company-proposal .content-facts{gap:22px}
+ .company-v14 .company-role{gap:36px}
+}
+@media(max-width:760px){
+ .content-v14.content-case{grid-template-columns:1fr;gap:32px;padding:28px 24px;margin:0 0 42px;border-radius:12px}
+ .content-v14 .content-case-story>p:not(.eyebrow){font-size:15px}
+ .content-v14 .content-case-detail>h3{font-size:16px}
+ .content-v14.content-uses .product-uses{margin-top:30px;gap:30px}
+ .content-v14.product-meeting{padding:34px 0;gap:26px}
+ .content-v14.product-meeting .button{width:100%;justify-content:space-between;white-space:normal}
+ .company-v14 .company-welcome{padding-bottom:38px}
+ .company-v14 .company-track-record{grid-template-columns:1fr;gap:30px;padding:30px 0 34px}
+ .company-v14 .company-track-heading h2 br{display:none}
+ .company-v14 .company-track-heading h2{font-size:24px}
+ .company-v14 .company-metrics{gap:16px}
+ .company-v14 .company-metrics>div+div{padding-left:16px}
+ .company-v14 .company-metrics dd{font-size:clamp(30px,7.5vw,48px)}
+ .company-v14 .company-metrics dt{font-size:12px;max-width:145px}
+ .company-v14 .company-approach{padding:44px 0}
+ .company-v14 .company-proposal{grid-template-columns:1fr;padding:28px 24px;gap:30px;border-radius:12px}
+ .company-v14 .company-proposal .content-facts{grid-template-columns:1fr;gap:24px}
+ .company-v14 .company-role{grid-template-columns:1fr;padding:44px 0 0;gap:24px}
+ .company-v14 .company-conversation>.button{display:flex;width:100%;margin-top:26px;justify-content:space-between;white-space:normal}
+}

@@ -1,0 +1,3 @@
+.product-illustration{display:block;width:100%;height:100%;overflow:visible}
+.product-illustration text{font-family:"DM Sans",Arial,sans-serif}
+.product-illustration [data-part]{transform-box:view-box}

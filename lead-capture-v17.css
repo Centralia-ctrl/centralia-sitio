@@ -1,0 +1,43 @@
+/* The consultation belongs to the page's editorial grid. */
+.home-capture{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(32px,4vw,56px);align-items:start;padding-top:64px;padding-bottom:64px}
+.home-capture .capture-copy>p:not(.eyebrow){max-width:350px}
+.home-capture .capture-copy .capture-audience{font-size:12px;line-height:1.7;margin-top:20px}
+.capture-contact-options{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:28px}
+.capture-contact-options a{display:inline-flex;align-items:center;gap:14px;color:#1b224e;font-size:14px;font-weight:500;line-height:1.6;text-decoration:none}
+.capture-contact-options a:hover{text-decoration:underline;text-underline-offset:5px}
+#consulta .capture-contact-options a[data-schedule]{min-height:0;padding:0;border:0;border-radius:0;background:transparent;color:#1b224e;font-size:14px;font-weight:500;line-height:1.6;gap:14px;box-shadow:none}
+#consulta .capture-contact-options a[data-schedule] .icon{width:17px;height:17px}
+.capture-contact-options svg{width:17px;height:17px;flex-shrink:0}
+.capture-in-view .whatsapp-float{visibility:hidden;opacity:0;pointer-events:none}
+.home-capture .capture-panel{border:0;border-radius:0;background:transparent;padding:3px 0 0;box-shadow:none}
+.capture-form-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin:0 0 20px;padding-bottom:14px;border-bottom:1px solid #e4e7ee;color:#616979;font-size:12px;line-height:1.6}
+.capture-form-meta span:first-child{font-weight:500;letter-spacing:.08em;color:#1b224e;white-space:nowrap}
+.capture-fields{gap:20px}
+.capture-field-wide{grid-column:1/-1}
+.capture-fields label{font-size:14px;font-weight:500;color:#1b224e}
+.capture-fields input,.capture-fields select{height:54px;margin-top:9px;border:1px solid #dce1e9;border-radius:8px;padding:13px 15px;background:#fafbfc;color:#303647;font-family:inherit;font-size:15px;font-weight:400;transition:border-color .18s,box-shadow .18s,background .18s}
+.capture-fields input::placeholder{color:#7b8290;opacity:1}
+.capture-fields select{padding-right:32px}
+.capture-fields select:has(option:checked[value=""]){color:#7b8290}
+.capture-fields input:hover,.capture-fields select:hover{border-color:#aab6cf}
+.capture-fields input:focus,.capture-fields select:focus{outline:0;border-color:#3c56dc;box-shadow:0 0 0 3px #3c56dc12;background:#fff}
+.capture-fields [aria-invalid="true"]{border-color:#a23632}
+.capture-fields .capture-unit{float:right;color:#616979;font-size:12px;font-weight:400;line-height:22px}
+.home-capture .capture-consent{margin:22px 0 0;font-size:13px;line-height:1.75;color:#545e6d;gap:10px}
+.capture-consent input{accent-color:#3c56dc}
+.capture-consent a{color:#1b224e;text-underline-offset:3px}
+.home-capture .capture-submit{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:54px;margin:20px 0 0;padding:16px 21px;border:1px solid #3c56dc;border-radius:8px;background:#3c56dc;color:#fff;font:500 14px/1.5 "DM Sans",Arial,sans-serif;cursor:pointer;transition:background .18s,transform .18s}
+.capture-submit:hover{background:#2d43be;border-color:#2d43be;transform:translateY(-1px)}
+.capture-submit:focus-visible,.capture-contact-options a:focus-visible,.capture-consent input:focus-visible{outline:3px solid #9caaf2;outline-offset:4px}
+.capture-submit:disabled{cursor:wait;opacity:.65;transform:none}
+.capture-submit svg{width:20px;height:20px}
+.home-capture .capture-note{margin:13px 0 0;font-size:12px;line-height:1.8;color:#616979}
+.capture-error{padding:12px 15px;background:#fcf3f2;border-radius:7px;font-size:12px;line-height:1.7}
+.capture-api-fallback{margin:12px 0 0;font-size:12px;line-height:1.7}
+.capture-api-fallback a{color:#3c56dc;text-underline-offset:3px}
+.capture-success{padding:32px 0;border-top:1px solid #e4e7ee}
+.capture-success-mark{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:#eef1fc;color:#3c56dc}
+.capture-success h3{color:#1b224e;font-size:30px;font-weight:500;letter-spacing:-.03em;margin:22px 0 14px}
+.capture-success p{max-width:430px;color:#616979;font-size:15px;line-height:1.8}
+@media(max-width:760px){.home-capture{grid-template-columns:1fr;gap:28px;padding-top:44px;padding-bottom:44px}.capture-contact-options{margin-top:24px;gap:14px}.home-capture .capture-panel{padding:0}.capture-form-meta{margin-bottom:20px}.capture-fields{grid-template-columns:1fr;gap:20px}.capture-fields input,.capture-fields select{font-size:16px}.capture-success h3{font-size:27px}}
+@media(prefers-reduced-motion:reduce){.capture-submit,.capture-fields input,.capture-fields select{transition:none}.capture-submit:hover{transform:none}}

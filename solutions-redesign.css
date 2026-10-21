@@ -1,0 +1,84 @@
+/* Solutions: three comparable products with consistent hierarchy and actions. */
+#soluciones{padding-block:88px}
+#soluciones .section-heading{align-items:end;margin-bottom:40px;gap:40px}
+#soluciones .section-heading .eyebrow{color:#315de8;font-size:12px;letter-spacing:.1em;margin-bottom:18px}
+#soluciones .section-heading h2{font-size:clamp(34px,3.8vw,50px);line-height:1.12;color:var(--brand);letter-spacing:-.045em}
+#soluciones .section-heading h2 br{display:block}
+#soluciones .section-heading h2 em{color:#315de8}
+#soluciones .section-description{max-width:350px;font-size:16px;line-height:1.75;color:var(--muted)}
+#soluciones .focused-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto;gap:20px;overflow:visible}
+#soluciones .finance-card{grid-column:auto;grid-row:auto;display:flex;flex-direction:column;gap:0;min-width:0;padding:28px 24px 16px;border:1px solid #dce2ed;border-radius:18px;background:#fff;box-shadow:none;overflow:hidden}
+#soluciones .finance-primary,#soluciones .finance-primary[data-active=true]{background:#f3f6ff;border-color:#ccd8ff}
+#soluciones .finance-copy{width:100%;min-height:188px}
+#soluciones .finance-top{font-size:10px;letter-spacing:.065em;font-weight:600;color:var(--brand);margin:0 0 28px;display:flex;align-items:center}
+#soluciones .finance-top>span:first-child{display:flex;align-items:center;gap:10px}
+#soluciones .product-dot{display:inline-flex;align-items:center;justify-content:center;flex:none;width:32px;height:32px;border-radius:9px;background:#e9efff;color:#315de8;font-size:11px;font-style:normal;box-shadow:none}
+#soluciones .offer-mark{display:none}
+#soluciones .finance-card h3{font-size:clamp(30px,2.8vw,38px);font-weight:500;line-height:1.12;color:var(--brand);margin:0;letter-spacing:-.045em}
+#soluciones .finance-description{font-size:14px;line-height:1.75;max-width:none;margin:14px 0 0;color:var(--muted)}
+#soluciones .finance-amount{width:100%;display:flex;flex-direction:column;gap:8px;min-height:176px;margin:24px 0 26px;padding-top:24px;border-top:1px solid #dce2ed}
+#soluciones .finance-amount>span{font-size:10px;letter-spacing:.08em;color:var(--muted)}
+#soluciones .finance-amount>strong{font-size:52px;font-weight:500;line-height:1.15;letter-spacing:-.05em;color:#315de8;white-space:normal}
+#soluciones .finance-amount>strong>span{font-size:21px;letter-spacing:-.025em}
+#soluciones .finance-amount>p{font-size:12px;line-height:1.65;margin:0;color:var(--muted)}
+#soluciones .finance-amount .solution-extra{font-size:11px;max-width:240px}
+#soluciones .finance-actions{display:grid;grid-template-columns:1fr;gap:6px;margin-top:auto;width:100%}
+#soluciones .finance-cta{min-height:56px;padding:14px 16px;font-size:14px;line-height:1.4;border-radius:9px;background:#fff;color:#315de8;border:1px solid #315de8;gap:10px}
+#soluciones .finance-primary .finance-cta{background:#315de8;color:#fff}
+#soluciones .finance-cta:hover{background:#eaf0ff;color:#254bc6}
+#soluciones .finance-primary .finance-cta:hover{background:#254bc6;color:#fff}
+#soluciones .finance-cta .icon{width:20px;height:20px}
+#soluciones .finance-details{font-size:12px;min-height:44px;color:var(--muted);background:transparent}
+#soluciones .solutions-bottom{margin-top:20px}
+#soluciones .portfolio-note{max-width:850px;font-size:11px;line-height:1.75}
+#soluciones .solution-dots{display:none}
+#soluciones .orientation{display:flex;justify-content:space-between;align-items:center;gap:28px;margin-top:32px;padding:26px 28px;border:1px solid #e5e9f1;border-radius:14px;background:#f7f8fb}
+#soluciones .orientation p{font-size:19px;font-weight:500;color:var(--brand);line-height:1.4}
+#soluciones .orientation p span{display:block;margin-top:6px;font-size:14px;font-weight:400;color:var(--muted)}
+#soluciones .orientation a{min-height:52px;font-size:14px;padding:14px 18px;white-space:nowrap}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){#soluciones .finance-card:hover{transform:translateY(-5px);border-color:#9bb2f5;box-shadow:0 16px 36px #1b224e0d}}
+@media(min-width:761px) and (max-width:1050px){#soluciones .focused-grid{grid-template-columns:1fr}#soluciones .finance-card{display:grid;grid-template-columns:1.2fr 1fr;gap:20px 32px;padding:28px}#soluciones .finance-copy{min-height:0}#soluciones .finance-amount{grid-column:2;grid-row:1;min-height:0;margin:0;padding:0;border:0}#soluciones .finance-actions{grid-column:1/-1;grid-template-columns:1fr 1fr;gap:32px;margin:0}}
+@media(max-width:760px){#soluciones{padding-block:56px}#soluciones .section-heading{display:block;margin-bottom:28px}#soluciones .section-description{max-width:100%;margin-top:18px}#soluciones .focused-grid{grid-template-columns:1fr;gap:18px}#soluciones .finance-card{padding:26px 24px 16px}#soluciones .finance-copy{min-height:0}#soluciones .finance-top{margin-bottom:22px}#soluciones .finance-card h3{font-size:34px}#soluciones .finance-amount{min-height:0;margin:24px 0}#soluciones .orientation{display:block;padding:24px}#soluciones .orientation a{margin-top:20px;width:100%;white-space:normal}}
+@media(prefers-reduced-motion:reduce){#soluciones .finance-card:hover{transform:none}}
+/* Invitation between the product comparison and the Centralia approach. */
+#soluciones .orientation{position:relative;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,1fr);align-items:center;gap:48px;margin-top:40px;padding:44px 48px;border:0;border-radius:20px;background:#1b224e;color:#fff;overflow:hidden}
+#soluciones .orientation-copy{position:relative;min-width:0}
+#soluciones .orientation .orientation-eyebrow{margin:0 0 18px;color:#bdcaff;font-size:11px;line-height:1.5;font-weight:600;letter-spacing:.12em}
+#soluciones .orientation h3{margin:0;color:#fff;font-size:clamp(30px,3.2vw,42px);line-height:1.12;letter-spacing:-.04em;font-weight:500}
+#soluciones .orientation .orientation-description{margin:18px 0 0;max-width:470px;color:#dce2f4;font-size:15px;line-height:1.75;font-weight:400}
+#soluciones .orientation-action{display:flex;flex-direction:column;align-items:center;gap:18px;min-width:0;padding-left:40px;border-left:1px solid #ffffff26}
+#soluciones .orientation-symbol{display:grid;place-items:center;width:54px;height:54px;border:1px solid #ffffff30;border-radius:16px;background:#ffffff0a;color:#c4d0ff}
+#soluciones .orientation-symbol .icon{width:27px;height:27px}
+#soluciones .orientation a[data-schedule]{display:flex;width:100%;max-width:320px;min-height:58px;margin:0;padding:16px 20px;gap:14px;white-space:normal;background:#fff;border:1px solid #fff;color:#1b224e;font-size:15px;border-radius:10px}
+#soluciones .orientation a[data-schedule]:hover{background:#e9eeff;border-color:#e9eeff;color:#1b224e}
+#soluciones .orientation a[data-schedule]:focus-visible{outline:3px solid #bdcaff;outline-offset:5px}
+#soluciones .orientation .orientation-note{margin:0;color:#dce2f4;font-size:12px;line-height:1.6;font-weight:400;text-align:center}
+#metodo .method-heading>.eyebrow{color:#315de8;letter-spacing:.1em}
+@media(max-width:760px){#soluciones .orientation{grid-template-columns:minmax(0,1fr);gap:28px;padding:30px 24px;margin-top:28px;border-radius:16px}#soluciones .orientation-action{align-items:stretch;padding:26px 0 0;border-left:0;border-top:1px solid #ffffff26;gap:12px}#soluciones .orientation-symbol{display:none}#soluciones .orientation a[data-schedule]{max-width:none}#soluciones .orientation .orientation-description{font-size:14px}}
+/* Quieter invitation: neutral surface and a single blue action. */
+#soluciones .orientation{background:#f5f6f8;color:var(--ink);border:1px solid #e5e9f1}
+#soluciones .orientation .orientation-eyebrow{color:var(--muted)}
+#soluciones .orientation h3{color:var(--brand)}
+#soluciones .orientation .orientation-description,#soluciones .orientation .orientation-note{color:var(--muted)}
+#soluciones .orientation-action{border-left-color:#dde2eb}
+#soluciones .orientation-symbol{background:#fff;border-color:#dde2eb;color:var(--muted)}
+#soluciones .orientation a[data-schedule]{background:#315de8;border-color:#315de8;color:#fff}
+#soluciones .orientation a[data-schedule]:hover{background:#254bc6;border-color:#254bc6;color:#fff}
+@media(max-width:760px){#soluciones .orientation-action{border-top-color:#dde2eb}}
+
+/* Refine the approved neutral invitation, keeping its established layout. */
+#soluciones .orientation{padding:40px 44px;gap:40px;border-radius:16px;background:#f5f6f8;grid-template-columns:minmax(0,1.4fr) minmax(260px,1fr)}
+#soluciones .orientation .orientation-eyebrow{font-size:10px;letter-spacing:.12em;margin-bottom:16px;color:#626b7b}
+#soluciones .orientation h3{font-size:clamp(30px,3vw,40px);font-weight:500;line-height:1.16;letter-spacing:-.04em}
+#soluciones .orientation .orientation-description{max-width:440px;margin-top:16px;font-size:15px;line-height:1.7}
+#soluciones .orientation-action{padding-left:36px;gap:14px;justify-content:center;align-self:stretch}
+#soluciones .orientation a[data-schedule]{max-width:300px;min-height:58px;padding:17px 20px;font-size:15px}
+#soluciones .orientation .orientation-note{font-size:12px;line-height:1.5}
+@media(prefers-reduced-motion:no-preference){#soluciones .orientation a[data-schedule]{transition:background-color .2s ease,box-shadow .2s ease,transform .2s ease}}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){#soluciones .orientation a[data-schedule]:hover{transform:translateY(-2px);box-shadow:0 7px 18px #315de81a}}
+@media(max-width:760px){#soluciones .orientation{grid-template-columns:minmax(0,1fr);padding:30px 24px;gap:24px}#soluciones .orientation-action{padding:24px 0 0;border-left:0;gap:12px}#soluciones .orientation a[data-schedule]{max-width:none}#soluciones .orientation .orientation-description{font-size:14px}}
+/* Make product names easy to identify above each benefit. */
+#soluciones .finance-top{font-size:15px;font-weight:700;letter-spacing:.025em;line-height:1.4;min-height:44px;margin-bottom:22px}
+#soluciones .finance-top>span:first-child{align-items:center;gap:10px;min-width:0}
+#soluciones .product-dot{width:34px;height:34px;font-size:12px}
+@media(max-width:760px){#soluciones .finance-top{font-size:16px;margin-bottom:20px}}

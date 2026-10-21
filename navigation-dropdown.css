@@ -1,0 +1,14 @@
+/* Click-operated product navigation; native details supports keyboard interaction. */
+.site-header .solutions-nav{position:relative}
+.site-header .solutions-nav summary{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:11px 16px;border-radius:8px;list-style:none;cursor:pointer;font-size:14px;font-weight:500;line-height:1.5;color:var(--ink)}
+.site-header .solutions-nav summary::-webkit-details-marker{display:none}
+.site-header .solutions-nav summary:hover,.site-header .solutions-nav[open]>summary{background:#fff;color:#315de8}
+.site-header .solutions-nav summary:focus-visible{outline:2px solid #315de8;outline-offset:3px}
+.site-header .nav-chevron{font-size:17px;line-height:1}
+.site-header .solutions-nav[open] .nav-chevron{transform:rotate(180deg)}
+.site-header .solutions-nav-panel{position:absolute;top:calc(100% + 12px);left:0;z-index:60;min-width:248px;padding:8px;background:#fff;border:1px solid #e0e5ee;border-radius:12px;box-shadow:0 12px 32px #1b224e16}
+.site-header .desktop-nav .solutions-nav-panel a{display:flex;width:100%;padding:13px 14px;min-height:46px;margin:0;white-space:nowrap;font-size:14px;border-radius:7px;background:transparent;color:var(--brand)}
+.site-header .desktop-nav .solutions-nav-panel a:hover,.site-header .desktop-nav .solutions-nav-panel a:focus-visible{background:#f0f4ff;color:#315de8}
+.site-header .mobile-nav .solutions-nav summary{margin-top:4px;padding:14px 16px;min-height:48px;background:#f4f6fa;color:var(--brand)}
+.site-header .mobile-nav .solutions-nav-panel{position:static;min-width:0;padding:4px 0 8px 14px;margin:8px 0 12px;border:0;border-left:2px solid #dce4fa;border-radius:0;box-shadow:none;background:transparent}
+.site-header .mobile-nav .solutions-nav-panel a{margin:0;padding:12px 14px;min-height:46px;background:transparent;font-size:14px}

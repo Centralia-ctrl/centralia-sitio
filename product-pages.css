@@ -1,0 +1,49 @@
+.product-page .product-breadcrumb{display:flex;flex-wrap:wrap;gap:12px;padding:30px 0;font-size:12px;color:var(--muted)}
+.product-breadcrumb a:hover{color:#315de8;text-decoration:underline}
+.product-hero{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:64px;align-items:center;padding:42px 0 80px}
+.product-page .eyebrow{color:#315de8;font-size:12px;letter-spacing:.09em;margin-bottom:20px}
+.product-hero h1{font-size:clamp(38px,4.5vw,62px);line-height:1.08;letter-spacing:-.05em;font-weight:500;color:var(--brand)}
+.product-intro{font-size:18px;line-height:1.7;color:var(--muted);margin-top:24px;max-width:640px}
+.product-actions{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:30px}
+.product-text-link{font-size:14px;color:#315de8;text-decoration:underline;text-underline-offset:5px}
+.product-stat{padding:34px;border:1px solid #dce2ed;background:#f3f6ff;border-radius:18px}
+.product-stat>p{font-size:14px;line-height:1.7;color:var(--muted)}
+.product-stat>strong{display:block;margin:16px 0;font-size:clamp(35px,4vw,52px);font-weight:500;letter-spacing:-.045em;color:#315de8;line-height:1.2}
+.product-stat small{display:block;border-top:1px solid #dce2ed;margin-top:22px;padding-top:16px;font-size:11px;color:var(--muted);line-height:1.7}
+.product-section{padding:64px 0;border-top:1px solid #e5e9f1;scroll-margin-top:90px}
+.product-page h2{font-size:clamp(28px,3vw,40px);line-height:1.15;font-weight:500;letter-spacing:-.035em;color:var(--brand)}
+.product-page h3{font-size:21px;line-height:1.3;font-weight:500;color:var(--brand);letter-spacing:-.02em}
+.product-uses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:32px}
+.product-uses article{border-left:2px solid #dae3ff;padding-left:22px}
+.product-page article p,.product-process p,.product-requirements p{font-size:15px;color:var(--muted);line-height:1.8;margin-top:14px}
+.product-process,.product-requirements,.product-faq{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:72px}
+.product-process ol{list-style:none;padding:0;margin:0;display:grid;gap:28px}
+.product-process li{display:grid;grid-template-columns:36px 1fr;gap:16px}
+.product-step{display:grid;place-items:center;align-self:start;width:34px;height:34px;border-radius:9px;background:#edf2ff;color:#315de8;font-size:12px}
+.product-process li p{margin-top:8px}
+.product-requirements span{display:block;margin-top:20px;font-size:13px;color:var(--brand)}
+.product-faq details{border-bottom:1px solid #e0e5ed;padding:20px 0}
+.product-faq details:first-child{padding-top:0}
+.product-faq summary{font-size:16px;line-height:1.5;cursor:pointer;color:var(--brand)}
+.product-faq details p{font-size:14px;line-height:1.8;color:var(--muted);margin-top:14px}
+.product-meeting{display:flex;align-items:center;justify-content:space-between;gap:28px;background:#f5f6f8;border:1px solid #e5e9f1;border-radius:16px;padding:36px;margin:24px 0 40px}
+.product-meeting p{font-size:14px;line-height:1.7;color:var(--muted);margin-top:12px}
+.product-meeting a{flex-shrink:0}
+.product-related{display:flex;gap:24px;flex-wrap:wrap;align-items:center;margin-bottom:64px;font-size:14px}
+.product-related p{color:var(--muted)}
+.product-related a{color:#315de8;padding:10px 0}
+#soluciones .product-detail-link{display:flex;justify-content:space-between;font-size:13px;color:#315de8;margin:0 0 18px;padding:8px 0;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:900px){.product-hero{gap:32px}.product-process,.product-requirements,.product-faq{gap:32px}.product-meeting{display:block}.product-meeting a{margin-top:24px}}
+@media(max-width:760px){.product-hero{grid-template-columns:1fr;padding:24px 0 48px;gap:32px}.product-intro{font-size:16px}.product-stat{padding:26px}.product-section{padding:42px 0}.product-uses,.product-process,.product-requirements,.product-faq{grid-template-columns:1fr;gap:28px}.product-meeting{padding:26px}.product-meeting a{width:100%}.product-related{gap:12px 24px}.product-related p{width:100%}}
+/* Company and FAQ pages share the product-page typography. */
+.company-intro{padding:40px 0 60px;max-width:920px}
+.company-intro h1{font-size:clamp(36px,4.5vw,60px);line-height:1.1;letter-spacing:-.045em;color:var(--brand);font-weight:500}
+.company-intro h1 span{color:#315de8}
+.company-intro>p:last-child{max-width:740px;font-size:18px;line-height:1.75;color:var(--muted);margin-top:24px}
+.company-page .method-section{background:transparent;border-top:1px solid #e5e9f1}
+.company-page .method-section>.section{padding-block:56px}
+.company-page .method-signoff{margin-bottom:0}
+.company-page .company-faq{border-top:1px solid #e5e9f1;grid-template-columns:minmax(0,.75fr) minmax(0,1.4fr);gap:64px}
+.company-page .product-uses .product-text-link{display:inline-block;margin-top:18px;line-height:1.6}
+.company-page .product-requirements .product-text-link{display:inline-block;margin-top:22px}
+@media(max-width:760px){.company-intro{padding:24px 0 40px}.company-intro>p:last-child{font-size:16px}.company-page .company-faq{grid-template-columns:1fr;gap:28px}.company-page .method-section>.section{padding-block:40px}}

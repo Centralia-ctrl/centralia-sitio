@@ -1,0 +1,22 @@
+/* Keep the warehouse footage in its original frame, below the approved welcome. */
+#empresas-en-movimiento{scroll-margin-top:96px}
+.business-story-video{background:#f4f6fb;border:1px solid #e5eaf2;border-radius:20px 58px 20px 20px}
+.business-story-video::after{display:none}
+.business-video-frame{position:relative;aspect-ratio:16/9;background:#19203a;overflow:hidden}
+.business-video{display:block;width:100%;height:100%;object-fit:contain}
+.business-story-video .scene-caption{position:static;display:block;margin:24px 26px 18px;max-width:none;color:#1b224e;font-size:24px;line-height:1.25}
+.business-story-video .story-sequence{position:static;margin:0 24px 24px;box-shadow:none;padding:17px 8px}
+.business-video-toggle{position:absolute;z-index:2;right:14px;bottom:14px;display:flex;align-items:center;gap:6px;min-height:44px;padding:10px 14px;border:1px solid #ffffff54;border-radius:30px;background:#151d37d9;color:white;font-family:inherit;font-size:12px;font-weight:500;line-height:1.2;cursor:pointer;backdrop-filter:blur(8px)}
+.business-video-toggle[hidden]{display:none}
+.business-video-toggle:hover{background:#1b224e}
+.business-video-toggle:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.business-video-toggle svg{width:16px;height:16px;fill:currentColor}
+.business-video-toggle .video-pause-icon,.business-video-toggle.is-playing .video-play-icon{display:none}
+.business-video-toggle.is-playing .video-pause-icon{display:block}
+@media(max-width:760px){
+  #empresas-en-movimiento{scroll-margin-top:82px}
+  .business-story-video{border-radius:16px 38px 16px 16px}
+  .business-story-video .scene-caption{font-size:22px;margin:20px 20px 15px}
+  .business-story-video .story-sequence{margin:0 17px 18px;padding:14px 6px}
+  .business-video-toggle{right:10px;bottom:10px;padding:10px 12px}
+}

@@ -1,0 +1,6 @@
+.product-scene{position:relative;aspect-ratio:31/26;width:100%;height:100%;overflow:hidden;isolation:isolate}
+.product-scene-canvas{position:absolute;inset:0;display:block;width:100%;height:100%;opacity:0;transition:opacity .4s ease;pointer-events:none}
+.product-scene-fallback{display:block;width:100%;height:100%;object-fit:contain}
+.product-scene[data-render-state="ready"] .product-scene-canvas{opacity:1}
+.product-scene[data-render-state="ready"] .product-scene-fallback{visibility:hidden}
+@media(prefers-reduced-motion:reduce){.product-scene-canvas{transition:none}}

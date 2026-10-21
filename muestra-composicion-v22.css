@@ -1,0 +1,30 @@
+/* Local product-card study. Keep the full-sized hero and its original spacing. */
+.compact-study .home-proof{grid-template-columns:1fr 1.3fr 1.5fr}
+.compact-study .solution-showcase{padding-block:54px 42px}
+.compact-study .showcase-heading{margin-bottom:28px;gap:56px}
+.compact-study .showcase-heading .eyebrow{margin-bottom:14px}
+.compact-study .showcase-heading h2{font-size:clamp(32px,3vw,42px)}
+.compact-study .direction-home .solution-tile-heading{padding:22px 24px 0}
+.compact-study .direction-home .solution-tile-content{padding:16px 24px 14px}
+.compact-study .direction-home .solution-index{top:21px;right:24px}
+.compact-study .solution-tile h3{font-size:31px}
+.compact-study .solution-description{min-height:0;margin:12px 0 18px;line-height:1.65}
+.compact-study .solution-metric{min-height:0;padding-top:16px;margin-bottom:12px}
+.compact-study .solution-metric>strong{font-size:30px;margin-top:5px}
+.compact-study .solution-metric>p{font-size:12px;line-height:1.6;margin-top:8px}
+.compact-study .solution-primary-link{min-height:46px;font-size:15px;font-weight:600}
+.compact-study .solution-secondary-actions{margin-top:0}
+.compact-study .solution-secondary-actions>button,.compact-study .direction-home .solution-secondary-actions>a[data-schedule]{min-height:42px;padding-block:9px}
+.compact-study .showcase-note{margin-top:18px}
+@media(max-width:760px){
+ .compact-study .home-proof{grid-template-columns:1fr 1fr}
+ .compact-study .solution-showcase{padding-block:38px 32px}
+ .compact-study .showcase-heading h2{font-size:34px}
+ .compact-study .showcase-heading>p{margin-top:16px}
+ .compact-study .solution-collection{gap:18px}
+ .compact-study .direction-home .solution-tile-heading{padding:22px 22px 0}
+ .compact-study .direction-home .solution-tile-content{padding:16px 22px 12px}
+ .compact-study .direction-home .solution-index{right:22px}
+ .compact-study .solution-description{font-size:15px}
+ .compact-study .solution-secondary-actions>button,.compact-study .direction-home .solution-secondary-actions>a[data-schedule]{min-height:44px;font-size:13px}
+}

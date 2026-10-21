@@ -1,0 +1,32 @@
+/* About Centralia: scoped to this page, leaving the approved home untouched. */
+.company-refresh .company-welcome{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:center;padding:32px 0 80px}
+.company-refresh .company-welcome h1{font-size:clamp(38px,4.1vw,58px);font-weight:500;line-height:1.1;letter-spacing:-.05em;color:#1b224e;margin:0}
+.company-refresh .company-welcome h1 span{color:#315de8}
+.company-refresh .company-welcome-copy>p:not(.eyebrow){max-width:530px;font-size:16px;line-height:1.8;color:#5d6470;margin-top:18px}
+.company-refresh .company-welcome-copy>.company-lead{font-size:21px!important;line-height:1.55!important;color:#343b46!important;margin-top:28px!important}
+.company-refresh .company-scene{margin:0}
+.company-refresh .company-scene img{width:100%;height:340px;object-fit:cover;object-position:45% center;border-radius:16px}
+.company-refresh .company-scene figcaption{margin-top:14px;font-size:12px;line-height:1.5;color:#5d6470}
+.company-refresh .company-approach{border-top:1px solid #e5e9f1;padding:64px 0}
+.company-refresh .company-principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:42px}
+.company-refresh .company-number{display:block;color:#315de8;font-size:13px;margin-bottom:20px}
+.company-refresh .company-principles h3{font-size:21px;line-height:1.35}
+.company-refresh .company-principles p{font-size:15px;line-height:1.8;margin-top:14px;color:#5d6470}
+.company-refresh .company-role{display:grid;grid-template-columns:1fr 1.15fr;gap:80px;padding:48px;background:#f5f7fa;border-radius:16px;margin:8px 0 0}
+.company-refresh .company-role-copy>p{font-size:16px;line-height:1.85;color:#343b46;margin:0}
+.company-refresh .company-role-copy>.company-role-note{font-size:13px;color:#5d6470;margin-top:18px}
+.company-refresh .company-role-copy>a{display:inline-block;margin-top:22px}
+.company-refresh .company-solutions{padding:72px 0}
+.company-refresh .company-solution-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;margin-top:30px}
+.company-refresh .company-solution-links>a{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;padding:22px 0;border-top:1px solid #dce3ed;transition:color .2s,border-color .2s}
+.company-refresh .company-solution-links strong{display:block;font-size:18px;font-weight:500;color:#1b224e}
+.company-refresh .company-solution-links small{display:block;font-size:14px;line-height:1.7;color:#5d6470;margin-top:8px}
+.company-refresh .company-solution-links>a>span:last-child{font-size:21px;color:#315de8}
+.company-refresh .company-solution-links>a:hover{border-color:#315de8}
+.company-refresh .company-solution-links>a:hover strong{color:#315de8}
+.company-refresh .company-conversation{display:flex;align-items:center;justify-content:space-between;gap:48px;padding:48px 0 64px;border-top:1px solid #e5e9f1}
+.company-refresh .company-conversation>div>p:last-child{max-width:560px;font-size:16px;line-height:1.8;color:#5d6470;margin-top:20px}
+.company-refresh .company-meeting{flex-shrink:0;padding:17px 24px;background:#315de8;color:#fff;font-size:15px;border-radius:9px;gap:20px}
+.company-refresh .company-meeting:hover{background:#264cc6}
+@media(max-width:1000px){.company-refresh .company-welcome{gap:36px}.company-refresh .company-role{gap:40px;padding:36px}.company-refresh .company-conversation{gap:30px}}
+@media(max-width:760px){.company-refresh .company-welcome{grid-template-columns:1fr;padding:20px 0 44px;gap:32px}.company-refresh .company-welcome h1{font-size:clamp(36px,8.5vw,50px)}.company-refresh .company-scene img{height:230px}.company-refresh .company-welcome-copy>.company-lead{font-size:19px!important}.company-refresh .company-approach{padding:40px 0}.company-refresh .company-principles{grid-template-columns:1fr;gap:28px;margin-top:30px}.company-refresh .company-principles article{border-top:1px solid #e5e9f1;padding-top:24px}.company-refresh .company-number{margin-bottom:12px}.company-refresh .company-role{grid-template-columns:1fr;gap:25px;padding:26px 24px}.company-refresh .company-solutions{padding:44px 0}.company-refresh .company-solution-links{grid-template-columns:1fr;gap:0}.company-refresh .company-conversation{display:block;padding:40px 0 48px}.company-refresh .company-meeting{display:flex;width:100%;margin-top:28px;justify-content:space-between}}

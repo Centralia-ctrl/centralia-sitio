@@ -1,0 +1,6 @@
+.site-header .header-inner{height:76px}
+.site-header a.brand{width:180px;min-height:48px;padding:6px;flex:0 0 180px}
+.site-header a.brand img{width:168px;max-width:100%;height:auto}
+@media(max-width:900px){.site-header .header-inner{height:72px}.site-header a.brand{width:160px;flex-basis:160px;min-height:44px}.site-header a.brand img{width:148px}}
+
+.hero.welcome-restarting,.hero.welcome-restarting *,.hero.welcome-restarting *::before,.hero.welcome-restarting *::after{animation:none!important}

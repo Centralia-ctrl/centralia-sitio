@@ -1,0 +1,23 @@
+/* Improvements from the 2026-10-10 audit. */
+:focus-visible{outline:3px solid var(--blue);outline-offset:4px;box-shadow:0 0 0 6px #fff}
+html{scroll-padding-top:120px}
+main:focus{outline:none}
+dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain}
+.footer-contact a{overflow-wrap:anywhere}
+.sim-request-advice{margin-block:16px}
+@media(max-width:600px){.footer-contact{min-width:0}.whatsapp-float{bottom:12px}.site-footer{padding-bottom:90px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Restore the welcome choreography, with a calmer pace before the actions. */
+@media(prefers-reduced-motion:no-preference){
+ .hero-heading>.eyebrow{animation-duration:1.2s}
+ .hero h1{animation-duration:1.5s;animation-delay:.2s}
+ .hero-mexico{animation:mexico-arrive 2.2s .8s both}
+ .hero-description{animation-duration:1.5s;animation-delay:.6s}
+ .hero .hero-actions>.hero-cta{animation-duration:1.4s;animation-delay:1.5s}
+ .hero .hero-actions>.hero-secondary{animation-duration:1.4s;animation-delay:1.75s}
+ .hero .scheduling-note{animation-duration:1.2s;animation-delay:1.9s}
+ .hero .hero-actions:focus-within>*{animation:none}
+}
+.sim-breakdown dd{white-space:nowrap;overflow-wrap:normal;word-break:normal}
+@media(max-width:480px){.sim-breakdown>div{display:block}.sim-breakdown dd{text-align:left;margin:6px 0 0}.sim-payment{font-size:clamp(24px,7vw,36px)}}

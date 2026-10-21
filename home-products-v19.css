@@ -1,0 +1,7 @@
+/* Homepage product cards without photography. */
+.direction-home .solution-tile-heading{padding:25px 25px 0}
+.direction-home .solution-tile-heading .solution-category{position:static;color:#315de8;font-size:13px;line-height:1.5;gap:10px}
+.direction-home .solution-tile-content{padding-top:21px}
+.direction-home .solution-index{top:27px}
+@media(min-width:761px) and (max-width:950px){.direction-home .solution-tile{display:flex;flex-direction:column}.direction-home .solution-tile-heading{padding:25px 28px 0}}
+@media(max-width:760px){.direction-home .solution-tile-heading{padding:24px 24px 0}.direction-home .solution-tile-content{padding-top:20px}.direction-home .solution-index{top:26px}}
