@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="solution-editorial-art" data-editorial="credit-growth" viewBox="95 45 490 410" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="volume-blue" x1=".12" y1="0" x2=".9" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#6A93FF"/><stop offset=".43" stop-color="#5678EF"/><stop offset="1" stop-color="#162BAB"/></linearGradient>
+  <linearGradient id="volume-top" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#91AEFF"/><stop offset="1" stop-color="#5276ED"/></linearGradient>
+  <linearGradient id="volume-side" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4565DA"/><stop offset="1" stop-color="#162BAB"/></linearGradient>
+  <linearGradient id="volume-gold" x1=".2" y1=".15" x2=".95" y2="1"><stop stop-color="#FFEAB9"/><stop offset=".5" stop-color="#F4D697"/><stop offset="1" stop-color="#C0883A"/></linearGradient>
+  <linearGradient id="volume-white" x1=".2" y1=".15" x2="1" y2="1"><stop offset=".35" stop-color="#FFFFFF"/><stop offset=".72" stop-color="#DCE4F1"/><stop offset="1" stop-color="#7D94B7"/></linearGradient>
+  <linearGradient id="path-fade"><stop stop-color="#E0E6F5" stop-opacity="0"/><stop offset=".3" stop-color="#E0E6F5"/><stop offset=".8" stop-color="#E0E6F5"/><stop offset="1" stop-color="#E0E6F5" stop-opacity="0"/></linearGradient>
+  <filter id="card-shadow" x="-25%" y="-25%" width="155%" height="165%" color-interpolation-filters="sRGB"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#192B47" flood-opacity=".17"/><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#192B47" flood-opacity=".12"/></filter>
+  <filter id="volume-shadow" x="-25%" y="-25%" width="155%" height="165%" color-interpolation-filters="sRGB"><feDropShadow dx="2" dy="9" stdDeviation="9" flood-color="#243E7A" flood-opacity=".09"/></filter>
+</defs>
+<g data-motion="growth" filter="url(#volume-shadow)">
+  <path data-growth-depth d="M170 344Q170 332 182 332H255Q266 332 274 324L378 227H347Q333 227 333 213V179Q333 165 347 165H467Q481 165 481 179V299Q481 313 467 313H433Q419 313 419 299V270L313 376Q295 394 270 394H182Q170 394 170 382Z" transform="translate(9 9)" fill="url(#volume-side)"/>
+  <path data-growth-face d="M170 344Q170 332 182 332H255Q266 332 274 324L378 227H347Q333 227 333 213V179Q333 165 347 165H467Q481 165 481 179V299Q481 313 467 313H433Q419 313 419 299V270L313 376Q295 394 270 394H182Q170 394 170 382Z" fill="url(#volume-blue)"/>
+  <path data-growth-glint d="M349 169H465Q477 169 477 181V215" fill="none" stroke="#B8CCFF" stroke-width="1.8" stroke-opacity=".68" stroke-linecap="round"/>
+  <path data-growth-gold d="M355 187H458V226" fill="none" stroke="url(#volume-gold)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M188 339H248" fill="none" stroke="#AFC5FF" stroke-width="1.5" stroke-linecap="round" opacity=".65"/>
+</g>
+</svg>

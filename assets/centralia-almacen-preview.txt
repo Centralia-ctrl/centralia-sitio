@@ -1,0 +1,5 @@
+Archivo recibido del usuario: istockphoto-1273494455-640_adpp_is.mp4
+Video: 768 x 432, duración 11.6 segundos, 2,295,609 bytes.
+Contiene marca de agua de iStock. Integrado únicamente en la vista previa local.
+Pendiente para lanzamiento: sustituir por el archivo licenciado, sin marca de agua.
+El cartel de carga se capturó del mismo video y conserva la marca de agua.
