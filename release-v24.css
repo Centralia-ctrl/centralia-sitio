@@ -32,3 +32,6 @@
 @media(max-width:760px){.centralia-v23 .whatsapp-float>span,.centralia-v23 .faq-topics>a>span{font-size:13px}}
 /* Home solution numbers: 4.10:1 before, about 6:1 with the secondary text color. */
 .home-v23 .direction-home .solution-index{color:#5d6470;font-size:12px}
+
+/* Warehouse still while the licensed video arrives: fill the 16:9 frame. */
+.business-story-video .business-video-frame>img.business-video{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
