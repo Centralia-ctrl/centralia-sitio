@@ -1330,3 +1330,7 @@ dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contai
  .centralia-v23 .showcase-note,.centralia-v23 .direction-terms>small,.centralia-v23 .capture-note,.centralia-v23 .legal-note,.centralia-v23 .solution-secondary-actions>.solution-conditions,.centralia-v23 .solution-metric>span,.centralia-v23 .content-case-story>small,.centralia-v23 .sim-consent,.centralia-v23 .sim-data-info,.centralia-v23 .sim-lead-grid small,.centralia-v23 .product-text-link,.centralia-v23 .welcome-secondary .product-text-link{font-size:14px}
  .centralia-v23 .footer-bottom>div{display:flex;flex-wrap:wrap;gap:14px 20px}
 }
+
+/* The welcome's main action is visible from the first frame. The other welcome animations stay. */
+.hero .hero-actions>.hero-cta{animation:none}
+.motion-enabled .hero-conversation.scroll-reveal{opacity:1;translate:none;transition:none}
