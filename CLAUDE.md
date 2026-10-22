@@ -42,20 +42,20 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 
 ## Cola de trabajo (en orden)
 
-1. **Optimizar Factoraje.**
-   - Re-codifica `assets/centralia-factoraje-artwork-loop.mp4` en H.264 con CRF 24, preset slow, sin audio y con `+faststart`, como `centralia-factoraje-artwork-loop-opt.mp4` (unos 270 KB).
-   - Crea una versión de 930 px de ancho, `centralia-factoraje-artwork-loop-mobile.mp4` (unos 110 KB), con `<source media="(max-width: 760px)">` antes de la versión completa.
-   - Convierte el póster a WebP con calidad 85, sin perder el fondo blanco (unos 45 KB).
-   - Conserva los originales. Solo cambia `factoraje.html`.
-2. **Botón principal de la portada.**
-   - "Agendemos una reunión" (`.hero-cta` dentro de `.hero-conversation.scroll-reveal`) tarda en aparecer por la animación de entrada.
-   - Debe verse desde el primer instante. Conserva las demás animaciones.
-   - Requiere vista previa.
-3. **Legibilidad.**
-   - Lleva a mínimo 12 px las etiquetas en mayúsculas y a 13 px el texto de lectura. Hoy hay textos de 9 a 11 px: descripciones del menú Soluciones, "CONTACTO DIRECTO", pie de página y pasos 01, 02, 03.
-   - Sube el contraste de los números 01, 02 y 03 de la portada (hoy 4.10:1) al menos a 4.5:1.
-   - Sin cambiar la composición. Requiere vista previa.
-4. **Video del almacén:** en espera del archivo licenciado. Cuando llegue, optimízalo igual que el de Factoraje y reemplaza también su póster.
+1. **Video del almacén:** en espera del archivo licenciado. Cuando llegue, optimízalo igual que el de Factoraje y reemplaza también su póster.
+
+## Terminado (no rehacer)
+
+- **Factoraje optimizado** (PR #4).
+  - `factoraje.html` usa:
+    - `centralia-factoraje-artwork-loop-opt.mp4` (273 KB).
+    - `centralia-factoraje-artwork-loop-mobile.mp4` (114 KB, para pantallas de hasta 760 px).
+    - `centralia-factoraje-artwork-poster.webp` (47 KB).
+  - Los originales se conservan en `assets/`.
+- **Botón principal de la portada visible desde el primer instante** (PR #5). En `release-v24.css` se quitó solo la animación de entrada de `.hero-cta`; las demás animaciones siguen.
+- **Legibilidad** (PR #6).
+  - En `release-v24.css`, las etiquetas quedaron en mínimo 12 px y el texto de lectura en mínimo 13 px. Ningún texto se redujo.
+  - Los números 01, 02 y 03 de la portada usan `#5d6470` (5.96:1).
 
 ## En espera (no hacer sin instrucción)
 
