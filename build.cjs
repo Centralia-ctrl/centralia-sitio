@@ -11,7 +11,7 @@ fs.writeFileSync(path.join(root,'site.css'),files.map(f=>'/* '+f+' */\n'+fs.read
 console.log('site.css rebuilt');
 
 // Public pages. Add a page here only when it is approved for publication.
-const PAGES=['index.html','credito-empresarial.html','factoraje.html','pago-a-proveedores.html','preguntas-frecuentes.html'];
+const PAGES=['index.html','404.html','credito-empresarial.html','factoraje.html','pago-a-proveedores.html','preguntas-frecuentes.html'];
 const ALWAYS=['_headers','robots.txt','sitemap.xml','assets/vendor/three/LICENSE','assets/DM-Sans-OFL.txt'];
 const dist=path.join(root,'dist');
 fs.rmSync(dist,{recursive:true,force:true});
