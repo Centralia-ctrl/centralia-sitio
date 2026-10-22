@@ -32,3 +32,8 @@
 @media(max-width:760px){.centralia-v23 .whatsapp-float>span,.centralia-v23 .faq-topics>a>span{font-size:13px}}
 /* Home solution numbers: 4.10:1 before, about 6:1 with the secondary text color. */
 .home-v23 .direction-home .solution-index{color:#5d6470;font-size:12px}
+
+/* Desktop reading text at 16px. Notes, metrics and legal text keep their size. */
+@media(min-width:1101px){
+ .centralia-v23 .answer-item>p,.centralia-v23 .content-v14.content-uses .product-uses article>p,.centralia-v23 .product-process li p,.centralia-v23 .content-v14 .content-facts dd,.centralia-v23 .product-section>div>p:not([class]),.centralia-v23 .product-meeting p,.centralia-v23 .solution-tile .solution-description,.centralia-v23 .content-prep-list>li,.centralia-v23 .capture-followup>p,.centralia-v23 .closing-inner p:not(.eyebrow){font-size:16px;line-height:1.7}
+}
