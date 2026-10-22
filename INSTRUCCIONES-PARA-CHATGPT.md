@@ -1,7 +1,7 @@
 # Centralia Financiera · Estado del sitio y pendientes para el lanzamiento (diciembre 2026)
 
 Documento para quien haga cambios en este repositorio (ChatGPT o Claude Code).
-Actualizado el 21 de octubre de 2026, revisado contra el código de este repositorio.
+Actualizado el 22 de octubre de 2026, revisado contra el código de este repositorio.
 
 - **Parte C:** reglas que no se negocian.
 - **Parte E:** cómo se publica el sitio. Léela antes de agregar o mover archivos.
@@ -51,27 +51,15 @@ Trabaja siempre con cambios pequeños y revisables: un tema por propuesta, con v
 | A5 WhatsApp | Mensaje neutral. El botón flotante se oculta cuando las condiciones o el pie están en pantalla (`contact-visibility.js`). |
 | A6 Medición | `pixel.js` está cargado en las 5 páginas y **apagado** (`enabled: false`). Solo se activará con consentimiento separado (ver A6 abajo). |
 | A7 Dominio y SEO | Todo apunta a `centraliafinanciera.com`. Las descripciones están sin errores de acentos. `sitemap.xml` y `robots.txt` están correctos. |
-| A10 Rendimiento | Una sola hoja `site.css` generada por `build.cjs`. Fuentes WOFF2. La publicación pesa unos 5.6 MB, sin archivos de prueba. |
-| Calidad | Sin errores de JavaScript y sin scroll horizontal en 390 px ni en 1440 px. |
+| A9 Legibilidad | Etiquetas en mínimo 12 px y texto de lectura en mínimo 13 px, sin reducir ningún texto. Números 01, 02 y 03 de la portada en `#5d6470` (5.96:1). Reglas al final de `release-v24.css` (PR #6). |
+| A10 Rendimiento | Una sola hoja `site.css` generada por `build.cjs`. Fuentes WOFF2. Factoraje optimizado: video de 273 KB, versión móvil de 114 KB para hasta 760 px y póster WebP de 47 KB; los originales se conservan (PR #4). La publicación pesa unos 5.0 MB, sin archivos de prueba. |
+| A11 Botón de la portada | "Agendemos una reunión" se ve desde el primer instante. Solo se quitó la animación de entrada de `.hero-cta`, en `release-v24.css`; las demás animaciones siguen (PR #5). |
+| Calidad | Sin errores de JavaScript y sin scroll horizontal en 360 px, 390 px ni 1440 px. |
 
 ### Pendiente
 
 **A8. Aviso de privacidad. EN ESPERA: no hacer todavía.**
 Se hará cuando exista la persona moral. Hoy los formularios enlazan a `https://centraliafinanciera.com/aviso-de-privacidad/`, la página del sitio anterior. Antes de lanzar hay que crear `aviso-de-privacidad.html` con el texto legal que entregue Centralia y apuntar ahí todos los enlaces. No redactes ni inventes texto legal.
-
-**A9. Legibilidad. Requiere vista previa y aprobación antes de aplicar.**
-
-1. Hay textos de 9 a 12 px en todas las páginas:
-   - Descripciones del menú Soluciones (11 px).
-   - Etiquetas en mayúsculas (11 a 12 px).
-   - "CONTACTO DIRECTO" (10 px).
-   - Pie de página (11 a 12 px).
-   - Pasos "01, 02, 03" (11 a 12 px).
-   Propuesta: mínimo 12 px para etiquetas en mayúsculas y 13 px para texto de lectura, sin cambiar la composición.
-2. En la portada, los números "01, 02, 03" tienen un contraste de 4.10:1. Deben llegar a 4.5:1.
-
-**A11. Botón principal de la portada. Requiere vista previa.**
-"Agendemos una reunión" aparece aproximadamente un segundo después de cargar, por la animación de entrada (`scroll-reveal` en `.hero-conversation`). Debe verse desde el primer instante. Se puede conservar la animación de las demás secciones.
 
 **A6. Activación de la medición. No hacer hasta que Miguel Ángel lo indique.**
 Cuando se active, hace falta:
