@@ -1331,6 +1331,10 @@ dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contai
  .centralia-v23 .footer-bottom>div{display:flex;flex-wrap:wrap;gap:14px 20px}
 }
 
+/* The welcome's main action is visible from the first frame. The other welcome animations stay. */
+.hero .hero-actions>.hero-cta{animation:none}
+.motion-enabled .hero-conversation.scroll-reveal{opacity:1;translate:none;transition:none}
+
 /* Legibility: labels at least 12px, reading text at least 13px, without changing the composition. */
 .centralia-v23 .home-proof>p,.centralia-v23 .business-story-copy>.eyebrow,.centralia-v23 .showcase-heading .eyebrow,.centralia-v23 .capture-copy>.eyebrow,.centralia-v23 .faq-section .eyebrow,.centralia-v23 .closing-inner .eyebrow,.centralia-v23 .footer-caption>span:not(.footer-tagline),.centralia-v23 dialog .eyebrow,.centralia-v23 .advance-estimate>span,.centralia-v23 .product-step,.centralia-v23 .faq-topics>a,.centralia-v23 .sim-steps>li,.centralia-v23 .sim-steps>li>span,.centralia-v23 .story-sequence>span{font-size:12px}
 .centralia-v23 .nav-solution-copy small,.centralia-v23 .hero .hero-action-detail,.centralia-v23 .home-proof>div>span,.centralia-v23 .business-video-toggle>span,.centralia-v23 .capture-form-meta>span,.centralia-v23 .capture-api-fallback,.centralia-v23 .capture-api-fallback a,.centralia-v23 .footer-bottom>span,.centralia-v23 .footer-bottom>div>a,.centralia-v23 .footer-bottom>div>button,.centralia-v23 .field-hint,.centralia-v23 .field-hint a,.centralia-v23 .field-error,.centralia-v23 .amount-presets>button,.centralia-v23 .advance-estimate>p,.centralia-v23 label[for=revenue]>span,.centralia-v23 label[for=purpose]>span,.centralia-v23 .company-only,.centralia-v23 .form-note,.centralia-v23 .details-note,.centralia-v23 .sim-next-step,.centralia-v23 .product-breadcrumb>a,.centralia-v23 .product-breadcrumb>span{font-size:13px}
