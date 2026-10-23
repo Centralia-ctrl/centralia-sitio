@@ -78,8 +78,8 @@ Cuando se active, hace falta:
    - Crédito sin garantía: hasta $15 M MXN, comisión de apertura de 4.5%.
    - Factoraje: anticipo de hasta 85%.
    - Pago a proveedores: hasta US$5 M, 37 días, más de 150 países.
-   - Tasa ilustrativa del simulador: 2% mensual.
-   - **Inconsistencia vigente:** `app.js` dice "Modalidades de 6 a 36 meses", pero el simulador ofrece 12, 18, 24 y 30 meses. Deben coincidir.
+   - Tasa ilustrativa del simulador: 2% mensual. **Confirmada.**
+   - Plazos: hasta 36 meses. **Confirmado.** `app.js` dice "Modalidades de 6 a 36 meses" y el simulador ofrece 12, 18, 24, 30 y 36 meses.
 2. **Símbolo ® y razón social.** Dependen de la constitución de la persona moral y del registro ante el IMPI.
 3. **Formulario único en HubSpot.** Hoy hay dos: portada `68d091a6-…` y simulador `1da292ee-…`. No cambies los endpoints hasta que exista el formulario nuevo y su ID.
 4. **Mensaje de éxito.** Falta definir en cuánto tiempo y por qué medio se contacta al prospecto.
