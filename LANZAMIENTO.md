@@ -28,7 +28,6 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
 
 - [ ] Las 5 páginas cargan por `https://centraliafinanciera.com/`, sin avisos de certificado.
 - [ ] `http://` y `www.` redirigen a `https://centraliafinanciera.com/`.
-- [ ] Una dirección inexistente muestra la página 404 propia.
 - [ ] Las direcciones del sitio anterior redirigen a su página nueva.
 - [ ] Menú, Soluciones, Preguntas frecuentes y "Volver arriba" funcionan.
 - [ ] Factoraje se reproduce, sin sonido y con fondo blanco.
@@ -49,7 +48,7 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
 
 - [ ] Verificar el dominio en Google Search Console y enviar `https://centraliafinanciera.com/sitemap.xml`.
 - [ ] Actualizar `lastmod` en `sitemap.xml` con la fecha del lanzamiento.
-- [ ] Revisar que ninguna de las 5 páginas tenga `noindex`; solo la 404 lo lleva.
+- [ ] Revisar que ninguna de las 5 páginas tenga `noindex`.
 
 ## 5. Medición (cuando Miguel Ángel lo indique)
 
