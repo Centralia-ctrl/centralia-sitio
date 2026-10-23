@@ -1,7 +1,7 @@
 # Centralia Financiera · Estado del sitio y pendientes para el lanzamiento (diciembre 2026)
 
 Documento para quien haga cambios en este repositorio (ChatGPT o Claude Code).
-Actualizado el 22 de octubre de 2026, revisado contra el código de este repositorio.
+Actualizado el 23 de octubre de 2026, revisado contra el código de este repositorio.
 
 - **Parte C:** reglas que no se negocian.
 - **Parte E:** cómo se publica el sitio. Léela antes de agregar o mover archivos.
@@ -49,11 +49,14 @@ Trabaja siempre con cambios pequeños y revisables: un tema por propuesta, con v
 | A3 Color | Sin restos verdes ni gris verdoso. Cifras en azul marino. Botón principal en azul `#315de8`. |
 | A4 Posicionamiento | "Te acompañamos a encontrar, comparar y contratar financiamiento para tu empresa. Exclusivo para personas morales." |
 | A5 WhatsApp | Mensaje neutral. El botón flotante se oculta cuando las condiciones o el pie están en pantalla (`contact-visibility.js`). |
-| A6 Medición | `pixel.js` está cargado en las 5 páginas y **apagado** (`enabled: false`). Solo se activará con consentimiento separado (ver A6 abajo). |
+| A6 Medición | `pixel.js` y el aviso de cookies `consent.js` están cargados en las 5 páginas y **apagados** (`enabled: false`). El aviso se puede ver con `?vista=cookies` (PR #9). Ver A6 abajo para activar. |
 | A7 Dominio y SEO | Todo apunta a `centraliafinanciera.com`. Las descripciones están sin errores de acentos. `sitemap.xml` y `robots.txt` están correctos. |
 | A9 Legibilidad | Etiquetas en mínimo 12 px y texto de lectura en mínimo 13 px, sin reducir ningún texto. Números 01, 02 y 03 de la portada en `#5d6470` (5.96:1). Reglas al final de `release-v24.css` (PR #6). |
 | A10 Rendimiento | Una sola hoja `site.css` generada por `build.cjs`. Fuentes WOFF2. Factoraje optimizado: video de 273 KB, versión móvil de 114 KB para hasta 760 px y póster WebP de 47 KB; los originales se conservan (PR #4). La publicación pesa unos 5.0 MB, sin archivos de prueba. |
 | A11 Botón de la portada | "Agendemos una reunión" se ve desde el primer instante. Solo se quitó la animación de entrada de `.hero-cta`, en `release-v24.css`; las demás animaciones siguen (PR #5). |
+| A12 Texto en computadora | Texto de lectura a 16 px desde 1101 px; notas, métricas y avisos legales sin cambio (PR #13). |
+| A13 Redes | Imagen de 1200×630 por página para compartir (`assets/og-*.png`, PR #11). Se regeneran con `herramientas/og-imagenes.cjs`. |
+| A14 Lanzamiento | Lista de verificación para el cambio de dominio en `LANZAMIENTO.md` (PR #14). |
 | Calidad | Sin errores de JavaScript y sin scroll horizontal en 360 px, 390 px ni 1440 px. |
 
 ### Pendiente
@@ -81,9 +84,9 @@ Cuando se active, hace falta:
 3. **Formulario único en HubSpot.** Hoy hay dos: portada `68d091a6-…` y simulador `1da292ee-…`. No cambies los endpoints hasta que exista el formulario nuevo y su ID.
 4. **Mensaje de éxito.** Falta definir en cuánto tiempo y por qué medio se contacta al prospecto.
 5. **Simulador arriba de $15 M.** Elegir entre agregar un escenario con garantía o avisar del límite antes de que el usuario escriba el monto.
-6. **Video del almacén.** `assets/centralia-almacen-preview.mp4` y su póster tienen marca de agua de iStock. Son una muestra pendiente de reemplazo por la versión licenciada o por material propio. No se publica en producción con la marca de agua.
+6. **Video del almacén.** `assets/centralia-almacen-preview.mp4` y su póster tienen marca de agua de iStock. Miguel Ángel comprará la licencia; el video se queda y se reemplaza por la versión licenciada cuando llegue. No se publica en producción con la marca de agua.
 7. **Animaciones de Crédito y Pago a proveedores.** Decidir si se rehacen con la línea de Factoraje antes o después del lanzamiento.
-8. **Titulares de producto.** "Tu siguiente compra pone todo en marcha." es poco claro. Proponer alternativas, sin aplicarlas.
+8. **Titulares de producto.** Resuelto para Pago a proveedores: "Tus compras, pagadas a tiempo." (PR #12). Crédito y Factoraje sin cambios.
 
 ## PARTE D · Criterios de aceptación de cada cambio
 
