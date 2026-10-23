@@ -34,7 +34,8 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 ## Medición y formularios
 
 - `pixel.js` (Meta Pixel 1375879946116372 y HubSpot 9145352) está cargado en las 5 páginas y **apagado** (`enabled: false`). No lo actives sin instrucción.
-- Para activar la medición hace falta: un banner de consentimiento que dispare `centralia:measurement-consent` y agregar los dominios de Meta y HubSpot tanto en `_headers` como en la `<meta http-equiv="Content-Security-Policy">` de cada página.
+- `consent.js` (aviso de cookies con opciones separadas de analítica y marketing) también está cargado en las 5 páginas y **apagado**. Dispara `centralia:measurement-consent`. Se ve en modo de vista previa, sin guardar nada, con `?vista=cookies` en cualquier página.
+- Para activar la medición hace falta: poner `enabled: true` en `consent.js` y en `pixel.js`, y agregar los dominios de Meta y HubSpot tanto en `_headers` como en la `<meta http-equiv="Content-Security-Policy">` de cada página.
 - Formularios de HubSpot:
   - Portada: `lead-capture-v17.js`, formulario `68d091a6-…`.
   - Simulador: `simulator.js`, formulario `1da292ee-…`.

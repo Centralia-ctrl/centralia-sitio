@@ -64,7 +64,7 @@ Se hará cuando exista la persona moral. Hoy los formularios enlazan a `https://
 **A6. Activación de la medición. No hacer hasta que Miguel Ángel lo indique.**
 Cuando se active, hace falta:
 
-1. Un aviso de cookies con opciones separadas de analítica y marketing, que dispare `centralia:measurement-consent`.
+1. Encender el aviso de cookies: `enabled: true` en `consent.js`. Ya existe, con opciones separadas de analítica y marketing, y dispara `centralia:measurement-consent`. Se puede ver antes con `?vista=cookies`.
 2. Cambiar `enabled` a `true` en `pixel.js`.
 3. Agregar a `_headers` y a la `<meta http-equiv="Content-Security-Policy">` de cada página los dominios de Meta y HubSpot. Las dos políticas deben coincidir.
 
