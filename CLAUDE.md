@@ -43,7 +43,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 
 ## Cola de trabajo (en orden)
 
-1. **Video del almacén:** en espera del archivo licenciado. Cuando llegue, optimízalo igual que el de Factoraje y reemplaza también su póster.
+1. **Video del almacén:** Miguel Ángel comprará la licencia para quitar la marca de agua; el video se queda en la portada (PR #8 cerrado). Cuando llegue el archivo licenciado, optimízalo igual que el de Factoraje y reemplaza también su póster.
 
 ## Terminado (no rehacer)
 
@@ -57,6 +57,18 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - **Legibilidad** (PR #6).
   - En `release-v24.css`, las etiquetas quedaron en mínimo 12 px y el texto de lectura en mínimo 13 px. Ningún texto se redujo.
   - Los números 01, 02 y 03 de la portada usan `#5d6470` (5.96:1).
+- **Texto de lectura en computadora a 16 px** (PR #13). Solo desde 1101 px, en `release-v24.css`. Las notas, métricas y avisos legales conservan su tamaño.
+- **Titular de Pago a proveedores** (PR #12): "Tus compras, pagadas a tiempo." Sustituyó a "Tu siguiente compra pone todo en marcha."
+- **Imágenes para compartir en redes** (PR #11).
+  - `assets/og-*.png`, de 1200×630, una por página, con `twitter:card` `summary_large_image`.
+  - Están en `ALWAYS` de `build.cjs`, porque `og:image` usa URL absoluta.
+  - Si cambia un titular, regenera las imágenes con `herramientas/og-imagenes.cjs`.
+- **Aviso de cookies apagado** (PR #9): `consent.js` y la capa `consent.css`. Ver "Medición y formularios".
+- **Lista de verificación para el lanzamiento** (PR #14): `LANZAMIENTO.md`. No se publica.
+
+## Decidido no hacer
+
+- Página 404 propia (PR #10 cerrado).
 
 ## En espera (no hacer sin instrucción)
 
@@ -67,5 +79,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - Mensaje de éxito y tiempo de respuesta.
 - Simulador arriba de $15 M.
 - Nuevas animaciones de Crédito y Pago a proveedores.
-- Titulares de producto.
+- Titulares de Crédito empresarial y Factoraje: sin cambios pedidos.
 - Activación de la medición.
+- Redirecciones del sitio anterior: falta la lista de direcciones actuales de `centraliafinanciera.com`.
+- Fecha del cambio de dominio y quién administra el DNS.
