@@ -74,7 +74,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 
 - Aviso de privacidad: se hará cuando se constituya la persona moral.
 - Razón social y símbolo ®.
-- Cifras, plazos y condiciones. Hay una inconsistencia conocida: `app.js` dice 6 a 36 meses y el simulador ofrece 12 a 30.
+- Cifras y condiciones. Ya confirmado por Miguel Ángel: tasa ilustrativa del simulador de 2% mensual y plazo máximo de 36 meses (el simulador ofrece 12, 18, 24, 30 y 36).
 - Formulario único de HubSpot.
 - Mensaje de éxito y tiempo de respuesta.
 - Simulador arriba de $15 M.

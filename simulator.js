@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const TERMS = [12, 18, 24, 30];
+  const TERMS = [12, 18, 24, 30, 36];
   const CALCULATION_RATE = 0.02;
 
   const OPENING_FEE = 0.045;
