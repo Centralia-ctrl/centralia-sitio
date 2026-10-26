@@ -12,6 +12,18 @@ MEETING = 'https://meetings.hubspot.com/miguelmeza1'
 
 ARTICLES = [
     {
+        'slug': 'pago-a-proveedores-en-el-extranjero',
+        'title': 'Cómo financiar el pago a proveedores en el extranjero | Centralia',
+        'headline': 'Cómo financiar el pago a proveedores en el extranjero',
+        'h1': ('Cómo financiar el pago', 'a proveedores en el extranjero.'),
+        'crumb': 'Pago a proveedores en el extranjero',
+        'eyebrow': 'PAGO A PROVEEDORES · GUÍA',
+        'tag': 'Pago a proveedores · Guía',
+        'description': 'Cómo funciona el financiamiento para pagar a proveedores en el extranjero, qué revisar en una compra internacional, las tres fechas clave y qué preguntar antes de contratar.',
+        'date': '2026-10-26', 'date_text': '26 de octubre de 2026', 'minutes': 5,
+        'image': 'og-pago-a-proveedores.png',
+    },
+    {
         'slug': 'credito-con-o-sin-garantia',
         'title': 'Crédito empresarial con o sin garantía: diferencias y cómo elegir | Centralia',
         'headline': 'Crédito empresarial con o sin garantía: diferencias y cómo elegir',
