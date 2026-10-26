@@ -11,7 +11,7 @@ fs.writeFileSync(path.join(root,'site.css'),files.map(f=>'/* '+f+' */\n'+fs.read
 console.log('site.css rebuilt');
 
 // Public pages. Add a page here only when it is approved for publication.
-const PAGES=['index.html','credito-empresarial.html','factoraje.html','pago-a-proveedores.html','preguntas-frecuentes.html','blog/index.html','blog/que-es-el-factoraje.html','blog/credito-con-o-sin-garantia.html','blog/pago-a-proveedores-en-el-extranjero.html','blog/documentos-para-credito-empresarial.html','blog/capital-de-trabajo.html','blog/como-comparar-propuestas-de-financiamiento.html','blog/opciones-de-financiamiento-para-pymes.html','blog/historial-crediticio-de-tu-empresa.html'];
+const PAGES=['index.html','muestra-estilo-v25.html','credito-empresarial.html','factoraje.html','pago-a-proveedores.html','preguntas-frecuentes.html','blog/index.html','blog/que-es-el-factoraje.html','blog/credito-con-o-sin-garantia.html','blog/pago-a-proveedores-en-el-extranjero.html','blog/documentos-para-credito-empresarial.html','blog/capital-de-trabajo.html','blog/como-comparar-propuestas-de-financiamiento.html','blog/opciones-de-financiamiento-para-pymes.html','blog/historial-crediticio-de-tu-empresa.html'];
 // Share images are referenced by absolute URL in og:image, so the crawler above does not find them.
 const OG_IMAGES=['inicio','credito-empresarial','factoraje','pago-a-proveedores','preguntas-frecuentes'].map(n=>`assets/og-${n}.png`);
 // The Organization logo in the home page's structured data is also an absolute URL.
