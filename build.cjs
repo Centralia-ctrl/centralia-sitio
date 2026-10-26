@@ -14,7 +14,8 @@ console.log('site.css rebuilt');
 const PAGES=['index.html','credito-empresarial.html','factoraje.html','pago-a-proveedores.html','preguntas-frecuentes.html'];
 // Share images are referenced by absolute URL in og:image, so the crawler above does not find them.
 const OG_IMAGES=['inicio','credito-empresarial','factoraje','pago-a-proveedores','preguntas-frecuentes'].map(n=>`assets/og-${n}.png`);
-const ALWAYS=[...OG_IMAGES,'_headers','robots.txt','sitemap.xml','assets/vendor/three/LICENSE','assets/DM-Sans-OFL.txt'];
+// The Organization logo in the home page's structured data is also an absolute URL.
+const ALWAYS=[...OG_IMAGES,'assets/centralia-logo.png','_headers','robots.txt','sitemap.xml','assets/vendor/three/LICENSE','assets/DM-Sans-OFL.txt'];
 const dist=path.join(root,'dist');
 fs.rmSync(dist,{recursive:true,force:true});
 
