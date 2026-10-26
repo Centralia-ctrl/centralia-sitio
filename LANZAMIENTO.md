@@ -26,10 +26,10 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
 
 ## 3. Probar en el dominio real, en celular y en computadora
 
-- [ ] Las 5 páginas cargan por `https://centraliafinanciera.com/`, sin avisos de certificado.
+- [ ] Las 5 páginas principales y el blog (`/blog/` y sus artículos) cargan por `https://centraliafinanciera.com/`, sin avisos de certificado.
 - [ ] `http://` y `www.` redirigen a `https://centraliafinanciera.com/`.
 - [ ] Las direcciones del sitio anterior redirigen a su página nueva.
-- [ ] Menú, Soluciones, Preguntas frecuentes y "Volver arriba" funcionan.
+- [ ] Menú, Soluciones, Preguntas frecuentes, Blog y "Volver arriba" funcionan.
 - [ ] Factoraje se reproduce, sin sonido y con fondo blanco.
 - [ ] "Agendemos una reunión" abre la agenda de HubSpot.
 - [ ] WhatsApp abre con el mensaje neutral.
@@ -48,7 +48,8 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
 
 - [ ] Verificar el dominio en Google Search Console y enviar `https://centraliafinanciera.com/sitemap.xml`.
 - [ ] Actualizar `lastmod` en `sitemap.xml` con la fecha del lanzamiento.
-- [ ] Revisar que ninguna de las 5 páginas tenga `noindex`.
+- [ ] Revisar que ninguna página publicada tenga `noindex`.
+- [ ] Revisar en Search Console que se indexen el blog y sus artículos, y que no haya errores de datos estructurados.
 
 ## 5. Medición (cuando Miguel Ángel lo indique)
 

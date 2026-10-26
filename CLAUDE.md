@@ -14,7 +14,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 ## Cómo se publica
 
 - Netlify ejecuta `node build.cjs` y publica solo `dist/`. `dist/` no se versiona (`.gitignore`).
-- Hay 5 páginas públicas: `index.html`, `credito-empresarial.html`, `factoraje.html`, `pago-a-proveedores.html` y `preguntas-frecuentes.html`. Para publicar otra, agrégala a `PAGES` en `build.cjs`, y solo con aprobación de Miguel Ángel.
+- Páginas públicas: las 5 principales (`index.html`, `credito-empresarial.html`, `factoraje.html`, `pago-a-proveedores.html` y `preguntas-frecuentes.html`) y el blog (`blog/index.html` y 8 artículos). Para publicar otra, agrégala a `PAGES` en `build.cjs`, y solo con aprobación de Miguel Ángel.
 - `site.css` se genera desde las capas de estilo listadas en `build.cjs`. No lo edites a mano: edita la capa y vuelve a construir.
 - Las muestras, los estudios y los recursos originales (`muestra-*`, `por-que-centralia.html`, los videos de prueba de factoraje y otros) se quedan en el repositorio como referencia. No los borres y no los publiques.
 - Blog en `blog/` (aprobado por Miguel Ángel). Sus páginas se generan con `python3 herramientas/blog.py` desde `herramientas/blog-articulos/<slug>.html` y la plantilla de `preguntas-frecuentes.html`. No las edites a mano. Para publicar un artículo: agrega su cuerpo y sus datos en `ARTICLES`, ejecuta el script, agrega la página a `PAGES` en `build.cjs` y a `sitemap.xml`, y ejecuta `node build.cjs`. Cada artículo sigue las reglas del sitio: sin instituciones ni cifras no confirmadas.
@@ -36,8 +36,8 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 
 ## Medición y formularios
 
-- `pixel.js` (Meta Pixel 1375879946116372 y HubSpot 9145352) está cargado en las 5 páginas y **apagado** (`enabled: false`). No lo actives sin instrucción.
-- `consent.js` (aviso de cookies con opciones separadas de analítica y marketing) también está cargado en las 5 páginas y **apagado**. Dispara `centralia:measurement-consent`. Se ve en modo de vista previa, sin guardar nada, con `?vista=cookies` en cualquier página.
+- `pixel.js` (Meta Pixel 1375879946116372 y HubSpot 9145352) está cargado en todas las páginas, incluido el blog, y **apagado** (`enabled: false`). No lo actives sin instrucción.
+- `consent.js` (aviso de cookies con opciones separadas de analítica y marketing) también está cargado en todas las páginas y **apagado**. Dispara `centralia:measurement-consent`. Se ve en modo de vista previa, sin guardar nada, con `?vista=cookies` en cualquier página.
 - Para activar la medición hace falta: poner `enabled: true` en `consent.js` y en `pixel.js`, y agregar los dominios de Meta y HubSpot tanto en `_headers` como en la `<meta http-equiv="Content-Security-Policy">` de cada página.
 - Formularios de HubSpot (cuenta 9145352):
   - Portada: `lead-capture-v17.js`, formulario "Centralia · Formulario web" (`68d091a6-…`). Envía `firstname`, `company`, `email`, `phone`, `cul_es_el_monto_que_requiere_tu_empresa` y `para_que_necesitas_el_financiamiento`.
@@ -74,6 +74,14 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - **Plazo de 36 meses en el simulador** (PR #16). Tasa ilustrativa de 2% mensual confirmada.
 - **Empresa en el formulario de la portada** (PR #17). Campo obligatorio junto a Nombre, enviado como `company`.
 
+- **SEO técnico** (PR #19): datos estructurados `Service` y `BreadcrumbList`, logo WebP de 600 px, íconos cuadrados del símbolo y `centralia-logo.png` en `ALWAYS`.
+- **Blog** (PR #20 a #28): portada y 8 artículos, "Blog" en el menú y en el pie, y generador en `herramientas/blog.py`.
+- **SEO completo** (PR #27): `FAQPage` desde las preguntas visibles, sección "Guías" en las páginas de producto, "Sigue leyendo" en los artículos, RSS y `lastmod` en el sitemap.
+- **Revisión completa** (PR #29):
+  - 844 ligas internas sin errores, sitemap igual a las páginas publicadas y sin desbordes de 320 a 1920 px.
+  - Accesibilidad WCAG 2.1 AA (axe) sin violaciones: se corrigieron el contraste del menú vacío del formulario y el subrayado de la liga del aviso de privacidad.
+  - Títulos de hasta 60 caracteres y descripciones de hasta 155 en el blog.
+
 ## Decidido no hacer
 
 - Página 404 propia (PR #10 cerrado).
@@ -91,3 +99,5 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - Activación de la medición.
 - Redirecciones del sitio anterior: falta la lista de direcciones actuales de `centraliafinanciera.com`.
 - Fecha del cambio de dominio y quién administra el DNS.
+- Google Search Console (se verifica en el DNS el día del cambio de dominio) y ficha de Google Business Profile (falta saber si hay oficina o solo atención en línea).
+- Las cifras del diálogo de costos y del simulador ($50 M, $15 M, US$5 M, 37 días, 4.5% y 85%) aparecen en todas las páginas. Solo la tasa de 2% y el plazo de 36 meses están confirmados.

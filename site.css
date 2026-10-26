@@ -1347,6 +1347,10 @@ dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contai
  .centralia-v23 .answer-item>p,.centralia-v23 .content-v14.content-uses .product-uses article>p,.centralia-v23 .product-process li p,.centralia-v23 .content-v14 .content-facts dd,.centralia-v23 .product-section>div>p:not([class]),.centralia-v23 .product-meeting p,.centralia-v23 .solution-tile .solution-description,.centralia-v23 .content-prep-list>li,.centralia-v23 .capture-followup>p,.centralia-v23 .closing-inner p:not(.eyebrow){font-size:16px;line-height:1.7}
 }
 
+/* Accessibility review: the empty select reaches 4.5:1 and the consent link is underlined, not color-only. */
+.capture-fields select:has(option:checked[value=""]){color:#5d6470}
+.capture-consent a{text-decoration:underline}
+
 /* consent.css */
 /* Cookie consent banner (consent.js). Off until measurement is activated. */
 .consent-banner{position:fixed;z-index:1000;left:24px;bottom:24px;width:min(440px,calc(100% - 48px));display:grid;gap:16px;padding:22px 22px 20px;border:1px solid #e4e7ee;border-radius:14px;background:#fff;color:#303647;box-shadow:0 18px 50px #1b224e24;font-size:14px;line-height:1.55}
