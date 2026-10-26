@@ -1,7 +1,7 @@
 # Centralia Financiera · Estado del sitio y pendientes para el lanzamiento (diciembre 2026)
 
 Documento para quien haga cambios en este repositorio (ChatGPT o Claude Code).
-Actualizado el 23 de octubre de 2026, revisado contra el código de este repositorio.
+Actualizado el 26 de octubre de 2026, revisado contra el código de este repositorio.
 
 - **Parte C:** reglas que no se negocian.
 - **Parte E:** cómo se publica el sitio. Léela antes de agregar o mover archivos.
@@ -57,6 +57,8 @@ Trabaja siempre con cambios pequeños y revisables: un tema por propuesta, con v
 | A12 Texto en computadora | Texto de lectura a 16 px desde 1101 px; notas, métricas y avisos legales sin cambio (PR #13). |
 | A13 Redes | Imagen de 1200×630 por página para compartir (`assets/og-*.png`, PR #11). Se regeneran con `herramientas/og-imagenes.cjs`. |
 | A14 Lanzamiento | Lista de verificación para el cambio de dominio en `LANZAMIENTO.md` (PR #14). |
+| A15 Formularios | El formulario de la portada pide la empresa (`company`, PR #17). El simulador ofrece 12 a 36 meses con 2% mensual (PR #16). |
+| A16 HubSpot | Formularios verificados contra el sitio y con aviso por correo a hola@. Embudo de negocios "Financiamiento PyME" (plan gratuito: se editó el embudo predeterminado). |
 | Calidad | Sin errores de JavaScript y sin scroll horizontal en 360 px, 390 px ni 1440 px. |
 
 ### Pendiente

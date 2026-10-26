@@ -36,10 +36,13 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - `pixel.js` (Meta Pixel 1375879946116372 y HubSpot 9145352) está cargado en las 5 páginas y **apagado** (`enabled: false`). No lo actives sin instrucción.
 - `consent.js` (aviso de cookies con opciones separadas de analítica y marketing) también está cargado en las 5 páginas y **apagado**. Dispara `centralia:measurement-consent`. Se ve en modo de vista previa, sin guardar nada, con `?vista=cookies` en cualquier página.
 - Para activar la medición hace falta: poner `enabled: true` en `consent.js` y en `pixel.js`, y agregar los dominios de Meta y HubSpot tanto en `_headers` como en la `<meta http-equiv="Content-Security-Policy">` de cada página.
-- Formularios de HubSpot:
-  - Portada: `lead-capture-v17.js`, formulario `68d091a6-…`.
-  - Simulador: `simulator.js`, formulario `1da292ee-…`.
+- Formularios de HubSpot (cuenta 9145352):
+  - Portada: `lead-capture-v17.js`, formulario "Centralia · Formulario web" (`68d091a6-…`). Envía `firstname`, `company`, `email`, `phone`, `cul_es_el_monto_que_requiere_tu_empresa` y `para_que_necesitas_el_financiamiento`.
+  - Simulador: `simulator.js`, formulario "Centralia PYME · Simulación y cotización" (`1da292ee-…`). Envía `firstname`, `company`, `email`, `phone` y `message`.
   - No cambies los endpoints.
+  - Los dos formularios avisan por correo a hola@centraliafinanciera.com.
+  - El formulario del simulador tiene cambios sin publicar en HubSpot, de origen desconocido. No publicarlos sin que Miguel Ángel lo decida.
+- HubSpot es un plan gratuito: no permite embudos adicionales ni flujos de trabajo. El embudo de negocios predeterminado se renombró a "Financiamiento PyME", con las etapas Consulta recibida (10%) → Primera reunión (20%) → Documentación (40%) → En evaluación (60%) → Propuesta enviada (80%) → Contratado (100%) / Perdido (0%). Los negocios no se crean solos con cada formulario.
 
 ## Cola de trabajo (en orden)
 
@@ -65,6 +68,8 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
   - Si cambia un titular, regenera las imágenes con `herramientas/og-imagenes.cjs`.
 - **Aviso de cookies apagado** (PR #9): `consent.js` y la capa `consent.css`. Ver "Medición y formularios".
 - **Lista de verificación para el lanzamiento** (PR #14): `LANZAMIENTO.md`. No se publica.
+- **Plazo de 36 meses en el simulador** (PR #16). Tasa ilustrativa de 2% mensual confirmada.
+- **Empresa en el formulario de la portada** (PR #17). Campo obligatorio junto a Nombre, enviado como `company`.
 
 ## Decidido no hacer
 
