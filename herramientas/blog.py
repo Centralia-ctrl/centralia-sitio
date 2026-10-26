@@ -12,6 +12,18 @@ MEETING = 'https://meetings.hubspot.com/miguelmeza1'
 
 ARTICLES = [
     {
+        'slug': 'opciones-de-financiamiento-para-pymes',
+        'title': 'Opciones de financiamiento para PyMEs en México | Centralia',
+        'headline': 'Opciones de financiamiento para PyMEs en México: guía para elegir',
+        'h1': ('Opciones de financiamiento', 'para PyMEs en México.'),
+        'crumb': 'Opciones de financiamiento para PyMEs',
+        'eyebrow': 'GUÍA PRINCIPAL',
+        'tag': 'Guía principal',
+        'description': 'Crédito empresarial, factoraje, pago a proveedores y otras alternativas: qué opción de financiamiento conviene a tu PyME según para qué necesitas el dinero y cuándo lo recuperas.',
+        'date': '2026-10-26', 'date_text': '26 de octubre de 2026', 'minutes': 7,
+        'image': 'og-inicio.png',
+    },
+    {
         'slug': 'como-comparar-propuestas-de-financiamiento',
         'title': 'Cómo comparar propuestas de financiamiento para tu empresa | Centralia',
         'headline': 'Cómo comparar propuestas de financiamiento para tu empresa',
