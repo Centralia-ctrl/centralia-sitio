@@ -88,6 +88,8 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
   - Accesibilidad WCAG 2.1 AA (axe) sin violaciones: se corrigieron el contraste del menú vacío del formulario y el subrayado de la liga del aviso de privacidad.
   - Títulos de hasta 60 caracteres y descripciones de hasta 155 en el blog.
 
+- **Acabado de marca** (PR #33, inspirado en la referencia de Brex del PR #32): redondeo único de 12 px, superficies sin sombra y pie navy `#1b224e` de borde a borde en todas las páginas. Está al final de `release-v24.css`. Preguntas frecuentes de la portada sigue en blanco.
+
 ## Decidido no hacer
 
 - Página 404 propia (PR #10 cerrado).

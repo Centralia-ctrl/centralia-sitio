@@ -41,3 +41,21 @@
 /* Accessibility review: the empty select reaches 4.5:1 and the consent link is underlined, not color-only. */
 .capture-fields select:has(option:checked[value=""]){color:#5d6470}
 .capture-consent a{text-decoration:underline}
+
+/* Brand finish (approved Oct 26, 2026): one 12px radius, flat surfaces and a navy footer on every page. */
+.centralia-v23{--finish-radius:12px;--finish-on-navy:#c3c8d8;--finish-line-navy:#ffffff26}
+body.centralia-v23 .button,body.centralia-v23 .hero .hero-cta,body.centralia-v23 .closing-inner .closing-cta,body.centralia-v23 .capture-submit,
+body.centralia-v23 .home-capture input,body.centralia-v23 .home-capture select,body.centralia-v23 .solution-tile,body.centralia-v23 .business-story-photo,
+body.centralia-v23 .story-sequence,body.centralia-v23 .closing-inner,body.centralia-v23 .social-links>a,body.centralia-v23 .whatsapp-float,
+body.centralia-v23 .business-video-toggle,body.centralia-v23 .button.button-dark,body.centralia-v23 .product-stat,body.centralia-v23 .use-illustration,
+body.centralia-v23 .content-v14.content-case,body.centralia-v23 .direction-product .product-requirements,body.centralia-v23 .blog-cta,body.centralia-v23 .blog-example{border-radius:var(--finish-radius)}
+body.centralia-v23 .whatsapp-float,body.centralia-v23 .business-stories *,body.centralia-v23 .solution-tile{box-shadow:none}
+body.centralia-v23 .desktop-nav .solutions-nav-panel{border-radius:var(--finish-radius)!important;box-shadow:none!important}
+body.centralia-v23 .site-footer{background:#1b224e;box-shadow:0 0 0 100vmax #1b224e;clip-path:inset(0 -100vmax);border-top:0;color:#fff;padding-top:56px;margin-top:24px}
+body.centralia-v23 .site-footer a,body.centralia-v23 .site-footer button,body.centralia-v23 .footer-caption>p{color:#fff}
+body.centralia-v23 .footer-caption>span,body.centralia-v23 .footer-tagline,body.centralia-v23 .footer-bottom,body.centralia-v23 .footer-bottom>span,
+body.centralia-v23 .footer-bottom>div>a,body.centralia-v23 .footer-bottom>div>button,body.centralia-v23 .legal-note{color:var(--finish-on-navy)}
+body.centralia-v23 .footer-bottom>div>a:hover,body.centralia-v23 .footer-bottom>div>button:hover{color:#fff}
+body.centralia-v23 .footer-bottom{border-top-color:var(--finish-line-navy)}
+body.centralia-v23 .social-links>a{background:transparent;border-color:var(--finish-line-navy);color:#fff}
+body.centralia-v23 .social-links [data-social=facebook]:hover,body.centralia-v23 .social-links [data-social=instagram]:hover{background:#ffffff14}
