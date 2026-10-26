@@ -18,6 +18,8 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - `site.css` se genera desde las capas de estilo listadas en `build.cjs`. No lo edites a mano: edita la capa y vuelve a construir.
 - Las muestras, los estudios y los recursos originales (`muestra-*`, `por-que-centralia.html`, los videos de prueba de factoraje y otros) se quedan en el repositorio como referencia. No los borres y no los publiques.
 - Blog en `blog/` (aprobado por Miguel Ángel). Sus páginas se generan con `python3 herramientas/blog.py` desde `herramientas/blog-articulos/<slug>.html` y la plantilla de `preguntas-frecuentes.html`. No las edites a mano. Para publicar un artículo: agrega su cuerpo y sus datos en `ARTICLES`, ejecuta el script, agrega la página a `PAGES` en `build.cjs` y a `sitemap.xml`, y ejecuta `node build.cjs`. Cada artículo sigue las reglas del sitio: sin instituciones ni cifras no confirmadas.
+- Datos estructurados de preguntas frecuentes (`FAQPage`) en la portada, las páginas de producto y Preguntas frecuentes. Se generan desde las preguntas visibles con `python3 herramientas/datos-faq.py`; ejecútalo cada vez que cambie una pregunta o respuesta.
+- Las páginas de producto tienen una sección "Guías" con tres artículos del blog, y cada artículo cierra con "Sigue leyendo" (`RELATED` en `herramientas/blog.py`). El blog publica `blog/feed.xml` (RSS).
 - La vista previa es https://centralia-sitio.netlify.app. Es privada y requiere la cuenta de Netlify de Miguel Ángel.
 
 ## Reglas que no se negocian

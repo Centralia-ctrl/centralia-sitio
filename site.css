@@ -1417,3 +1417,14 @@ dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contai
 .blog-example{margin-top:22px;padding:22px 24px;border:1px solid #e4e7ee;border-radius:14px}
 .blog-page .blog-article .blog-body .blog-example p{margin-top:10px;font-size:16px}
 .blog-page .blog-article .blog-body .blog-example .blog-example-title{margin-top:0;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#5d6470}
+/* Product pages: related guides, in the same two-column rhythm as the FAQ section. */
+.related-guides{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:72px}
+.related-guides h2{margin-top:10px}
+.related-guides .product-text-link{display:inline-block;margin-top:20px}
+.related-guides-list{margin:0;padding:0;list-style:none;border-top:1px solid #e4e7ee}
+.related-guides-list a{display:grid;gap:4px;padding:18px 2px;border-bottom:1px solid #e4e7ee;text-decoration:none}
+.related-guides-list strong{color:#1b224e;font-size:17px;font-weight:500;line-height:1.4}
+.related-guides-list span{color:#5d6470;font-size:14px;line-height:1.6}
+.related-guides-list a:hover strong{color:#315de8}
+.related-guides-list a:focus-visible{outline:3px solid #315de8;outline-offset:3px}
+@media(max-width:760px){.related-guides{grid-template-columns:1fr;gap:28px}}
