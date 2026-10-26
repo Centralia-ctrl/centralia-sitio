@@ -44,7 +44,13 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
   - Simulador: `simulator.js`, formulario "Centralia PYME · Simulación y cotización" (`1da292ee-…`). Envía `firstname`, `company`, `email`, `phone` y `message`.
   - No cambies los endpoints.
   - Los dos formularios avisan por correo a hola@centraliafinanciera.com.
-  - El formulario del simulador tiene cambios sin publicar en HubSpot, de origen desconocido. No publicarlos sin que Miguel Ángel lo decida.
+  - El 26 de octubre de 2026 se descartó el borrador sin publicar del formulario del simulador; los dos formularios quedan igual que lo que envía el sitio.
+  - La agenda "Meetings Link: miguelmeza1" la usa el botón "Agendemos una reunión" en todas las páginas: no la borres.
+  - Limpieza de lo anterior (decisión de Miguel Ángel: nada del pasado):
+    - "Hey Negocios" ya no existe.
+    - "blog Comment Form" no se puede borrar sin borrar el blog de HubSpot; no afecta al sitio.
+    - Las 52 reuniones de 2021 a 2026 (hipotecario y seguros) siguen ahí; su borrado es permanente y lo decide Miguel Ángel, exportando antes un respaldo.
+    - Los contactos eliminados no se restauran.
 - HubSpot es un plan gratuito: no permite embudos adicionales ni flujos de trabajo. El embudo de negocios predeterminado se renombró a "Financiamiento PyME", con las etapas Consulta recibida (10%) → Primera reunión (20%) → Documentación (40%) → En evaluación (60%) → Propuesta enviada (80%) → Contratado (100%) / Perdido (0%). Los negocios no se crean solos con cada formulario.
 
 ## Cola de trabajo (en orden)
