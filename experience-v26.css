@@ -1,0 +1,57 @@
+/* Interaction layer. Keeps the approved hero, type and palette. */
+.cx-chooser{margin:28px 0 36px;padding:24px 0;border-block:1px solid #e4e7ee}
+.cx-chooser h3{margin:0 0 16px;color:#1b224e;font-size:20px;font-weight:500}
+.cx-options{display:flex;flex-wrap:wrap;gap:10px}
+.cx-choice,.cx-case-button,.cx-back{font:500 15px/1.5 "DM Sans",Arial,sans-serif;color:#1b224e;background:#fff;border:1px solid #e4e7ee;border-radius:12px;padding:12px 17px;cursor:pointer;min-height:46px}
+.cx-choice:hover,.cx-case-button:hover,.cx-back:hover{border-color:#1b224e}
+.cx-choice[aria-pressed=true],.cx-case-button[aria-pressed=true]{border-color:#1b224e;background:#f5f6fa}
+.cx-choice:focus-visible,.cx-case-button:focus-visible,.cx-back:focus-visible,.cx-planner input:focus-visible{outline:3px solid #315de8;outline-offset:3px}
+.cx-recommendation{margin-top:20px;max-width:750px;line-height:1.7;color:#303647}
+.cx-recommendation p{margin:0 0 10px}
+.cx-recommendation a,.cx-case-link{color:#1b224e;text-decoration:underline;text-underline-offset:4px;font-weight:500}
+.cx-recommendation a+a{margin-left:24px}
+.product-uses .cx-case-button{margin-top:18px;background:transparent;padding:10px 14px;font-size:14px}
+.content-case.cx-selected{border-left:3px solid #1b224e}
+.cx-case-link{display:inline-block;margin-top:20px;font-size:15px}
+.cx-planner{margin:0 0 50px;padding:32px;border:1px solid #e4e7ee;border-radius:12px;color:#303647;background:#fff}
+.cx-planner h2{font-size:clamp(26px,3vw,36px);color:#1b224e;letter-spacing:-.03em;margin:0 0 14px}
+.cx-planner>p{max-width:720px;line-height:1.7}
+.cx-date-fields{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.cx-date-fields label{font-size:15px;font-weight:500;color:#1b224e;min-width:0}
+.cx-date-fields input{box-sizing:border-box;display:block;width:100%;min-width:0;min-height:54px;border:1px solid #e4e7ee;border-radius:12px;padding:12px;background:#fafbfc;color:#303647;font:inherit;margin-top:10px}
+.cx-planner-output{display:block;border-top:1px solid #e4e7ee;padding-top:20px;line-height:1.7;min-height:80px}
+.cx-planner-output strong{font-size:30px;font-weight:500;color:#1b224e;display:block}
+.cx-planner .cx-planner-note{font-size:13px;color:#5d6470;line-height:1.7}
+.cx-planner button.button{font-family:inherit;cursor:pointer}
+.cx-planner button:disabled{opacity:.5;cursor:default}
+.cx-steps{display:flex;gap:20px;padding:0;margin:0 0 24px;list-style:none;color:#5d6470;font-size:14px}
+.cx-steps li{padding-bottom:10px;border-bottom:2px solid #e4e7ee;flex:1}
+.cx-steps [aria-current=step]{color:#1b224e;border-color:#1b224e;font-weight:500}
+.cx-form-step{border:0;padding:0;margin:0;min-width:0}
+.cx-form-step legend{font-size:22px;letter-spacing:-.02em;color:#1b224e;margin-bottom:20px;padding:0}
+.cx-back{margin-top:16px}
+.cx-capture-followup{grid-column:1;grid-row:2;align-self:start}
+.cx-capture-followup h3{font-size:18px;color:#1b224e;font-weight:500}
+.cx-capture-followup p{font-size:15px;line-height:1.8;color:#5d6470;max-width:350px}
+.home-capture:has(.cx-capture-followup){row-gap:24px}
+.home-capture:has(.cx-capture-followup) .capture-panel{grid-column:2;grid-row:1/span 2}
+.cx-process-step{transition:border-color .35s,transform .35s;border-top-color:#e4e7ee}
+.cx-process-step.cx-in-view{border-top-color:#1b224e;transform:translateY(-3px)}
+@media(max-width:760px){
+ .cx-options{display:grid;grid-template-columns:1fr;gap:8px}
+ .cx-choice{text-align:left}
+ .cx-recommendation a{display:block;min-height:44px;padding:8px 0}
+ .cx-recommendation a+a{margin-left:0}
+ .cx-planner{padding:24px 20px;margin-bottom:32px}
+ .cx-date-fields{grid-template-columns:1fr;gap:16px}
+ .cx-date-fields input{font-size:16px}
+ .home-capture:has(.cx-capture-followup) .capture-panel{grid-column:1;grid-row:2}
+ .cx-capture-followup{grid-column:1;grid-row:3}
+ .home-capture .capture-copy>p:not(.eyebrow){margin-bottom:0}
+ .home-capture .capture-copy .capture-audience{margin-top:12px}
+ .faq-directory .faq-topics{display:grid;grid-template-columns:1fr;overflow:visible;white-space:normal;gap:0;position:static}
+ .faq-directory .faq-topics a{min-height:44px;padding:12px 0;white-space:normal}
+}
+@media(prefers-reduced-motion:reduce){.cx-process-step{transition:none;transform:none!important}}
+
+#centralia-contact-form [hidden],.cx-back[hidden]{display:none!important}
