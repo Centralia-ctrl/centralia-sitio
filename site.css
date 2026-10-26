@@ -1361,7 +1361,7 @@ body.centralia-v23 .content-v14.content-case,body.centralia-v23 .direction-produ
 body.centralia-v23 .whatsapp-float,body.centralia-v23 .business-stories *,body.centralia-v23 .solution-tile{box-shadow:none}
 body.centralia-v23 .desktop-nav .solutions-nav-panel{border-radius:var(--finish-radius)!important;box-shadow:none!important}
 body.centralia-v23 .site-footer{padding-bottom:0}
-body.centralia-v23 .footer-bottom,body.centralia-v23 .legal-note{border-image:conic-gradient(#1b224e 0 0) fill 0/0/0 100vmax}
+body.centralia-v23 .footer-bottom,body.centralia-v23 .legal-note{background:#1b224e;border-image:conic-gradient(#1b224e 0 0) fill 0/0/0 100vmax}
 body.centralia-v23 .footer-bottom{border-top:0;padding-top:32px}
 body.centralia-v23 .legal-note{max-width:none;margin:-1px 0 0;padding:21px 0 40px}
 body.centralia-v23 .footer-bottom,body.centralia-v23 .footer-bottom>span,body.centralia-v23 .footer-bottom>div>a,
