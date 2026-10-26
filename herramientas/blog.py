@@ -12,6 +12,18 @@ MEETING = 'https://meetings.hubspot.com/miguelmeza1'
 
 ARTICLES = [
     {
+        'slug': 'historial-crediticio-de-tu-empresa',
+        'title': 'Historial crediticio de tu empresa: qué revisan y cómo cuidarlo | Centralia',
+        'headline': 'Historial crediticio de tu empresa: qué revisan y cómo cuidarlo',
+        'h1': ('Historial crediticio de tu empresa:', 'qué revisan y cómo cuidarlo.'),
+        'crumb': 'Historial crediticio',
+        'eyebrow': 'ANTES DE SOLICITAR · GUÍA',
+        'tag': 'Antes de solicitar · Guía',
+        'description': 'Qué es el historial crediticio de una empresa, qué muestra un reporte, cómo lo usa una institución al evaluar, qué pasa si tu empresa no tiene historial y cómo cuidarlo.',
+        'date': '2026-10-26', 'date_text': '26 de octubre de 2026', 'minutes': 6,
+        'image': 'og-inicio.png',
+    },
+    {
         'slug': 'opciones-de-financiamiento-para-pymes',
         'title': 'Opciones de financiamiento para PyMEs en México | Centralia',
         'headline': 'Opciones de financiamiento para PyMEs en México: guía para elegir',
@@ -99,10 +111,11 @@ ARTICLES = [
 
 # Three related reads shown at the end of each article (internal links help readers and search engines).
 RELATED = {
+    'historial-crediticio-de-tu-empresa': ['documentos-para-credito-empresarial', 'credito-con-o-sin-garantia', 'que-es-el-factoraje'],
     'opciones-de-financiamiento-para-pymes': ['credito-con-o-sin-garantia', 'que-es-el-factoraje', 'pago-a-proveedores-en-el-extranjero'],
     'como-comparar-propuestas-de-financiamiento': ['opciones-de-financiamiento-para-pymes', 'credito-con-o-sin-garantia', 'documentos-para-credito-empresarial'],
     'capital-de-trabajo': ['que-es-el-factoraje', 'pago-a-proveedores-en-el-extranjero', 'opciones-de-financiamiento-para-pymes'],
-    'documentos-para-credito-empresarial': ['credito-con-o-sin-garantia', 'como-comparar-propuestas-de-financiamiento', 'opciones-de-financiamiento-para-pymes'],
+    'documentos-para-credito-empresarial': ['historial-crediticio-de-tu-empresa', 'credito-con-o-sin-garantia', 'como-comparar-propuestas-de-financiamiento'],
     'pago-a-proveedores-en-el-extranjero': ['capital-de-trabajo', 'que-es-el-factoraje', 'opciones-de-financiamiento-para-pymes'],
     'credito-con-o-sin-garantia': ['documentos-para-credito-empresarial', 'como-comparar-propuestas-de-financiamiento', 'opciones-de-financiamiento-para-pymes'],
     'que-es-el-factoraje': ['capital-de-trabajo', 'como-comparar-propuestas-de-financiamiento', 'opciones-de-financiamiento-para-pymes'],
