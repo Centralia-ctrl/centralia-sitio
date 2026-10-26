@@ -1482,3 +1482,8 @@ body.centralia-v23 .footer-bottom>div>a:hover,body.centralia-v23 .footer-bottom>
 .blog-body h3+ul{margin-top:10px}
 
 @media(max-width:760px){.blog-flow{grid-template-columns:1fr}.blog-flow li+li::after{top:-9px;left:24px;transform:rotate(135deg)}.blog-table table{font-size:14px}.blog-table th,.blog-table td{padding:10px 14px}}
+
+/* Author note at the end of each guide. */
+.blog-author{margin-top:36px;padding-top:22px;border-top:1px solid #e4e7ee}
+.blog-page .blog-article .blog-author p{margin-top:6px;font-size:15px;line-height:1.7;color:#5d6470}
+.blog-page .blog-article .blog-author .blog-author-name{margin-top:0;color:#1b224e;font-size:16px;font-weight:600}

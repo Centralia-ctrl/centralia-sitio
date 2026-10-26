@@ -9,6 +9,9 @@ import json, os, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = 'https://centraliafinanciera.com/'
 MEETING = 'https://meetings.hubspot.com/miguelmeza1'
+# Every guide is signed by its author. The bio states only confirmed facts.
+AUTHOR = {'name': 'Miguel Ángel Meza Badillo', 'role': 'Director general',
+          'bio': 'Director general de Centralia Financiera. Acompaña a empresas en México a encontrar, comparar y contratar financiamiento.'}
 
 ARTICLES = [
     {
@@ -218,12 +221,13 @@ def main():
         main_html = ('<main id="contenido" class="product-page direction-faq blog-page"><div class="shell">'
                      + crumb(['<a href="../index.html">Inicio</a>', '<a href="./">Blog</a>', f'<span aria-current="page">{a["crumb"]}</span>'])
                      + f'<article class="blog-article"><header class="company-intro blog-header"><p class="eyebrow">{a["eyebrow"]}</p>'
-                     + f'<h1>{a["h1"][0]}<br><span>{a["h1"][1]}</span></h1><p class="blog-meta"><time datetime="{a["date"]}">{a["date_text"]}</time>'
-                     + f' · Lectura de {a["minutes"]} minutos</p></header><div class="blog-body">' + body + '</div></article>' + related(a['slug']) + '</div></main>')
+                     + f'<h1>{a["h1"][0]}<br><span>{a["h1"][1]}</span></h1><p class="blog-meta">Por {AUTHOR["name"]}, {AUTHOR["role"].lower()} · <time datetime="{a["date"]}">{a["date_text"]}</time>'
+                     + f' · Lectura de {a["minutes"]} minutos</p></header><div class="blog-body">' + body
+                     + f'<aside class="blog-author" aria-label="Autor"><p class="blog-author-name">{AUTHOR["name"]}</p><p>{AUTHOR["bio"]}</p></aside></div></article>' + related(a['slug']) + '</div></main>')
         graph = [
             {'@type': 'BlogPosting', '@id': url + '#articulo', 'headline': a['headline'], 'description': a['description'],
              'inLanguage': 'es-MX', 'datePublished': a['date'], 'dateModified': a['date'], 'url': url, 'mainEntityOfPage': url,
-             'image': BASE + 'assets/' + a['image'], 'author': {'@type': 'Organization', 'name': 'Centralia Financiera', 'url': BASE},
+             'image': BASE + 'assets/' + a['image'], 'author': {'@type': 'Person', 'name': AUTHOR['name'], 'jobTitle': AUTHOR['role'], 'worksFor': {'@id': BASE + '#organizacion'}},
              'publisher': org, 'isPartOf': {'@id': blog_url + '#blog'}},
             {'@type': 'BreadcrumbList', 'itemListElement': [
                 {'@type': 'ListItem', 'position': 1, 'name': 'Inicio', 'item': BASE},
@@ -231,6 +235,7 @@ def main():
                 {'@type': 'ListItem', 'position': 3, 'name': a['crumb'], 'item': url}]},
         ]
         html = page(tpl, 'blog/' + a['slug'] + '.html', a['title'], a['description'], a['image'], 'article', graph, main_html)
+        html = html.replace('<meta name="description"', f'<meta name="author" content="{AUTHOR["name"]}">\n  <meta name="description"', 1)
         open(os.path.join(ROOT, 'blog', a['slug'] + '.html'), 'w', encoding='utf-8', newline='').write(html)
         cards.append((a['slug'] != INDEX_FIRST, f'<li><a class="blog-card" href="{a["slug"]}.html"><span class="blog-card-tag">{a["tag"]}</span>'
                      f'<span class="blog-card-title">{a["headline"]}</span><span class="blog-card-text">{a["description"]}</span>'
