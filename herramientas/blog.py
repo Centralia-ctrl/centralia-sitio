@@ -97,6 +97,17 @@ ARTICLES = [
     },
 ]
 
+# Three related reads shown at the end of each article (internal links help readers and search engines).
+RELATED = {
+    'opciones-de-financiamiento-para-pymes': ['credito-con-o-sin-garantia', 'que-es-el-factoraje', 'pago-a-proveedores-en-el-extranjero'],
+    'como-comparar-propuestas-de-financiamiento': ['opciones-de-financiamiento-para-pymes', 'credito-con-o-sin-garantia', 'documentos-para-credito-empresarial'],
+    'capital-de-trabajo': ['que-es-el-factoraje', 'pago-a-proveedores-en-el-extranjero', 'opciones-de-financiamiento-para-pymes'],
+    'documentos-para-credito-empresarial': ['credito-con-o-sin-garantia', 'como-comparar-propuestas-de-financiamiento', 'opciones-de-financiamiento-para-pymes'],
+    'pago-a-proveedores-en-el-extranjero': ['capital-de-trabajo', 'que-es-el-factoraje', 'opciones-de-financiamiento-para-pymes'],
+    'credito-con-o-sin-garantia': ['documentos-para-credito-empresarial', 'como-comparar-propuestas-de-financiamiento', 'opciones-de-financiamiento-para-pymes'],
+    'que-es-el-factoraje': ['capital-de-trabajo', 'como-comparar-propuestas-de-financiamiento', 'opciones-de-financiamiento-para-pymes'],
+}
+
 INDEX = {
     'title': 'Blog de financiamiento empresarial | Centralia Financiera',
     'description': 'Guías claras sobre crédito empresarial, factoraje y pago a proveedores para empresas en México.',
@@ -141,6 +152,8 @@ def page(tpl, path, title, description, image, og_type, graph, main):
             return m.group(0)
         return f'{attr}={quote}../{value}{quote}'
     s = re.sub(r'\b(src|href|poster)=(["\'])([^"\']*)\2', fix, s)
+    # RSS feed for readers and aggregators; added after the path fix because it lives in blog/.
+    s = s.replace('</head>', '<link rel="alternate" type="application/rss+xml" title="Blog de Centralia Financiera" href="feed.xml">\n</head>', 1)
     # The header marks the blog as the current section.
     for a in ('<a href="../blog/">Blog</a></nav>', '<a href="../blog/">Blog <span>03</span></a>'):
         assert s.count(a) == 1, a
@@ -149,6 +162,30 @@ def page(tpl, path, title, description, image, og_type, graph, main):
 
 
 SLUGS = {a['slug'] for a in ARTICLES}
+BY_SLUG = {a['slug']: a for a in ARTICLES}
+
+
+def related(slug):
+    items = ''.join(f'<li><a href="{r}.html"><strong>{BY_SLUG[r]["headline"]}</strong><span>{BY_SLUG[r]["tag"]}</span></a></li>' for r in RELATED[slug])
+    return ('<section class="product-section related-guides" aria-labelledby="related-guides-title"><div><p class="eyebrow">SIGUE LEYENDO</p>'
+            '<h2 id="related-guides-title">Más guías<br>para tu empresa.</h2><a class="product-text-link" href="./">Ver todas las guías</a></div>'
+            f'<ul class="related-guides-list">{items}</ul></section>')
+
+
+def feed():
+    import datetime
+    esc = lambda t: t.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+    days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+    def rfc822(d):
+        x = datetime.date.fromisoformat(d)
+        return f'{days[x.weekday()]}, {x.day:02d} {months[x.month - 1]} {x.year} 12:00:00 -0600'
+    items = ''.join(f'<item><title>{esc(a["headline"])}</title><link>{BASE}blog/{a["slug"]}.html</link>'
+                    f'<guid isPermaLink="true">{BASE}blog/{a["slug"]}.html</guid><pubDate>{rfc822(a["date"])}</pubDate>'
+                    f'<description>{esc(a["description"])}</description></item>' for a in ARTICLES)
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Blog de Centralia Financiera</title>'
+            f'<link>{BASE}blog/</link><description>{esc(INDEX["description"])}</description><language>es-MX</language>{items}</channel></rss>\n')
 
 
 def main():
@@ -165,7 +202,7 @@ def main():
                      + crumb(['<a href="../index.html">Inicio</a>', '<a href="./">Blog</a>', f'<span aria-current="page">{a["crumb"]}</span>'])
                      + f'<article class="blog-article"><header class="company-intro blog-header"><p class="eyebrow">{a["eyebrow"]}</p>'
                      + f'<h1>{a["h1"][0]}<br><span>{a["h1"][1]}</span></h1><p class="blog-meta"><time datetime="{a["date"]}">{a["date_text"]}</time>'
-                     + f' · Lectura de {a["minutes"]} minutos</p></header><div class="blog-body">' + body + '</div></article>' + CTA + '</div></main>')
+                     + f' · Lectura de {a["minutes"]} minutos</p></header><div class="blog-body">' + body + '</div></article>' + related(a['slug']) + CTA + '</div></main>')
         graph = [
             {'@type': 'BlogPosting', '@id': url + '#articulo', 'headline': a['headline'], 'description': a['description'],
              'inLanguage': 'es-MX', 'datePublished': a['date'], 'dateModified': a['date'], 'url': url, 'mainEntityOfPage': url,
@@ -198,6 +235,8 @@ def main():
     html = page(tpl, 'blog/', INDEX['title'], INDEX['description'], 'og-inicio.png', 'website', graph, index_main)
     open(os.path.join(ROOT, 'blog', 'index.html'), 'w', encoding='utf-8', newline='').write(html)
     print('blog/index.html')
+    open(os.path.join(ROOT, 'blog', 'feed.xml'), 'w', encoding='utf-8', newline='').write(feed())
+    print('blog/feed.xml')
 
 
 if __name__ == '__main__':
