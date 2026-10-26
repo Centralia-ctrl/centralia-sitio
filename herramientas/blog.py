@@ -129,6 +129,7 @@ INDEX = {
     'description': 'Guías claras sobre crédito empresarial, factoraje y pago a proveedores para empresas en México.',
 }
 
+# Meeting block for the blog index. Articles close with their own contextual invitation instead.
 CTA = ('<section class="product-meeting"><div><h2>Hablemos de tu empresa.</h2><p>30 minutos para revisar qué quieres '
        'financiar y en qué plazo.</p></div><a class="button button-dark" data-schedule href="' + MEETING + '" target="_blank" '
        'rel="noopener noreferrer">Agendemos una reunión <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></a></section>')
@@ -218,7 +219,7 @@ def main():
                      + crumb(['<a href="../index.html">Inicio</a>', '<a href="./">Blog</a>', f'<span aria-current="page">{a["crumb"]}</span>'])
                      + f'<article class="blog-article"><header class="company-intro blog-header"><p class="eyebrow">{a["eyebrow"]}</p>'
                      + f'<h1>{a["h1"][0]}<br><span>{a["h1"][1]}</span></h1><p class="blog-meta"><time datetime="{a["date"]}">{a["date_text"]}</time>'
-                     + f' · Lectura de {a["minutes"]} minutos</p></header><div class="blog-body">' + body + '</div></article>' + related(a['slug']) + CTA + '</div></main>')
+                     + f' · Lectura de {a["minutes"]} minutos</p></header><div class="blog-body">' + body + '</div></article>' + related(a['slug']) + '</div></main>')
         graph = [
             {'@type': 'BlogPosting', '@id': url + '#articulo', 'headline': a['headline'], 'description': a['description'],
              'inLanguage': 'es-MX', 'datePublished': a['date'], 'dateModified': a['date'], 'url': url, 'mainEntityOfPage': url,
