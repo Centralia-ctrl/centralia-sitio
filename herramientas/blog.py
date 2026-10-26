@@ -12,6 +12,18 @@ MEETING = 'https://meetings.hubspot.com/miguelmeza1'
 
 ARTICLES = [
     {
+        'slug': 'documentos-para-credito-empresarial',
+        'title': 'Qué documentos te piden para un crédito empresarial | Centralia',
+        'headline': 'Qué documentos te piden para un crédito empresarial',
+        'h1': ('Qué documentos te piden', 'para un crédito empresarial.'),
+        'crumb': 'Documentos para un crédito empresarial',
+        'eyebrow': 'CRÉDITO EMPRESARIAL · GUÍA',
+        'tag': 'Crédito empresarial · Guía',
+        'description': 'Los documentos que suelen pedirse para un crédito empresarial: de la empresa, del representante legal, información financiera, garantía o aval, y consejos para que el expediente avance.',
+        'date': '2026-10-26', 'date_text': '26 de octubre de 2026', 'minutes': 5,
+        'image': 'og-credito-empresarial.png',
+    },
+    {
         'slug': 'pago-a-proveedores-en-el-extranjero',
         'title': 'Cómo financiar el pago a proveedores en el extranjero | Centralia',
         'headline': 'Cómo financiar el pago a proveedores en el extranjero',
