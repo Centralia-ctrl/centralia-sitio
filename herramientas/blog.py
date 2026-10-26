@@ -121,11 +121,15 @@ RELATED = {
     'que-es-el-factoraje': ['capital-de-trabajo', 'como-comparar-propuestas-de-financiamiento', 'opciones-de-financiamiento-para-pymes'],
 }
 
+# The blog index opens with the main guide; the rest keep the ARTICLES order (newest first).
+INDEX_FIRST = 'opciones-de-financiamiento-para-pymes'
+
 INDEX = {
     'title': 'Blog de financiamiento empresarial | Centralia Financiera',
     'description': 'Guías claras sobre crédito empresarial, factoraje y pago a proveedores para empresas en México.',
 }
 
+# Meeting block for the blog index. Articles close with their own contextual invitation instead.
 CTA = ('<section class="product-meeting"><div><h2>Hablemos de tu empresa.</h2><p>30 minutos para revisar qué quieres '
        'financiar y en qué plazo.</p></div><a class="button button-dark" data-schedule href="' + MEETING + '" target="_blank" '
        'rel="noopener noreferrer">Agendemos una reunión <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></a></section>')
@@ -215,7 +219,7 @@ def main():
                      + crumb(['<a href="../index.html">Inicio</a>', '<a href="./">Blog</a>', f'<span aria-current="page">{a["crumb"]}</span>'])
                      + f'<article class="blog-article"><header class="company-intro blog-header"><p class="eyebrow">{a["eyebrow"]}</p>'
                      + f'<h1>{a["h1"][0]}<br><span>{a["h1"][1]}</span></h1><p class="blog-meta"><time datetime="{a["date"]}">{a["date_text"]}</time>'
-                     + f' · Lectura de {a["minutes"]} minutos</p></header><div class="blog-body">' + body + '</div></article>' + related(a['slug']) + CTA + '</div></main>')
+                     + f' · Lectura de {a["minutes"]} minutos</p></header><div class="blog-body">' + body + '</div></article>' + related(a['slug']) + '</div></main>')
         graph = [
             {'@type': 'BlogPosting', '@id': url + '#articulo', 'headline': a['headline'], 'description': a['description'],
              'inLanguage': 'es-MX', 'datePublished': a['date'], 'dateModified': a['date'], 'url': url, 'mainEntityOfPage': url,
@@ -228,15 +232,15 @@ def main():
         ]
         html = page(tpl, 'blog/' + a['slug'] + '.html', a['title'], a['description'], a['image'], 'article', graph, main_html)
         open(os.path.join(ROOT, 'blog', a['slug'] + '.html'), 'w', encoding='utf-8', newline='').write(html)
-        cards.append(f'<li><a class="blog-card" href="{a["slug"]}.html"><span class="blog-card-tag">{a["tag"]}</span>'
+        cards.append((a['slug'] != INDEX_FIRST, f'<li><a class="blog-card" href="{a["slug"]}.html"><span class="blog-card-tag">{a["tag"]}</span>'
                      f'<span class="blog-card-title">{a["headline"]}</span><span class="blog-card-text">{a["description"]}</span>'
-                     f'<span class="blog-card-meta"><time datetime="{a["date"]}">{a["date_text"]}</time> · {a["minutes"]} min</span></a></li>')
+                     f'<span class="blog-card-meta"><time datetime="{a["date"]}">{a["date_text"]}</time> · {a["minutes"]} min</span></a></li>'))
         print('blog/' + a['slug'] + '.html')
     index_main = ('<main id="contenido" class="product-page direction-faq blog-page"><div class="shell">'
                   + crumb(['<a href="../index.html">Inicio</a>', '<span aria-current="page">Blog</span>'])
                   + '<header class="company-intro"><p class="eyebrow">BLOG</p><h1>Financiamiento empresarial,<br><span>explicado con claridad.</span></h1>'
                   + '<p>Guías para entender tus opciones antes de la primera conversación.</p></header>'
-                  + '<ul class="blog-index">' + ''.join(cards) + '</ul>' + CTA + '</div></main>')
+                  + '<ul class="blog-index">' + ''.join(c for _, c in sorted(cards, key=lambda c: c[0])) + '</ul>' + CTA + '</div></main>')
     graph = [
         {'@type': 'Blog', '@id': blog_url + '#blog', 'name': 'Blog de Centralia Financiera', 'url': blog_url, 'inLanguage': 'es-MX',
          'description': INDEX['description'], 'publisher': {'@id': BASE + '#organizacion'},
