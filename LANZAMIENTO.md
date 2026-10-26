@@ -47,7 +47,8 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
 
 ## 4. Buscadores
 
-- [ ] Verificar el dominio en Google Search Console y enviar `https://centraliafinanciera.com/sitemap.xml`.
+- [x] Verificar el dominio en Google Search Console (hecho el 26 de octubre de 2026, por DNS).
+- [ ] Enviar `https://centraliafinanciera.com/sitemap.xml` en Search Console, el mismo día del cambio.
 - [ ] Actualizar `lastmod` en `sitemap.xml` con la fecha del lanzamiento.
 - [ ] Revisar que ninguna página publicada tenga `noindex`.
 - [ ] Revisar en Search Console que se indexen el blog y sus artículos, y que no haya errores de datos estructurados.

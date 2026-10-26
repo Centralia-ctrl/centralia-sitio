@@ -105,6 +105,8 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - Activación de la medición.
 - Redirecciones del sitio anterior: en `_redirects` (PR #31). El WordPress solo tenía Inicio, Aviso de privacidad y Educación financiera (→ `/blog/`). Falta confirmar la dirección exacta de Educación financiera.
 - **Aviso de privacidad antes del cambio de dominio:** los formularios enlazan a `/aviso-de-privacidad/` del WordPress, que deja de existir al cambiar el dominio. Hay que crear su página en el sitio nuevo, con el texto vigente o el nuevo, antes del lanzamiento.
-- Fecha del cambio de dominio. El DNS lo administra Carlos; tiene pendiente agregar el registro TXT de Google Search Console.
-- Google Search Console (se verifica en el DNS el día del cambio de dominio) y ficha de Google Business Profile (falta saber si hay oficina o solo atención en línea).
+- Fecha del cambio de dominio. El DNS lo administra Carlos.
+- Google Search Console: dominio `centraliafinanciera.com` verificado por DNS (26 de octubre de 2026). El sitemap nuevo se envía el día del cambio de dominio, no antes, porque hoy el dominio sigue mostrando el WordPress.
+- Ficha de Google Business Profile: falta saber si hay oficina o solo atención en línea.
+- Meta: el Pixel 1375879946116372 está activo y hoy lo dispara el WordPress; no está conectado a HubSpot. Si hay anuncios en diciembre, conviene activar la medición desde el lanzamiento suave para no perder datos.
 - Las cifras del diálogo de costos y del simulador ($50 M, $15 M, US$5 M, 37 días, 4.5% y 85%) aparecen en todas las páginas. Solo la tasa de 2% y el plazo de 36 meses están confirmados.
