@@ -80,7 +80,7 @@ Cuando se active, hace falta:
 1. **Cifras y condiciones.** Deben confirmarse con los fondeadores:
    - Crédito con garantía: hasta $50 M MXN, comisión por disposición de 1%, 2% o 4%.
    - Crédito sin garantía: hasta $15 M MXN, comisión de apertura de 4.5%.
-   - Factoraje: anticipo de hasta 85%.
+   - Factoraje: anticipo de hasta 85% del valor de facturas elegibles, antes de costos. **Confirmado.**
    - Pago a proveedores: hasta US$5 M, 37 días, más de 150 países.
    - Tasa ilustrativa del simulador: 2% mensual. **Confirmada.**
    - Plazos: hasta 36 meses. **Confirmado.** `app.js` dice "Modalidades de 6 a 36 meses" y el simulador ofrece 12, 18, 24, 30 y 36 meses.
