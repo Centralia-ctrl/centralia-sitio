@@ -10,7 +10,8 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
   - Cifras y plazos confirmados.
   - Video del almacén sin marca de agua.
 - [ ] Todos los enlaces "Aviso de privacidad" apuntan a la página nueva y ya no a `https://centraliafinanciera.com/aviso-de-privacidad/` del sitio anterior. Están en las 5 páginas, en `consent.js` y en los formularios.
-- [ ] Hay redirecciones 301 de cada dirección del sitio anterior a su equivalente nuevo. Se configuran en un archivo `_redirects`, que debe agregarse a `ALWAYS` en `build.cjs`.
+- [ ] Las redirecciones 301 del sitio anterior están en `_redirects` (ya en `ALWAYS`). Confirmar que siguen completas.
+- [ ] Existe `/aviso-de-privacidad/` en el sitio nuevo: los formularios enlazan ahí y la página del WordPress desaparece con el cambio de dominio.
 - [ ] Se tiene la lista de direcciones del sitio anterior, por ejemplo de su `sitemap.xml` o de Google Search Console.
 - [ ] Se sabe quién administra el DNS del dominio y se tiene acceso.
 - [ ] Se eligió un horario de poco tráfico y está disponible quien pueda revertir el cambio.
@@ -46,7 +47,8 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
 
 ## 4. Buscadores
 
-- [ ] Verificar el dominio en Google Search Console y enviar `https://centraliafinanciera.com/sitemap.xml`.
+- [x] Verificar el dominio en Google Search Console (hecho el 26 de octubre de 2026, por DNS).
+- [ ] Enviar `https://centraliafinanciera.com/sitemap.xml` en Search Console, el mismo día del cambio.
 - [ ] Actualizar `lastmod` en `sitemap.xml` con la fecha del lanzamiento.
 - [ ] Revisar que ninguna página publicada tenga `noindex`.
 - [ ] Revisar en Search Console que se indexen el blog y sus artículos, y que no haya errores de datos estructurados.
