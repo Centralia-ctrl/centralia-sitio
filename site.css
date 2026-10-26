@@ -1432,3 +1432,32 @@ dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contai
 .related-guides-list a:hover strong{color:#315de8}
 .related-guides-list a:focus-visible{outline:3px solid #315de8;outline-offset:3px}
 @media(max-width:760px){.related-guides{grid-template-columns:1fr;gap:28px}}
+
+/* Comparison tables: scroll inside their own frame on narrow screens, never the page. */
+.blog-table{margin-top:22px;overflow-x:auto;border:1px solid #e4e7ee;border-radius:12px}
+.blog-table table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.6}
+.blog-table caption{padding:14px 18px 0;text-align:left;color:#5d6470;font-size:13px;caption-side:top}
+.blog-table th,.blog-table td{padding:12px 18px;border-top:1px solid #e4e7ee;text-align:left;vertical-align:top}
+.blog-table thead th{border-top:0;background:#f4f6fa;color:#1b224e;font-size:13px;font-weight:600}
+.blog-table tbody th{color:#1b224e;font-weight:500}
+.blog-table td:empty::after{content:'';display:block;height:1.6em;border-bottom:1px dashed #c3c8d8}
+.blog-table-note{font-size:13px}
+.blog-page .blog-article .blog-body .blog-table-note{margin-top:10px;font-size:14px;color:#5d6470}
+
+/* A three-step sequence, static, read left to right (top to bottom on phones). */
+.blog-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px;padding:0;list-style:none;counter-reset:flow}
+.blog-flow li{position:relative;padding:18px 20px;border:1px solid #e4e7ee;border-radius:12px;background:#fff;counter-increment:flow;font-size:15px;line-height:1.6}
+.blog-flow li::before{content:counter(flow,decimal-leading-zero);display:block;margin-bottom:6px;color:#5d6470;font-size:12px;font-weight:600;letter-spacing:.08em}
+.blog-flow li+li{margin-top:0}
+.blog-flow strong{display:block;color:#1b224e;font-size:17px;font-weight:600}
+.blog-flow li+li::after{content:'';position:absolute;top:50%;left:-9px;width:6px;height:6px;border-top:1.5px solid #5d6470;border-right:1.5px solid #5d6470;transform:translateY(-50%) rotate(45deg)}
+
+/* Checklists: square markers, nothing to tick on screen. */
+.blog-checklist{margin-top:14px;padding:0;list-style:none}
+.blog-checklist li{position:relative;padding-left:30px}
+.blog-checklist li+li{margin-top:10px}
+.blog-checklist li::before{content:'';position:absolute;left:0;top:.42em;width:14px;height:14px;border:1.5px solid #1b224e;border-radius:3px}
+.blog-body h3{margin-top:28px;color:#1b224e;font-size:19px;font-weight:600;line-height:1.35}
+.blog-body h3+ul{margin-top:10px}
+
+@media(max-width:760px){.blog-flow{grid-template-columns:1fr}.blog-flow li+li::after{top:-9px;left:24px;transform:rotate(135deg)}.blog-table table{font-size:14px}.blog-table th,.blog-table td{padding:10px 14px}}
