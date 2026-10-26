@@ -88,6 +88,8 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
   - Accesibilidad WCAG 2.1 AA (axe) sin violaciones: se corrigieron el contraste del menú vacío del formulario y el subrayado de la liga del aviso de privacidad.
   - Títulos de hasta 60 caracteres y descripciones de hasta 155 en el blog.
 
+- **Contacto directo del pie** (PR #36): sin correo; WhatsApp es un botón junto a Facebook e Instagram, con el mismo mensaje neutral.
+
 ## Decidido no hacer
 
 - Página 404 propia (PR #10 cerrado).

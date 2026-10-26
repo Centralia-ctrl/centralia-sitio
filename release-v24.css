@@ -41,3 +41,7 @@
 /* Accessibility review: the empty select reaches 4.5:1 and the consent link is underlined, not color-only. */
 .capture-fields select:has(option:checked[value=""]){color:#5d6470}
 .capture-consent a{text-decoration:underline}
+
+/* Footer contact: WhatsApp sits with the social links, in its brand green. */
+.social-links [data-social=whatsapp] .social-brand{background:var(--whatsapp)}
+.social-links [data-social=whatsapp]:hover{background:#f2fbf5}
