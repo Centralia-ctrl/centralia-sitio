@@ -89,7 +89,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
   - Títulos de hasta 60 caracteres y descripciones de hasta 155 en el blog.
 
 - **Acabado de marca** (PR #33, inspirado en la referencia de Brex del PR #32): redondeo único de 12 px, superficies sin sombra y franja navy `#1b224e` de borde a borde en la parte inferior del pie (derechos y avisos legales) en todas las páginas; arriba, contacto y redes quedan en blanco. Está al final de `release-v24.css`. Preguntas frecuentes de la portada sigue en blanco.
-- **Guías precisadas** (PR #34): tablas, secuencia de factoraje y listas de comprobación en `blog.css`; Opciones de financiamiento va primero en el índice (`INDEX_FIRST` en `herramientas/blog.py`). Fuentes en la descripción del PR. Pendientes: 85% sin confirmar y autoría con nombre.
+- **Guías precisadas** (PR #34): tablas, secuencia de factoraje y listas de comprobación en `blog.css`; Opciones de financiamiento va primero en el índice (`INDEX_FIRST` en `herramientas/blog.py`). Fuentes en la descripción del PR. Pendiente: autoría con nombre.
 - **Contacto sin duplicar y WhatsApp sin tapar** (PR #35): los artículos cierran solo con su invitación contextual; `contact-visibility.js` oculta el botón flotante sobre bloques de contacto y sobre cualquier control.
 - **Contacto directo del pie** (PR #36): sin correo; WhatsApp es un botón junto a Facebook e Instagram, con el mismo mensaje neutral.
 
@@ -101,7 +101,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 
 - Aviso de privacidad: se hará cuando se constituya la persona moral.
 - Razón social y símbolo ®.
-- Cifras y condiciones. Ya confirmado por Miguel Ángel: tasa ilustrativa del simulador de 2% mensual y plazo máximo de 36 meses (el simulador ofrece 12, 18, 24, 30 y 36).
+- Cifras y condiciones. Ya confirmado por Miguel Ángel: tasa ilustrativa del simulador de 2% mensual, plazo máximo de 36 meses (el simulador ofrece 12, 18, 24, 30 y 36) y anticipo de factoraje de hasta 85% del valor de facturas elegibles, antes de costos (26 de octubre de 2026).
 - Formulario único de HubSpot.
 - Mensaje de éxito y tiempo de respuesta.
 - Simulador arriba de $15 M.
@@ -114,4 +114,4 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - Google Search Console: dominio `centraliafinanciera.com` verificado por DNS (26 de octubre de 2026). El sitemap nuevo se envía el día del cambio de dominio, no antes, porque hoy el dominio sigue mostrando el WordPress.
 - Ficha de Google Business Profile: falta saber si hay oficina o solo atención en línea.
 - Meta: el Pixel 1375879946116372 está activo y hoy lo dispara el WordPress; no está conectado a HubSpot. Si hay anuncios en diciembre, conviene activar la medición desde el lanzamiento suave para no perder datos.
-- Las cifras del diálogo de costos y del simulador ($50 M, $15 M, US$5 M, 37 días, 4.5% y 85%) aparecen en todas las páginas. Solo la tasa de 2% y el plazo de 36 meses están confirmados.
+- Las cifras del diálogo de costos y del simulador ($50 M, $15 M, US$5 M, 37 días y 4.5%) aparecen en todas las páginas y siguen sin confirmar. Están confirmados la tasa de 2%, el plazo de 36 meses y el anticipo de hasta 85%.
