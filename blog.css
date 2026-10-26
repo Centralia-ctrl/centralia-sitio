@@ -1,0 +1,40 @@
+/* Blog: index cards and article reading layout, in the approved palette. */
+.blog-page .company-intro h1{max-width:860px}
+.blog-header{padding-bottom:28px}
+.blog-meta{margin-top:20px;font-size:14px;color:#5d6470}
+.blog-article{max-width:760px}
+.blog-body{padding-bottom:56px;color:#303647;font-size:17px;line-height:1.8}
+.blog-body>*+*{margin-top:18px}
+.blog-body h2{margin-top:44px;color:#1b224e;font-size:clamp(24px,2.4vw,30px);font-weight:500;line-height:1.25;letter-spacing:-.02em;scroll-margin-top:100px}
+.blog-body h2+p,.blog-body h2+ul,.blog-body h2+ol{margin-top:14px}
+.blog-body a:not(.button){color:#1b224e;text-decoration:underline;text-underline-offset:3px}
+.blog-body a:not(.button):hover{color:#315de8}
+.blog-body strong{color:#1b224e;font-weight:600}
+.blog-lead{font-size:19px;line-height:1.75;color:#303647}
+.blog-list,.blog-steps{padding-left:22px}
+.blog-list li+li,.blog-steps li+li{margin-top:10px}
+.blog-steps li::marker{color:#1b224e;font-weight:600}
+.blog-cta{margin-top:44px;padding:28px;border:1px solid #e4e7ee;border-radius:16px;background:#f4f6fa}
+.blog-cta .blog-cta-title{color:#1b224e;font-size:21px;font-weight:600}
+.blog-cta p+p{margin-top:8px;color:#5d6470;font-size:16px}
+.blog-cta-actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;margin-top:20px}
+.blog-note{margin-top:36px;font-size:13px;line-height:1.7;color:#5d6470}
+.blog-index{display:grid;gap:16px;max-width:860px;margin:0 0 64px;padding:0;list-style:none}
+.blog-card{display:grid;gap:10px;padding:28px;border:1px solid #e4e7ee;border-radius:16px;background:#fff;color:#303647;text-decoration:none;transition:border-color .2s ease,translate .2s ease}
+.blog-card:hover{border-color:#1b224e}
+.blog-card:focus-visible{outline:3px solid #315de8;outline-offset:3px}
+.blog-card-tag{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#5d6470}
+.blog-card-title{color:#1b224e;font-size:clamp(21px,2vw,25px);font-weight:500;line-height:1.3;letter-spacing:-.02em}
+.blog-card-text{font-size:16px;line-height:1.7;color:#5d6470}
+.blog-card-meta{font-size:13px;color:#5d6470}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.blog-card:hover{translate:0 -2px}}
+@media(max-width:760px){.blog-body{font-size:16px}.blog-lead{font-size:17px}.blog-cta{padding:22px}.blog-card{padding:22px}}
+/* Product pages style every "article p" at 15px muted; the blog article keeps its reading size. */
+.blog-page .blog-article .blog-body p{margin-top:18px;font-size:17px;line-height:1.8;color:#303647}
+.blog-page .blog-article .blog-body h2+p{margin-top:14px}
+.blog-page .blog-article .blog-body .blog-lead{margin-top:0;font-size:19px;line-height:1.75}
+.blog-page .blog-article .blog-body .blog-cta .blog-cta-title{margin-top:0;font-size:21px;color:#1b224e}
+.blog-page .blog-article .blog-body .blog-cta p+p{margin-top:8px;font-size:16px;color:#5d6470}
+.blog-page .blog-article .blog-body .blog-note{margin-top:36px;font-size:13px;line-height:1.7;color:#5d6470}
+.blog-page .blog-article .blog-meta{font-size:14px;color:#5d6470}
+@media(max-width:760px){.blog-page .blog-article .blog-body p{font-size:16px}.blog-page .blog-article .blog-body .blog-lead{font-size:17px}}

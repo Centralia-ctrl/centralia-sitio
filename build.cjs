@@ -6,12 +6,12 @@ const fs=require('fs'),path=require('path');
 const root=__dirname;
 // Preserve the relative order of every page's former style chain.
 // Only current source layers are bundled. Historical palette studies stay outside.
-const files=["styles.css","refinements.css","simulator.css","institutional.css","section-layout.css","inline-overrides.css","solutions-redesign.css","navigation-dropdown.css","product-pages.css","audit-fixes.css","company-page.css","brand-direction.css","visual-system.css","business-video.css","factoraje-film.css","solution-film.css","product-illustrations-v10.css","content-direction-v14.css","launch-readiness-v15.css","lead-capture-v17.css","home-products-v19.css","editorial-v23.css","release-v24.css","consent.css"];
+const files=["styles.css","refinements.css","simulator.css","institutional.css","section-layout.css","inline-overrides.css","solutions-redesign.css","navigation-dropdown.css","product-pages.css","audit-fixes.css","company-page.css","brand-direction.css","visual-system.css","business-video.css","factoraje-film.css","solution-film.css","product-illustrations-v10.css","content-direction-v14.css","launch-readiness-v15.css","lead-capture-v17.css","home-products-v19.css","editorial-v23.css","release-v24.css","consent.css","blog.css"];
 fs.writeFileSync(path.join(root,'site.css'),files.map(f=>'/* '+f+' */\n'+fs.readFileSync(path.join(root,f),'utf8')).join('\n'));
 console.log('site.css rebuilt');
 
 // Public pages. Add a page here only when it is approved for publication.
-const PAGES=['index.html','credito-empresarial.html','factoraje.html','pago-a-proveedores.html','preguntas-frecuentes.html'];
+const PAGES=['index.html','credito-empresarial.html','factoraje.html','pago-a-proveedores.html','preguntas-frecuentes.html','blog/index.html','blog/que-es-el-factoraje.html'];
 // Share images are referenced by absolute URL in og:image, so the crawler above does not find them.
 const OG_IMAGES=['inicio','credito-empresarial','factoraje','pago-a-proveedores','preguntas-frecuentes'].map(n=>`assets/og-${n}.png`);
 // The Organization logo in the home page's structured data is also an absolute URL.
