@@ -12,6 +12,18 @@ MEETING = 'https://meetings.hubspot.com/miguelmeza1'
 
 ARTICLES = [
     {
+        'slug': 'como-comparar-propuestas-de-financiamiento',
+        'title': 'Cómo comparar propuestas de financiamiento para tu empresa | Centralia',
+        'headline': 'Cómo comparar propuestas de financiamiento para tu empresa',
+        'h1': ('Cómo comparar propuestas', 'de financiamiento para tu empresa.'),
+        'crumb': 'Cómo comparar propuestas',
+        'eyebrow': 'ANTES DE CONTRATAR · GUÍA',
+        'tag': 'Antes de contratar · Guía',
+        'description': 'Monto neto, tasa y su periodicidad, CAT y costo total, comisiones, calendario de pagos y garantías: qué revisar para comparar propuestas de financiamiento antes de firmar.',
+        'date': '2026-10-26', 'date_text': '26 de octubre de 2026', 'minutes': 6,
+        'image': 'og-inicio.png',
+    },
+    {
         'slug': 'capital-de-trabajo',
         'title': 'Capital de trabajo: qué es y cuánto necesita tu empresa | Centralia',
         'headline': 'Capital de trabajo: qué es y cuánto necesita tu empresa',
