@@ -121,6 +121,9 @@ RELATED = {
     'que-es-el-factoraje': ['capital-de-trabajo', 'como-comparar-propuestas-de-financiamiento', 'opciones-de-financiamiento-para-pymes'],
 }
 
+# The blog index opens with the main guide; the rest keep the ARTICLES order (newest first).
+INDEX_FIRST = 'opciones-de-financiamiento-para-pymes'
+
 INDEX = {
     'title': 'Blog de financiamiento empresarial | Centralia Financiera',
     'description': 'Guías claras sobre crédito empresarial, factoraje y pago a proveedores para empresas en México.',
@@ -229,15 +232,15 @@ def main():
         ]
         html = page(tpl, 'blog/' + a['slug'] + '.html', a['title'], a['description'], a['image'], 'article', graph, main_html)
         open(os.path.join(ROOT, 'blog', a['slug'] + '.html'), 'w', encoding='utf-8', newline='').write(html)
-        cards.append(f'<li><a class="blog-card" href="{a["slug"]}.html"><span class="blog-card-tag">{a["tag"]}</span>'
+        cards.append((a['slug'] != INDEX_FIRST, f'<li><a class="blog-card" href="{a["slug"]}.html"><span class="blog-card-tag">{a["tag"]}</span>'
                      f'<span class="blog-card-title">{a["headline"]}</span><span class="blog-card-text">{a["description"]}</span>'
-                     f'<span class="blog-card-meta"><time datetime="{a["date"]}">{a["date_text"]}</time> · {a["minutes"]} min</span></a></li>')
+                     f'<span class="blog-card-meta"><time datetime="{a["date"]}">{a["date_text"]}</time> · {a["minutes"]} min</span></a></li>'))
         print('blog/' + a['slug'] + '.html')
     index_main = ('<main id="contenido" class="product-page direction-faq blog-page"><div class="shell">'
                   + crumb(['<a href="../index.html">Inicio</a>', '<span aria-current="page">Blog</span>'])
                   + '<header class="company-intro"><p class="eyebrow">BLOG</p><h1>Financiamiento empresarial,<br><span>explicado con claridad.</span></h1>'
                   + '<p>Guías para entender tus opciones antes de la primera conversación.</p></header>'
-                  + '<ul class="blog-index">' + ''.join(cards) + '</ul>' + CTA + '</div></main>')
+                  + '<ul class="blog-index">' + ''.join(c for _, c in sorted(cards, key=lambda c: c[0])) + '</ul>' + CTA + '</div></main>')
     graph = [
         {'@type': 'Blog', '@id': blog_url + '#blog', 'name': 'Blog de Centralia Financiera', 'url': blog_url, 'inLanguage': 'es-MX',
          'description': INDEX['description'], 'publisher': {'@id': BASE + '#organizacion'},
