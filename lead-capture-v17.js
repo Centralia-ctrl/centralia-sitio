@@ -26,6 +26,7 @@
   }
   function validate(values) {
     if (values.name.trim().length < 2) return ['name', 'Escribe tu nombre con al menos dos caracteres.'];
+    if (values.company.trim().length < 2) return ['company', 'Escribe el nombre de tu empresa con al menos dos caracteres.'];
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) return ['email', 'Escribe un correo electrónico válido.'];
     const digits = values.phone.replace(/\D/g, '');
     if (!/^\+?[\d() .-]+$/.test(values.phone.trim()) || digits.length < 10 || digits.length > 15) return ['phone', 'Escribe un WhatsApp de 10 dígitos o incluye el código de tu país.'];
@@ -38,7 +39,7 @@
   function payload(values, pageUri) {
     return {
       fields: [
-        ['firstname', values.name.trim()], ['email', values.email.trim()],
+        ['firstname', values.name.trim()], ['company', values.company.trim()], ['email', values.email.trim()],
         ['phone', values.phone.trim()],
         ['cul_es_el_monto_que_requiere_tu_empresa', String(parseAmount(values.amount))],
         ['para_que_necesitas_el_financiamiento', values.purpose]
@@ -51,7 +52,7 @@
     const form = doc.getElementById('centralia-contact-form');
     if (!form) return;
     const field = name => doc.getElementById('capture-' + name);
-    const controls = ['name', 'email', 'phone', 'amount', 'purpose', 'consent'].map(field);
+    const controls = ['name', 'company', 'email', 'phone', 'amount', 'purpose', 'consent'].map(field);
     const button = field('submit'), buttonText = field('submit-text');
     const error = field('error'), fallback = field('fallback'), success = field('success');
     let sending = false, accepted = false;
