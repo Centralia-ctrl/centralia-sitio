@@ -14,7 +14,7 @@
 .factoraje-page .film-artwork{background:var(--factoraje-paper)}
 .centralia-v23 .footer-bottom>div{flex-wrap:wrap;row-gap:12px}
 .privacy-notice-link{display:inline-block;margin-top:20px;color:var(--blue);text-decoration:underline;text-underline-offset:4px}
-.terms-in-view .whatsapp-float,.footer-in-view .whatsapp-float,.modal-open .whatsapp-float{visibility:hidden;pointer-events:none}
+.terms-in-view .whatsapp-float,.footer-in-view .whatsapp-float,.contact-in-view .whatsapp-float,.float-over-control .whatsapp-float,.modal-open .whatsapp-float{visibility:hidden;pointer-events:none}
 @media(max-width:760px){
  .home-v23 .hero{min-height:0}
  .home-v23 .hero-purpose{font-size:15px;line-height:1.75;margin-top:22px;max-width:34em}
