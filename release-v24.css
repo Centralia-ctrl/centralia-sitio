@@ -37,3 +37,7 @@
 @media(min-width:1101px){
  .centralia-v23 .answer-item>p,.centralia-v23 .content-v14.content-uses .product-uses article>p,.centralia-v23 .product-process li p,.centralia-v23 .content-v14 .content-facts dd,.centralia-v23 .product-section>div>p:not([class]),.centralia-v23 .product-meeting p,.centralia-v23 .solution-tile .solution-description,.centralia-v23 .content-prep-list>li,.centralia-v23 .capture-followup>p,.centralia-v23 .closing-inner p:not(.eyebrow){font-size:16px;line-height:1.7}
 }
+
+/* Accessibility review: the empty select reaches 4.5:1 and the consent link is underlined, not color-only. */
+.capture-fields select:has(option:checked[value=""]){color:#5d6470}
+.capture-consent a{text-decoration:underline}

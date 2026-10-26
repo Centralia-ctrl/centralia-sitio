@@ -59,7 +59,9 @@ Trabaja siempre con cambios pequeños y revisables: un tema por propuesta, con v
 | A14 Lanzamiento | Lista de verificación para el cambio de dominio en `LANZAMIENTO.md` (PR #14). |
 | A15 Formularios | El formulario de la portada pide la empresa (`company`, PR #17). El simulador ofrece 12 a 36 meses con 2% mensual (PR #16). |
 | A16 HubSpot | Formularios verificados contra el sitio y con aviso por correo a hola@. Embudo de negocios "Financiamiento PyME" (plan gratuito: se editó el embudo predeterminado). |
-| Calidad | Sin errores de JavaScript y sin scroll horizontal en 360 px, 390 px ni 1440 px. |
+| A17 Blog | `/blog/` con 8 guías, generado con `herramientas/blog.py`, en el menú y el pie. Sin instituciones ni cifras no confirmadas (PR #20 a #28). |
+| A18 SEO | Datos estructurados (`Organization`, `Service`, `BreadcrumbList`, `FAQPage`, `Blog` y `BlogPosting`), sección "Guías" en las páginas de producto, RSS, sitemap con `lastmod` y logo e íconos ligeros (PR #19 y #27). |
+| Calidad | Sin errores de JavaScript ni scroll horizontal de 320 a 1920 px. 844 ligas internas sin errores. Accesibilidad WCAG 2.1 AA sin violaciones según axe (PR #29). |
 
 ### Pendiente
 
