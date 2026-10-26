@@ -58,3 +58,7 @@ body.centralia-v23 .legal-note{max-width:none;margin:-1px 0 0;padding:21px 0 40p
 body.centralia-v23 .footer-bottom,body.centralia-v23 .footer-bottom>span,body.centralia-v23 .footer-bottom>div>a,
 body.centralia-v23 .footer-bottom>div>button,body.centralia-v23 .legal-note{color:var(--finish-on-navy)}
 body.centralia-v23 .footer-bottom>div>a:hover,body.centralia-v23 .footer-bottom>div>button:hover{color:#fff}
+
+/* Footer contact: WhatsApp sits with the social links, in its brand green. */
+.social-links [data-social=whatsapp] .social-brand{background:var(--whatsapp)}
+.social-links [data-social=whatsapp]:hover{background:#f2fbf5}
