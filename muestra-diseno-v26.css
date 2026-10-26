@@ -1,0 +1,52 @@
+/* Estudio aislado sobre la portada: recorrido en el hero, cifras en franja propia, condiciones más ligeras y más aire en celular. No se publica. */
+
+/* 1. Hero: el recorrido a la derecha, el titular y la acción a la izquierda. */
+body.diseno-v26 .hero-journey{margin:0;padding:28px 28px 22px;border:1px solid #e4e7ee;border-radius:12px;background:#fff}
+body.diseno-v26 .journey-title{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#5d6470}
+body.diseno-v26 .hero-journey ol{position:relative;margin:14px 0 0;padding:0;list-style:none}
+body.diseno-v26 .hero-journey ol::before{content:'';position:absolute;left:16px;top:28px;bottom:28px;width:1px;background:#e4e7ee}
+body.diseno-v26 .hero-journey li{position:relative;display:grid;grid-template-columns:34px 1fr;column-gap:16px;padding:12px 0}
+body.diseno-v26 .journey-number{grid-row:1/3;position:relative;z-index:1;display:grid;place-items:center;width:34px;height:34px;border:1px solid #e4e7ee;border-radius:50%;background:#fff;color:#5d6470;font-size:12px;font-weight:600}
+body.diseno-v26 .hero-journey strong{color:#1b224e;font-size:18px;font-weight:600;line-height:1.35}
+body.diseno-v26 .hero-journey li>span:last-child{margin-top:2px;color:#5d6470;font-size:15px;line-height:1.55}
+@media(min-width:1101px){
+  body.centralia-v23.home-v23.diseno-v26 .hero-copy{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);grid-template-areas:"heading journey" "conversation journey";column-gap:72px;row-gap:30px;align-items:start}
+  body.centralia-v23.home-v23.diseno-v26 .hero-heading{grid-area:heading}
+  body.centralia-v23.home-v23.diseno-v26 .hero-conversation{grid-area:conversation;max-width:470px}
+  body.centralia-v23.home-v23.diseno-v26 .hero-journey{grid-area:journey;align-self:center}
+  body.centralia-v23.home-v23.diseno-v26 .hero .hero-contact-link{margin:20px 0 0}
+  body.centralia-v23.home-v23.diseno-v26 .hero .hero-actions{justify-content:flex-start;margin-left:0;padding-left:0}
+}
+@media(max-width:1100px){body.diseno-v26 .hero-journey{margin-top:32px}}
+
+/* Movimiento: cada paso se marca en navy, uno tras otro. Sin movimiento si el sistema lo pide. */
+@keyframes journey-step{0%{background:#1b224e;border-color:#1b224e;color:#fff}33.33%,100%{background:#fff;border-color:#e4e7ee;color:#5d6470}}
+@media(prefers-reduced-motion:no-preference){
+  body.diseno-v26 .journey-number{animation:journey-step 9s step-end infinite}
+  body.diseno-v26 .hero-journey li:nth-child(2) .journey-number{animation-delay:3s}
+  body.diseno-v26 .hero-journey li:nth-child(3) .journey-number{animation-delay:6s}
+}
+
+/* 2. Cifras de trayectoria en franja propia, más grandes. */
+body.centralia-v23.home-v23.diseno-v26 .home-proof{border:0;background:#f4f6fa;box-shadow:0 0 0 100vmax #f4f6fa;clip-path:inset(0 -100vmax);padding:44px 0 46px;align-items:center}
+body.centralia-v23.home-v23.diseno-v26 .home-proof::before,body.centralia-v23.home-v23.diseno-v26 .home-proof::after{display:none}
+body.centralia-v23.home-v23.diseno-v26 .home-proof strong{font-size:clamp(34px,3.2vw,46px);font-weight:500;letter-spacing:-.035em;line-height:1.1}
+body.centralia-v23.home-v23.diseno-v26 .home-proof span{margin-top:6px;font-size:15px}
+body.centralia-v23.home-v23.diseno-v26 .business-stories{border-top:0}
+
+/* 4. Costos y condiciones: liga discreta junto a la acción principal, sin raya ni "+". */
+body.centralia-v23.home-v23.diseno-v26 .solution-primary-link{border-bottom:0}
+body.centralia-v23.home-v23.diseno-v26 .solution-secondary-actions{border-top:0;margin-top:-4px}
+body.centralia-v23.home-v23.diseno-v26 .solution-secondary-actions>.solution-conditions{min-height:44px;padding:0;border:0;font-size:13px;color:#5d6470;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c3c8d8}
+body.centralia-v23.home-v23.diseno-v26 .solution-secondary-actions>.solution-conditions>span{display:none}
+
+/* 5. Más aire en celular. */
+@media(max-width:760px){
+  body.centralia-v23.home-v23.diseno-v26 .home-proof{grid-template-columns:1fr;padding:34px 0 36px;row-gap:22px}
+  body.centralia-v23.home-v23.diseno-v26 .home-proof strong{font-size:34px}
+  body.centralia-v23.home-v23.diseno-v26 .solution-collection{gap:24px}
+  body.centralia-v23.home-v23.diseno-v26 .capture-fields{row-gap:26px}
+  body.centralia-v23.home-v23.diseno-v26 .home-capture{padding-block:72px}
+  body.centralia-v23.home-v23.diseno-v26 .faq-section{padding-block:72px}
+  body.diseno-v26 .hero-journey{padding:22px 20px 16px}
+}
