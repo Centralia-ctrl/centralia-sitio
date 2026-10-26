@@ -89,7 +89,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
   - Títulos de hasta 60 caracteres y descripciones de hasta 155 en el blog.
 
 - **Acabado de marca** (PR #33, inspirado en la referencia de Brex del PR #32): redondeo único de 12 px, superficies sin sombra y franja navy `#1b224e` de borde a borde en la parte inferior del pie (derechos y avisos legales) en todas las páginas; arriba, contacto y redes quedan en blanco. Está al final de `release-v24.css`. Preguntas frecuentes de la portada sigue en blanco.
-- **Guías precisadas** (PR #34): tablas, secuencia de factoraje y listas de comprobación en `blog.css`; Opciones de financiamiento va primero en el índice (`INDEX_FIRST` en `herramientas/blog.py`). Fuentes en la descripción del PR. Las guías las firma Miguel Ángel Meza Badillo, director general (`AUTHOR` en `herramientas/blog.py`, PR #38); la ficha solo lleva datos confirmados.
+- **Guías precisadas** (PR #34): tablas, secuencia de factoraje y listas de comprobación en `blog.css`; Opciones de financiamiento va primero en el índice (`INDEX_FIRST` en `herramientas/blog.py`). Fuentes en la descripción del PR. Las guías las firma Miguel Ángel Meza Badillo, director general (`AUTHOR` en `herramientas/blog.py`, PR #39); la ficha solo lleva datos confirmados.
 - **Contacto sin duplicar y WhatsApp sin tapar** (PR #35): los artículos cierran solo con su invitación contextual; `contact-visibility.js` oculta el botón flotante sobre bloques de contacto y sobre cualquier control.
 - **Contacto directo del pie** (PR #36): sin correo; WhatsApp es un botón junto a Facebook e Instagram, con el mismo mensaje neutral.
 
