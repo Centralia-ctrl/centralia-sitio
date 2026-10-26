@@ -1,0 +1,13 @@
+# Redirecciones del sitio anterior (WordPress) al sitio nuevo. Netlify las aplica con 301.
+# El sitio anterior tenía 3 páginas públicas: Inicio (/), Aviso de privacidad y Educación financiera.
+# /aviso-de-privacidad/ queda pendiente: necesita su página en el sitio nuevo antes del cambio de dominio.
+
+/educacion-financiera    /blog/    301
+/educacion-financiera/*  /blog/    301
+
+# Direcciones automáticas de WordPress que conocen los buscadores.
+/feed                    /blog/feed.xml    301
+/feed/*                  /blog/feed.xml    301
+/wp-sitemap.xml          /sitemap.xml      301
+/sitemap_index.xml       /sitemap.xml      301
+/wp-sitemap*             /sitemap.xml      301
