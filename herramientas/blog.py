@@ -12,6 +12,18 @@ MEETING = 'https://meetings.hubspot.com/miguelmeza1'
 
 ARTICLES = [
     {
+        'slug': 'capital-de-trabajo',
+        'title': 'Capital de trabajo: qué es y cuánto necesita tu empresa | Centralia',
+        'headline': 'Capital de trabajo: qué es y cuánto necesita tu empresa',
+        'h1': ('Capital de trabajo:', 'qué es y cuánto necesita tu empresa.'),
+        'crumb': 'Capital de trabajo',
+        'eyebrow': 'FINANZAS DE TU EMPRESA · GUÍA',
+        'tag': 'Finanzas de tu empresa · Guía',
+        'description': 'Qué es el capital de trabajo, cómo calcular tu ciclo de efectivo, cómo estimar cuánto necesitas, cómo mejorarlo y qué financiamiento conviene según dónde se detiene tu dinero.',
+        'date': '2026-10-26', 'date_text': '26 de octubre de 2026', 'minutes': 6,
+        'image': 'og-inicio.png',
+    },
+    {
         'slug': 'documentos-para-credito-empresarial',
         'title': 'Qué documentos te piden para un crédito empresarial | Centralia',
         'headline': 'Qué documentos te piden para un crédito empresarial',
