@@ -55,3 +55,43 @@
 @media(prefers-reduced-motion:reduce){.cx-process-step{transition:none;transform:none!important}}
 
 #centralia-contact-form [hidden],.cx-back[hidden]{display:none!important}
+
+/* Approved home composition: consultation in the hero, without a repeated section. */
+body.home-first-step .hero.shell{min-height:650px;padding-block:56px 64px}
+body.home-first-step .hero .hero-copy{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:72px;align-items:center}
+body.home-first-step .hero .hero-heading{min-width:0}
+body.home-first-step .hero h1{font-size:clamp(48px,4.6vw,66px);line-height:1.1;letter-spacing:-.045em;margin-top:24px;max-width:690px}
+body.home-first-step .hero-purpose{max-width:590px;line-height:1.8}
+body.home-first-step .hero .hero-conversation{position:static;margin:0;padding:0;border:0;min-width:0;opacity:1;translate:none;transform:none}
+body.home-first-step .capture-panel{padding:28px 28px 24px;border:1px solid #e4e7ee;border-radius:12px;background:#fff;box-shadow:none;scroll-margin-top:108px}
+body.home-first-step .capture-form-meta{display:block;padding:0;margin:0 0 20px;border:0}
+body.home-first-step .capture-form-meta h2{font-size:32px;line-height:1.15;font-weight:500;letter-spacing:-.035em;color:#1b224e;margin:0 0 12px}
+body.home-first-step .capture-form-meta p{font-size:15px;line-height:1.65;color:#5d6470;margin:0}
+body.home-first-step .cx-steps{font-size:13px;gap:18px;margin:0 0 20px}
+body.home-first-step .capture-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px}
+body.home-first-step .capture-fields label{font-size:14px;line-height:1.5;min-width:0}
+body.home-first-step .capture-fields label:has(#capture-amount),body.home-first-step .capture-fields label:has(#capture-purpose){grid-column:1/-1}
+body.home-first-step .capture-fields input,body.home-first-step .capture-fields select{width:100%;height:54px;font-size:15px;border-radius:12px;background:#fafbfc;box-sizing:border-box}
+body.home-first-step .capture-submit{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:54px;padding:16px 20px;margin-top:22px;background:#315de8;color:#fff;border-color:#315de8;border-radius:12px;font-size:15px;box-shadow:none;cursor:pointer}
+body.home-first-step .capture-submit svg{width:20px;height:20px;stroke:currentColor}
+body.home-first-step .capture-submit:hover{background:#254bc6}
+body.home-first-step .capture-note{font-size:12px;line-height:1.7;color:#5d6470;margin:14px 0 0}
+body.home-first-step .capture-consent{margin-top:20px;font-size:12px;line-height:1.7}
+body.home-first-step .first-step-meeting{display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid #e4e7ee;padding:16px 0 0;margin-top:18px;color:#1b224e;font-size:14px;font-weight:500;text-decoration:underline;text-underline-offset:4px;min-height:44px}
+body.home-first-step .first-step-meeting svg{width:16px;height:16px}
+@media(max-width:1100px){
+ body.home-first-step .hero.shell{padding-block:56px 64px;min-height:0}
+ body.home-first-step .hero .hero-copy{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:36px}
+ body.home-first-step .hero h1{font-size:clamp(42px,4.8vw,54px)}
+ body.home-first-step .capture-panel{padding:25px 22px 20px}
+}
+@media(max-width:760px){
+ body.home-first-step .hero.shell{padding-block:40px 44px}
+ body.home-first-step .hero .hero-copy{grid-template-columns:1fr;gap:30px;align-items:start}
+ body.home-first-step .hero h1{font-size:clamp(38px,9.4vw,58px);line-height:1.08;margin:20px 0 0}
+ body.home-first-step .hero-purpose{font-size:15px;line-height:1.7;margin-top:20px}
+ body.home-first-step .capture-panel{padding:24px 20px 22px}
+ body.home-first-step .capture-form-meta h2{font-size:30px}
+ body.home-first-step .capture-fields input,body.home-first-step .capture-fields select{font-size:16px}
+ body.home-first-step .capture-fields{grid-template-columns:1fr}
+}
