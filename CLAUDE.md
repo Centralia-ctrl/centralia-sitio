@@ -99,7 +99,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
   - Los formularios envían `context.hutk` a HubSpot solo cuando existe la cookie `hubspotutk` (al aceptar la medición), para conservar el origen de cada prospecto (PR #46). Prueba en `experience.test.cjs`.
   - Blog con 16 guías: 8 nuevas sobre factoraje con y sin recurso, requisitos, factoraje o crédito, aforo, crédito simple o revolvente, flujo a 13 semanas, días de cobranza y estados financieros (PR #47). El sitemap tiene 22 páginas.
 
-- **Mensaje de éxito** (27 de octubre de 2026, decisión de Miguel Ángel): "Te contactamos a la brevedad desde hola@centraliafinanciera.com", en el formulario de la portada y en el simulador de todas las páginas.
+- **Mensaje de éxito** (27 de octubre de 2026, decisión de Miguel Ángel): portada: "Recibimos tu consulta. Te contactamos a la brevedad desde hola@centraliafinanciera.com."; simulador en todas las páginas: "Recibimos tu solicitud. Te contactamos a la brevedad."
 
 ## Decidido no hacer
 
