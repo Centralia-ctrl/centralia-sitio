@@ -216,7 +216,11 @@
     $('#sim-send-status').textContent = 'Guardando tu solicitud…';
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 20000);
-    const hubspotToken = (/(?:^|;\s*)hubspotutk=([0-9a-f]{32})(?:;|$)/.exec(document.cookie) || [])[1];
+    // HubSpot's visitor cookie travels only with measurement on and current analytics consent (pixel.js),
+    // checked now, at submit time. Consent to process the request is not consent to analytics.
+    let analyticsAllowed = false;
+    try { analyticsAllowed = typeof window.__centraliaAnalyticsAllowed === 'function' && window.__centraliaAnalyticsAllowed() === true; } catch {}
+    const hubspotToken = analyticsAllowed ? (/(?:^|;\s*)hubspotutk=([0-9a-f]{32})(?:;|$)/.exec(document.cookie) || [])[1] : undefined;
     try {
       const response = await fetch(FORM_ENDPOINT, {
         method:'POST', headers:{'Content-Type':'application/json'}, signal:controller.signal,
@@ -224,7 +228,6 @@
           fields: Object.entries(values).map(([name,value])=>({objectTypeId:'0-1',name,value})),
           context:{
             ...(/^https?:$/.test(location.protocol) ? {pageUri:location.origin + location.pathname} : {}),
-            // HubSpot's visitor cookie exists only after the visitor accepts measurement.
             ...(hubspotToken ? {hutk:hubspotToken} : {}),
             pageName:'Centralia PYME | Simulación de ' + (mode === 'credit' ? 'crédito' : mode==='suppliers'?'calendario de pago a proveedores':'factoraje')
           },

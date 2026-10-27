@@ -110,3 +110,54 @@ test('Home form: HubSpot visitor token travels only when its cookie exists',()=>
  assert.equal(capture.payload(values,'https://example.invalid/',token).context.hutk,token);
  assert.equal('hutk' in capture.payload(values,'https://example.invalid/','').context,false);
 });
+
+// HubSpot visitor cookie (hutk): only with measurement on, current analytics consent and a valid cookie.
+const pixelModule=require('./pixel.js');
+const HUTK='0123456789abcdef0123456789abcdef';
+function measuredPage(name,{enabled=true,cookie,stored,choices=[]}={}){
+ const p=page(name);
+ if(cookie!==undefined)p.d.cookie='hubspotutk='+cookie;
+ if(stored!==undefined)p.w.localStorage.setItem('centralia-consent-v1',JSON.stringify(stored));
+ pixelModule.start(p.w,{...pixelModule.SETTINGS,enabled});
+ for(const choice of choices)p.d.dispatchEvent(new p.w.CustomEvent('centralia:measurement-consent',{detail:choice}));
+ return p;
+}
+async function homeContext(setup,beforeSend=()=>{}){
+ const p=measuredPage('index.html',setup);capture.init(p.d,p.w);
+ const f=n=>p.d.getElementById('capture-'+n),form=p.d.getElementById('centralia-contact-form');
+ f('amount').value='1,000,000';f('purpose').value='Factoraje';submit(p.w,form);
+ for(const [k,v] of Object.entries({name:'Prueba Local',company:'Empresa',email:'qa@example.invalid',phone:'5512345678'}))f(k).value=v;
+ f('consent').checked=true;beforeSend(p);submit(p.w,form);await flush();
+ assert.equal(p.calls.length,1);assert.equal(f('success').hidden,false);const context=p.calls[0].body.context;p.dom.window.close();return context;
+}
+async function simulatorContext(setup,beforeSend=()=>{}){
+ const p=measuredPage('pago-a-proveedores.html',setup);p.w.eval(read('simulator.js'));p.w.eval(read('experience-v26.js'));
+ const d=p.d;d.querySelector('[name=payment]').value='2030-12-20';d.querySelector('[name=collection]').value='2031-01-10';d.querySelector('[name=collection]').dispatchEvent(new p.w.Event('change'));
+ d.querySelector('[data-payment-planner] button').click();
+ for(const [id,value] of Object.entries({'lead-name':'Prueba Local','lead-company':'Empresa','lead-email':'qa@example.invalid','lead-phone':'5512345678','lead-role':'Representante legal'}))d.getElementById(id).value=value;
+ d.getElementById('lead-business').checked=true;d.getElementById('lead-consent').checked=true;beforeSend(p);
+ submit(p.w,d.getElementById('sim-lead-form'));await flush();
+ assert.equal(p.calls.length,1);assert.equal(d.querySelector('.sim-success').hidden,false);const context=p.calls[0].body.context;p.dom.window.close();return context;
+}
+const accepted={analytics:true,marketing:false}, rejected={analytics:false,marketing:false};
+for(const [label,send] of [['Home form',homeContext],['Simulator',simulatorContext]]){
+ test(label+': no hutk with the cookie when analytics consent is rejected or absent',async()=>{
+  assert.equal('hutk' in await send({cookie:HUTK,stored:rejected,choices:[rejected]}),false);
+  assert.equal('hutk' in await send({cookie:HUTK}),false);
+  assert.equal('hutk' in await send({cookie:HUTK,choices:[accepted]}),false,'accepted in memory but never stored');
+ });
+ test(label+': no hutk when analytics consent is revoked before sending',async()=>{
+  const revoke=p=>{p.w.localStorage.setItem('centralia-consent-v1',JSON.stringify(rejected));p.d.dispatchEvent(new p.w.CustomEvent('centralia:measurement-consent',{detail:rejected}));};
+  assert.equal('hutk' in await send({cookie:HUTK,stored:accepted,choices:[accepted]},revoke),false);
+ });
+ test(label+': no hutk while measurement is off',async()=>{
+  assert.equal('hutk' in await send({enabled:false,cookie:HUTK,stored:accepted,choices:[accepted]}),false);
+ });
+ test(label+': no hutk when the cookie is missing or invalid',async()=>{
+  assert.equal('hutk' in await send({stored:accepted,choices:[accepted]}),false);
+  assert.equal('hutk' in await send({cookie:'not-a-hubspot-token',stored:accepted,choices:[accepted]}),false);
+ });
+ test(label+': hutk travels when measurement is on, analytics is accepted and the cookie is valid',async()=>{
+  assert.equal((await send({cookie:HUTK,stored:accepted,choices:[accepted]})).hutk,HUTK);
+ });
+}
