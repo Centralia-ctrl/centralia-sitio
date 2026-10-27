@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 520" fill="none">
+ <defs>
+  <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5d6470"/><stop offset=".4" stop-color="#1b224e"/><stop offset="1" stop-color="#151b3d"/></linearGradient>
+  <linearGradient id="white" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#e4e7ee"/></linearGradient>
+  <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e4e7ee"/><stop offset="1" stop-color="#a9afba"/></linearGradient>
+  <filter id="shadow" x="-30%" y="-100%" width="170%" height="300%"><feGaussianBlur stdDeviation="9"/></filter>
+  <path id="arch" d="M0 290V18Q0 0 18 0H212Q230 0 230 18V290H194V49Q194 37 182 37H48Q36 37 36 49V290Z"/>
+ </defs>
+ <ellipse cx="330" cy="432" rx="230" ry="16" fill="#303647" opacity=".12" filter="url(#shadow)"/>
+ <path d="m174 447 363-86 12 3-363 87Z" fill="#1b224e"/>
+ <g transform="translate(384 163) scale(.76) skewY(-11)"><use href="#arch" transform="translate(23 10)" fill="#a9afba"/><use href="#arch" fill="url(#silver)" stroke="#a9afba" stroke-width=".8"/></g>
+ <g transform="translate(246 141) scale(.9) skewY(-11)"><use href="#arch" transform="translate(23 10)" fill="#c8cdd6"/><use href="#arch" fill="url(#white)" stroke="#d7dbe2" stroke-width=".8"/></g>
+ <g transform="translate(54 137) scale(1.08) skewY(-11)"><use href="#arch" transform="translate(23 10)" fill="#151b3d"/><use href="#arch" fill="url(#navy)" stroke="#5d6470" stroke-width=".7"/></g>
+</svg>
