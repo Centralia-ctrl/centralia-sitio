@@ -96,7 +96,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - **Escaneo del 27 de octubre de 2026** (PR #43 a #47):
   - Portada: una sola raya bajo las cifras y cifras completas en celular; `site.css` normalizado para que construir no lo marque como modificado (PR #43).
   - SEO: descripción de la portada a 144 caracteres, título de Pago a proveedores a 50 y `sitemap.xml` sin BOM (PR #45).
-  - Los formularios envían `context.hutk` a HubSpot solo cuando existe la cookie `hubspotutk` (al aceptar la medición), para conservar el origen de cada prospecto (PR #46). Prueba en `experience.test.cjs`.
+  - Los formularios envían `context.hutk` a HubSpot para conservar el origen de cada prospecto (PR #46), solo si al enviar se cumplen las tres condiciones: medición habilitada, consentimiento de analítica explícito y vigente (`__centraliaAnalyticsAllowed()` en `pixel.js`) y cookie `hubspotutk` válida (PR #52). Autorizar el tratamiento de datos de la consulta no equivale a aceptar analítica. Pruebas en `experience.test.cjs`.
   - Blog con 16 guías: 8 nuevas sobre factoraje con y sin recurso, requisitos, factoraje o crédito, aforo, crédito simple o revolvente, flujo a 13 semanas, días de cobranza y estados financieros (PR #47). El sitemap tiene 22 páginas.
 
 - **Mensaje de éxito** (27 de octubre de 2026, decisión de Miguel Ángel): portada: "Recibimos tu consulta. Te contactamos a la brevedad desde hola@centraliafinanciera.com."; simulador en todas las páginas: "Recibimos tu solicitud. Te contactamos a la brevedad."
