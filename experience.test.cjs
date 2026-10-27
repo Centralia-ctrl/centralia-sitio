@@ -161,3 +161,66 @@ for(const [label,send] of [['Home form',homeContext],['Simulator',simulatorConte
   assert.equal((await send({cookie:HUTK,stored:accepted,choices:[accepted]})).hutk,HUTK);
  });
 }
+test('Home confirmation: summary of what was sent, human review next, and no way onward to registration',async()=>{
+ const {dom,w,d,calls}=page('index.html');const opened=[];w.open=(...a)=>{opened.push(a);return null;};capture.init(d,w);
+ const f=n=>d.getElementById('capture-'+n),form=d.getElementById('centralia-contact-form');
+ assert.equal(f('success').hidden,true);
+ f('amount').value='2,500,000';f('purpose').value='Pago a proveedores';submit(w,form);
+ for(const [name,value] of Object.entries({name:'Prueba',company:'Empresa',email:'qa@example.invalid',phone:'5512345678'}))f(name).value=value;
+ f('consent').checked=true;submit(w,form);await flush();
+ assert.equal(calls.length,1);assert.equal(f('success').hidden,false);assert.equal(form.hidden,true);
+ assert.equal(f('summary-purpose').textContent,'Pago a proveedores');assert.equal(f('summary-amount').textContent,'$2,500,000 MXN');
+ const text=f('success').textContent;
+ assert.match(text,/Recibimos tu consulta\.Te contactamos a la brevedad desde hola@centraliafinanciera\.com\./);
+ assert.match(text,/Ahora, lo revisamos contigo\./);assert.match(text,/te compartiremos una invitación al registro/);
+ assert.match(text,/El envío no implica una aprobación de financiamiento\./);
+ assert.equal(f('success').querySelector('a[href^="mailto:"]').getAttribute('href'),'mailto:hola@centraliafinanciera.com');
+ assert.equal(d.querySelector('.first-step-meeting').getAttribute('href'),'https://meetings.hubspot.com/miguelmeza1');
+ assert.equal(d.querySelectorAll('#consulta a[href*="registro"],#consulta button[data-registro]').length,0);
+ assert.equal(opened.length,0);assert.equal(w.location.href,'https://centraliafinanciera.com/index.html');
+ assert.ok(!/registro/i.test(read('lead-capture-v26.js')));dom.window.close();
+});
+test('Home confirmation never appears when HubSpot does not confirm (error or network failure)',async()=>{
+ for(const fetcher of [async()=>({ok:false,status:400}),async()=>{throw new Error('offline');}]){
+  const {dom,w,d}=page('index.html');w.fetch=fetcher;capture.init(d,w);
+  const f=n=>d.getElementById('capture-'+n),form=d.getElementById('centralia-contact-form');
+  f('amount').value='500000';f('purpose').value='Factoraje';submit(w,form);
+  for(const [name,value] of Object.entries({name:'Prueba',company:'Empresa',email:'qa@example.invalid',phone:'5512345678'}))f(name).value=value;
+  f('consent').checked=true;submit(w,form);await flush();
+  assert.equal(f('success').hidden,true);assert.equal(f('summary-amount').textContent,'');assert.equal(f('amount').value,'500000');
+  assert.equal(f('error').hidden,false);assert.equal(f('submit').disabled,false);dom.window.close();
+ }
+});
+const testDestinations={ejemplo:{nombre:'Destino de prueba',dominio:'registro.example',url:'https://registro.example/alta?ref=prueba'}};
+test('Registration invitation: no destination ships until Centralia confirms one',()=>{
+ const {DESTINOS,destination}=require('./registro-invitacion.js');
+ assert.deepEqual(Object.keys(DESTINOS),[]);assert.equal(destination('?destino=ejemplo'),null);
+});
+test('Registration invitation: only allowlisted destinations, https and matching domain, no data from the URL',()=>{
+ const {destination}=require('./registro-invitacion.js');
+ const ok=destination('?destino=ejemplo',testDestinations);
+ assert.equal(ok.nombre,'Destino de prueba');assert.equal(ok.dominio,'registro.example');assert.equal(new URL(ok.url).hostname,ok.dominio);
+ for(const q of ['','?destino=','?destino=otro','?destino=__proto__','?destino=constructor','?destino=EJEMPLO','?url=https://evil.example','?destino=ejemplo%2F..'])assert.equal(destination(q,testDestinations),null,q);
+ const bad={a:{nombre:'A',dominio:'a.example',url:'http://a.example/x'},b:{nombre:'B',dominio:'b.example',url:'https://other.example/x'},c:{nombre:'C',dominio:'c.example',url:'javascript:alert(1)'}};
+ for(const id of Object.keys(bad))assert.equal(destination('?destino='+id,bad),null,id);
+});
+test('Registration invitation page: identifies destination and domain, outside Centralia, never auto-opens',()=>{
+ const html=read('invitacion-registro.html');const {init}=require('./registro-invitacion.js');
+ assert.match(html,/<meta name="robots" content="noindex, nofollow">/);assert.ok(!/rel="canonical"/.test(html));
+ assert.ok(!read('build.cjs').includes('invitacion-registro.html'));assert.ok(!read('sitemap.xml').includes('invitacion-registro'));
+ for(const [query,shown] of [['?destino=ejemplo',true],['?destino=otro',false],['',false]]){
+  const dom=new JSDOM(html,{url:'https://centraliafinanciera.com/invitacion-registro.html'+query});
+  const w=dom.window,d=w.document;const opened=[];w.open=(...a)=>{opened.push(a);return null;};
+  init(d,w,testDestinations);
+  assert.equal(d.getElementById('invitation-ready').hidden,!shown);assert.equal(d.getElementById('invitation-missing').hidden,shown);
+  const link=d.getElementById('invitation-continue');
+  if(shown){
+   assert.equal(link.getAttribute('href'),'https://registro.example/alta?ref=prueba');
+   assert.equal(link.textContent.trim(),'Continuar al registro');assert.match(link.rel,/noopener/);
+   assert.match(d.querySelector('.invitation-outside').textContent,/fuera de Centralia, en el sitio de Destino de prueba \(registro\.example\)/);
+  } else assert.equal(link.getAttribute('href'),'#');
+  assert.match(d.querySelector('.first-step-meeting').textContent,/Necesito ayuda con mi registro/);
+  assert.match(d.body.textContent,/El registro no implica una aprobación de financiamiento\./);
+  assert.equal(opened.length,0);assert.equal(w.location.pathname,'/invitacion-registro.html');dom.window.close();
+ }
+});
