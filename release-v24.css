@@ -62,3 +62,7 @@ body.centralia-v23 .footer-bottom>div>a:hover,body.centralia-v23 .footer-bottom>
 /* Footer contact: WhatsApp sits with the social links, in its brand green. */
 .social-links [data-social=whatsapp] .social-brand{background:var(--whatsapp)}
 .social-links [data-social=whatsapp]:hover{background:#f2fbf5}
+
+/* Home trust figures: one rule below them, and each figure on a single line on phones. */
+.home-v23 .home-proof+.business-stories{border-top:0}
+@media(max-width:760px){.home-v23 .home-proof{grid-template-columns:1fr;row-gap:18px}.home-v23 .home-proof strong{white-space:nowrap}}
