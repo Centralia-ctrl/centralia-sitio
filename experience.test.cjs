@@ -161,3 +161,33 @@ for(const [label,send] of [['Home form',homeContext],['Simulator',simulatorConte
   assert.equal((await send({cookie:HUTK,stored:accepted,choices:[accepted]})).hutk,HUTK);
  });
 }
+test('Home confirmation: summary of what was sent, human review next, and no way onward to registration',async()=>{
+ const {dom,w,d,calls}=page('index.html');const opened=[];w.open=(...a)=>{opened.push(a);return null;};capture.init(d,w);
+ const f=n=>d.getElementById('capture-'+n),form=d.getElementById('centralia-contact-form');
+ assert.equal(f('success').hidden,true);
+ f('amount').value='2,500,000';f('purpose').value='Pago a proveedores';submit(w,form);
+ for(const [name,value] of Object.entries({name:'Prueba',company:'Empresa',email:'qa@example.invalid',phone:'5512345678'}))f(name).value=value;
+ f('consent').checked=true;submit(w,form);await flush();
+ assert.equal(calls.length,1);assert.equal(f('success').hidden,false);assert.equal(form.hidden,true);
+ assert.equal(f('summary-purpose').textContent,'Pago a proveedores');assert.equal(f('summary-amount').textContent,'$2,500,000 MXN');
+ const text=f('success').textContent;
+ assert.match(text,/Recibimos tu consulta\.Te contactamos a la brevedad desde hola@centraliafinanciera\.com\./);
+ assert.match(text,/Ahora, lo revisamos contigo\./);assert.match(text,/te compartiremos una invitación al registro/);
+ assert.match(text,/El envío no implica una aprobación de financiamiento\./);
+ assert.equal(f('success').querySelector('a[href^="mailto:"]').getAttribute('href'),'mailto:hola@centraliafinanciera.com');
+ assert.equal(d.querySelector('.first-step-meeting').getAttribute('href'),'https://meetings.hubspot.com/miguelmeza1');
+ assert.equal(d.querySelectorAll('#consulta a[href*="registro"],#consulta button[data-registro]').length,0);
+ assert.equal(opened.length,0);assert.equal(w.location.href,'https://centraliafinanciera.com/index.html');
+ assert.ok(!/registro/i.test(read('lead-capture-v26.js')));dom.window.close();
+});
+test('Home confirmation never appears when HubSpot does not confirm (error or network failure)',async()=>{
+ for(const fetcher of [async()=>({ok:false,status:400}),async()=>{throw new Error('offline');}]){
+  const {dom,w,d}=page('index.html');w.fetch=fetcher;capture.init(d,w);
+  const f=n=>d.getElementById('capture-'+n),form=d.getElementById('centralia-contact-form');
+  f('amount').value='500000';f('purpose').value='Factoraje';submit(w,form);
+  for(const [name,value] of Object.entries({name:'Prueba',company:'Empresa',email:'qa@example.invalid',phone:'5512345678'}))f(name).value=value;
+  f('consent').checked=true;submit(w,form);await flush();
+  assert.equal(f('success').hidden,true);assert.equal(f('summary-amount').textContent,'');assert.equal(f('amount').value,'500000');
+  assert.equal(f('error').hidden,false);assert.equal(f('submit').disabled,false);dom.window.close();
+ }
+});

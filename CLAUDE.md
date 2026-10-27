@@ -100,6 +100,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
   - Blog con 16 guías: 8 nuevas sobre factoraje con y sin recurso, requisitos, factoraje o crédito, aforo, crédito simple o revolvente, flujo a 13 semanas, días de cobranza y estados financieros (PR #47). El sitemap tiene 22 páginas.
 
 - **Mensaje de éxito** (27 de octubre de 2026, decisión de Miguel Ángel): portada: "Recibimos tu consulta. Te contactamos a la brevedad desde hola@centraliafinanciera.com."; simulador en todas las páginas: "Recibimos tu solicitud. Te contactamos a la brevedad."
+- **Confirmación con revisión de Centralia** (PR #55): tras la respuesta correcta de HubSpot, la portada muestra el mensaje aprobado, el resumen de necesidad y monto, "Ahora, lo revisamos contigo." y la nota de no aprobación. No lleva botón ni redirección al registro: la invitación al registro se comparte solo después de que una persona de Centralia revisa el caso.
 
 ## Decidido no hacer
 
@@ -117,6 +118,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - Activación de la medición.
 - Redirecciones del sitio anterior: en `_redirects` (PR #31). El WordPress solo tenía Inicio, Aviso de privacidad y Educación financiera (→ `/blog/`). Falta confirmar la dirección exacta de Educación financiera.
 - **Aviso de privacidad antes del cambio de dominio:** los formularios enlazan a `/aviso-de-privacidad/` del WordPress, que deja de existir al cambiar el dominio. Hay que crear su página en el sitio nuevo, con el texto vigente o el nuevo, antes del lanzamiento.
+- **Página privada de invitación al registro:** en un PR en borrador aparte, sin publicar. Se activa solo cuando Miguel Ángel confirme un destino real (nombre, dominio y liga) y apruebe mostrar su nombre en esa página. Solvento fue solo una idea: no es destino.
 - Fecha del cambio de dominio. El DNS lo administra Carlos.
 - Google Search Console: dominio `centraliafinanciera.com` verificado por DNS (26 de octubre de 2026). El sitemap nuevo se envía el día del cambio de dominio, no antes, porque hoy el dominio sigue mostrando el WordPress.
 - Ficha de Google Business Profile: falta saber si hay oficina o solo atención en línea.

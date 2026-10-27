@@ -47,6 +47,10 @@
     try { return typeof env.__centraliaAnalyticsAllowed === 'function' && env.__centraliaAnalyticsAllowed() === true; }
     catch { return false; }
   }
+  // What the confirmation repeats back: only what the person just sent, never a link onward.
+  function summary(values) {
+    return {purpose: values.purpose, amount: '$' + new Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(parseAmount(values.amount)) + ' MXN'};
+  }
   function payload(values, pageUri, hutk) {
     return {
       fields: [
@@ -153,6 +157,8 @@
           fail(response.status === 429 ? 'Hay demasiados intentos. Espera unos minutos antes de volver a enviar.' : 'No pudimos registrar la consulta. Tus datos siguen aquí; puedes intentarlo de nuevo o abrir el formulario alternativo.');
           fallback.hidden = false; return;
         }
+        const sent = summary(values);
+        field('summary-purpose').textContent = sent.purpose; field('summary-amount').textContent = sent.amount;
         accepted = true; form.hidden = true; success.hidden = false; field('success-title').focus();
         try { doc.dispatchEvent(new env.CustomEvent('centralia:lead-confirmed', {detail: {source: 'home', submissionId: 'home'}})); } catch { /* Optional measurement must never affect form success. */ }
       } catch {
@@ -174,6 +180,6 @@
       observer.observe(doc.getElementById('consulta'));
     }
   }
-  if (typeof module !== 'undefined' && module.exports) module.exports = {validate, payload, init, formatAmountInput, hubspotToken, analyticsAllowed};
+  if (typeof module !== 'undefined' && module.exports) module.exports = {validate, payload, summary, init, formatAmountInput, hubspotToken, analyticsAllowed};
   else init(document, window);
 })();

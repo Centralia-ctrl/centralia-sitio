@@ -79,6 +79,12 @@ body.home-first-step .capture-note{font-size:12px;line-height:1.7;color:#5d6470;
 body.home-first-step .capture-consent{margin-top:20px;font-size:12px;line-height:1.7}
 body.home-first-step .first-step-meeting{display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid #e4e7ee;padding:16px 0 0;margin-top:18px;color:#1b224e;font-size:14px;font-weight:500;text-decoration:underline;text-underline-offset:4px;min-height:44px}
 body.home-first-step .first-step-meeting svg{width:16px;height:16px}
+/* Confirmation: summary of what was sent and the human review that follows. */
+body.home-first-step .capture-success a{color:#1b224e;text-decoration:underline;text-underline-offset:3px}
+body.home-first-step .capture-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0 0;padding:16px 0;border-block:1px solid #e4e7ee}
+body.home-first-step .capture-summary dt{font-size:12px;line-height:1.5;color:#5d6470}
+body.home-first-step .capture-summary dd{margin:2px 0 0;font-size:15px;font-weight:500;color:#1b224e;overflow-wrap:anywhere}
+body.home-first-step .capture-review-title{margin:22px 0 8px;font-size:18px;font-weight:500;letter-spacing:-.01em;color:#1b224e}
 @media(max-width:1100px){
  body.home-first-step .hero.shell{padding-block:56px 64px;min-height:0}
  body.home-first-step .hero .hero-copy{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:36px}
