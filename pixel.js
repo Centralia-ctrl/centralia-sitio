@@ -16,6 +16,15 @@
     const doc = env.document;
     let marketing = false, analytics = false, metaLoaded = false, hubspotLoaded = false;
     let marketingRevoked = false, analyticsRevoked = false;
+    // Forms ask right before sending whether HubSpot's visitor cookie may travel with the lead:
+    // only while measurement runs and the latest analytics choice, also the stored one, is yes.
+    env.__centraliaAnalyticsAllowed = () => {
+      if (!analytics || analyticsRevoked) return false;
+      try {
+        const saved = JSON.parse(env.localStorage.getItem('centralia-consent-v1'));
+        return Boolean(saved) && saved.analytics === true;
+      } catch { return false; }
+    };
     const leads = new Set();
     const categories = {'/credito-empresarial.html': 'Credito empresarial', '/factoraje.html': 'Factoraje', '/pago-a-proveedores.html': 'Pago a proveedores'};
     const category = categories[env.location.pathname] || 'Centralia';
