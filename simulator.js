@@ -13,6 +13,7 @@
   }
   const $ = selector => document.querySelector(selector);
   const dialog = $('#simulator-dialog'), amountInput = $('#sim-amount'), term = $('#sim-term'), currency = $('#sim-currency');
+  let provider = null;
   let mode = 'credit', opener = null, step = 'scenario', sending = false;
   const received = new Set();
   const FORM_ENDPOINT = 'https://api.hsforms.com/submissions/v3/integration/submit/9145352/1da292ee-7ccc-42e4-a427-ece646e13e65';
@@ -33,6 +34,12 @@
   const money = value => new Intl.NumberFormat('es-MX', {style:'currency', currency: mode === 'credit' ? 'MXN' : activeCurrency, currencyDisplay:'code', minimumFractionDigits:2}).format(value);
   const save = () => { drafts[mode === 'credit' ? 'credit' : activeCurrency] = amountInput.value; };
   function render() {
+    if (mode === 'suppliers') {
+      $('#sim-error').hidden=true;
+      $('#sim-results').hidden=false;
+      $('#sim-results').textContent=step==='result'?scenario():'';
+      return;
+    }
     const amount = parseAmount(amountInput.value);
     const exceedsCreditLimit = mode === 'credit' && amount > 15000000;
     const valid = Number.isFinite(amount) && amount > 0 && amount <= 999999999999.99 && !exceedsCreditLimit && (mode !== 'credit' || TERMS.includes(Number(term.value)));
@@ -69,7 +76,7 @@
     $('#sim-results').replaceChildren(fragment);
   }
   function selectMode(next) {
-    save(); mode = next === 'factoring' ? 'factoring' : 'credit';
+    if(mode!=='suppliers')save(); mode = next === 'factoring' ? 'factoring' : 'credit';
     amountInput.value = drafts[mode === 'credit' ? 'credit' : activeCurrency];
     $('#simulator-title').textContent = mode === 'credit' ? 'Simula tu crédito.' : 'Calcula tu anticipo.';
     $('#simulator-intro').textContent = mode === 'credit' ? 'Elige monto y plazo. Consulta tu estimación sin compartir datos personales.' : 'Indica el valor de tus facturas. Consulta el anticipo estimado sin compartir datos personales.';
@@ -81,8 +88,11 @@
   }
   function setStep(next) {
     step = next;
+    $('.sim-steps').hidden=mode==='suppliers';
+    $('#sim-back').textContent=mode==='suppliers'?'← Ajustar mis fechas':'← Ajustar monto y plazo';
+    $('#sim-new').textContent=mode==='suppliers'?'← Volver a mi calendario':'← Ajustar mi simulación';
     $('#sim-credit-assumptions').hidden = mode !== 'credit' || next === 'contact';
-    $('#sim-factoring-note').hidden = mode === 'credit' || next === 'contact';
+    $('#sim-factoring-note').hidden = mode !== 'factoring' || next === 'contact';
     $('#simulator-title').textContent = next === 'contact' ? 'Solicita asesoría.' : next === 'result' ? 'Tu estimación.' : mode === 'credit' ? 'Simula tu crédito.' : 'Calcula tu anticipo.';
     $('#simulator-intro').textContent = next === 'contact' ? 'Si quieres que revisemos tu escenario, comparte tus datos y autoriza el contacto.' : next === 'result' ? 'Un punto de partida para conversar. La propuesta final depende de la evaluación de tu empresa.' : mode === 'credit' ? 'Elige monto y plazo. Consulta tu estimación sin compartir datos personales.' : 'Indica el valor de tus facturas. Consulta el anticipo estimado sin compartir datos personales.';
     $('#sim-scenario').hidden = next !== 'scenario';
@@ -92,6 +102,10 @@
       if (el.dataset.step === next) el.setAttribute('aria-current', 'step');
       else el.removeAttribute('aria-current');
     });
+    if(mode==='suppliers'){
+      $('#simulator-title').textContent=next==='contact'?'Revisemos tu calendario.':'Tu calendario.';
+      $('#simulator-intro').textContent=next==='contact'?'Comparte tus datos para revisar estas fechas con tu empresa. No es una cotización ni una aprobación.':'Recibimos tu consulta. Conserva estas fechas para la conversación.';
+    }
     render();
   }
   document.querySelectorAll('[data-simulate]').forEach(button=>button.addEventListener('click',()=>{
@@ -101,7 +115,17 @@
     dialog.showModal(); dialog.scrollTop=0;document.body.classList.add('modal-open');
     (sending ? $('#sim-send-status') : amountInput).focus({preventScroll:true});
   }));
-  dialog.addEventListener('close',()=>opener?.focus({preventScroll:true}));
+  document.addEventListener('centralia:provider-scenario', event=>{
+    if(sending)return;
+    const data=event.detail;
+    if(!data||!/^\d{4}-\d{2}-\d{2}$/.test(data.payment)||!/^\d{4}-\d{2}-\d{2}$/.test(data.collection)||!Number.isFinite(data.days))return;
+    if(mode!=='suppliers')save();
+    provider={payment:data.payment,collection:data.collection,days:data.days};mode='suppliers';
+    opener=document.querySelector('[data-payment-planner] button');
+    $('#sim-summary').textContent=scenario();$('#sim-send-error').hidden=true;$('#sim-send-status').textContent='';$('.sim-success').hidden=true;$('#sim-request-advice').hidden=false;
+    setStep('contact');dialog.showModal();dialog.scrollTop=0;document.body.classList.add('modal-open');$('#lead-name').focus({preventScroll:true});
+  });
+  dialog.addEventListener('close' ,()=>opener?.focus({preventScroll:true}));
   amountInput.addEventListener('input', () => {
     const text = amountInput.value;
     const caret = amountInput.selectionStart ?? text.length;
@@ -133,6 +157,7 @@
   term.addEventListener('change',render);
   currency.addEventListener('change',()=>{save();activeCurrency=currency.value==='USD'?'USD':'MXN';amountInput.value=drafts[activeCurrency];render();});
   function scenario() {
+    if(mode==='suppliers')return 'Pago a proveedores · Pago: '+new Date(provider.payment+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})+' · Cobro previsto: '+new Date(provider.collection+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})+' · Diferencia: '+provider.days+' días. Intervalo de planeación, no plazo autorizado.';
     const amount = parseAmount(amountInput.value);
     return mode === 'credit'
       ? 'Crédito empresarial · ' + money(amount) + ' · ' + term.value + ' meses'
@@ -143,7 +168,7 @@
     const figures = mode === 'credit' ? credit(amount, Number(term.value)) : null;
     return [
       'Solicitud web PYME — Centralia Financiera', scenario(),
-      figures ? 'Mensualidad ilustrativa: ' + money(figures.monthly) + '. Comisión: ' + money(figures.commission) + '. Antes de IVA y otros cargos.' : 'Anticipo ilustrativo hasta 85%: ' + money(factoring(amount).advance) + ', antes de costos.',
+      mode==='suppliers' ? 'Fecha de pago al proveedor: '+provider.payment+'\nFecha prevista de cobro: '+provider.collection+'\nRevisión de fechas; sin cálculo de tasa, monto o anticipo.' : figures ? 'Mensualidad ilustrativa: ' + money(figures.monthly) + '. Comisión: ' + money(figures.commission) + '. Antes de IVA y otros cargos.' : 'Anticipo ilustrativo hasta 85%: ' + money(factoring(amount).advance) + ', antes de costos.',
       'Cargo: ' + $('#lead-role').value,
       'Destino: ' + ($('#lead-purpose').value || 'Por definir'),
       'Cuándo lo necesita: ' + ($('#lead-timing').value || 'Por definir'),
@@ -166,7 +191,7 @@
   $('#sim-request-advice').addEventListener('click', () => {
     setStep('contact'); $('#lead-name').focus({preventScroll:true}); dialog.scrollTop = 0;
   });
-  const goBack = () => { if (!sending) { setStep('scenario'); amountInput.focus({preventScroll:true}); dialog.scrollTop = 0; } };
+  const goBack = () => { if(mode==='suppliers'){if(!sending)dialog.close();return;} if (!sending) { setStep('scenario'); amountInput.focus({preventScroll:true}); dialog.scrollTop = 0; } };
   $('#sim-back').addEventListener('click', goBack);
   $('#sim-new').addEventListener('click', goBack);
   const phone = $('#lead-phone');
@@ -198,14 +223,14 @@
           fields: Object.entries(values).map(([name,value])=>({objectTypeId:'0-1',name,value})),
           context:{
             ...(/^https?:$/.test(location.protocol) ? {pageUri:location.origin + location.pathname} : {}),
-            pageName:'Centralia PYME | Simulación de ' + (mode === 'credit' ? 'crédito' : 'factoraje')
+            pageName:'Centralia PYME | Simulación de ' + (mode === 'credit' ? 'crédito' : mode==='suppliers'?'calendario de pago a proveedores':'factoraje')
           },
           legalConsentOptions:{consent:{consentToProcess:true,text:$('#lead-consent').nextElementSibling.textContent}}
         })
       });
       if (!response.ok) throw new Error('submission_failed');
       received.add(key); $('.sim-success').hidden = false; $('#sim-request-advice').hidden = true; $('#sim-send-status').textContent = '';
-      try { document.dispatchEvent(new CustomEvent('centralia:lead-confirmed', {detail: {source: mode === 'credit' ? 'simulator-credit' : 'simulator-factoring', submissionId: 'simulator-' + received.size}})); } catch { /* Optional measurement must never affect form success. */ }
+      try { document.dispatchEvent(new CustomEvent('centralia:lead-confirmed', {detail: {source: mode === 'credit' ? 'simulator-credit' : mode==='suppliers'?'supplier-calendar':'simulator-factoring', submissionId: 'simulator-' + received.size}})); } catch { /* Optional measurement must never affect form success. */ }
       setStep('result'); dialog.scrollTop = 0;
       if (dialog.open) $('#sim-results').focus({preventScroll:true});
     } catch (error) {
