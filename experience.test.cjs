@@ -100,3 +100,13 @@ test('Measurement stays off by default and filters input before any future conse
  d.dispatchEvent(new w.CustomEvent('centralia:measurement-consent',{detail:{marketing:false,analytics:false}}));
  const after=w.fbq.queue.length;emit({action:'form_started',product:'home'});assert.equal(w.fbq.queue.length,after);dom.window.close();
 });
+
+test('Home form: HubSpot visitor token travels only when its cookie exists',()=>{
+ const values={name:'Ana Pérez',company:'Empresa SA',email:'ana@example.invalid',phone:'5512345678',amount:'1,000,000',purpose:'Factoraje',consent:true};
+ const token='0123456789abcdef0123456789abcdef';
+ assert.equal(capture.hubspotToken('a=1; hubspotutk='+token+'; b=2'),token);
+ assert.equal(capture.hubspotToken('hubspotutk=not-a-token; a=1'),'');
+ assert.equal(capture.hubspotToken(''),'');
+ assert.equal(capture.payload(values,'https://example.invalid/',token).context.hutk,token);
+ assert.equal('hutk' in capture.payload(values,'https://example.invalid/','').context,false);
+});
