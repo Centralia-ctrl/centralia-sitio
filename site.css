@@ -1580,14 +1580,6 @@ body.home-first-step .capture-summary{display:grid;grid-template-columns:repeat(
 body.home-first-step .capture-summary dt{font-size:12px;line-height:1.5;color:#5d6470}
 body.home-first-step .capture-summary dd{margin:2px 0 0;font-size:15px;font-weight:500;color:#1b224e;overflow-wrap:anywhere}
 body.home-first-step .capture-review-title{margin:22px 0 8px;font-size:18px;font-weight:500;letter-spacing:-.01em;color:#1b224e}
-/* Private registration invitation (invitacion-registro.html), shared only after Centralia's review. */
-body.registro-invitacion .invitation{max-width:620px;margin:0 auto;padding:32px 0 88px}
-body.registro-invitacion .invitation h1{margin:14px 0 12px;font-size:clamp(32px,4vw,44px);line-height:1.12;font-weight:500;letter-spacing:-.035em;color:#1b224e}
-body.registro-invitacion .invitation-intro{font-size:16px;line-height:1.7;color:#303647;margin:0}
-body.registro-invitacion .invitation-outside{font-size:14px;line-height:1.7;color:#5d6470;margin:16px 0 0}
-body.registro-invitacion .capture-submit{text-decoration:none}
-body.registro-invitacion .capture-submit:focus-visible,body.registro-invitacion .first-step-meeting:focus-visible{outline:3px solid #315de8;outline-offset:3px}
-@media(max-width:760px){body.registro-invitacion .invitation{padding:20px 0 64px}}
 @media(max-width:1100px){
  body.home-first-step .hero.shell{padding-block:56px 64px;min-height:0}
  body.home-first-step .hero .hero-copy{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:36px}
