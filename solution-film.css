@@ -47,6 +47,10 @@
 .welcome-secondary--single{justify-content:center}
 
 .solution-artwork{isolation:isolate}
+.credit-arches-fallback,.credit-arches-canvas{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
+.credit-arches-canvas{visibility:hidden}
+.has-credit-3d .credit-arches-canvas{visibility:visible}
+.has-credit-3d .credit-arches-fallback{visibility:hidden}
 
 
 
