@@ -118,7 +118,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - Activación de la medición.
 - Redirecciones del sitio anterior: en `_redirects` (PR #31). El WordPress solo tenía Inicio, Aviso de privacidad y Educación financiera (→ `/blog/`). Falta confirmar la dirección exacta de Educación financiera.
 - **Aviso de privacidad antes del cambio de dominio:** los formularios enlazan a `/aviso-de-privacidad/` del WordPress, que deja de existir al cambiar el dominio. Hay que crear su página en el sitio nuevo, con el texto vigente o el nuevo, antes del lanzamiento.
-- **Página privada de invitación al registro:** en un PR en borrador aparte, sin publicar. Se activa solo cuando Miguel Ángel confirme un destino real (nombre, dominio y liga) y apruebe mostrar su nombre en esa página. Solvento fue solo una idea: no es destino.
+- **Página privada de invitación al registro:** en un PR en borrador aparte, sin publicar. Se activa solo cuando Miguel Ángel confirme un destino real (nombre, dominio y liga) y apruebe mostrar su nombre en esa página. No hay ningún destino definido.
 - Fecha del cambio de dominio. El DNS lo administra Carlos.
 - Google Search Console: dominio `centraliafinanciera.com` verificado por DNS (26 de octubre de 2026). El sitemap nuevo se envía el día del cambio de dominio, no antes, porque hoy el dominio sigue mostrando el WordPress.
 - Ficha de Google Business Profile: falta saber si hay oficina o solo atención en línea.
