@@ -99,6 +99,8 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
   - Los formularios envían `context.hutk` a HubSpot solo cuando existe la cookie `hubspotutk` (al aceptar la medición), para conservar el origen de cada prospecto (PR #46). Prueba en `experience.test.cjs`.
   - Blog con 16 guías: 8 nuevas sobre factoraje con y sin recurso, requisitos, factoraje o crédito, aforo, crédito simple o revolvente, flujo a 13 semanas, días de cobranza y estados financieros (PR #47). El sitemap tiene 22 páginas.
 
+- **Mensaje de éxito** (27 de octubre de 2026, decisión de Miguel Ángel): "Te contactamos a la brevedad desde hola@centraliafinanciera.com", en el formulario de la portada y en el simulador de todas las páginas.
+
 ## Decidido no hacer
 
 - Página 404 propia (PR #10 cerrado).
@@ -109,7 +111,6 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - Razón social y símbolo ®.
 - Cifras y condiciones. Ya confirmado por Miguel Ángel: tasa ilustrativa del simulador de 2% mensual, plazo máximo de 36 meses (el simulador ofrece 12, 18, 24, 30 y 36) y anticipo de factoraje de hasta 85% del valor de facturas elegibles, antes de costos (26 de octubre de 2026).
 - Formulario único de HubSpot.
-- Mensaje de éxito y tiempo de respuesta.
 - Simulador arriba de $15 M.
 - Nuevas animaciones de Crédito y Pago a proveedores.
 - Titulares de Crédito empresarial y Factoraje: sin cambios pedidos.
