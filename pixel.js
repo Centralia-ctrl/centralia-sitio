@@ -72,10 +72,19 @@
       if (name) env.fbq('trackCustom', name, {content_category: category});
       // Never send the link's phone, email, query string, or prefilled message.
     }, true);
-    doc.addEventListener('centralia:lead-confirmed', event => {
+    // Only fixed labels cross the measurement boundary. No DOM text or visitor input.
+    const interactionNames = {solution_selected:'SolutionSelected',use_case_selected:'UseCaseSelected',calendar_consultation:'CalendarConsultation',form_started:'FormStarted',form_step_completed:'FormStepCompleted'};
+    const productNames = {home:'Portada',credit:'Credito empresarial',factoring:'Factoraje',suppliers:'Pago a proveedores'};
+    doc.addEventListener('centralia:interaction', event => {
+      if (!marketing || !metaLoaded) return;
+      const detail=event.detail||{};
+      if(!Object.hasOwn(interactionNames,detail.action)||!Object.hasOwn(productNames,detail.product))return;
+      env.fbq('trackCustom',interactionNames[detail.action],{content_category:productNames[detail.product]});
+    });
+    doc.addEventListener('centralia:lead-confirmed' , event => {
       if (!marketing || !metaLoaded) return;
       const detail = event.detail || {};
-      const labels = {'home': 'Formulario portada', 'simulator-credit': 'Simulador credito', 'simulator-factoring': 'Simulador factoraje'};
+      const labels = {'home': 'Formulario portada', 'simulator-credit': 'Simulador credito', 'simulator-factoring': 'Simulador factoraje', 'supplier-calendar': 'Calendario proveedores'};
       if (!Object.hasOwn(labels, detail.source) || typeof detail.submissionId !== 'string') return;
       const key = detail.source + ':' + detail.submissionId;
       if (leads.has(key)) return;

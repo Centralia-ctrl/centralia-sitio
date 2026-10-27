@@ -1,0 +1,97 @@
+/* Interaction layer. Keeps the approved hero, type and palette. */
+.cx-chooser{margin:28px 0 36px;padding:24px 0;border-block:1px solid #e4e7ee}
+.cx-chooser h3{margin:0 0 16px;color:#1b224e;font-size:20px;font-weight:500}
+.cx-options{display:flex;flex-wrap:wrap;gap:10px}
+.cx-choice,.cx-case-button,.cx-back{font:500 15px/1.5 "DM Sans",Arial,sans-serif;color:#1b224e;background:#fff;border:1px solid #e4e7ee;border-radius:12px;padding:12px 17px;cursor:pointer;min-height:46px}
+.cx-choice:hover,.cx-case-button:hover,.cx-back:hover{border-color:#1b224e}
+.cx-choice[aria-pressed=true],.cx-case-button[aria-pressed=true]{border-color:#1b224e;background:#f5f6fa}
+.cx-choice:focus-visible,.cx-case-button:focus-visible,.cx-back:focus-visible,.cx-planner input:focus-visible{outline:3px solid #315de8;outline-offset:3px}
+.cx-recommendation{margin-top:20px;max-width:750px;line-height:1.7;color:#303647}
+.cx-recommendation p{margin:0 0 10px}
+.cx-recommendation a,.cx-case-link{color:#1b224e;text-decoration:underline;text-underline-offset:4px;font-weight:500}
+.cx-recommendation a+a{margin-left:24px}
+.product-uses .cx-case-button{margin-top:18px;background:transparent;padding:10px 14px;font-size:14px}
+.content-case.cx-selected{border-left:3px solid #1b224e}
+.cx-case-link{display:inline-block;margin-top:20px;font-size:15px}
+.cx-planner{margin:0 0 50px;padding:32px;border:1px solid #e4e7ee;border-radius:12px;color:#303647;background:#fff}
+.cx-planner h2{font-size:clamp(26px,3vw,36px);color:#1b224e;letter-spacing:-.03em;margin:0 0 14px}
+.cx-planner>p{max-width:720px;line-height:1.7}
+.cx-date-fields{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.cx-date-fields label{font-size:15px;font-weight:500;color:#1b224e;min-width:0}
+.cx-date-fields input{box-sizing:border-box;display:block;width:100%;min-width:0;min-height:54px;border:1px solid #e4e7ee;border-radius:12px;padding:12px;background:#fafbfc;color:#303647;font:inherit;margin-top:10px}
+.cx-planner-output{display:block;border-top:1px solid #e4e7ee;padding-top:20px;line-height:1.7;min-height:80px}
+.cx-planner-output strong{font-size:30px;font-weight:500;color:#1b224e;display:block}
+.cx-planner .cx-planner-note{font-size:13px;color:#5d6470;line-height:1.7}
+.cx-planner button.button{font-family:inherit;cursor:pointer}
+.cx-planner button:disabled{opacity:.5;cursor:default}
+.cx-steps{display:flex;gap:20px;padding:0;margin:0 0 24px;list-style:none;color:#5d6470;font-size:14px}
+.cx-steps li{padding-bottom:10px;border-bottom:2px solid #e4e7ee;flex:1}
+.cx-steps [aria-current=step]{color:#1b224e;border-color:#1b224e;font-weight:500}
+.cx-form-step{border:0;padding:0;margin:0;min-width:0}
+.cx-form-step legend{font-size:22px;letter-spacing:-.02em;color:#1b224e;margin-bottom:20px;padding:0}
+.cx-back{margin-top:16px}
+.cx-capture-followup{grid-column:1;grid-row:2;align-self:start}
+.cx-capture-followup h3{font-size:18px;color:#1b224e;font-weight:500}
+.cx-capture-followup p{font-size:15px;line-height:1.8;color:#5d6470;max-width:350px}
+.home-capture:has(.cx-capture-followup){row-gap:24px}
+.home-capture:has(.cx-capture-followup) .capture-panel{grid-column:2;grid-row:1/span 2}
+.cx-process-step{transition:border-color .35s,transform .35s;border-top-color:#e4e7ee}
+.cx-process-step.cx-in-view{border-top-color:#1b224e;transform:translateY(-3px)}
+@media(max-width:760px){
+ .cx-options{display:grid;grid-template-columns:1fr;gap:8px}
+ .cx-choice{text-align:left}
+ .cx-recommendation a{display:block;min-height:44px;padding:8px 0}
+ .cx-recommendation a+a{margin-left:0}
+ .cx-planner{padding:24px 20px;margin-bottom:32px}
+ .cx-date-fields{grid-template-columns:1fr;gap:16px}
+ .cx-date-fields input{font-size:16px}
+ .home-capture:has(.cx-capture-followup) .capture-panel{grid-column:1;grid-row:2}
+ .cx-capture-followup{grid-column:1;grid-row:3}
+ .home-capture .capture-copy>p:not(.eyebrow){margin-bottom:0}
+ .home-capture .capture-copy .capture-audience{margin-top:12px}
+ .faq-directory .faq-topics{display:grid;grid-template-columns:1fr;overflow:visible;white-space:normal;gap:0;position:static}
+ .faq-directory .faq-topics a{min-height:44px;padding:12px 0;white-space:normal}
+}
+@media(prefers-reduced-motion:reduce){.cx-process-step{transition:none;transform:none!important}}
+
+#centralia-contact-form [hidden],.cx-back[hidden]{display:none!important}
+
+/* Approved home composition: consultation in the hero, without a repeated section. */
+body.home-first-step .hero.shell{min-height:650px;padding-block:56px 64px}
+body.home-first-step .hero .hero-copy{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:72px;align-items:center}
+body.home-first-step .hero .hero-heading{min-width:0}
+body.home-first-step .hero h1{font-size:clamp(48px,4.6vw,66px);line-height:1.1;letter-spacing:-.045em;margin-top:24px;max-width:690px}
+body.home-first-step .hero-purpose{max-width:590px;line-height:1.8}
+body.home-first-step .hero .hero-conversation{position:static;margin:0;padding:0;border:0;min-width:0;opacity:1;translate:none;transform:none}
+body.home-first-step .capture-panel{padding:28px 28px 24px;border:1px solid #e4e7ee;border-radius:12px;background:#fff;box-shadow:none;scroll-margin-top:108px}
+body.home-first-step .capture-form-meta{display:block;padding:0;margin:0 0 20px;border:0}
+body.home-first-step .capture-form-meta h2{font-size:32px;line-height:1.15;font-weight:500;letter-spacing:-.035em;color:#1b224e;margin:0 0 12px}
+body.home-first-step .capture-form-meta p{font-size:15px;line-height:1.65;color:#5d6470;margin:0}
+body.home-first-step .cx-steps{font-size:13px;gap:18px;margin:0 0 20px}
+body.home-first-step .capture-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px}
+body.home-first-step .capture-fields label{font-size:14px;line-height:1.5;min-width:0}
+body.home-first-step .capture-fields label:has(#capture-amount),body.home-first-step .capture-fields label:has(#capture-purpose){grid-column:1/-1}
+body.home-first-step .capture-fields input,body.home-first-step .capture-fields select{width:100%;height:54px;font-size:15px;border-radius:12px;background:#fafbfc;box-sizing:border-box}
+body.home-first-step .capture-submit{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:54px;padding:16px 20px;margin-top:22px;background:#315de8;color:#fff;border-color:#315de8;border-radius:12px;font-size:15px;box-shadow:none;cursor:pointer}
+body.home-first-step .capture-submit svg{width:20px;height:20px;stroke:currentColor}
+body.home-first-step .capture-submit:hover{background:#254bc6}
+body.home-first-step .capture-note{font-size:12px;line-height:1.7;color:#5d6470;margin:14px 0 0}
+body.home-first-step .capture-consent{margin-top:20px;font-size:12px;line-height:1.7}
+body.home-first-step .first-step-meeting{display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid #e4e7ee;padding:16px 0 0;margin-top:18px;color:#1b224e;font-size:14px;font-weight:500;text-decoration:underline;text-underline-offset:4px;min-height:44px}
+body.home-first-step .first-step-meeting svg{width:16px;height:16px}
+@media(max-width:1100px){
+ body.home-first-step .hero.shell{padding-block:56px 64px;min-height:0}
+ body.home-first-step .hero .hero-copy{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:36px}
+ body.home-first-step .hero h1{font-size:clamp(42px,4.8vw,54px)}
+ body.home-first-step .capture-panel{padding:25px 22px 20px}
+}
+@media(max-width:760px){
+ body.home-first-step .hero.shell{padding-block:40px 44px}
+ body.home-first-step .hero .hero-copy{grid-template-columns:1fr;gap:30px;align-items:start}
+ body.home-first-step .hero h1{font-size:clamp(38px,9.4vw,58px);line-height:1.08;margin:20px 0 0}
+ body.home-first-step .hero-purpose{font-size:15px;line-height:1.7;margin-top:20px}
+ body.home-first-step .capture-panel{padding:24px 20px 22px}
+ body.home-first-step .capture-form-meta h2{font-size:30px}
+ body.home-first-step .capture-fields input,body.home-first-step .capture-fields select{font-size:16px}
+ body.home-first-step .capture-fields{grid-template-columns:1fr}
+}
