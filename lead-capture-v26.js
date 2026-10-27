@@ -36,10 +36,16 @@
     if (!values.consent) return ['consent', 'Autoriza el uso de tus datos para que podamos atender tu consulta.'];
     return null;
   }
-  // HubSpot's visitor cookie only exists after the visitor accepts measurement; with it, the lead keeps its source.
+  // HubSpot's visitor cookie; with it, the lead keeps its source. It travels only if analyticsAllowed() says so.
   function hubspotToken(cookie) {
     const match = /(?:^|;\s*)hubspotutk=([0-9a-f]{32})(?:;|$)/.exec(cookie || '');
     return match ? match[1] : '';
+  }
+  // Asked at submit time: measurement on and current analytics consent (pixel.js). Consent to process the
+  // inquiry is not consent to analytics.
+  function analyticsAllowed(env) {
+    try { return typeof env.__centraliaAnalyticsAllowed === 'function' && env.__centraliaAnalyticsAllowed() === true; }
+    catch { return false; }
   }
   function payload(values, pageUri, hutk) {
     return {
@@ -141,7 +147,7 @@
       try {
         const response = await env.fetch(ENDPOINT, {
           method: 'POST', headers: {'Content-Type': 'application/json'}, credentials: 'omit',
-          body: JSON.stringify(payload(values, env.location.origin + env.location.pathname, hubspotToken(doc.cookie))), signal: controller.signal
+          body: JSON.stringify(payload(values, env.location.origin + env.location.pathname, analyticsAllowed(env) ? hubspotToken(doc.cookie) : '')), signal: controller.signal
         });
         if (!response.ok) {
           fail(response.status === 429 ? 'Hay demasiados intentos. Espera unos minutos antes de volver a enviar.' : 'No pudimos registrar la consulta. Tus datos siguen aquí; puedes intentarlo de nuevo o abrir el formulario alternativo.');
@@ -168,6 +174,6 @@
       observer.observe(doc.getElementById('consulta'));
     }
   }
-  if (typeof module !== 'undefined' && module.exports) module.exports = {validate, payload, init, formatAmountInput, hubspotToken};
+  if (typeof module !== 'undefined' && module.exports) module.exports = {validate, payload, init, formatAmountInput, hubspotToken, analyticsAllowed};
   else init(document, window);
 })();
