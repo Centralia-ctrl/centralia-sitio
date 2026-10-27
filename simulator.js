@@ -216,6 +216,7 @@
     $('#sim-send-status').textContent = 'Guardando tu solicitud…';
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 20000);
+    const hubspotToken = (/(?:^|;\s*)hubspotutk=([0-9a-f]{32})(?:;|$)/.exec(document.cookie) || [])[1];
     try {
       const response = await fetch(FORM_ENDPOINT, {
         method:'POST', headers:{'Content-Type':'application/json'}, signal:controller.signal,
@@ -223,6 +224,8 @@
           fields: Object.entries(values).map(([name,value])=>({objectTypeId:'0-1',name,value})),
           context:{
             ...(/^https?:$/.test(location.protocol) ? {pageUri:location.origin + location.pathname} : {}),
+            // HubSpot's visitor cookie exists only after the visitor accepts measurement.
+            ...(hubspotToken ? {hutk:hubspotToken} : {}),
             pageName:'Centralia PYME | Simulación de ' + (mode === 'credit' ? 'crédito' : mode==='suppliers'?'calendario de pago a proveedores':'factoraje')
           },
           legalConsentOptions:{consent:{consentToProcess:true,text:$('#lead-consent').nextElementSibling.textContent}}

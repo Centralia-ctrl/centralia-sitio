@@ -36,7 +36,12 @@
     if (!values.consent) return ['consent', 'Autoriza el uso de tus datos para que podamos atender tu consulta.'];
     return null;
   }
-  function payload(values, pageUri) {
+  // HubSpot's visitor cookie only exists after the visitor accepts measurement; with it, the lead keeps its source.
+  function hubspotToken(cookie) {
+    const match = /(?:^|;\s*)hubspotutk=([0-9a-f]{32})(?:;|$)/.exec(cookie || '');
+    return match ? match[1] : '';
+  }
+  function payload(values, pageUri, hutk) {
     return {
       fields: [
         ['firstname', values.name.trim()], ['company', values.company.trim()], ['email', values.email.trim()],
@@ -44,7 +49,7 @@
         ['cul_es_el_monto_que_requiere_tu_empresa', String(parseAmount(values.amount))],
         ['para_que_necesitas_el_financiamiento', values.purpose]
       ].map(([name, value]) => ({objectTypeId: '0-1', name, value})),
-      context: {pageUri, pageName: 'Centralia | Consulta de financiamiento'},
+      context: {pageUri, pageName: 'Centralia | Consulta de financiamiento', ...(hutk ? {hutk} : {})},
       legalConsentOptions: {consent: {consentToProcess: true, text: CONSENT}}
     };
   }
@@ -136,7 +141,7 @@
       try {
         const response = await env.fetch(ENDPOINT, {
           method: 'POST', headers: {'Content-Type': 'application/json'}, credentials: 'omit',
-          body: JSON.stringify(payload(values, env.location.origin + env.location.pathname)), signal: controller.signal
+          body: JSON.stringify(payload(values, env.location.origin + env.location.pathname, hubspotToken(doc.cookie))), signal: controller.signal
         });
         if (!response.ok) {
           fail(response.status === 429 ? 'Hay demasiados intentos. Espera unos minutos antes de volver a enviar.' : 'No pudimos registrar la consulta. Tus datos siguen aquí; puedes intentarlo de nuevo o abrir el formulario alternativo.');
@@ -163,6 +168,6 @@
       observer.observe(doc.getElementById('consulta'));
     }
   }
-  if (typeof module !== 'undefined' && module.exports) module.exports = {validate, payload, init, formatAmountInput};
+  if (typeof module !== 'undefined' && module.exports) module.exports = {validate, payload, init, formatAmountInput, hubspotToken};
   else init(document, window);
 })();
