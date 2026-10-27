@@ -14,7 +14,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 ## Cómo se publica
 
 - Netlify ejecuta `node build.cjs` y publica solo `dist/`. `dist/` no se versiona (`.gitignore`).
-- Páginas públicas: las 5 principales (`index.html`, `credito-empresarial.html`, `factoraje.html`, `pago-a-proveedores.html` y `preguntas-frecuentes.html`) y el blog (`blog/index.html` y 8 artículos). Para publicar otra, agrégala a `PAGES` en `build.cjs`, y solo con aprobación de Miguel Ángel.
+- Páginas públicas: las 5 principales (`index.html`, `credito-empresarial.html`, `factoraje.html`, `pago-a-proveedores.html` y `preguntas-frecuentes.html`) y el blog (`blog/index.html` y 16 artículos). Para publicar otra, agrégala a `PAGES` en `build.cjs`, y solo con aprobación de Miguel Ángel.
 - `site.css` se genera desde las capas de estilo listadas en `build.cjs`. No lo edites a mano: edita la capa y vuelve a construir.
 - Las muestras, los estudios y los recursos originales (`muestra-*`, `por-que-centralia.html`, los videos de prueba de factoraje y otros) se quedan en el repositorio como referencia. No los borres y no los publiques.
 - Blog en `blog/` (aprobado por Miguel Ángel). Sus páginas se generan con `python3 herramientas/blog.py` desde `herramientas/blog-articulos/<slug>.html` y la plantilla de `preguntas-frecuentes.html`. No las edites a mano. Para publicar un artículo: agrega su cuerpo y sus datos en `ARTICLES`, ejecuta el script, agrega la página a `PAGES` en `build.cjs` y a `sitemap.xml`, y ejecuta `node build.cjs`. Cada artículo sigue las reglas del sitio: sin instituciones ni cifras no confirmadas.
@@ -92,6 +92,12 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - **Guías precisadas** (PR #34): tablas, secuencia de factoraje y listas de comprobación en `blog.css`; Opciones de financiamiento va primero en el índice (`INDEX_FIRST` en `herramientas/blog.py`). Fuentes en la descripción del PR. Las guías las firma Miguel Ángel Meza Badillo, director general (`AUTHOR` en `herramientas/blog.py`, PR #39); la ficha solo lleva datos confirmados.
 - **Contacto sin duplicar y WhatsApp sin tapar** (PR #35): los artículos cierran solo con su invitación contextual; `contact-visibility.js` oculta el botón flotante sobre bloques de contacto y sobre cualquier control.
 - **Contacto directo del pie** (PR #36): sin correo; WhatsApp es un botón junto a Facebook e Instagram, con el mismo mensaje neutral.
+
+- **Escaneo del 27 de octubre de 2026** (PR #43 a #47):
+  - Portada: una sola raya bajo las cifras y cifras completas en celular; `site.css` normalizado para que construir no lo marque como modificado (PR #43).
+  - SEO: descripción de la portada a 144 caracteres, título de Pago a proveedores a 50 y `sitemap.xml` sin BOM (PR #45).
+  - Los formularios envían `context.hutk` a HubSpot solo cuando existe la cookie `hubspotutk` (al aceptar la medición), para conservar el origen de cada prospecto (PR #46). Prueba en `experience.test.cjs`.
+  - Blog con 16 guías: 8 nuevas sobre factoraje con y sin recurso, requisitos, factoraje o crédito, aforo, crédito simple o revolvente, flujo a 13 semanas, días de cobranza y estados financieros (PR #47). El sitemap tiene 22 páginas.
 
 ## Decidido no hacer
 
