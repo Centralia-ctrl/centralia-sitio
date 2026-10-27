@@ -5,6 +5,7 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
 
 ## 1. Antes del día del cambio
 
+- [ ] Netlify publica `main` en producción. Al 27 de octubre de 2026 los despliegues de producción se omitían por créditos agotados; las vistas previas sí funcionan.
 - [ ] Todo lo que impide el lanzamiento está integrado en `main`:
   - Aviso de privacidad propio.
   - Cifras y plazos confirmados.
@@ -34,9 +35,11 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
 - [ ] Factoraje se reproduce, sin sonido y con fondo blanco.
 - [ ] "Agendemos una reunión" abre la agenda de HubSpot.
 - [ ] WhatsApp abre con el mensaje neutral.
-- [ ] El correo y el teléfono del pie funcionan.
+- [ ] Los botones del pie (Facebook, Instagram y WhatsApp) abren lo que corresponde.
 - [ ] Formulario de la portada:
-  - Se envía una prueba y llega a HubSpot.
+  - Se envía una prueba en dos pasos y llega a HubSpot.
+  - Se ve "Recibimos tu consulta. Te contactamos a la brevedad desde hola@centraliafinanciera.com."
+  - El contacto aparece en la lista "Prospectos del sitio" de HubSpot.
   - Se borra después el contacto de prueba.
 - [ ] Simulador:
   - Crédito y Factoraje calculan.
@@ -49,7 +52,7 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
 
 - [x] Verificar el dominio en Google Search Console (hecho el 26 de octubre de 2026, por DNS).
 - [ ] Enviar `https://centraliafinanciera.com/sitemap.xml` en Search Console, el mismo día del cambio.
-- [ ] Actualizar `lastmod` en `sitemap.xml` con la fecha del lanzamiento.
+- [ ] Actualizar `lastmod` en `sitemap.xml` con la fecha del lanzamiento. Son 22 páginas: las 5 principales, el índice del blog y 16 guías.
 - [ ] Revisar que ninguna página publicada tenga `noindex`.
 - [ ] Revisar en Search Console que se indexen el blog y sus artículos, y que no haya errores de datos estructurados.
 
@@ -58,6 +61,14 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
 - [ ] `enabled: true` en `consent.js` y en `pixel.js`.
 - [ ] Agregar los dominios de Meta y HubSpot a `_headers` y a la CSP de cada página. Las dos políticas deben coincidir.
 - [ ] Confirmar que nada se carga antes de aceptar el aviso de cookies y que, al aceptar, llegan los eventos a Meta y a HubSpot.
+- [ ] Con analítica aceptada, un envío de prueba lleva `context.hutk` y HubSpot muestra el origen del contacto. Con analítica rechazada o revocada no lo lleva (lo cubren las pruebas de `experience.test.cjs`).
+- [ ] `node --test experience.test.cjs` (con jsdom 26) aprueba todas las pruebas.
+
+## 6. Seguimiento de prospectos (HubSpot y Make)
+
+- [x] Lista dinámica "Prospectos del sitio" en HubSpot (lista 130): contactos que enviaron el formulario de la portada o el del simulador (27 de octubre de 2026).
+- [ ] En cada formulario de HubSpot (*Marketing → Formularios*): correo de seguimiento desde hola@centraliafinanciera.com (*Automatización*) y etapa del contacto "Lead" (*Opciones*). Desde la conexión de Claude no se pueden editar formularios.
+- [ ] Si se usa Make para crear el negocio en "Consulta recibida" y la tarea de seguimiento: contratar un plan (la organización está en pausa, sin licencia) y reconectar HubSpot en Make con permisos de negocios (`deals-read` y `deals-write`); la conexión actual no los tiene.
 
 ## Si algo falla
 
