@@ -66,3 +66,8 @@ body.centralia-v23 .footer-bottom>div>a:hover,body.centralia-v23 .footer-bottom>
 /* Home trust figures: one rule below them, and each figure on a single line on phones. */
 .home-v23 .home-proof+.business-stories{border-top:0}
 @media(max-width:760px){.home-v23 .home-proof{grid-template-columns:1fr;row-gap:18px}.home-v23 .home-proof strong{white-space:nowrap}}
+
+/* Footer contact: the email sits with WhatsApp and the social links, in navy. */
+.social-links [data-social=email] .social-brand{background:#1b224e}
+.social-links [data-social=email] .social-brand .icon{width:18px;height:18px}
+.social-links [data-social=email]:hover{background:#f4f6fa}

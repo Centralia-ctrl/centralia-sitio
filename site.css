@@ -1376,6 +1376,11 @@ body.centralia-v23 .footer-bottom>div>a:hover,body.centralia-v23 .footer-bottom>
 .home-v23 .home-proof+.business-stories{border-top:0}
 @media(max-width:760px){.home-v23 .home-proof{grid-template-columns:1fr;row-gap:18px}.home-v23 .home-proof strong{white-space:nowrap}}
 
+/* Footer contact: the email sits with WhatsApp and the social links, in navy. */
+.social-links [data-social=email] .social-brand{background:#1b224e}
+.social-links [data-social=email] .social-brand .icon{width:18px;height:18px}
+.social-links [data-social=email]:hover{background:#f4f6fa}
+
 /* consent.css */
 /* Cookie consent banner (consent.js). Off until measurement is activated. */
 .consent-banner{position:fixed;z-index:1000;left:24px;bottom:24px;width:min(440px,calc(100% - 48px));display:grid;gap:16px;padding:22px 22px 20px;border:1px solid #e4e7ee;border-radius:14px;background:#fff;color:#303647;box-shadow:0 18px 50px #1b224e24;font-size:14px;line-height:1.55}
