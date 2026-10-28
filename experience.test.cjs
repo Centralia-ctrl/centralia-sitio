@@ -191,3 +191,16 @@ test('Home confirmation never appears when HubSpot does not confirm (error or ne
   assert.equal(f('error').hidden,false);assert.equal(f('submit').disabled,false);dom.window.close();
  }
 });
+test('Crédito empresarial: new illustration keeps the HTML messages, poster fallback and no demo controls',()=>{
+ const html=read('credito-empresarial.html'),js=read('credit-welcome-3d.js');
+ const d=new JSDOM(html).window.document;
+ assert.deepEqual([...d.querySelectorAll('[data-film-message]')].map(m=>m.textContent),['Dale capitala tu siguienteetapa.','Invierte en equipo,inventario yexpansión.']);
+ const art=d.querySelector('[data-credit-art]');
+ assert.equal(art.getAttribute('aria-label'),'Dale capital a tu siguiente etapa. Invierte en equipo, inventario y expansión.');
+ assert.equal(art.querySelector('img').getAttribute('src'),'assets/credito-bienvenida-poster.webp');assert.equal(art.querySelector('img').getAttribute('alt'),'');
+ assert.equal(art.querySelector('canvas').getAttribute('aria-hidden'),'true');
+ assert.ok(d.querySelector('script[type="module"][src="credit-welcome-3d.js"]'));assert.ok(!html.includes('credit-structure-v26.js'));
+ assert.ok(!/contrapeso/i.test(html+js));
+ assert.ok(!/data-preview|Tweak|window\.THREE/.test(js));assert.match(js,/from '\.\/assets\/vendor\/three\/three\.module\.min\.js'/);
+ assert.match(js,/prefers-reduced-motion: reduce/);
+});
