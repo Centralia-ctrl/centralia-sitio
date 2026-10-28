@@ -4,7 +4,7 @@
    the first frame renders, and remains if WebGL is unavailable. */
 import * as T from './assets/vendor/three/three.module.min.js';
 
-const art = document.querySelector('[data-credit-contrapeso]');
+const art = document.querySelector('[data-credit-art]');
 if (art) start(art);
 
 function start(art) {
