@@ -134,3 +134,7 @@ Condiciones confirmadas: hasta $15 millones sin garantía, hasta $50 millones co
 Las capas credit-simulator-preview.css, product-sales-preview.css y unified-tools-preview.css conservan sus nombres de la muestra y ahora forman parte de site.css. No se publica preview-guard.js ni los servidores y avisos de pruebas. El blog se regeneró desde su plantilla para unificar el formulario, sin modificar los artículos.
 
 La medición permanece apagada. El acceso privado de Netlify no cambia. El despliegue de producción depende de reactivar los créditos de Netlify; las vistas previas siguen habilitadas.
+
+## Navegación simplificada · 4 de noviembre de 2026
+
+Miguel Ángel aprobó el menú «Soluciones · Blog · Contacto», tanto en escritorio como en móvil. Contacto lleva a «Tu primer paso» de la portada. Preguntas frecuentes permanece accesible desde el pie y conserva su URL, contenido y datos estructurados; las preguntas de cada producto siguen en su lugar. El generador del blog mantiene esta misma navegación.
