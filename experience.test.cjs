@@ -52,18 +52,18 @@ test('Home form: failed API keeps values and permits explicit retry',async()=>{
  assert.equal(form.hidden,false);assert.equal(f('email').value,'qa@example.invalid');assert.equal(f('submit').disabled,false);assert.equal(f('fallback').hidden,false);dom.window.close();
 });
 test('Provider planner: no network before explicit consent; dates reach only the existing message field',async()=>{
- const {dom,w,d,calls}=page('pago-a-proveedores.html');w.eval(read('simulator.js'));w.eval(read('experience-v26.js'));
- d.querySelector('[name=payment]').value='2030-12-20';d.querySelector('[name=collection]').value='2031-01-10';d.querySelector('[name=collection]').dispatchEvent(new w.Event('change'));
- assert.match(d.querySelector('output').textContent,/21 días/);assert.equal(calls.length,0);
- d.querySelector('[data-payment-planner] button').click();assert.equal(d.querySelector('dialog#simulator-dialog').open,true);assert.match(d.getElementById('sim-summary').textContent,/20 dic 2030/);
+ const {dom,w,d,calls}=page('pago-a-proveedores.html');w.eval(read('simulator.js'));w.eval(read('experience-v26.js'));w.eval(read('supplier-calendar-preview.js'));
+ d.querySelector('[name=purchase-amount]').value='750000.50';d.querySelector('[name=payment]').value='2030-12-20';d.querySelector('[name=collection]').value='2031-01-10';d.querySelector('[name=collection]').dispatchEvent(new w.Event('change'));
+ assert.match(d.querySelector('[data-calendar-gap]').textContent,/21 días/);assert.equal(calls.length,0);
+ d.querySelector('[data-calendar-review]').click();assert.equal(d.querySelector('dialog#simulator-dialog').open,true);assert.match(d.getElementById('sim-summary').textContent,/20 dic 2030/);
  const form=d.getElementById('sim-lead-form');submit(w,form);assert.equal(calls.length,0);
- for(const [id,value] of Object.entries({'lead-name':'Prueba Local','lead-company':'Empresa','lead-email':'qa@example.invalid','lead-phone':'5512345678','lead-role':'Representante legal'}))d.getElementById(id).value=value;
+ for(const [id,value] of Object.entries({'lead-name':'Prueba Local','lead-company':'Empresa','lead-email':'qa@example.invalid','lead-phone':'5512345678'}))d.getElementById(id).value=value;
  d.getElementById('lead-business').checked=true;submit(w,form);assert.equal(calls.length,0);
  d.getElementById('lead-consent').checked=true;submit(w,form);await flush();
  assert.equal(calls.length,1);assert.match(calls[0].url,/1da292ee-/);
  const fields=Object.fromEntries(calls[0].body.fields.map(x=>[x.name,x.value]));
  assert.deepEqual(Object.keys(fields),['email','firstname','company','phone','message']);
- assert.match(fields.message,/Pago a proveedores/);assert.match(fields.message,/2031-01-10/);assert.match(fields.message,/21 días/);assert.doesNotMatch(fields.message,/85%|Mensualidad ilustrativa/);
+ assert.match(fields.message,/Pago a proveedores/);assert.match(fields.message,/MXN/);assert.match(fields.message,/750,000.50/);assert.match(fields.message,/2031-01-10/);assert.match(fields.message,/21 días/);assert.doesNotMatch(fields.message,/85%|Mensualidad ilustrativa/);
  assert.equal(d.querySelector('.sim-success').hidden,false);assert.equal(d.querySelector('.sim-steps').hidden,true);dom.window.close();
 });
 test('Credit and factoring arithmetic still uses the existing limits and percentages',()=>{
@@ -131,10 +131,10 @@ async function homeContext(setup,beforeSend=()=>{}){
  assert.equal(p.calls.length,1);assert.equal(f('success').hidden,false);const context=p.calls[0].body.context;p.dom.window.close();return context;
 }
 async function simulatorContext(setup,beforeSend=()=>{}){
- const p=measuredPage('pago-a-proveedores.html',setup);p.w.eval(read('simulator.js'));p.w.eval(read('experience-v26.js'));
+ const p=measuredPage('pago-a-proveedores.html',setup);p.w.eval(read('simulator.js'));p.w.eval(read('experience-v26.js'));p.w.eval(read('supplier-calendar-preview.js'));
  const d=p.d;d.querySelector('[name=payment]').value='2030-12-20';d.querySelector('[name=collection]').value='2031-01-10';d.querySelector('[name=collection]').dispatchEvent(new p.w.Event('change'));
- d.querySelector('[data-payment-planner] button').click();
- for(const [id,value] of Object.entries({'lead-name':'Prueba Local','lead-company':'Empresa','lead-email':'qa@example.invalid','lead-phone':'5512345678','lead-role':'Representante legal'}))d.getElementById(id).value=value;
+ d.querySelector('[data-calendar-review]').click();
+ for(const [id,value] of Object.entries({'lead-name':'Prueba Local','lead-company':'Empresa','lead-email':'qa@example.invalid','lead-phone':'5512345678'}))d.getElementById(id).value=value;
  d.getElementById('lead-business').checked=true;d.getElementById('lead-consent').checked=true;beforeSend(p);
  submit(p.w,d.getElementById('sim-lead-form'));await flush();
  assert.equal(p.calls.length,1);assert.equal(d.querySelector('.sim-success').hidden,false);const context=p.calls[0].body.context;p.dom.window.close();return context;

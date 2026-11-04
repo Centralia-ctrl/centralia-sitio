@@ -124,3 +124,13 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - Ficha de Google Business Profile: falta saber si hay oficina o solo atención en línea.
 - Meta: el Pixel 1375879946116372 está activo y hoy lo dispara el WordPress; no está conectado a HubSpot. Si hay anuncios en diciembre, conviene activar la medición desde el lanzamiento suave para no perder datos.
 - Las cifras del diálogo de costos y del simulador ($50 M, $15 M, US$5 M, 37 días y 4.5%) aparecen en todas las páginas y siguen sin confirmar. Están confirmados la tasa de 2%, el plazo de 36 meses y el anticipo de hasta 85%.
+
+## Publicación aprobada · 4 de noviembre de 2026
+
+Miguel Ángel autorizó publicar la muestra comercial de las tres soluciones. Se integran el simulador de Crédito empresarial, el cálculo de Factoraje y el calendario de Pago a proveedores arriba de sus páginas; se conservan las animaciones aprobadas. Los formularios comparten nombre, empresa, correo y teléfono; mantienen sus endpoints y los consentimientos separados.
+
+Condiciones confirmadas: hasta $15 millones sin garantía, hasta $50 millones con garantía y hasta 60 meses en Crédito empresarial. El ejemplo sin garantía usa 2% mensual y 4.5% de apertura antes de IVA. La comisión con garantía sigue por confirmar. Factoraje usa hasta 85% de anticipo bruto antes de costos. El calendario de proveedores no promete tasas ni plazos aprobados.
+
+Las capas credit-simulator-preview.css, product-sales-preview.css y unified-tools-preview.css conservan sus nombres de la muestra y ahora forman parte de site.css. No se publica preview-guard.js ni los servidores y avisos de pruebas. El blog se regeneró desde su plantilla para unificar el formulario, sin modificar los artículos.
+
+La medición permanece apagada. El acceso privado de Netlify no cambia. El despliegue de producción depende de reactivar los créditos de Netlify; las vistas previas siguen habilitadas.

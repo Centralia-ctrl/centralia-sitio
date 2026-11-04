@@ -1,0 +1,98 @@
+/* Approved local preview: one visual system for the three tools and contact forms. */
+body.product-tools-unified.sales-preview .product-tool,
+body.product-tools-unified.supplier-calendar-preview .product-tool{background:#fff;border:1px solid #e4e7ee;border-radius:12px;padding:28px;box-shadow:none;min-width:0;scroll-margin-top:0}
+body.product-tools-unified.sales-preview .product-tool-welcome,
+body.product-tools-unified.supplier-calendar-preview .product-tool-welcome{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,5vw,72px);align-items:start}
+body.product-tools-unified.sales-preview .product-tool h2,
+body.product-tools-unified.supplier-calendar-preview .product-tool h2{font-size:29px;font-weight:500;letter-spacing:-.04em;line-height:1.2;margin:0;color:#1b224e}
+body.product-tools-unified.sales-preview .product-tool :is(.credit-calculator-heading,.factoring-calculator-heading){display:block;margin:0 0 24px}
+body.product-tools-unified.sales-preview .product-tool :is(.credit-calculator-heading,.factoring-calculator-heading)>p,
+body.product-tools-unified.supplier-calendar-preview .supplier-calendar-subtitle{font-size:14px;line-height:1.6;color:#5d6470;margin:8px 0 0;max-width:none}
+body.product-tools-unified.supplier-calendar-preview .supplier-calendar-subtitle{margin-bottom:24px}
+body.product-tools-unified.sales-preview .product-tool :is(.credit-inline-amount,.factoring-input-money),
+body.product-tools-unified.supplier-calendar-preview .supplier-amount-field{background:white;border:1px solid #e4e7ee;border-radius:8px;min-height:56px;padding:8px 12px;gap:8px}
+body.product-tools-unified.sales-preview .product-tool :is(.credit-inline-amount,.factoring-input-money) input,
+body.product-tools-unified.supplier-calendar-preview .supplier-calendar-card .supplier-amount-field input{height:38px;min-height:38px;padding:0;font-size:28px;line-height:1.2;font-weight:500;letter-spacing:-.035em;min-width:0}
+body.product-tools-unified.sales-preview .product-tool :is(.credit-inline-amount,.factoring-input-money)>span,
+body.product-tools-unified.supplier-calendar-preview .supplier-amount-field>span{font-size:13px;color:#5d6470}
+body.product-tools-unified.sales-preview #credit-inline-term,
+body.product-tools-unified.sales-preview .factoring-inline-pair :is(input,select),
+body.product-tools-unified.supplier-calendar-preview .supplier-calendar-fields input{font-size:16px;min-height:48px;border-color:#e4e7ee;border-radius:8px;background:#fff}
+body.product-tools-unified.sales-preview .credit-inline-result,
+body.product-tools-unified.sales-preview .factoring-calculator-result,
+body.product-tools-unified.supplier-calendar-preview .supplier-calendar-insight{border:0;background:#f8f9fa;border-radius:8px;padding:18px;margin-top:20px}
+body.product-tools-unified.sales-preview .credit-inline-result{margin-bottom:20px}
+body.product-tools-unified.sales-preview .credit-inline-result .sales-assumption-line{margin-bottom:0}
+body.product-tools-unified.sales-preview .factoring-calculator-result{padding:18px 0 0;background:transparent;border-radius:0;border-top:1px solid #e4e7ee}
+body.product-tools-unified.sales-preview #factoring-inline-result{padding:18px;background:#f8f9fa;border-radius:8px;margin-bottom:20px}
+body.product-tools-unified.sales-preview :is(.credit-payment,.factoring-advance-value){font-size:38px;line-height:1.2;margin:8px 0;letter-spacing:-.04em}
+body.product-tools-unified.sales-preview .product-tool :is(.credit-inline-review,.factoring-review),
+body.product-tools-unified.supplier-calendar-preview .supplier-calendar-review{min-height:52px;padding:14px 16px;font-size:14px;line-height:1.5;border-radius:8px;background:#315de8;border-color:#315de8;color:white;gap:12px}
+body.product-tools-unified.sales-preview .product-tool :is(.credit-inline-review,.factoring-review):hover,
+body.product-tools-unified.supplier-calendar-preview .supplier-calendar-review:hover{background:#254bc6;border-color:#254bc6}
+body.product-tools-unified.sales-preview .product-tool details{margin-top:20px;padding-top:12px;border-top:1px solid #e4e7ee}
+body.product-tools-unified.sales-preview .product-tool details>summary{font-size:13px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:16px;list-style:none}
+body.product-tools-unified.sales-preview .product-tool details>summary::-webkit-details-marker{display:none}
+body.product-tools-unified.sales-preview .factoring-calculator-disclosure>summary:after{content:'+';font-size:18px}
+body.product-tools-unified.sales-preview .factoring-calculator-disclosure[open]>summary:after{content:'−'}
+body.product-tools-unified .tool-mobile-entry{display:none}
+body.product-tools-unified .product-meeting :is(.supplier-closing-actions,.sales-closing-actions) [data-schedule]{background:transparent;border:0;color:#1b224e;padding:8px 0;min-height:44px;box-shadow:none;text-decoration:underline;text-underline-offset:4px;font-size:14px;white-space:normal}
+/* A single, short contact step on products, home, FAQ and every guide. */
+body.unified-contact .simulator-dialog{max-width:680px;max-height:calc(100dvh - 32px);padding:28px 30px;overflow-y:auto;overscroll-behavior:contain}
+body.unified-contact .simulator-dialog h2{font-size:30px;line-height:1.15;margin-top:12px}
+body.unified-contact .simulator-dialog .dialog-intro{margin-top:12px;line-height:1.6}
+body.unified-contact .sim-lead-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px}
+body.unified-contact .simulator-dialog .sim-lead-grid input,
+body.unified-contact #centralia-contact-form .capture-fields :is(input,select){font-size:16px;min-height:48px;border:1px solid #e4e7ee;border-radius:8px;background:#fff;color:#1b224e}
+body.unified-contact .simulator-dialog .sim-lead-grid label{font-size:14px;line-height:1.5}
+body.unified-contact #sim-contact .sim-contact-context{display:none}
+body.unified-contact #sim-contact .sim-summary{background:#f8f9fa;border-color:#e4e7ee;margin-bottom:12px}
+body.unified-contact #sim-contact .preview-contact-note{padding:0;border:0;background:none;margin-bottom:12px;font-size:12px;color:#5d6470;line-height:1.6}
+body.unified-contact #sim-contact .sim-lead-grid+.sim-consent{padding-top:14px;margin-top:16px}
+body.unified-contact #sim-contact .sim-consent{margin-top:12px;line-height:1.6}
+body.unified-contact #sim-contact .sim-data-info{margin:12px 0 18px}
+body.unified-contact .sim-success{background:#f8f9fa;border-color:#e4e7ee}
+body.unified-contact .sim-success p{margin:0 0 14px;line-height:1.65}
+body.unified-contact .sim-success p:last-child{margin:0;font-size:12px}
+body.unified-contact .sim-success a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+body.unified-contact .sim-confirmed-scenario{padding-block:12px;border-block:1px solid #e4e7ee}
+body.unified-contact .simulator-dialog .dialog-close{min-width:44px;min-height:44px}
+body.unified-contact [hidden]{display:none!important}
+@media(max-width:980px){
+ body.product-tools-unified.sales-preview .product-tool-welcome,
+ body.product-tools-unified.supplier-calendar-preview .product-tool-welcome{grid-template-columns:1fr;gap:24px}
+ body.product-tools-unified .tool-mobile-entry{display:inline-flex;align-items:center;justify-content:space-between;gap:30px;min-height:48px;margin-top:16px;padding:11px 16px;border:1px solid #e4e7ee;border-radius:8px;color:#1b224e;font-size:14px;font-weight:500;text-decoration:none}
+ body.product-tools-unified .tool-mobile-entry:focus-visible{outline:2px solid #315de8;outline-offset:3px}
+ body.product-tools-unified.credit-simulator-preview .credit-calculator-copy h1 span{display:inline}
+ body.product-tools-unified.credit-simulator-preview .credit-calculator-copy h1 span+span:before{content:' '}
+ body.product-tools-unified.credit-simulator-preview .credit-calculator-copy h1{font-size:clamp(40px,7vw,64px)}
+}
+@media(max-width:680px){
+ body.product-tools-unified.sales-preview .product-tool,
+ body.product-tools-unified.supplier-calendar-preview .product-tool{padding:22px 20px;scroll-margin-top:0}
+ body.product-tools-unified.sales-preview .product-tool h2,
+ body.product-tools-unified.supplier-calendar-preview .product-tool h2{font-size:27px}
+ body.product-tools-unified.sales-preview :is(.credit-payment,.factoring-advance-value){font-size:32px}
+ body.product-tools-unified.sales-preview .credit-input-row{grid-template-columns:1fr}
+ body.product-tools-unified.sales-preview .factoring-inline-pair{grid-template-columns:1fr 1fr;gap:12px}
+ body.product-tools-unified.sales-preview .factoring-inline-pair label{min-height:42px;display:flex;align-items:end}
+ body.product-tools-unified.credit-simulator-preview .credit-calculator-profile{display:none}
+ body.product-tools-unified.sales-preview .credit-confirmed-benefits{margin-top:20px;padding-top:16px;gap:10px 20px}
+ body.product-tools-unified.sales-preview .credit-calculator-for{margin-top:15px}
+ body.product-tools-unified.sales-preview .credit-how-link{margin-top:5px}
+ body.product-tools-unified.sales-preview .factoring-first-benefit{margin-top:20px;padding-top:16px}
+ body.product-tools-unified.sales-preview .factoring-first-profile{margin-top:12px}
+ body.product-tools-unified.supplier-calendar-preview .supplier-payment-story{margin-top:22px}
+ body.unified-contact .simulator-dialog{width:calc(100% - 24px);max-height:calc(100dvh - 24px);padding:24px 20px}
+ body.unified-contact .simulator-dialog h2{font-size:27px;padding-right:24px}
+ body.unified-contact .sim-lead-grid{grid-template-columns:1fr;gap:14px}
+ body.unified-contact .simulator-dialog .dialog-close{position:sticky;top:-12px;float:right;background:white;z-index:2}
+}
+@media(max-width:360px){
+ body.product-tools-unified.sales-preview .product-tool,
+ body.product-tools-unified.supplier-calendar-preview .product-tool{padding:20px 16px}
+ body.product-tools-unified.sales-preview :is(.credit-payment,.factoring-advance-value){font-size:28px}
+ body.product-tools-unified.sales-preview .product-tool :is(.credit-inline-amount,.factoring-input-money) input,
+ body.product-tools-unified.supplier-calendar-preview .supplier-calendar-card .supplier-amount-field input{font-size:25px}
+ body.unified-contact .simulator-dialog{padding:22px 16px}
+}

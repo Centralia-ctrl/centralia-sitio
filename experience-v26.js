@@ -50,7 +50,7 @@
     suppliers:[
       ['Tu compra en México, con fechas claras.','Revisa cuándo debe cobrar el proveedor y cuándo entrarían los ingresos de la operación. El calendario ayuda a explicar la necesidad.'],
       ['Una compra internacional también tiene tiempos.','Además de las fechas, prepara país, moneda y condiciones del proveedor. La disponibilidad se revisa para cada operación.'],
-      ['Pon tus pagos y cobros en el mismo calendario.','Compara ambas fechas en la herramienta de abajo. El intervalo es un dato para conversar; no representa un plazo autorizado.']
+      ['Pon tus pagos y cobros en el mismo calendario.','Compara ambas fechas en el calendario. El intervalo es un dato para conversar; no representa un plazo autorizado.']
     ]
   };
   const example=document.querySelector('.content-case');
@@ -58,6 +58,14 @@
     const heading=example.querySelector('h2'), copy=example.querySelector('.content-case-story>p:not(.eyebrow)');
     const status=document.createElement('p'); status.className='sr-only'; status.setAttribute('role','status'); example.append(status);
     const link=document.createElement('a'); link.className='cx-case-link'; link.href='index.html?solucion='+current+'#consulta'; link.textContent='Cuéntanos tu necesidad →'; example.querySelector('.content-case-story').append(link);
+    if(document.body.classList.contains('sales-preview')&&['credit','factoring'].includes(current)){
+      link.href='#sim-contact';link.setAttribute('aria-haspopup','dialog');
+      link.addEventListener('click',event=>{event.preventDefault();document.dispatchEvent(new CustomEvent('centralia:consult-product',{detail:{product:current,opener:link}}));});
+    }
+    if(current==='suppliers'&&document.querySelector('[data-supplier-calendar]')){
+      link.href='#calendario-proveedores';link.textContent='Revisar mi compra con Centralia →';link.setAttribute('aria-haspopup','dialog');
+      link.addEventListener('click',event=>{event.preventDefault();document.dispatchEvent(new CustomEvent('centralia:consult-supplier',{detail:{opener:link}}));});
+    }
     document.querySelectorAll('.product-uses article').forEach((article,index)=>{
       const button=document.createElement('button'); button.type='button'; button.className='cx-case-button'; button.textContent='Ver este caso'; button.setAttribute('aria-pressed','false'); button.setAttribute('aria-controls','context-title'); button.setAttribute('aria-label','Ver caso: '+article.querySelector('h3').textContent);
       button.addEventListener('click',()=>{
@@ -66,12 +74,12 @@
         document.querySelectorAll('.cx-case-button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
         heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});
         example.classList.add('cx-selected'); status.textContent='Ejemplo seleccionado: '+article.querySelector('h3').textContent;
-        example.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth',block:'center'});
+        example.scrollIntoView({behavior:current==='credit'||matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth',block:'center'});
         emit('use_case_selected',current);
       }); article.append(button);
     });
   }
-  const planner=document.querySelector('[data-payment-planner]');
+  const planner=document.querySelector('[data-payment-planner]:not([data-supplier-calendar])');
   if (planner) {
     planner.hidden=false;
     const payment=planner.querySelector('[name=payment]'), collection=planner.querySelector('[name=collection]'), output=planner.querySelector('output'), button=planner.querySelector('button');

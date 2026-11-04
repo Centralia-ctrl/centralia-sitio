@@ -29,7 +29,7 @@
     if (values.company.trim().length < 2) return ['company', 'Escribe el nombre de tu empresa con al menos dos caracteres.'];
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) return ['email', 'Escribe un correo electrónico válido.'];
     const digits = values.phone.replace(/\D/g, '');
-    if (!/^\+?[\d() .-]+$/.test(values.phone.trim()) || digits.length < 10 || digits.length > 15) return ['phone', 'Escribe un WhatsApp de 10 dígitos o incluye el código de tu país.'];
+    if (!/^\+?[\d() .-]+$/.test(values.phone.trim()) || digits.length < 10 || digits.length > 15) return ['phone', 'Escribe un teléfono de 10 dígitos o incluye el código de tu país.'];
     const amount = parseAmount(values.amount);
     if (!Number.isFinite(amount) || amount <= 0 || amount > 999999999999.99) return ['amount', 'Indica un monto mayor a cero. Por ejemplo: 1,000,000.'];
     if (!PURPOSES.includes(values.purpose)) return ['purpose', 'Selecciona la solución que te interesa.'];
