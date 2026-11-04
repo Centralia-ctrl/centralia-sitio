@@ -1,0 +1,51 @@
+/* Isolated preview: the complete credit page keeps its existing brand and content. */
+body.credit-simulator-preview .credit-calculator-welcome{display:grid;grid-template-columns:minmax(0,1.13fr) minmax(0,1fr);align-items:center;gap:clamp(40px,6vw,100px);padding:64px 0 58px;margin:0}
+body.credit-simulator-preview .credit-calculator-copy .eyebrow{font-size:12px;color:#5d6470;letter-spacing:.12em;margin-bottom:27px}
+body.credit-simulator-preview .credit-calculator-copy h1{font-size:clamp(54px,5.3vw,78px);font-weight:500;line-height:1.04;letter-spacing:-.055em;color:#1b224e;margin:0}
+body.credit-simulator-preview .credit-calculator-copy h1 span{display:block}
+body.credit-simulator-preview .credit-calculator-intro{font-size:17px;line-height:1.75;color:#5d6470;max-width:470px;margin-top:28px}
+body.credit-simulator-preview .credit-calculator-for{font-size:14px;line-height:1.7;color:#303647;margin-top:20px}
+body.credit-simulator-preview .credit-how-link{display:inline-flex;gap:25px;align-items:center;min-height:44px;font-size:14px;margin-top:21px;color:#1b224e;text-decoration:underline;text-underline-offset:6px}
+body.credit-simulator-preview .credit-how-link .icon{width:18px;height:18px;transform:rotate(90deg)}
+body.credit-simulator-preview .credit-calculator-profile{font-size:12px;line-height:1.7;color:#5d6470;margin-top:25px}
+body.credit-simulator-preview .credit-inline-calculator{background:#f8f9fa;border:1px solid #e4e7ee;border-radius:12px;padding:30px 32px 22px;box-shadow:none;min-width:0;scroll-margin-top:120px}
+body.credit-simulator-preview .credit-calculator-heading h2{font-size:30px;line-height:1.2;color:#1b224e;letter-spacing:-.04em;margin:0}
+body.credit-simulator-preview .credit-calculator-heading>p{font-size:14px;color:#5d6470;margin-top:7px}
+body.credit-simulator-preview #credit-inline-form{margin-top:24px}
+body.credit-simulator-preview #credit-inline-form label,body.credit-simulator-preview .credit-inline-terms legend{font-size:14px;font-weight:500;color:#303647;margin:0 0 9px}
+body.credit-simulator-preview .credit-inline-amount{display:flex;align-items:center;gap:10px;padding:9px 14px;border:1px solid #d8dde6;background:white;border-radius:8px}
+body.credit-simulator-preview .credit-inline-amount>span{font-size:14px;color:#5d6470}
+body.credit-simulator-preview .credit-inline-amount input{border:0;border-radius:0;box-shadow:none;padding:0;min-width:0;width:100%;font-size:27px;font-weight:500;line-height:1.6;letter-spacing:-.035em;color:#1b224e;background:transparent}
+body.credit-simulator-preview .credit-calculator-note{font-size:12px;line-height:1.6;color:#5d6470;margin:8px 0 0}
+body.credit-simulator-preview .credit-inline-terms{padding:0;margin:20px 0 22px;border:0;min-width:0}
+body.credit-simulator-preview .credit-term-choices{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+body.credit-simulator-preview .credit-term-choices button{background:white;border:1px solid #d8dde6;border-radius:7px;min-height:42px;padding:8px 4px;color:#5d6470;font-size:14px;line-height:1.5}
+body.credit-simulator-preview .credit-term-choices button[aria-pressed=true]{background:#1b224e;border-color:#1b224e;color:white}
+body.credit-simulator-preview .credit-inline-result{border-top:1px solid #e4e7ee;padding-top:20px}
+body.credit-simulator-preview .credit-payment-label{color:#5d6470;font-size:13px}
+body.credit-simulator-preview .credit-payment{color:#1b224e;font-weight:500;font-size:clamp(32px,3.8vw,48px);line-height:1.2;letter-spacing:-.05em;font-variant-numeric:tabular-nums;margin:7px 0 17px;overflow-wrap:anywhere}
+body.credit-simulator-preview .credit-inline-breakdown{font-size:12px;color:#5d6470;margin:0 0 22px}
+body.credit-simulator-preview .credit-inline-breakdown>div{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:9px 0}
+body.credit-simulator-preview .credit-inline-breakdown dd{margin:0;color:#303647;white-space:nowrap;font-variant-numeric:tabular-nums}
+body.credit-simulator-preview .credit-inline-review{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:52px;padding:15px 17px;font-size:14px;line-height:1.5;gap:12px;text-align:left}
+body.credit-simulator-preview .credit-inline-review:disabled{background:#e4e7ee!important;border-color:#e4e7ee!important;color:#5d6470!important;cursor:default}
+body.credit-simulator-preview .credit-inline-privacy{text-align:center;font-size:12px;line-height:1.5;color:#5d6470;margin-top:10px}
+body.credit-simulator-preview .credit-inline-assumptions{border-top:1px solid #e4e7ee;margin-top:19px;padding-top:14px;color:#5d6470;font-size:12px;line-height:1.7}
+body.credit-simulator-preview .credit-inline-assumptions summary{list-style:none;display:flex;align-items:start;justify-content:space-between;gap:14px;cursor:pointer;color:#303647}
+body.credit-simulator-preview .credit-inline-assumptions summary::-webkit-details-marker{display:none}
+body.credit-simulator-preview .credit-details-plus{font-size:18px;line-height:1.2;flex:none}
+body.credit-simulator-preview .credit-inline-assumptions[open] .credit-details-plus{transform:rotate(45deg)}
+body.credit-simulator-preview .credit-inline-assumptions p{margin-top:10px}
+body.credit-simulator-preview .credit-welcome-bridge{display:flex;justify-content:space-between;align-items:center;gap:28px;border-top:1px solid #e4e7ee;border-bottom:1px solid #e4e7ee;padding:23px 0;margin:0 0 6px}
+body.credit-simulator-preview .credit-welcome-bridge>p{font-size:16px;line-height:1.6;color:#5d6470}
+body.credit-simulator-preview .credit-welcome-bridge strong{color:#1b224e;font-weight:500}
+body.credit-simulator-preview .credit-welcome-bridge>span{color:#5d6470;font-size:13px}
+body.credit-simulator-preview #usos-credito{border-top:0;padding-top:62px}
+body.credit-simulator-preview .preview-local-note{font-size:12px;color:#5d6470;padding:9px 0;border-bottom:1px solid #e4e7ee;line-height:1.6}
+body.credit-simulator-preview .preview-local-note strong{font-weight:500;color:#303647}
+body.credit-simulator-preview .simulator-dialog .preview-contact-note{background:#f8f9fa;border:1px solid #e4e7ee;border-radius:8px;padding:10px 14px;color:#5d6470;font-size:12px;margin-bottom:16px}
+@media(min-width:900px) and (max-width:1120px){body.credit-simulator-preview .credit-calculator-welcome{gap:40px;grid-template-columns:minmax(0,1fr) minmax(0,1.04fr)}body.credit-simulator-preview .credit-inline-calculator{padding:26px 24px 20px}}
+@media(max-width:899px){body.credit-simulator-preview .credit-calculator-welcome{grid-template-columns:1fr;gap:32px;padding:42px 0 38px}body.credit-simulator-preview .credit-calculator-copy h1{font-size:clamp(44px,7vw,64px)}body.credit-simulator-preview .credit-calculator-copy h1 span{display:inline}body.credit-simulator-preview .credit-calculator-copy h1 span+span:before{content:' '}body.credit-simulator-preview .credit-calculator-intro{max-width:620px;font-size:16px;margin-top:20px}body.credit-simulator-preview .credit-calculator-for{margin-top:13px}body.credit-simulator-preview .credit-how-link{margin-top:10px}body.credit-simulator-preview .credit-calculator-profile{display:none}body.credit-simulator-preview .credit-inline-calculator{padding:28px;max-width:none}body.credit-simulator-preview .credit-payment{font-size:44px}body.credit-simulator-preview #usos-credito{padding-top:48px}}
+@media(max-width:550px){body.credit-simulator-preview .credit-calculator-welcome{padding:30px 0 32px;gap:24px}body.credit-simulator-preview .credit-calculator-copy .eyebrow{margin-bottom:18px}body.credit-simulator-preview .credit-calculator-copy h1{font-size:44px;line-height:1.08;max-width:420px}body.credit-simulator-preview .credit-calculator-intro{font-size:15px;line-height:1.7;margin-top:17px}body.credit-simulator-preview .credit-calculator-for{display:none}body.credit-simulator-preview .credit-how-link{margin-top:11px;font-size:13px}body.credit-simulator-preview .credit-inline-calculator{padding:24px 20px 20px}body.credit-simulator-preview .credit-calculator-heading h2{font-size:27px}body.credit-simulator-preview .credit-payment{font-size:39px}body.credit-simulator-preview .credit-inline-breakdown>div{flex-wrap:wrap;gap:2px 12px}body.credit-simulator-preview .credit-welcome-bridge{display:block;padding:20px 0}body.credit-simulator-preview .credit-welcome-bridge>span{display:block;margin-top:7px;font-size:12px}body.credit-simulator-preview .credit-inline-review{font-size:13px;padding:14px 12px}body.credit-simulator-preview .credit-inline-review .icon{width:18px;height:18px}}
+@media(max-width:360px){body.credit-simulator-preview .credit-calculator-copy h1{font-size:39px}body.credit-simulator-preview .credit-inline-calculator{padding:22px 16px 18px}body.credit-simulator-preview .credit-payment{font-size:35px}body.credit-simulator-preview .credit-inline-amount input{font-size:24px}}
+@media(prefers-reduced-motion:no-preference){body.credit-simulator-preview .credit-term-choices button{transition:background .18s,color .18s,border-color .18s}body.credit-simulator-preview .credit-inline-review{transition:background .18s}}

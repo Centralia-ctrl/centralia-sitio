@@ -1,4 +1,21 @@
 /* Interaction layer. Keeps the approved hero, type and palette. */
+/* Scoped Credit interactions: native buttons cover each card, including its title. */
+[data-credit-experience] .product-uses article{position:relative;isolation:isolate}
+[data-credit-experience] .product-uses .cx-case-button::after{content:"";position:absolute;inset:0;z-index:1;cursor:pointer}
+[data-credit-experience] .product-uses article:focus-within{outline:2px solid #315de8;outline-offset:8px;border-radius:12px}
+[data-credit-experience] .content-case.cx-selected{border-left:0;box-shadow:inset 3px 0 #1b224e}
+[data-credit-metrics]{scroll-margin-top:104px}
+[data-credit-amount]{display:inline-block;position:relative;white-space:nowrap;font-variant-numeric:tabular-nums}
+[data-credit-amount]::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:currentColor;opacity:.25;transform:scaleX(0);transform-origin:left}
+.credit-metrics-entered [data-credit-amount]::after{transform:scaleX(1);animation:credit-amount-line .8s cubic-bezier(.22,1,.36,1) .2s backwards}
+.credit-metrics-entered [data-credit-amount="secondary"]::after{animation-delay:.4s}
+[data-credit-amount="secondary"]{font-weight:600;color:#1b224e}
+#usos-credito{scroll-margin-top:104px}
+@keyframes credit-amount-line{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media(max-width:760px){[data-credit-experience] .product-uses .cx-case-button{grid-column:2;justify-self:start;white-space:nowrap}}
+@media(prefers-reduced-motion:reduce){
+ [data-credit-metrics] [data-credit-amount]::after{animation:none}
+}
 .cx-chooser{margin:28px 0 36px;padding:24px 0;border-block:1px solid #e4e7ee}
 .cx-chooser h3{margin:0 0 16px;color:#1b224e;font-size:20px;font-weight:500}
 .cx-options{display:flex;flex-wrap:wrap;gap:10px}

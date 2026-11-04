@@ -58,9 +58,9 @@
       range: 'Hasta $50 millones MXN con garantía real, o hasta $15 millones sin garantía real. Exclusivo para personas morales.',
       facts: [
         ['Con garantía', 'Hasta $50 millones MXN. Línea de hasta 5 años; condiciones y disposiciones según modalidad.'],
-        ['Sin garantía real', 'Hasta $15 millones MXN. Modalidades de 6 a 36 meses; aval según evaluación.'],
+        ['Sin garantía real', 'Hasta $15 millones MXN y hasta 60 meses; aval según evaluación.'],
         ['Tasa de interés', 'Se confirma en la propuesta individual según perfil, plazo y modalidad. Pide la tasa y su periodicidad por escrito.'],
-        ['Comisiones', 'Con garantía: comisión por disposición de 1%, 2% o 4%, según modalidad. Sin garantía real: comisión por apertura de 4.5%.'],
+        ['Comisiones', 'Sin garantía real: apertura ilustrativa de 4.5%, antes de IVA, utilizada en el simulador. Con garantía real: comisión por confirmar, no incluida en el cálculo. Las comisiones definitivas se detallan en tu propuesta.'],
         ['Perfil de empresa', 'Persona moral. Se revisan antigüedad, facturación, historial crediticio, capacidad de pago y, cuando aplica, la garantía.']
       ],
       note: 'Montos máximos sujetos a evaluación. Las modalidades son alternativas, no se suman. La propuesta confirmará tasa, comisiones, impuestos, costo total, garantías y calendario de pagos antes de contratar.'
