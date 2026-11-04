@@ -279,7 +279,7 @@ def page(tpl, path, title, description, image, og_type, graph, main):
     # RSS feed for readers and aggregators; added after the path fix because it lives in blog/.
     s = s.replace('</head>', '<link rel="alternate" type="application/rss+xml" title="Blog de Centralia Financiera" href="feed.xml">\n</head>', 1)
     # The header marks the blog as the current section.
-    for a in ('<a href="../blog/">Blog</a></nav>', '<a href="../blog/">Blog <span>03</span></a>'):
+    for a in ('<a href="../blog/">Blog</a><a href="../index.html#consulta">Contacto</a></nav>', '<a href="../blog/">Blog <span>02</span></a>'):
         assert s.count(a) == 1, a
         s = s.replace(a, a.replace('href="../blog/"', 'href="./" aria-current="page"'))
     return s
