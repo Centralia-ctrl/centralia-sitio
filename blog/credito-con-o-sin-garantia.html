@@ -30,8 +30,8 @@
   <script src="../consent.js?v=24" defer></script>
   <script src="../contact-visibility.js?v=24" defer></script>
   <script src="../connections.js" defer></script>
-  <script src="../app.js?v=20261104" defer></script>
-  <script src="../simulator.js?v=20261104" defer></script>
+  <script src="../app.js?v=20261105-credit-36-20" defer></script>
+  <script src="../simulator.js?v=20261105-credit-36-20" defer></script>
   <script src="../motion.js" defer></script>
   <script src="../navigation.js" defer></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://centraliafinanciera.com/blog/credito-con-o-sin-garantia.html#articulo","headline":"Crédito empresarial con o sin garantía: diferencias y cómo elegir","description":"Qué es una garantía real, en qué se diferencian el crédito con y sin garantía, cómo elegir la modalidad para tu empresa y qué preguntar antes de contratar.","inLanguage":"es-MX","datePublished":"2026-10-26","dateModified":"2026-10-26","url":"https://centraliafinanciera.com/blog/credito-con-o-sin-garantia.html","mainEntityOfPage":"https://centraliafinanciera.com/blog/credito-con-o-sin-garantia.html","image":"https://centraliafinanciera.com/assets/og-credito-empresarial.png","author":{"@type":"Person","name":"Miguel Ángel Meza Badillo","jobTitle":"Director general","worksFor":{"@id":"https://centraliafinanciera.com/#organizacion"}},"publisher":{"@type":"Organization","@id":"https://centraliafinanciera.com/#organizacion","name":"Centralia Financiera","url":"https://centraliafinanciera.com/","logo":{"@type":"ImageObject","url":"https://centraliafinanciera.com/assets/centralia-logo.png"}},"isPartOf":{"@id":"https://centraliafinanciera.com/blog/#blog"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://centraliafinanciera.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://centraliafinanciera.com/blog/"},{"@type":"ListItem","position":3,"name":"Crédito con o sin garantía","item":"https://centraliafinanciera.com/blog/credito-con-o-sin-garantia.html"}]}]}</script>
@@ -173,10 +173,10 @@
   <button class="dialog-close" data-close aria-label="Cerrar simulador"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
   <p class="eyebrow">CENTRALIA / HAZ TUS NÚMEROS</p>
   <h2 id="simulator-title">Simula tu crédito.</h2>
-  <p class="dialog-intro" id="simulator-intro">Elige monto y plazo. Consulta tu estimación sin compartir datos personales.</p>
+  <p class="dialog-intro" id="simulator-intro">Indica el monto para estimar tus pagos a 36 meses.</p>
   <ol class="sim-steps" aria-label="Pasos de tu simulación"><li data-step="scenario" aria-current="step"><span>1</span> Tu escenario</li><li data-step="result"><span>2</span> Tu estimación</li><li data-step="contact"><span>3</span> Asesoría opcional</li></ol>
   <div class="sim-assumptions" id="sim-credit-assumptions">
-    <p><strong>Estima tus mensualidades.</strong> Ejemplo con 2% mensual. Sin garantía real: apertura ilustrativa de 4.5%, antes de IVA. Con garantía real: comisión por confirmar, no incluida. No incluye IVA ni otros cargos; las condiciones finales dependen de la evaluación.</p>
+    <p><strong>Estimación a 36 meses.</strong> Tasa ilustrativa de 2% mensual y 5% de apertura por separado. Antes de IVA y otros cargos. Las condiciones finales se confirman en la propuesta.</p>
     <details><summary>Ver detalles del cálculo</summary><p>Cada mensualidad incluye una parte del crédito y los intereses sobre el saldo pendiente. La comisión de apertura se muestra aparte: no se suma al monto financiado ni se resta del dinero que recibirías.</p><p>El total es parcial: suma mensualidades y comisión, pero no incluye impuestos ni otros cargos. No equivale al Costo Anual Total (CAT). Una propuesta confirmará las condiciones, el costo completo y las fechas de pago.</p></details>
   </div>
   <p id="sim-factoring-note" class="details-note" hidden>El anticipo se calcula como el 85% del valor capturado, antes de costos. El 15% restante es una retención inicial, no una comisión. Los importes se redondean a centavos; la retención se ajusta para que ambos sumen el valor de las facturas. El anticipo y el remanente netos dependen de la elegibilidad, del pago de la factura y de los costos del contrato.</p>
@@ -184,10 +184,10 @@
   <form id="simulator-form" novalidate>
     <div class="simulator-inputs">
       <div><label for="sim-amount" id="sim-amount-label">Monto de crédito · MXN</label><input id="sim-amount" name="amount" type="text" inputmode="decimal" value="5,000,000" maxlength="20" aria-describedby="sim-scope sim-error" required></div>
-      <div id="sim-term-field"><label for="sim-term">Plazo</label><select id="sim-term" name="term" aria-describedby="sim-error" required><option value="12">12 meses</option><option value="18">18 meses</option><option value="24" selected>24 meses</option><option value="30">30 meses</option><option value="36">36 meses</option></select></div>
+      <div id="sim-term-field"><label for="sim-term">Plazo</label><select id="sim-term" name="term" aria-describedby="sim-error" disabled required><option value="36" selected>36 meses</option></select></div>
       <div id="sim-currency-field" hidden><label for="sim-currency">Moneda de las facturas</label><select id="sim-currency" name="currency"><option value="MXN">Pesos mexicanos · MXN</option><option value="USD">Dólares estadounidenses · USD</option></select></div>
     </div>
-    <p id="sim-scope" class="field-hint">Ejemplo de crédito sin garantía real: hasta $15 millones MXN. Aval según evaluación.</p>
+    <p id="sim-scope" class="field-hint">Crédito empresarial de hasta $20 millones MXN a 36 meses. Condiciones según evaluación.</p>
     <p id="sim-error" class="field-error" role="alert" hidden></p>
     <p id="sim-proposal" class="field-hint" hidden><a href="https://meetings.hubspot.com/miguelmeza1" target="_blank" rel="noopener noreferrer">Solicitar una propuesta para un monto mayor ↗</a></p>
     <button type="submit" class="button button-dark sim-calculate">Ver mi estimación <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button><p class="sim-next-step">El cálculo es local. Después podrás solicitar asesoría si lo deseas.</p>
