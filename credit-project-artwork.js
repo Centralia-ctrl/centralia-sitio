@@ -4,7 +4,7 @@ import { RoomEnvironment } from './assets/vendor/three/RoomEnvironment.js';
 import { createExpansionNetwork } from './credit-expansion-network.js';
 
 // Local study: restrained sequences with a pace suited to each business need.
-export function createProjectArtwork(host, onState) {
+export function createProjectArtwork(host, onState = () => {}) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'low-power' });
   renderer.setClearColor(0xffffff, 1);
   renderer.outputColorSpace = THREE.SRGBColorSpace;

@@ -164,3 +164,11 @@ Corrección posterior de ubicación: las tres condiciones pasan debajo de las ci
 Miguel Ángel autorizó integrar y publicar la propuesta premium. Se integra la bienvenida de composición sobria, los beneficios destacados debajo de las cifras y la entrada conjunta de 950 ms. Se retira «Ver detalle del cálculo» de la bienvenida. El formulario operativo conserva sus consentimientos y destino de HubSpot. La demostración independiente y su botón de previsualización quedan fuera del sitio.
 
 La revisión incluye las escenas de Expansión e Inventario aprobadas, el límite de $20 millones a 36 meses, la apertura del 5% por separado y las condiciones comerciales confirmadas. La compilación genera 73 archivos y las 36 pruebas pasan. El 6 de noviembre, Netlify sigue mostrando producción pausada por créditos agotados, con vistas previas habilitadas. La publicación en la dirección principal depende de reactivar los créditos o del siguiente ciclo.
+
+## Ajustes finales de las tres soluciones · 6 de noviembre de 2026
+
+Miguel Ángel revisó y autorizó publicar los ajustes que parten de main `cee998e`. En Crédito se ajustan la proporción de la bienvenida, las cifras y beneficios, la superficie del simulador y la nota de cálculo. Los proyectos tienen más separación, el botón queda debajo de la explicación y se retiran los rótulos repetidos y el control visible de pausa. Las escenas aprobadas, su reproducción y el comportamiento de movimiento reducido continúan activos.
+
+En Factoraje y Pago a proveedores se ajusta únicamente la separación vertical entre secciones. El margen inferior del ejemplo es de 56 px en escritorio y 24 px en móvil, tras el recorte aprobado de 24 px. En móvil, «Ver este caso» se alinea en la segunda columna bajo la descripción, con una flecha discreta y un área de toque de 44 px. Sus HTML y scripts permanecen iguales a main.
+
+Se revisaron las tres páginas a 360 y 390 px, los controles, el paso al formulario y la reproducción de las animaciones. Se enviaron tres consultas identificadas como pruebas desde las páginas y se confirmó en HubSpot la recepción de cada producto, monto, escenario y consentimiento. La comparación móvil es una vista local dentro de dist/ que queda fuera de la compilación publicable.

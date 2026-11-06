@@ -24,7 +24,6 @@
     const principal=parse(amount.value), valid=Number.isFinite(principal)&&principal>0&&principal<=limit;
     range.max=String(limit);
     section.querySelector('#credit-inline-range-max').textContent='$20 millones MXN';
-    section.querySelector('#credit-inline-scope').textContent='Condiciones según evaluación.';
     error.hidden=valid;result.hidden=!valid;review.disabled=!valid;amount.setAttribute('aria-invalid',String(!valid));
     if(!valid){error.textContent=principal>limit?'El monto máximo es de $20 millones MXN.':'Escribe un monto mayor a cero, hasta $20 millones MXN. Para centavos, utiliza punto y hasta dos decimales.';return null;}
     const figures=window.CENTRALIA_SIMULATION.credit(principal,months);
