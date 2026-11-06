@@ -68,9 +68,14 @@ test('Provider planner: no network before explicit consent; dates reach only the
 });
 test('Credit and factoring arithmetic still uses the existing limits and percentages',()=>{
  const {dom,w,d}=page('pago-a-proveedores.html');w.eval(read('simulator.js'));
- const c=w.CENTRALIA_SIMULATION.credit(100000,12);assert.ok(c.monthly>9000&&c.monthly<10000);
+ const c=w.CENTRALIA_SIMULATION.credit(1000000,36);assert.ok(Math.abs(c.monthly-39232.852597798)<0.000001);
+ assert.equal(c.commission,50000);assert.ok(Math.abs(c.partialTotal-1462382.693521)<0.000001);
+ const legacy=w.CENTRALIA_SIMULATION.credit(1000000,36,'secured');assert.equal(legacy.commission,50000);assert.equal(legacy.monthly,c.monthly);
+ assert.equal(w.CENTRALIA_SIMULATION.credit(20000000,36).commission,1000000);
+ assert.throws(()=>w.CENTRALIA_SIMULATION.credit(1000000,24));
+ assert.throws(()=>w.CENTRALIA_SIMULATION.credit(100000,12));
  assert.equal(w.CENTRALIA_SIMULATION.factoring(100000).advance,85000);
- assert.throws(()=>w.CENTRALIA_SIMULATION.credit(15000001,12));
+ assert.throws(()=>w.CENTRALIA_SIMULATION.credit(20000000.01,36));
  assert.throws(()=>w.CENTRALIA_SIMULATION.credit(100000,13));dom.window.close();
 });
 test('Switching from a provider calendar to credit and factoring restores the correct screens',()=>{

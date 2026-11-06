@@ -18,15 +18,19 @@ test('All 22 pages use four contact fields in the same order, with opt-in consen
   assert.ok(d.querySelector('.sim-success[tabindex="-1"] .sim-confirmed-scenario'));assert.doesNotMatch(d.querySelector('.sim-data-info').textContent,/tu nombre, cargo/);dom.window.close();
  }
 });
-test('Illustrative opening fee stays at 4.5% only for unsecured credit; visible FAQs match structured answers',()=>{
- for(const f of ['app.js','index.html','preguntas-frecuentes.html']){assert.doesNotMatch(read(f),/1%, 2% o 4%/);assert.match(read(f),/4\.5%/);}
+test('Credit uses 36 months and 5% opening; visible FAQs match structured answers',()=>{
+ for(const f of pages){const dom=new JSDOM(read(f)),d=dom.window.document;
+  assert.equal(d.querySelector('#sim-credit-kind'),null,f);assert.equal(d.querySelector('#sim-term').value,'36',f);assert.match(d.querySelector('#sim-scope').textContent,/20 millones.*36 meses/);dom.window.close();
+ }
+ for(const f of ['app.js','index.html','preguntas-frecuentes.html']){assert.doesNotMatch(read(f),/4\.5%|comisión por confirmar/);assert.match(read(f),/5%/);}
  for(const f of ['index.html','preguntas-frecuentes.html']){const dom=new JSDOM(read(f)),d=dom.window.document;
   const graph=[...d.querySelectorAll('script[type="application/ld+json"]')].flatMap(e=>JSON.parse(e.textContent)['@graph']||[]),faq=graph.find(e=>e['@type']==='FAQPage'),answer=faq?.mainEntity.find(e=>e.name==='¿Qué tasa y comisiones pagaría mi empresa?')?.acceptedAnswer.text;
-  assert.ok(answer);assert.ok(d.body.textContent.includes(answer),f);assert.match(answer,/4\.5%, antes de IVA/);assert.match(answer,/con garantía, la comisión está por confirmar/);dom.window.close();
+  assert.ok(answer);assert.ok(d.body.textContent.includes(answer),f);assert.match(answer,/36 meses/);assert.match(answer,/apertura del 5% por separado, antes de IVA/);dom.window.close();
  }
 });
 for(const file of ['index.html','preguntas-frecuentes.html','blog/factoraje-con-recurso-y-sin-recurso.html'])test(file+': shared dialog calculates, requests consent, confirms the scenario and focuses its visible receipt',async()=>{
- const p=setup(file);p.$('[data-simulate="credit"]').click();p.$('#sim-amount').value='1200000';p.$('#sim-term').value='36';
+ const p=setup(file);p.$('[data-simulate="credit"]').click();p.$('#sim-amount').value='1200000';
+ assert.equal(p.$('#sim-term').disabled,true);assert.deepEqual([...p.$('#sim-term').options].map(option=>option.value),['36']);
  p.$('#simulator-form').dispatchEvent(new p.w.Event('submit',{bubbles:true,cancelable:true}));
  p.$('#sim-request-advice').click();
  for(const [id,v] of Object.entries({'lead-name':'Prueba Local','lead-company':'Empresa local','lead-email':'qa@example.invalid','lead-phone':'5512345678'}))p.$('#'+id).value=v;
