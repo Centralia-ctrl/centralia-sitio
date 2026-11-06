@@ -32,7 +32,7 @@
   <script src="connections.js" defer></script>
   <script src="app.js?v=20261105-credit-36-20" defer></script>
   <script src="simulator.js?v=20261105-credit-36-20" defer></script>
-  <script src="credit-inline-calculator.js?v=20261105-credit-layout" defer></script>
+  <script src="credit-inline-calculator.js?v=20261106-credit-composition" defer></script>
   <script src="motion.js" defer></script>
   <script src="navigation.js" defer></script>
   <script src="experience-v26.js?v=20261104" defer></script>
@@ -48,8 +48,8 @@
 <meta property="og:image:alt" content="Centralia Financiera">
 <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="stylesheet" href="site.css?v=20261105-credit-projects">
-<script src="credit-project-scenes.js?v=20261105-clean-scenes" defer></script>
+  <link rel="stylesheet" href="site.css?v=20261106-project-spacing">
+<script src="credit-project-scenes.js?v=20261106-project-layout" defer></script>
 </head>
 <body id="inicio" class="centralia-v23 solution-page credit-simulator-preview sales-preview unified-contact product-tools-unified">
 <a class="skip-link" href="#contenido">Ir al contenido</a>
@@ -99,13 +99,13 @@
       <div class="credit-input-row"><div class="credit-amount-control"><label for="credit-inline-amount">¿Cuánto necesita tu empresa?</label>
       <div class="credit-inline-amount"><span aria-hidden="true">$</span><input id="credit-inline-amount" name="credit-amount" type="text" inputmode="decimal" value="1,000,000" maxlength="20" autocomplete="off" aria-describedby="credit-inline-scope credit-inline-error" required><span>MXN</span></div>
       </div><div class="credit-inline-term-field" hidden><label for="credit-inline-term">Plazo</label><select id="credit-inline-term" name="credit-term" disabled><option value="36" selected>36 meses</option></select></div></div>
-      <label class="sr-only" for="credit-inline-range">Ajustar monto del crédito</label><input class="sales-range" id="credit-inline-range" type="range" min="0" max="20000000" step="50000" value="1000000"><div class="range-scale" aria-hidden="true"><span>$0</span><span id="credit-inline-range-max">$20 millones MXN</span></div><p id="credit-inline-scope" class="credit-calculator-note">Condiciones según evaluación.</p>
+      <label class="sr-only" for="credit-inline-range">Ajustar monto del crédito</label><input class="sales-range" id="credit-inline-range" type="range" min="0" max="20000000" step="50000" value="1000000"><div class="range-scale" aria-hidden="true"><span>$0</span><span id="credit-inline-range-max">$20 millones MXN</span></div>
       <p id="credit-inline-error" class="field-error" role="alert" hidden></p>
       <div id="credit-inline-result" class="credit-inline-result" aria-live="polite" aria-atomic="true">
         <p class="credit-payment-label"><span>Pago mensual estimado</span><span id="credit-inline-month-label">36 meses</span></p><p class="credit-payment" id="credit-inline-payment">$39,232.85</p>
         <dl class="credit-inline-upfront"><div><dt id="credit-inline-fee-label">Apertura del 5%<span>Pago único</span></dt><dd id="credit-inline-fee">$50,000.00</dd></div></dl>
       </div>
-      <p class="sales-assumption-line" id="credit-inline-assumption">Tasa ilustrativa de 2% mensual. Importes antes de IVA y otros cargos.</p>
+      <p class="sales-assumption-line" id="credit-inline-scope"><span id="credit-inline-assumption">Tasa ilustrativa de 2% mensual. Importes antes de IVA y otros cargos.</span> Condiciones según evaluación.</p>
       <button class="button button-dark credit-inline-review" id="credit-inline-review" type="submit">Continuar con este monto <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
       <p class="sales-next-copy">Comparte tus datos para que Centralia revise tu caso.</p>
     </form>
@@ -115,8 +115,7 @@
 
 
 <section id="usos-credito" class="product-section content-v14 credit-projects" aria-labelledby="credit-projects-title">
-  <div class="credit-project-heading"><p class="eyebrow">PARA TU EMPRESA</p><h2 id="credit-projects-title">Capital para lo que sigue.</h2><p class="content-intro">Revisamos contigo cuánto necesitas invertir y cómo organizar los pagos.</p></div>
-  <p class="credit-project-prompt">Elige lo que quieres impulsar.</p>
+  <div class="credit-project-heading"><div><p class="eyebrow">PARA TU EMPRESA</p><h2 id="credit-projects-title">¿Qué quieres impulsar?</h2></div><p class="content-intro">Elige tu proyecto y revisa qué considerar antes de financiarlo.</p></div>
   <div class="credit-project-choices" role="group" aria-label="Elegir el proyecto de tu empresa">
     <button type="button" class="credit-project-choice" data-project="expansion" aria-pressed="true" aria-controls="credit-project-panel-expansion"><span class="credit-project-choice-title"><span>Expansión</span></span><span class="credit-project-choice-note">Financia la apertura de una sucursal o la ampliación de tus instalaciones.</span></button>
     <button type="button" class="credit-project-choice" data-project="inventario" aria-pressed="false" aria-controls="credit-project-panel-inventario"><span class="credit-project-choice-title"><span>Inventario</span></span><span class="credit-project-choice-note">Prepara mercancía e insumos para tu siguiente temporada de ventas.</span></button>
@@ -128,20 +127,20 @@
       <div id="credit-project-art" class="credit-project-art" role="img" aria-label="Una sede abre conexiones hacia tres nuevas sucursales, que se incorporan una por una.">
         <div class="credit-project-fallback"><span aria-hidden="true">↗</span><p>Un nuevo espacio para crecer.</p></div>
       </div>
-      <figcaption><span class="credit-project-caption">Red de sucursales</span><button type="button" class="credit-project-replay" aria-controls="credit-project-art" hidden>Pausar movimiento <span aria-hidden="true">Ⅱ</span></button></figcaption>
     </figure>
-    <button type="button" id="credit-project-inquiry" class="button button-dark credit-project-cta" aria-haspopup="dialog" aria-controls="simulator-dialog"><span class="credit-project-cta-label">Quiero financiar mi expansión</span><span aria-hidden="true">→</span></button>
     </div>
     <div class="credit-project-stories"><article id="credit-project-panel-expansion" class="credit-project-story" aria-labelledby="credit-project-title-expansion">
-      <p class="eyebrow">UNA SITUACIÓN COTIDIANA</p><h3 id="credit-project-title-expansion">Un nuevo espacio para crecer.</h3><p class="credit-project-copy">Abrir otra sucursal implica adecuaciones, equipo y un periodo de arranque. Conviene revisar el proyecto completo antes de definir el monto.</p>
+      <h3 id="credit-project-title-expansion">Un nuevo espacio para crecer.</h3><p class="credit-project-copy">Abrir otra sucursal implica adecuaciones, equipo y un periodo de arranque. Conviene revisar el proyecto completo antes de definir el monto.</p>
       <details class="credit-project-details"><summary>Lo que revisamos contigo<span aria-hidden="true">+</span></summary><dl><div><dt>La inversión</dt><dd>Qué necesitas para abrir y comenzar a operar.</dd></div><div><dt>El arranque</dt><dd>Cuándo esperas recibir ingresos de la nueva sucursal.</dd></div><div><dt>El flujo</dt><dd>Cómo se sostendrían los pagos durante ese periodo.</dd></div></dl></details>
     </article><article id="credit-project-panel-inventario" class="credit-project-story" aria-labelledby="credit-project-title-inventario" hidden>
-      <p class="eyebrow">UNA SITUACIÓN COTIDIANA</p><h3 id="credit-project-title-inventario">Prepárate para tu siguiente temporada.</h3><p class="credit-project-copy">La mercancía se compra antes de venderse. Revisa cuánto inventario necesitas y en qué momento esperas recuperar esa inversión.</p>
+      <h3 id="credit-project-title-inventario">Prepárate para tu siguiente temporada.</h3><p class="credit-project-copy">La mercancía se compra antes de venderse. Revisa cuánto inventario necesitas y en qué momento esperas recuperar esa inversión.</p>
       <details class="credit-project-details"><summary>Lo que revisamos contigo<span aria-hidden="true">+</span></summary><dl><div><dt>La compra</dt><dd>Importe de mercancía e insumos.</dd></div><div><dt>La rotación</dt><dd>Cuánto tiempo tardarías en vender y cobrar.</dd></div><div><dt>El calendario</dt><dd>Cómo se relacionan los pagos con tus cobros previstos.</dd></div></dl></details>
     </article><article id="credit-project-panel-equipo" class="credit-project-story" aria-labelledby="credit-project-title-equipo" hidden>
-      <p class="eyebrow">UNA SITUACIÓN COTIDIANA</p><h3 id="credit-project-title-equipo">La inversión empieza antes de producir.</h3><p class="credit-project-copy">Comprar una máquina también puede requerir instalación y puesta en marcha. Esos tiempos forman parte de la revisión.</p>
+      <h3 id="credit-project-title-equipo">La inversión empieza antes de producir.</h3><p class="credit-project-copy">Comprar una máquina también puede requerir instalación y puesta en marcha. Esos tiempos forman parte de la revisión.</p>
       <details class="credit-project-details"><summary>Lo que revisamos contigo<span aria-hidden="true">+</span></summary><dl><div><dt>El proyecto completo</dt><dd>Compra, instalación y necesidades para iniciar.</dd></div><div><dt>El tiempo de arranque</dt><dd>Cuándo comenzaría a producir el equipo.</dd></div><div><dt>El calendario de pagos</dt><dd>Cómo se relacionaría con el flujo de tu empresa.</dd></div></dl></details>
-    </article></div>
+    </article>
+    <button type="button" id="credit-project-inquiry" class="button button-dark credit-project-cta" aria-haspopup="dialog" aria-controls="simulator-dialog"><span class="credit-project-cta-label">Quiero financiar mi expansión</span><span aria-hidden="true">→</span></button>
+    </div>
   </div>
   <p class="sr-only" id="credit-project-status" role="status" aria-live="polite"></p>
   <noscript><p>Activa JavaScript para elegir otro proyecto y ver su movimiento.</p></noscript>

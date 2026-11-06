@@ -1,4 +1,34 @@
 /* Approved local preview: one visual system for the three tools and contact forms. */
+/* Preview: only vertical spacing between Factoraje and supplier sections. */
+body:is(.factoraje-page,.supplier-calendar-preview) .product-section{padding-block:80px}
+body:is(.factoraje-page,.supplier-calendar-preview) .content-case{margin-top:16px;margin-bottom:56px}
+body:is(.factoraje-page,.supplier-calendar-preview) .product-meeting{padding-block:64px}
+@media(max-width:760px){
+ body:is(.factoraje-page,.supplier-calendar-preview) .product-section{padding-block:56px}
+ body:is(.factoraje-page,.supplier-calendar-preview) .content-case{margin-top:8px;margin-bottom:24px}
+ body:is(.factoraje-page,.supplier-calendar-preview) .product-meeting{padding-block:48px}
+ body:is(.factoraje-page,.supplier-calendar-preview) .product-uses .cx-case-button {
+  grid-column:2;
+  justify-self:start;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  min-height:44px;
+  margin-top:12px;
+  padding:8px 0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  white-space:nowrap;
+  text-decoration:underline;
+  text-underline-offset:4px;
+ }
+ body:is(.factoraje-page,.supplier-calendar-preview) .product-uses .cx-case-button::after {
+  content:"→";
+  font-size:18px;
+  text-decoration:none;
+ }
+}
 body.product-tools-unified.sales-preview .product-tool,
 body.product-tools-unified.supplier-calendar-preview .product-tool{background:#fff;border:1px solid #e4e7ee;border-radius:12px;padding:28px;box-shadow:none;min-width:0;scroll-margin-top:0}
 body.product-tools-unified.sales-preview .product-tool-welcome,
