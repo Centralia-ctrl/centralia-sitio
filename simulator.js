@@ -1,25 +1,30 @@
 (() => {
   'use strict';
-  const TERMS = [12, 18, 24, 30, 36, 42, 48, 54, 60];
+  const TERMS = [36];
   const CALCULATION_RATE = 0.02;
 
-  const OPENING_FEE = 0.045;
-  const CREDIT_LIMITS = Object.freeze({unsecured:15000000, secured:50000000});
-  function credit(amount, months, kind = 'unsecured') {
-    if (!Object.hasOwn(CREDIT_LIMITS,kind) || !Number.isFinite(amount) || amount <= 0 || amount > CREDIT_LIMITS[kind] || !TERMS.includes(months)) throw new RangeError('Invalid credit scenario');
+  const OPENING_FEE = 0.05;
+  const CREDIT_LIMIT = 20000000;
+  const CREDIT_PROJECTS = Object.freeze({
+    expansion: 'Expansión',
+    inventario: 'Inventario',
+    equipo: 'Equipo y operación'
+  });
+  function credit(amount, months) {
+    if (!Number.isFinite(amount) || amount <= 0 || amount > CREDIT_LIMIT || !TERMS.includes(months)) throw new RangeError('Invalid credit scenario');
     const monthly = amount * CALCULATION_RATE / (1 - Math.pow(1 + CALCULATION_RATE, -months));
     const payments = monthly * months;
-    // Only the unsecured opening fee is confirmed as an illustrative assumption.
-    const commission = kind === 'unsecured' ? amount * OPENING_FEE : null;
-    return { monthly, payments, interest: payments - amount, commission, partialTotal: commission === null ? null : payments + commission };
+    // The opening fee is separate from the financed amount.
+    const commission = amount * OPENING_FEE;
+    return { monthly, payments, interest: payments - amount, commission, partialTotal: payments + commission };
   }
   const $ = selector => document.querySelector(selector);
   const dialog = $('#simulator-dialog'), amountInput = $('#sim-amount'), term = $('#sim-term'), currency = $('#sim-currency');
-  let creditKind = 'unsecured';
-  const kindInput = $('#sim-credit-kind');
-  // Keep the shared credit calculator's supported terms consistent on all pages.
-  for(const months of TERMS)if(!Array.from(term.options).some(option=>Number(option.value)===months))term.add(new Option(months+' meses',String(months)));
-  const creditScope = () => creditKind === 'secured' ? 'Crédito con garantía real: hasta $50 millones MXN y hasta 60 meses. Condiciones según evaluación.' : 'Crédito sin garantía real: hasta $15 millones MXN y hasta 60 meses. Aval según evaluación.';
+  let creditProject = null;
+  // Older page templates may still include other terms. Normalize every entry point.
+  term.replaceChildren(new Option('36 meses', '36', true, true));
+  term.disabled = true;
+  const creditScope = 'Crédito empresarial de hasta $20 millones MXN a 36 meses. Condiciones según evaluación.';
   let provider = null;
   let factoringDays = null;
   const compactConsultation = document.body.classList.contains('unified-contact') || document.body.classList.contains('sales-preview');
@@ -42,6 +47,46 @@
     return {advance: advanceCents / 100, retained: (cents - advanceCents) / 100};
   }
   const money = value => new Intl.NumberFormat('es-MX', {style:'currency', currency: mode === 'credit' ? 'MXN' : activeCurrency, currencyDisplay:'code', minimumFractionDigits:2}).format(value);
+  const contactOverview = document.createElement('div');
+  contactOverview.id = 'sim-contact-overview';
+  const contactSummary = $('#sim-summary');
+  contactSummary.before(contactOverview);
+  contactOverview.append(contactSummary);
+  const contactCosts = document.createElement('dl');
+  contactCosts.id = 'sim-credit-costs';
+  contactCosts.hidden = true;
+  contactOverview.append(contactCosts);
+  const contactCostNote = document.createElement('p');
+  contactCostNote.className = 'sim-credit-cost-note';
+  contactCostNote.textContent = 'Importes antes de IVA y otros cargos.';
+  contactCostNote.hidden = true;
+  contactOverview.append(contactCostNote);
+  const backButton = $('#sim-back');
+
+  function updateContactOverview() {
+    const showsCredit = mode === 'credit' && step === 'contact' && !inquiryOnly;
+    contactCosts.hidden = !showsCredit;
+    contactCostNote.hidden = !showsCredit;
+    contactCosts.replaceChildren();
+    contactOverview.classList.toggle('has-credit-costs', showsCredit);
+    backButton.classList.toggle('sim-summary-edit', showsCredit);
+    if (!showsCredit) {
+      $('#sim-lead-submit').after(backButton);
+      return;
+    }
+    const figures = credit(parseAmount(amountInput.value), Number(term.value));
+    for (const [label, value] of [['Pago mensual estimado', figures.monthly], ['Apertura del 5% · pago único', figures.commission]]) {
+      const row = document.createElement('div');
+      const name = document.createElement('dt');
+      const amount = document.createElement('dd');
+      name.textContent = label;
+      amount.textContent = money(value);
+      row.append(name, amount);
+      contactCosts.append(row);
+    }
+    contactOverview.append(backButton);
+    backButton.textContent = 'Modificar monto';
+  }
   const save = () => { if(!inquiryOnly)drafts[mode === 'credit' ? 'credit' : activeCurrency] = amountInput.value; };
   function render() {
     if (inquiryOnly) {
@@ -56,7 +101,7 @@
       return;
     }
     const amount = parseAmount(amountInput.value);
-    const exceedsCreditLimit = mode === 'credit' && amount > CREDIT_LIMITS[creditKind];
+    const exceedsCreditLimit = mode === 'credit' && amount > CREDIT_LIMIT;
     const valid = Number.isFinite(amount) && amount > 0 && amount <= 999999999999.99 && !exceedsCreditLimit && (mode !== 'credit' || TERMS.includes(Number(term.value)));
     $('#sim-error').hidden = valid;
     $('#sim-proposal').hidden = !exceedsCreditLimit;
@@ -66,7 +111,7 @@
     term.setAttribute('aria-invalid', String(mode === 'credit' && !TERMS.includes(Number(term.value))));
     if (!valid) {
       $('#sim-results').replaceChildren();
-      $('#sim-error').textContent = exceedsCreditLimit ? creditScope() : mode === 'credit' && !TERMS.includes(Number(term.value)) ? 'Selecciona uno de los plazos disponibles.' : 'Escribe un monto mayor a cero, de hasta 12 dígitos. Las comas se agregan automáticamente; para centavos usa punto y hasta dos decimales.';
+      $('#sim-error').textContent = exceedsCreditLimit ? creditScope : mode === 'credit' && !TERMS.includes(Number(term.value)) ? 'El plazo del cálculo es de 36 meses.' : 'Escribe un monto mayor a cero, de hasta 12 dígitos. Las comas se agregan automáticamente; para centavos usa punto y hasta dos decimales.';
       return;
     }
     if (step !== 'result') { $('#sim-results').replaceChildren(); return; }
@@ -74,10 +119,10 @@
     const add = (tag, cls, text, parent=fragment) => { const e=document.createElement(tag); e.className=cls; e.textContent=text; parent.append(e); return e; };
     const rows = [];
     if (mode === 'credit') {
-      const result = credit(amount, Number(term.value), creditKind);
+      const result = credit(amount, Number(term.value));
       add('p','sim-payment-label',`Mensualidad estimada · ${term.value} meses`);
       add('p','sim-payment',money(result.monthly));
-      add('p','sim-result-note',creditKind === 'secured' ? 'Ejemplo con tasa ilustrativa de 2% mensual. Comisión por confirmar; no está incluida. No es una oferta. No incluye IVA, seguros ni otros cargos.' : 'Cálculo de ejemplo con 2% mensual y 4.5% de comisión de apertura. No es una oferta. No incluye IVA, seguros ni otros cargos. Puede haber diferencias de centavos por redondeo.');
+      add('p','sim-result-note','Estimación con 2% mensual y 5% de apertura por separado. Antes de IVA, seguros y otros cargos. Las condiciones finales se confirman en la propuesta.');
       rows.push(['Capital solicitado',amount],['Intereses estimados del plazo',result.interest],['Suma de mensualidades',result.payments]);
       if(result.commission !== null)rows.push(['Comisión de apertura, antes de IVA',result.commission],['Total parcial: pagos + comisión, antes de IVA',result.partialTotal]);
     } else {
@@ -92,29 +137,30 @@
     $('#sim-results').replaceChildren(fragment);
   }
   function selectMode(next) {
-    creditKind=kindInput?.value==='secured'?'secured':'unsecured';
+    creditProject = null;
     factoringDays = null;
     if(mode!=='suppliers')save(); mode = next === 'factoring' ? 'factoring' : 'credit';
     inquiryOnly=false;inlineReview=false;
     amountInput.value = drafts[mode === 'credit' ? 'credit' : activeCurrency];
     $('#simulator-title').textContent = mode === 'credit' ? 'Simula tu crédito.' : 'Calcula tu anticipo.';
-    $('#simulator-intro').textContent = mode === 'credit' ? 'Elige monto y plazo. Consulta tu estimación sin compartir datos personales.' : 'Indica el valor de tus facturas. Consulta el anticipo estimado sin compartir datos personales.';
+    $('#simulator-intro').textContent = mode === 'credit' ? 'Indica el monto para estimar tus pagos a 36 meses.' : 'Indica el valor de tus facturas. Consulta el anticipo estimado sin compartir datos personales.';
     $('#sim-amount-label').textContent = mode === 'credit' ? 'Monto de crédito · MXN' : 'Valor de las facturas';
     $('#sim-term-field').hidden = mode !== 'credit'; $('#sim-currency-field').hidden = mode === 'credit';
-    if($('#sim-credit-kind-field'))$('#sim-credit-kind-field').hidden=mode!=='credit';
     $('#sim-credit-assumptions').hidden = mode !== 'credit'; $('#sim-factoring-note').hidden = mode === 'credit';
-    $('#sim-scope').textContent = mode === 'credit' ? creditScope() : 'Para facturas elegibles de productos o servicios entregados y aceptados. Moneda y porcentaje sujetos a evaluación.';
+    $('#sim-scope').textContent = mode === 'credit' ? creditScope : 'Para facturas elegibles de productos o servicios entregados y aceptados. Moneda y porcentaje sujetos a evaluación.';
     setStep('scenario');
   }
   function setStep(next) {
     step = next;
+    dialog.dataset.product = mode;
+    dialog.dataset.step = next;
     $('.sim-steps').hidden=mode==='suppliers'||inlineReview||inquiryOnly;
-    $('#sim-back').textContent=mode==='suppliers'?'← Ajustar mi compra':'← Ajustar monto y plazo';
+    $('#sim-back').textContent=mode==='suppliers'?'← Ajustar mi compra':'← Ajustar monto';
     $('#sim-new').textContent=mode==='suppliers'?'← Volver a mi compra':'← Ajustar mi simulación';
     $('#sim-credit-assumptions').hidden = mode !== 'credit' || next === 'contact';
     $('#sim-factoring-note').hidden = mode !== 'factoring' || next === 'contact';
     $('#simulator-title').textContent = next === 'contact' ? 'Solicita asesoría.' : next === 'result' ? 'Tu estimación.' : mode === 'credit' ? 'Simula tu crédito.' : 'Calcula tu anticipo.';
-    $('#simulator-intro').textContent = next === 'contact' ? 'Si quieres que revisemos tu escenario, comparte tus datos y autoriza el contacto.' : next === 'result' ? 'Un punto de partida para conversar. La propuesta final depende de la evaluación de tu empresa.' : mode === 'credit' ? 'Elige monto y plazo. Consulta tu estimación sin compartir datos personales.' : 'Indica el valor de tus facturas. Consulta el anticipo estimado sin compartir datos personales.';
+    $('#simulator-intro').textContent = next === 'contact' ? 'Si quieres que revisemos tu escenario, comparte tus datos y autoriza el contacto.' : next === 'result' ? 'Un punto de partida para conversar. La propuesta final depende de la evaluación de tu empresa.' : mode === 'credit' ? 'Indica el monto para estimar tus pagos a 36 meses.' : 'Indica el valor de tus facturas. Consulta el anticipo estimado sin compartir datos personales.';
     $('#sim-scenario').hidden = next !== 'scenario';
     $('#sim-contact').hidden = next !== 'contact';
     $('#sim-result-panel').hidden = next !== 'result';
@@ -131,6 +177,11 @@
       $('#simulator-intro').textContent=mode==='credit'?'Te contactaremos para conocer tu proyecto y orientar la revisión.':'Te contactaremos para revisar tus facturas y explicarte qué preparar.';
       $('#sim-back').textContent=inquiryOnly?'← Volver a la página':'← Ajustar mi escenario';
     }
+    if (mode === 'credit' && next === 'contact') {
+      $('#simulator-title').textContent = 'Revisemos tu crédito.';
+      $('#simulator-intro').textContent = 'Centralia te contactará a la brevedad para revisar tu caso.';
+    }
+    $('#sim-lead-submit').firstChild.textContent = mode === 'credit' ? 'Solicitar revisión ' : 'Enviar mi consulta ';
     if(compactConsultation && (inlineReview||inquiryOnly))$('#sim-new').textContent=inquiryOnly?'← Volver a la página':'← Ajustar mi escenario';
     const supplierReceived=mode==='suppliers'&&!!$('[data-supplier-confirmation]');
     if((compactConsultation||supplierReceived) && next==='result' && !$('.sim-success').hidden){
@@ -138,7 +189,10 @@
       $('#simulator-intro').textContent='Tu consulta es el primer paso. No necesitas iniciar ningún registro adicional.';
       $('.sim-confirmed-scenario').textContent=scenario();
       $('.sim-steps').hidden=true;
+      $('#sim-credit-assumptions').hidden=true;
+      $('#sim-factoring-note').hidden=true;
     }
+    updateContactOverview();
     render();
     if((compactConsultation||supplierReceived) && next==='result' && !$('.sim-success').hidden)$('#sim-results').hidden=true;
   }
@@ -152,11 +206,10 @@
   document.addEventListener('centralia:credit-review', event => {
     if(sending)return;
     const data=event.detail;
-    const nextKind=data?.kind ?? 'unsecured';
-    if(!data||!Object.hasOwn(CREDIT_LIMITS,nextKind)||!Number.isFinite(data.amount)||data.amount<=0||data.amount>CREDIT_LIMITS[nextKind]||!TERMS.includes(data.months))return;
+    if(!data||!Number.isFinite(data.amount)||data.amount<=0||data.amount>CREDIT_LIMIT||!TERMS.includes(data.months))return;
     selectMode('credit');
-    creditKind=nextKind;if(kindInput)kindInput.value=creditKind;
-    $('#sim-scope').textContent=creditScope();
+    creditProject = Object.hasOwn(CREDIT_PROJECTS, data.project) ? CREDIT_PROJECTS[data.project] : null;
+    $('#sim-scope').textContent=creditScope;
     amountInput.value=new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(data.amount);
     term.value=String(data.months);save();
     inlineReview=true;
@@ -183,6 +236,7 @@
     if(sending||!compactConsultation)return;
     const data=event.detail;if(!data||!['credit','factoring'].includes(data.product))return;
     selectMode(data.product);inquiryOnly=true;inlineReview=true;
+    if (mode === 'credit' && Object.hasOwn(CREDIT_PROJECTS, data.project)) creditProject = CREDIT_PROJECTS[data.project];
     // No default amount, date, or currency is attached to a direct consultation.
     opener=data.opener instanceof HTMLElement?data.opener:null;
     $('#sim-summary').textContent=scenario();$('#sim-send-error').hidden=true;$('#sim-send-status').textContent='';$('.sim-success').hidden=true;$('#sim-request-advice').hidden=false;
@@ -230,19 +284,19 @@
     render();
   });
   term.addEventListener('change',render);
-  kindInput?.addEventListener('change',()=>{creditKind=kindInput.value==='secured'?'secured':'unsecured';$('#sim-scope').textContent=creditScope();render();});
   currency.addEventListener('change',()=>{save();activeCurrency=currency.value==='USD'?'USD':'MXN';amountInput.value=drafts[activeCurrency];render();});
   function scenario() {
-    if(inquiryOnly)return (mode==='credit'?'Crédito empresarial':'Factoraje')+' · Consulta sin monto definido. Lo revisamos contigo.';
+    const creditDescription = creditProject ? 'Crédito empresarial · ' + creditProject : 'Crédito empresarial';
+    if(inquiryOnly)return (mode==='credit'?creditDescription:'Factoraje')+' · Consulta sin monto definido. Lo revisamos contigo.';
     if(mode==='suppliers')return 'Pago a proveedores'+(provider.amount===null?'':' · Compra por '+new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',currencyDisplay:'code'}).format(provider.amount))+' · Pago: '+new Date(provider.payment+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})+' · Cobro previsto: '+new Date(provider.collection+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})+' · '+(provider.days<0?'Cobro previsto '+Math.abs(provider.days)+' días antes del pago':provider.days===0?'Pago y cobro el mismo día':'Diferencia: '+provider.days+' días')+'. Intervalo de planeación, no plazo autorizado.';
     const amount = parseAmount(amountInput.value);
     return mode === 'credit'
-      ? 'Crédito empresarial · ' + money(amount) + ' · ' + term.value + ' meses · ' + (creditKind==='secured'?'Con garantía real':'Sin garantía real')
+      ? creditDescription + ' · ' + money(amount) + ' · ' + term.value + ' meses'
       : 'Factoraje · Facturas por ' + money(amount) + (factoringDays ? ' · Cobro previsto en '+factoringDays+' días; plazo sujeto a evaluación.' : '');
   }
   function scenarioMessage() {
     const amount = parseAmount(amountInput.value);
-    const figures = mode === 'credit' && !inquiryOnly ? credit(amount, Number(term.value), creditKind) : null;
+    const figures = mode === 'credit' && !inquiryOnly ? credit(amount, Number(term.value)) : null;
     return [
       'Solicitud web PYME — Centralia Financiera', scenario(),
       inquiryOnly ? 'Consulta directa: sin importe, moneda ni plazo indicados por el visitante.' : mode==='suppliers' ? 'Fecha de pago al proveedor: '+provider.payment+'\nFecha prevista de cobro: '+provider.collection+'\nRevisión de compra; sin cálculo de tasa, costo ni monto de financiamiento autorizado.' : figures ? 'Mensualidad ilustrativa: ' + money(figures.monthly) + '. Tasa ilustrativa: 2% mensual. Comisión: ' + (figures.commission===null?'por confirmar, no incluida':money(figures.commission)) + '. Antes de IVA y otros cargos.' : 'Anticipo ilustrativo hasta 85%: ' + money(factoring(amount).advance) + ', antes de costos.',
@@ -295,7 +349,7 @@
     const key = JSON.stringify([values.email.toLowerCase(),values.firstname,values.company,values.phone,scenario()]);
     const focusReceipt=()=>{const target=$('.sim-success:not([hidden])[tabindex]');(target||$('#sim-results')).focus({preventScroll:true});};
     if (received.has(key)) { $('.sim-success').hidden = false; $('#sim-request-advice').hidden = true; setStep('result'); focusReceipt(); return; }
-    sending = true; $('#sim-lead-fields').disabled = true;
+    sending = true; $('#sim-lead-fields').disabled = true; backButton.disabled = true;
     form.setAttribute('aria-busy','true');
     $('#sim-send-status').textContent = 'Guardando tu solicitud…';
     const controller = new AbortController();
@@ -328,7 +382,7 @@
       $('#sim-send-error').textContent = 'No pudimos confirmar el envío. Tus datos siguen aquí: revisa tu conexión e inténtalo de nuevo. También puedes contactarnos por WhatsApp desde la página.';
       $('#sim-send-error').hidden = false;
     } finally {
-      clearTimeout(timeout); sending = false; $('#sim-lead-fields').disabled = false; form.removeAttribute('aria-busy');
+      clearTimeout(timeout); sending = false; $('#sim-lead-fields').disabled = false; backButton.disabled = false; form.removeAttribute('aria-busy');
     }
   });
   render();

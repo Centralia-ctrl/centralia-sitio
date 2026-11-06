@@ -1970,6 +1970,18 @@ body.unified-contact .sim-success p:last-child{margin:0;font-size:12px}
 body.unified-contact .sim-success a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
 body.unified-contact .sim-confirmed-scenario{padding-block:12px;border-block:1px solid #e4e7ee}
 body.unified-contact .simulator-dialog .dialog-close{min-width:44px;min-height:44px}
+body.unified-contact .simulator-dialog[data-product="credit"][data-step="contact"]>.eyebrow{display:none}
+body.unified-contact .simulator-dialog[data-product="credit"][data-step="contact"] h2{margin-top:0}
+body.unified-contact .simulator-dialog[data-product="credit"] #sim-contact-overview.has-credit-costs{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:14px;background:#f8f9fa;border:1px solid #e4e7ee;border-radius:12px;padding:14px 16px;margin:16px 0 20px}
+body.unified-contact .simulator-dialog[data-product="credit"] #sim-contact-overview.has-credit-costs #sim-summary{grid-column:1/-1;border:0;background:transparent;padding:0;margin:0 0 12px;font-size:13px;line-height:1.6}
+body.unified-contact #sim-credit-costs{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0;padding-top:12px;border-top:1px solid #e4e7ee}
+body.unified-contact #sim-credit-costs>div{min-width:0}
+body.unified-contact #sim-credit-costs dt{font-size:12px;line-height:1.5;color:#5d6470}
+body.unified-contact #sim-credit-costs dd{font-size:16px;line-height:1.5;font-weight:500;color:#1b224e;margin:4px 0 0;font-variant-numeric:tabular-nums;white-space:nowrap}
+body.unified-contact .sim-credit-cost-note{align-self:center;font-size:12px;line-height:1.5;color:#5d6470;margin:6px 0 0}
+body.unified-contact .simulator-dialog #sim-contact-overview .sim-summary-edit{grid-column:2;display:inline-flex;align-items:center;min-height:44px;margin:6px 0 -4px;padding:0;background:transparent;color:#1b224e;text-decoration:underline;text-underline-offset:4px;font-size:13px}
+body.unified-contact .simulator-dialog[data-product="credit"][data-step="contact"] .sim-lead-grid{gap:14px 20px}
+body.unified-contact .simulator-dialog[data-product="credit"][data-step="contact"] #sim-lead-form>.form-note:last-child{margin-top:12px}
 body.unified-contact [hidden]{display:none!important}
 @media(max-width:980px){
  body.product-tools-unified.sales-preview .product-tool-welcome,
@@ -2001,6 +2013,9 @@ body.unified-contact [hidden]{display:none!important}
  body.unified-contact .sim-lead-grid{grid-template-columns:1fr;gap:14px}
  body.unified-contact .simulator-dialog .dialog-close{position:sticky;top:-12px;float:right;background:white;z-index:2}
 }
+@media(max-width:460px){
+ body.unified-contact #sim-credit-costs{grid-template-columns:1fr}
+}
 @media(max-width:360px){
  body.product-tools-unified.sales-preview .product-tool,
  body.product-tools-unified.supplier-calendar-preview .product-tool{padding:20px 16px}
@@ -2009,3 +2024,260 @@ body.unified-contact [hidden]{display:none!important}
  body.product-tools-unified.supplier-calendar-preview .supplier-calendar-card .supplier-amount-field input{font-size:25px}
  body.unified-contact .simulator-dialog{padding:22px 16px}
 }
+
+/* credit-project-scenes.css */
+/* Credit welcome, calculator and approved project artwork. */
+body.product-tools-unified.credit-simulator-preview .credit-calculator-welcome {
+ display:grid;
+ grid-template-columns:minmax(0,1fr) minmax(0,1.03fr);
+ align-items:center;
+ gap:32px clamp(40px,4.5vw,64px);
+ padding:48px 0 36px;
+}
+body.product-tools-unified.credit-simulator-preview .credit-calculator-copy {
+ align-self:center;
+ padding:16px 0;
+}
+body.product-tools-unified.credit-simulator-preview .credit-calculator-copy>.eyebrow {
+ margin:0 0 24px;
+ letter-spacing:.14em;
+}
+body.product-tools-unified.credit-simulator-preview .credit-calculator-copy h1 {
+ font-size:clamp(54px,4.5vw,64px);
+ line-height:1.06;
+ letter-spacing:-.055em;
+}
+body.product-tools-unified.credit-simulator-preview .credit-confirmed-benefits {
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:24px;
+ border:0;
+ margin:34px 0 0;
+ padding:0;
+ max-width:440px;
+}
+body.product-tools-unified.credit-simulator-preview .credit-confirmed-benefits p {
+ padding:0;
+ min-width:0;
+}
+body.product-tools-unified.credit-simulator-preview .credit-confirmed-benefits p+p {
+ border-left:1px solid #e4e7ee;
+ padding-left:28px;
+}
+body.product-tools-unified.credit-simulator-preview .credit-benefit-label {
+ font-size:12px;
+ line-height:1.5;
+ color:#5d6470;
+ margin-bottom:7px;
+}
+body.product-tools-unified.credit-simulator-preview .credit-confirmed-benefits strong {
+ display:block;
+ font-weight:500;
+}
+body.product-tools-unified.credit-simulator-preview .credit-benefit-number {
+ display:block;
+ font-size:49px;
+ line-height:1.05;
+ letter-spacing:-.06em;
+ font-variant-numeric:tabular-nums;
+}
+body.product-tools-unified.credit-simulator-preview .credit-benefit-unit {
+ display:block;
+ margin-top:5px;
+ color:#303647;
+ font-size:15px;
+ line-height:1.5;
+ letter-spacing:-.015em;
+}
+body.product-tools-unified.credit-simulator-preview .credit-benefit-unit small {
+ margin-left:3px;
+ color:#5d6470;
+ font-size:12px;
+ letter-spacing:0;
+}
+body.product-tools-unified.credit-simulator-preview .credit-inline-calculator {
+ padding:26px;
+ border-radius:12px;
+}
+body.product-tools-unified.credit-simulator-preview .product-tool .credit-calculator-heading {margin-bottom:24px}
+body.product-tools-unified.credit-simulator-preview .product-tool h2 {font-size:25px}
+body.product-tools-unified.credit-simulator-preview #credit-inline-form {margin-top:0}
+body.credit-simulator-preview #credit-inline-term:disabled,.simulator-dialog #sim-term:disabled {appearance:none;background-image:none;color:#303647;opacity:1;-webkit-text-fill-color:#303647}
+body.product-tools-unified.credit-simulator-preview .credit-input-row {grid-template-columns:minmax(0,1fr)}
+body.credit-simulator-preview .credit-inline-term-field[hidden] {display:none!important}
+body.product-tools-unified.credit-simulator-preview .product-tool .credit-inline-amount {
+ min-height:60px;
+ height:auto;
+ padding:8px 14px;
+}
+body.product-tools-unified.credit-simulator-preview .product-tool .credit-inline-amount input {
+ height:40px;
+ font-size:29px;
+}
+body.product-tools-unified.credit-simulator-preview .credit-inline-amount:focus-within {
+ outline:2px solid #315de8;
+ outline-offset:3px;
+}
+body.product-tools-unified.credit-simulator-preview .credit-inline-amount input:focus {outline:none}
+body.credit-simulator-preview #credit-inline-range {
+ margin:22px 0 13px;
+ background:linear-gradient(to right,#315de8 var(--credit-range-fill,5%),#e4e7ee var(--credit-range-fill,5%));
+}
+body.product-tools-unified.credit-simulator-preview .credit-inline-result {
+ margin:22px 0 0;
+ padding:20px 18px 18px;
+}
+body.product-tools-unified.credit-simulator-preview .credit-payment-label {
+ display:flex;
+ justify-content:space-between;
+ align-items:baseline;
+ flex-wrap:wrap;
+ gap:4px 12px;
+ margin:0;
+ font-size:13px;
+}
+body.product-tools-unified.credit-simulator-preview .credit-payment-label>span:last-child {color:#303647}
+body.product-tools-unified.credit-simulator-preview .credit-payment {
+ font-size:40px;
+ line-height:1.15;
+ letter-spacing:-.045em;
+ margin:8px 0 18px;
+}
+body.credit-simulator-preview .credit-inline-upfront {margin:0;padding-top:14px;border-top:1px solid #e4e7ee}
+body.credit-simulator-preview .credit-inline-upfront>div {display:flex;align-items:baseline;justify-content:space-between;gap:6px 12px;flex-wrap:wrap}
+body.credit-simulator-preview .credit-inline-upfront dt {font-size:13px;line-height:1.5;color:#5d6470}
+body.credit-simulator-preview .credit-inline-upfront dt span {display:block;font-size:12px;margin-top:2px}
+body.credit-simulator-preview .credit-inline-upfront dd {margin:0;font-size:17px;font-weight:500;color:#1b224e;font-variant-numeric:tabular-nums}
+body.product-tools-unified.credit-simulator-preview .product-tool .credit-inline-review {min-height:52px;padding:14px 18px;font-size:14px;margin-top:18px}
+body.product-tools-unified.credit-simulator-preview #credit-inline-assumption {font-size:12px;line-height:1.6;margin:14px 0 0}
+body.product-tools-unified.credit-simulator-preview .product-tool .sales-next-copy {margin:8px 0 0;font-size:13px;line-height:1.6}
+.credit-welcome-features {
+ display:grid;
+ grid-template-columns:1fr;
+ gap:15px;
+ list-style:none;
+ max-width:460px;
+ padding:24px 0 0;
+ margin:28px 0 0;
+ border-top:1px solid #e4e7ee;
+}
+.credit-welcome-features li {display:flex;align-items:center;gap:12px;color:#1b224e;font-size:15px;font-weight:500;line-height:1.5}
+.credit-welcome-features .icon {flex:none;width:18px;height:18px;color:#315de8}
+@media(prefers-reduced-motion:no-preference) {
+ .credit-inline-review .icon {transition:transform .2s ease}
+ .credit-inline-review:hover:not(:disabled) .icon {transform:translateX(4px)}
+}
+@media(max-width:1100px) and (min-width:981px) {
+ body.product-tools-unified.credit-simulator-preview .credit-calculator-welcome {gap:28px 36px}
+ body.product-tools-unified.credit-simulator-preview .credit-inline-calculator {padding:26px 24px 16px}
+ body.product-tools-unified.credit-simulator-preview .credit-calculator-copy h1 {font-size:54px}
+}
+@media(max-width:980px) {
+ body.product-tools-unified.credit-simulator-preview .credit-calculator-welcome {grid-template-columns:1fr;gap:28px;padding:36px 0 28px}
+ body.product-tools-unified.credit-simulator-preview .credit-calculator-copy {padding:0}
+ body.product-tools-unified.credit-simulator-preview .credit-calculator-copy h1 {font-size:clamp(38px,6vw,58px);max-width:700px}
+ body.product-tools-unified.credit-simulator-preview .credit-confirmed-benefits {margin-top:26px;max-width:460px}
+ body.product-tools-unified.credit-simulator-preview .credit-benefit-number {font-size:46px}
+ body.product-tools-unified.credit-simulator-preview .credit-benefit-unit {font-size:15px;margin-top:5px}
+ .credit-welcome-features {max-width:700px;gap:10px;margin-top:22px;padding-top:18px}
+ .credit-welcome-features li {font-size:15px;gap:10px}
+}
+@media(max-width:680px) {
+ body.product-tools-unified.credit-simulator-preview .credit-calculator-welcome {gap:24px;padding:28px 0 24px}
+ body.product-tools-unified.credit-simulator-preview .credit-calculator-copy>.eyebrow {margin-bottom:18px}
+ body.product-tools-unified.credit-simulator-preview .credit-confirmed-benefits {gap:20px;margin-top:24px;max-width:none}
+ body.product-tools-unified.credit-simulator-preview .credit-confirmed-benefits p+p {padding-left:24px}
+ body.product-tools-unified.credit-simulator-preview .credit-benefit-number {font-size:42px}
+ body.product-tools-unified.credit-simulator-preview .credit-benefit-label {font-size:12px;margin-bottom:4px}
+ body.product-tools-unified.credit-simulator-preview .credit-benefit-unit {font-size:14px}
+ body.product-tools-unified.credit-simulator-preview .credit-inline-calculator {padding:20px 20px 12px}
+ body.product-tools-unified.credit-simulator-preview .product-tool .credit-calculator-heading {margin-bottom:16px}
+ body.product-tools-unified.credit-simulator-preview .product-tool h2 {font-size:26px}
+ body.product-tools-unified.credit-simulator-preview .product-tool .credit-inline-amount {min-height:60px;padding:8px 12px}
+ body.product-tools-unified.credit-simulator-preview .product-tool .credit-inline-amount input {font-size:30px}
+ body.product-tools-unified.credit-simulator-preview .credit-inline-result {padding:16px 16px 14px;margin-top:16px}
+ body.product-tools-unified.credit-simulator-preview .credit-payment {font-size:36px;margin-bottom:12px}
+ body.credit-simulator-preview .credit-inline-upfront dd {font-size:16px}
+ .credit-welcome-features {gap:10px;padding-top:16px;margin-top:20px}
+ .credit-welcome-features li {font-size:15px}
+}
+@media(max-width:360px) {
+ body.product-tools-unified.credit-simulator-preview .credit-inline-calculator {padding:22px 16px 12px}
+ body.product-tools-unified.credit-simulator-preview .credit-payment {font-size:32px}
+}
+.credit-projects{scroll-margin-top:98px;padding-bottom:56px!important}
+.credit-project-heading{max-width:780px}
+.credit-project-prompt{font-size:14px;color:#5d6470;margin:34px 0 14px}
+.credit-project-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.credit-project-choice{position:relative;appearance:none;text-align:left;font:inherit;background:#fff;color:#1b224e;border:1px solid #e4e7ee;border-radius:12px;padding:22px 24px;cursor:pointer;min-height:134px;transition:border-color .2s,background-color .2s}
+.credit-project-choice:hover{background:#fafbfc;border-color:#9ba2b0}
+.credit-project-choice[aria-pressed="true"]{border-color:#1b224e;background:#f7f8fa}
+.credit-project-choice-title{display:flex;justify-content:space-between;gap:12px;font-size:19px;font-weight:500;line-height:1.35}
+.credit-project-choice::after{
+ content:"";
+ position:absolute;
+ bottom:0;
+ left:50%;
+ width:28px;
+ height:3px;
+ border-radius:3px 3px 0 0;
+ background:#1b224e;
+ transform:translateX(-50%);
+ opacity:0;
+ transition:opacity .2s;
+}
+.credit-project-choice[aria-pressed="true"]::after{opacity:1}
+.credit-project-choice-note{display:block;font-size:14px;line-height:1.65;color:#5d6470;margin-top:12px;max-width:290px}
+.credit-project-layout{display:grid;grid-template-columns:minmax(0,1.36fr) minmax(0,1fr);gap:48px;align-items:center;padding-top:36px}
+.credit-project-figure{min-width:0;margin:0}
+.credit-project-visual{min-width:0}
+.credit-project-art{position:relative;width:100%;aspect-ratio:1.42;background:#fff;overflow:hidden}
+.credit-project-art canvas{display:block;width:100%;height:100%}
+.credit-project-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#5d6470;background:#f7f8fa;border-radius:12px;text-align:center;padding:32px}
+.credit-project-fallback>span{font-size:64px;color:#1b224e;font-weight:300}
+.credit-project-art.is-ready .credit-project-fallback{display:none}
+.credit-project-figure figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#5d6470;font-size:12px;line-height:1.5;padding:0 8px;min-height:44px}
+.credit-project-replay{font:inherit;border:0;background:transparent;color:#1b224e;cursor:pointer;min-height:44px;display:inline-flex;gap:8px;align-items:center;padding:6px 0;white-space:nowrap}
+.credit-project-replay:hover{text-decoration:underline;text-underline-offset:4px}
+.credit-project-replay:disabled{cursor:default;opacity:.5}
+.credit-project-story[hidden],.credit-project-replay[hidden]{display:none!important}
+.credit-project-stories{min-width:0}
+.credit-project-story h3{font-size:clamp(27px,2.6vw,34px);font-weight:400;letter-spacing:-.025em;line-height:1.2;color:#1b224e;margin:14px 0 18px;max-width:390px}
+.credit-project-copy{font-size:16px;line-height:1.8;color:#5d6470;margin:0 0 22px;max-width:440px}
+.credit-project-details{border-top:1px solid #e4e7ee;border-bottom:1px solid #e4e7ee;margin:0 0 23px}
+.credit-project-details summary{font-size:14px;line-height:1.5;font-weight:500;list-style:none;min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;color:#303647}
+.credit-project-details summary::-webkit-details-marker{display:none}
+.credit-project-details summary>span{font-size:22px;font-weight:300}
+.credit-project-details[open] summary>span{transform:rotate(45deg)}
+.credit-project-details dl{margin:0 0 18px;display:grid;gap:16px}
+.credit-project-details dt{font-size:14px;color:#1b224e;font-weight:500;margin-bottom:5px}
+.credit-project-details dd{margin:0;font-size:14px;line-height:1.7;color:#5d6470}
+.credit-project-cta{display:flex;width:min(100%,370px);margin:12px auto 0;gap:18px;font-size:15px;text-align:left;white-space:normal;cursor:pointer}
+.credit-project-cta>[aria-hidden]{flex:none}
+.credit-project-cta-label{flex:1;min-width:0}
+.credit-project-story>small{display:block;font-size:12px;color:#5d6470;margin-top:18px}
+.credit-project-choice:focus-visible,.credit-project-replay:focus-visible,.credit-project-cta:focus-visible,.credit-project-details summary:focus-visible{outline:2px solid #315de8;outline-offset:4px}
+.credit-project-story.is-entering{animation:credit-project-enter .48s cubic-bezier(.2,.7,.2,1) both}
+@keyframes credit-project-enter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1000px){.credit-project-layout{gap:28px;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}.credit-project-choice{padding:18px;min-height:150px}.credit-project-choice-title{font-size:17px}.credit-project-story h3{font-size:28px}}
+@media(max-width:760px){
+ .credit-projects{padding-top:28px!important;padding-bottom:32px!important;scroll-margin-top:82px}
+ .credit-project-heading>.eyebrow{display:none}
+ .credit-project-heading h2{margin-top:0;margin-bottom:0}
+ .credit-projects .content-intro{margin-top:14px;line-height:1.65}
+ .credit-project-prompt{margin:18px 0 12px;font-size:13px}
+ .credit-project-choices{gap:8px}
+ .credit-project-choice{padding:13px 9px;min-height:82px;border-radius:8px}
+ .credit-project-choice-title{font-size:14px;line-height:1.4;display:block}
+ .credit-project-choice-note{display:none}
+ .credit-project-layout{grid-template-columns:1fr;gap:18px;padding-top:10px}
+ .credit-project-art{aspect-ratio:1.6}
+ .credit-project-figure figcaption{padding:0;font-size:12px;gap:12px}
+ .credit-project-replay{font-size:12px}
+ .credit-project-cta{width:100%;min-height:52px;margin-top:8px;padding:14px 16px;font-size:14px}
+ .credit-project-story>.eyebrow{display:none}
+ .credit-project-story h3{font-size:28px;margin-top:12px;max-width:320px}
+ .credit-project-copy{font-size:15px;line-height:1.75;max-width:none}
+ .credit-project-story>small{margin-top:14px}
+}
+@media(prefers-reduced-motion:reduce){.credit-project-choice,.credit-project-choice::after{transition:none}.credit-project-story.is-entering{animation:none}}

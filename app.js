@@ -55,15 +55,15 @@
     capital: {
       title: 'Capital para crecer',
       message: 'crédito empresarial para la operación o expansión de mi empresa',
-      range: 'Hasta $50 millones MXN con garantía real, o hasta $15 millones sin garantía real. Exclusivo para personas morales.',
+      range: 'Hasta $20 millones MXN a 36 meses, sin garantía. Exclusivo para personas morales.',
       facts: [
-        ['Con garantía', 'Hasta $50 millones MXN. Línea de hasta 5 años; condiciones y disposiciones según modalidad.'],
-        ['Sin garantía real', 'Hasta $15 millones MXN y hasta 60 meses; aval según evaluación.'],
-        ['Tasa de interés', 'Se confirma en la propuesta individual según perfil, plazo y modalidad. Pide la tasa y su periodicidad por escrito.'],
-        ['Comisiones', 'Sin garantía real: apertura ilustrativa de 4.5%, antes de IVA, utilizada en el simulador. Con garantía real: comisión por confirmar, no incluida en el cálculo. Las comisiones definitivas se detallan en tu propuesta.'],
-        ['Perfil de empresa', 'Persona moral. Se revisan antigüedad, facturación, historial crediticio, capacidad de pago y, cuando aplica, la garantía.']
+        ['Monto y plazo', 'Hasta $20 millones MXN a 36 meses; condiciones según evaluación.'],
+        ['Tasa de interés', 'Tasa fija sobre saldos insolutos. El porcentaje se confirma en la propuesta individual según el perfil de tu empresa.'],
+        ['Pagos anticipados', 'Sin penalizaciones por pagos anticipados.'],
+        ['Comisiones', 'Apertura de 5% antes de IVA. El simulador la muestra por separado. Las condiciones definitivas se detallan en tu propuesta.'],
+        ['Perfil de empresa', 'Persona moral. Se revisan antigüedad, facturación, historial crediticio y capacidad de pago.']
       ],
-      note: 'Montos máximos sujetos a evaluación. Las modalidades son alternativas, no se suman. La propuesta confirmará tasa, comisiones, impuestos, costo total, garantías y calendario de pagos antes de contratar.'
+      note: 'Monto máximo sujeto a evaluación. La propuesta confirmará tasa, comisiones, impuestos, costo total, requisitos y calendario de pagos antes de contratar.'
     },
     liquidez: {
       title: 'Factoraje empresarial',
@@ -170,8 +170,7 @@
     let hint = routes[currentRoute].range;
     const value = numericAmount();
     if (!undecided && currentRoute === 'capital') {
-      if (value > 50000000) hint += ' El monto supera este máximo; lo revisaremos contigo sin prometer una autorización.';
-      else if (value > 15000000) hint += ' Por el monto indicado, revisaremos la modalidad con garantía real.';
+      if (value > 20000000) hint += ' El monto supera este máximo; lo revisaremos contigo sin prometer una autorización.';
     }
     if (!undecided && currentRoute === 'pagos' && currentCurrency === 'USD' && value > 5000000) hint += ' El monto indicado supera el máximo de esta línea.';
     $('#route-hint').textContent = hint;

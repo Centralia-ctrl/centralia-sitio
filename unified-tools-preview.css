@@ -57,6 +57,18 @@ body.unified-contact .sim-success p:last-child{margin:0;font-size:12px}
 body.unified-contact .sim-success a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
 body.unified-contact .sim-confirmed-scenario{padding-block:12px;border-block:1px solid #e4e7ee}
 body.unified-contact .simulator-dialog .dialog-close{min-width:44px;min-height:44px}
+body.unified-contact .simulator-dialog[data-product="credit"][data-step="contact"]>.eyebrow{display:none}
+body.unified-contact .simulator-dialog[data-product="credit"][data-step="contact"] h2{margin-top:0}
+body.unified-contact .simulator-dialog[data-product="credit"] #sim-contact-overview.has-credit-costs{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:14px;background:#f8f9fa;border:1px solid #e4e7ee;border-radius:12px;padding:14px 16px;margin:16px 0 20px}
+body.unified-contact .simulator-dialog[data-product="credit"] #sim-contact-overview.has-credit-costs #sim-summary{grid-column:1/-1;border:0;background:transparent;padding:0;margin:0 0 12px;font-size:13px;line-height:1.6}
+body.unified-contact #sim-credit-costs{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0;padding-top:12px;border-top:1px solid #e4e7ee}
+body.unified-contact #sim-credit-costs>div{min-width:0}
+body.unified-contact #sim-credit-costs dt{font-size:12px;line-height:1.5;color:#5d6470}
+body.unified-contact #sim-credit-costs dd{font-size:16px;line-height:1.5;font-weight:500;color:#1b224e;margin:4px 0 0;font-variant-numeric:tabular-nums;white-space:nowrap}
+body.unified-contact .sim-credit-cost-note{align-self:center;font-size:12px;line-height:1.5;color:#5d6470;margin:6px 0 0}
+body.unified-contact .simulator-dialog #sim-contact-overview .sim-summary-edit{grid-column:2;display:inline-flex;align-items:center;min-height:44px;margin:6px 0 -4px;padding:0;background:transparent;color:#1b224e;text-decoration:underline;text-underline-offset:4px;font-size:13px}
+body.unified-contact .simulator-dialog[data-product="credit"][data-step="contact"] .sim-lead-grid{gap:14px 20px}
+body.unified-contact .simulator-dialog[data-product="credit"][data-step="contact"] #sim-lead-form>.form-note:last-child{margin-top:12px}
 body.unified-contact [hidden]{display:none!important}
 @media(max-width:980px){
  body.product-tools-unified.sales-preview .product-tool-welcome,
@@ -87,6 +99,9 @@ body.unified-contact [hidden]{display:none!important}
  body.unified-contact .simulator-dialog h2{font-size:27px;padding-right:24px}
  body.unified-contact .sim-lead-grid{grid-template-columns:1fr;gap:14px}
  body.unified-contact .simulator-dialog .dialog-close{position:sticky;top:-12px;float:right;background:white;z-index:2}
+}
+@media(max-width:460px){
+ body.unified-contact #sim-credit-costs{grid-template-columns:1fr}
 }
 @media(max-width:360px){
  body.product-tools-unified.sales-preview .product-tool,
