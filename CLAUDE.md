@@ -172,3 +172,15 @@ Miguel Ángel revisó y autorizó publicar los ajustes que parten de main `cee99
 En Factoraje y Pago a proveedores se ajusta únicamente la separación vertical entre secciones. El margen inferior del ejemplo es de 56 px en escritorio y 24 px en móvil, tras el recorte aprobado de 24 px. En móvil, «Ver este caso» se alinea en la segunda columna bajo la descripción, con una flecha discreta y un área de toque de 44 px. Sus HTML y scripts permanecen iguales a main.
 
 Se revisaron las tres páginas a 360 y 390 px, los controles, el paso al formulario y la reproducción de las animaciones. Se enviaron tres consultas identificadas como pruebas desde las páginas y se confirmó en HubSpot la recepción de cada producto, monto, escenario y consentimiento. La comparación móvil es una vista local dentro de dist/ que queda fuera de la compilación publicable.
+
+## Vista local posterior a la auditoría · 6 de noviembre de 2026
+
+Por petición de Miguel Ángel se retira el bloque de preguntas de la portada y su objeto FAQPage. En Factoraje móvil se compactan título y presentación, se conserva la cifra de anticipo con sus condiciones y las ligas de apoyo pasan después del cálculo. En computadora conservan su posición junto al simulador. El orden de teclado sigue el orden del documento.
+
+Pago a proveedores explica el pago de la compra y la liquidación posterior del financiamiento. El calendario muestra las condiciones de hasta 37 días junto a su resultado, indica cuándo el cobro previsto supera ese plazo y usa el botón «Quiero financiar esta compra». La cifra del calendario sigue siendo el intervalo entre las fechas, sin convertirla en un plazo autorizado. Se conservan cálculos, formularios, consentimientos y animaciones. Esta revisión es local y espera aprobación para publicar.
+
+Validación de esta vista local: 37 pruebas aprobadas, compilación de 73 archivos sin referencias faltantes y 530 enlaces internos sin destinos rotos. Las consultas se verificaron sin enviar nuevos contactos reales.
+
+## Cierre móvil autorizado · 6 de noviembre de 2026
+
+Miguel Ángel autorizó terminar los dos ajustes de conversión y actualizar la versión privada. Las barras de monto de Crédito y Factoraje tienen una zona táctil de 44 px en móvil y conservan una línea visible de 5 px. La portada presenta las necesidades «Invertir en mi empresa», «Anticipar mis facturas» y «Financiar una compra» con los valores de producto existentes para HubSpot. Se incluyen los ajustes locales anteriores de portada, Factoraje y proveedores.
