@@ -50,7 +50,7 @@
     const days = current.days, count = Math.abs(days);
     $('[data-calendar-caption]').textContent = days<0?'Tu cobro está previsto':days===0?'Tu pago y tu cobro coinciden':'Entre tu pago y tu cobro hay';
     $('[data-calendar-days]').textContent = days<0?count+' '+plural(count)+' antes':days===0?'El mismo día':count+' '+plural(count);
-    $('[data-calendar-detail]').textContent = days<0?'Cobrarías antes de pagar. Revisemos si necesitas financiamiento para esta compra.':days===0?'Revisemos los horarios de pago y la disponibilidad del dinero.':'Revisemos cómo cubrir ese intervalo sin frenar tu operación.';
+    $('[data-calendar-detail]').textContent = days<0?'Cobrarías antes de pagar. Revisemos si necesitas financiamiento para esta compra.':days===0?'Revisemos los horarios de pago y la disponibilidad del dinero.':days>37?'Tu cobro sería después del plazo de hasta 37 días. Revisemos otra alternativa para cubrir la compra.':'Revisemos cómo financiar esta compra según tus fechas de pago y cobro.';
     $('[data-calendar-gap]').textContent = days<0?'El cobro está previsto '+count+' '+plural(count)+' antes del pago.':days===0?'Pago y cobro previstos para el mismo día.':count+' '+plural(count)+' entre tu pago y tu cobro previsto.';
     const events = days<0?[
       ['Cobro previsto',current.collection,'collection'],['Pago al proveedor',current.payment,'payment']

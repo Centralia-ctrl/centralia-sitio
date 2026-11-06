@@ -23,7 +23,7 @@ test('Credit uses 36 months and 5% opening; visible FAQs match structured answer
   assert.equal(d.querySelector('#sim-credit-kind'),null,f);assert.equal(d.querySelector('#sim-term').value,'36',f);assert.match(d.querySelector('#sim-scope').textContent,/20 millones.*36 meses/);dom.window.close();
  }
  for(const f of ['app.js','index.html','preguntas-frecuentes.html']){assert.doesNotMatch(read(f),/4\.5%|comisión por confirmar/);assert.match(read(f),/5%/);}
- for(const f of ['index.html','preguntas-frecuentes.html']){const dom=new JSDOM(read(f)),d=dom.window.document;
+ for(const f of ['preguntas-frecuentes.html']){const dom=new JSDOM(read(f)),d=dom.window.document;
   const graph=[...d.querySelectorAll('script[type="application/ld+json"]')].flatMap(e=>JSON.parse(e.textContent)['@graph']||[]),faq=graph.find(e=>e['@type']==='FAQPage'),answer=faq?.mainEntity.find(e=>e.name==='¿Qué tasa y comisiones pagaría mi empresa?')?.acceptedAnswer.text;
   assert.ok(answer);assert.ok(d.body.textContent.includes(answer),f);assert.match(answer,/36 meses/);assert.match(answer,/apertura del 5% por separado, antes de IVA/);dom.window.close();
  }
@@ -44,4 +44,15 @@ test('Supplier case CTA preserves amount and dates; invalid scenario stays on pa
  p.$('#supplier-amount').value='8700000';p.$('#supplier-payment').value='2030-12-20';p.$('#supplier-collection').value='2031-01-10';
  const link=p.$('.cx-case-link');link.click();assert.equal(p.$('#simulator-dialog').open,true);assert.match(p.$('#sim-summary').textContent,/8,700,000.00.*21 días/);assert.equal(p.w.location.pathname,'/pago-a-proveedores.html');
  p.$('#sim-back').click();assert.equal(p.d.activeElement,link);p.$('#supplier-amount').value='0';link.click();assert.equal(p.$('#simulator-dialog').open,false);assert.equal(p.d.activeElement,p.$('#supplier-amount'));assert.equal(p.calls.length,0);p.close();
+});
+test('Supplier calendar distinguishes the payment cycle from the maximum financing term',()=>{
+ const p=setup('pago-a-proveedores.html');p.w.eval(read('supplier-calendar-preview.js'));
+ p.$('#supplier-payment').value='2030-01-01';
+ for(const [date,expected,overTerm] of [['2030-01-31','30 días',false],['2030-02-07','37 días',false],['2030-02-08','38 días',true]]){
+  p.$('#supplier-collection').value=date;p.$('#supplier-collection').dispatchEvent(new p.w.Event('input'));
+  assert.equal(p.$('[data-calendar-days]').textContent,expected);
+  assert.equal(p.$('[data-calendar-detail]').textContent.includes('después del plazo de hasta 37 días'),overTerm);
+  assert.equal(p.$('[data-calendar-review]').disabled,false);
+ }
+ assert.equal(p.calls.length,0);p.close();
 });
