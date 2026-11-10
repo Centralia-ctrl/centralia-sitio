@@ -62,7 +62,7 @@
 .home-v23 .capture-followup p{font-size:14px;line-height:1.8;color:var(--editorial-ink);margin:0}
 .home-v23 .home-capture .capture-audience{font-size:13px}
 .home-v23 .closing-inner{background:#fff;border-color:var(--editorial-line)}
-.home-v23 .closing-inner::before{background:var(--editorial-line)}
+.home-v23 .closing-inner::before{display:none}
 .home-v23 .solution-primary-link:focus-visible{outline:3px solid var(--editorial-blue);outline-offset:4px}
 @media(max-width:950px){
  .home-v23 .solution-description{max-width:540px}
