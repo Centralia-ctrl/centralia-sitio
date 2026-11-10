@@ -109,7 +109,8 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 ## En espera (no hacer sin instrucción)
 
 - Aviso de privacidad: se hará cuando se constituya la persona moral.
-- Razón social y símbolo ®.
+- Razón social: CENTRALIA FINANCIERA® es una marca comercial operada por Martha Patricia Meza Badillo, persona física con actividad empresarial (dato de Miguel Ángel, 10 de noviembre de 2026). El símbolo ® se conserva: Miguel Ángel confirmó que la marca está registrada. Falta decidir si el nombre del operador aparece en el pie; va en el aviso de privacidad.
+- **Domicilio** (10 de noviembre de 2026): Av. Popocatépetl 415, Sta. Cruz Atoyac, Benito Juárez, 03310, Ciudad de México. Está en el pie de todas las páginas y en `Organization` de la portada.
 - Cifras y condiciones. Ya confirmado por Miguel Ángel: tasa ilustrativa del simulador de 2% mensual, plazo máximo de 36 meses (el simulador ofrece 12, 18, 24, 30 y 36) y anticipo de factoraje de hasta 85% del valor de facturas elegibles, antes de costos (26 de octubre de 2026).
 - Formulario único de HubSpot.
 - Simulador arriba de $15 M.
