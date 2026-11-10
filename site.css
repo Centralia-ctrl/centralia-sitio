@@ -1378,6 +1378,8 @@ body.centralia-v23 .footer-bottom>div>a:hover,body.centralia-v23 .footer-bottom>
 /* Compact contact group after removing the footer tagline. */
 .site-footer .footer-main{row-gap:14px}
 .site-footer .footer-caption>p{margin-top:4px}
+/* Domicilio en el pie (10 nov 2026). */
+body.centralia-v23 .footer-caption .footer-address{display:block;margin-top:8px;font-style:normal;font-size:13px;line-height:1.6;color:#5d6470}
 
 /* consent.css */
 /* Cookie consent banner (consent.js). Off until measurement is activated. */
