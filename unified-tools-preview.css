@@ -195,3 +195,21 @@ body.product-tools-unified.factoring-first-preview .factoring-first-actions{grid
  body.product-tools-unified.factoring-first-preview .factoring-first-actions .sales-section-link{min-height:44px}
  body.product-tools-unified.factoring-first-preview .factoring-first-actions .factoring-direct-review{margin-top:4px}
 }
+/* Keep the factoring amount and its result together on mobile. Desktop stays unchanged. */
+@media(max-width:680px){
+ body.product-tools-unified.factoring-first-preview .factoring-calculator-grid{display:flex;flex-direction:column;gap:0}
+ body.product-tools-unified.factoring-first-preview :is(.factoring-calculator-inputs,.factoring-calculator-result){display:contents}
+ body.product-tools-unified.factoring-first-preview .factoring-calculator-inputs>label[for="factoring-inline-amount"]{order:0}
+ body.product-tools-unified.factoring-first-preview .factoring-input-money{order:1}
+ body.product-tools-unified.factoring-first-preview #factoring-inline-error{order:2}
+ body.product-tools-unified.factoring-first-preview #factoring-inline-result{order:3;margin:16px 0 12px}
+ body.product-tools-unified.factoring-first-preview .factoring-calculator-inputs>label[for="factoring-inline-range"]{order:4}
+ body.product-tools-unified.factoring-first-preview #factoring-inline-range{order:4}
+ body.product-tools-unified.factoring-first-preview .factoring-calculator-inputs>.range-scale{order:5}
+ body.product-tools-unified.factoring-first-preview #factoring-inline-range-note{order:6}
+ body.product-tools-unified.factoring-first-preview .factoring-inline-pair{order:7}
+ body.product-tools-unified.factoring-first-preview #factoring-inline-days-note{order:8}
+ body.product-tools-unified.factoring-first-preview #factoring-inline-review{order:9}
+ body.product-tools-unified.factoring-first-preview .factoring-calculator-result>.sales-next-copy{order:10}
+ body.product-tools-unified.factoring-first-preview .factoring-calculator-disclosure{order:11}
+}

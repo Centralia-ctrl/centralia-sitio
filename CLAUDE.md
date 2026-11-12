@@ -215,3 +215,31 @@ Actualizados el simulador, la respuesta visible y su FAQ estructurada, y el cont
 ## Publicación de Pago a proveedores autorizada · 12 de noviembre de 2026
 
 Miguel Ángel autorizó publicar la versión revisada: «dale publícalo y que mejorarias?». Se publica el simulador de monto y plazo con las condiciones confirmadas, el resultado aclarado, los tres ejemplos y el título equilibrado. El diseño y la rueda permanecen como se aprobaron; Crédito, Factoraje y la portada no se rediseñan. Los impuestos y otros cargos siguen excluidos del resultado. No se modifica la medición ni la configuración de acceso de Netlify. La publicación se tramita mediante un único pull request con las fuentes y site.css generado; dist/ continúa fuera del repositorio. Validación previa: 40 pruebas y construcción de 72 archivos sin referencias faltantes.
+
+## Muestra móvil y título de Pago a proveedores · 12 de noviembre de 2026
+
+Después de publicar el PR #69 (main 42ce110), Miguel Ángel pidió acercar el resultado al monto en móvil e igualar la escala del título con las otras soluciones. Esta revisión es solo local: no publicar ni fusionar sin aprobación.
+
+En pantallas de hasta 680 px, el resumen de capital más interés queda a 16 px del campo de monto, antes del plazo. Se conserva un único resultado, el desglose, los avisos de costos, el formulario y el cálculo. En escritorio se conserva la distribución del simulador. El titular usa la escala de Factoraje (hasta 68 px), con ajuste natural de líneas; se mantienen sus palabras, metadatos y jerarquía SEO. La rueda y todos los scripts se conservan sin modificaciones.
+
+Archivos: pago-a-proveedores.html, supplier-simulator-preview.css, site.css generado y CLAUDE.md. Compilación: 72 archivos, 5.1 MB, sin referencias faltantes. Las 40 pruebas existentes pasan. No se enviaron consultas reales ni se activó la medición.
+
+Revisión posterior solicitada por Miguel Ángel: unir el desglose al resultado y explicar el recorrido del dinero, sin publicar. La tarjeta muestra compra a financiar, interés por el plazo elegido y capital más interés estimado en un único resumen, junto al monto en móvil. Conserva la exclusión de impuestos y otros cargos.
+
+La introducción, Cómo funciona y la respuesta FAQ explican que la empresa autoriza el pago al proveedor con la línea aprobada y luego liquida a la entidad otorgante mediante transferencia, según las instrucciones y el vencimiento del estado de cuenta. Centralia acompaña la evaluación. FAQ y JSON-LD sincronizados. El mecanismo se verificó en la documentación oficial de operación y estado de cuenta de Jeeves; no se incluye su nombre en el sitio. Fuentes: https://jeeves.zendesk.com/hc/es-001/articles/16582729969425 y https://jeeves.zendesk.com/hc/es-001/articles/17512031383697. Las condiciones particulares de 1.5% mensual, 15–60 días y sin apertura siguen siendo las confirmadas por Miguel Ángel; no se copian otros plazos ni cargos de la página pública del proveedor.
+
+Se conservan diseño, rueda, scripts de cálculo, formularios, SEO principal y medición apagada. Las 40 pruebas pasan y la compilación termina con 72 archivos sin referencias faltantes. Esta revisión permanece exclusivamente en la muestra local, pendiente de aprobación para publicar.
+
+Corrección inmediata de Miguel Ángel: rechazó «a la entidad que lo otorgó» por sonar burocrático. La bienvenida recupera «Tu proveedor recibe el pago. Tu empresa conserva liquidez y paga después.». La explicación de devolución queda en Cómo funciona y FAQ usando «la financiera» y las instrucciones del estado de cuenta. Se mantiene el resumen unido y no se publica.
+
+## Muestra local · condiciones y resultados juntos · 12 de noviembre de 2026
+
+Miguel Ángel autorizó corregir las condiciones de Pago a proveedores en la portada, integrar su mejora local pendiente y acercar el resultado de Factoraje al monto en móvil, sin publicar. La tarjeta y la ventana de costos de Proveedores ahora muestran 15–60 días, 1.5% mensual y sin comisión de apertura. Se retiran de esa comunicación los máximos de US$5 millones, 37 días y la cobertura de 150 países no confirmados. El monto se mantiene sujeto a evaluación y se explican impuestos y cargos por separado.
+
+La muestra conserva el título y desglose integrado de Proveedores, además de su explicación de pago y devolución ya revisada. En Factoraje solo cambia la distribución móvil hasta 680 px: el resultado aparece después del importe; se conservan todos los controles, notas, cálculos y el orden de tabulación entre campos. Escritorio, animaciones, formularios, endpoints y medición siguen iguales. El video del almacén se conserva por instrucción explícita del usuario. No hay publicación ni cambios en Netlify.
+
+Validación de esta muestra: 40 pruebas aprobadas; construcción de 72 archivos (5.1 MB), sin referencias faltantes. Portada revisada a 320 y 1440 px; Factoraje y Proveedores a 320, 360 y 390 px, sin desbordes. El resultado de Factoraje queda a 16 px del importe; 1,000,000 MXN produce 850,000 MXN antes de costos y un importe inválido oculta el resultado y bloquea continuar. Se verificó que los archivos de animación, las fórmulas, los endpoints, la medición y los metadatos SEO siguen iguales; las FAQ de Proveedores coinciden con sus datos estructurados. Vista previa: http://127.0.0.1:52920/. Sin envíos reales ni publicación.
+
+## Publicación autorizada de la revisión móvil · 12 de noviembre de 2026
+
+Miguel Ángel aprobó publicar estos ajustes de portada, Factoraje y Pago a proveedores en Netlify después de revisar la muestra. Se integran únicamente las condiciones de Proveedores de la portada y su ventana de costos, el título y desglose de Proveedores y la proximidad del resultado de Factoraje al monto en móvil. Se conservan el diseño aprobado, las animaciones, el video, los cálculos y formularios. La medición permanece apagada y el acceso de Netlify no se modifica. Validación previa a la integración: 40 pruebas aprobadas y construcción de 72 archivos (5.1 MB), sin referencias faltantes. Se tramita en un único pull request; dist/ no se sube al repositorio.

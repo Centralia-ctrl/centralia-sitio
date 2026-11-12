@@ -81,15 +81,16 @@
     pagos: {
       title: 'Pago a proveedores',
       message: 'financiamiento para pagar a los proveedores de mi empresa en México o el extranjero',
-      range: 'Línea revolvente de hasta US$5 millones, con hasta 37 días de financiamiento. Sujeta a evaluación.',
+      range: 'Financiamiento para compras en México y el extranjero, con plazos de 15 a 60 días. Sujeto a evaluación.',
       facts: [
-        ['Línea de crédito', 'Hasta US$5 millones. El monto autorizado depende del perfil y evaluación de la empresa.'],
-        ['Plazo', 'Hasta 37 días. El plazo se evalúa según la operación y se confirma en la propuesta, dentro de las condiciones de la línea.'],
-        ['Cobertura', 'Pagos en México y a proveedores en más de 150 países. Monedas y destinos según disponibilidad.'],
-        ['Tasa y comisiones', 'Se confirman en la propuesta y antes de cada operación. El costo de financiamiento, la transferencia y el tipo de cambio se revisan por separado.'],
-        ['Control de pagos', 'Pagos agrupados, programación de fechas y controles de autorización para la operación de tu empresa.']
+        ['Monto', 'El monto autorizado depende de la evaluación de tu empresa y de la compra. Se confirma en la propuesta.'],
+        ['Plazo', 'De 15 a 60 días, según evaluación. El plazo autorizado se confirma en la propuesta.'],
+        ['Tasa', '1.5% mensual. El simulador calcula interés simple sobre el monto de la compra, con una base de 30 días.'],
+        ['Apertura', 'Sin comisión de apertura.'],
+        ['Cobertura', 'Pagos en México y el extranjero. Cada país, moneda, proveedor y operación se revisa para confirmar su disponibilidad.'],
+        ['Otros cargos', 'Los impuestos y otros cargos aplicables, incluidos transferencia o tipo de cambio cuando correspondan, se confirman en la propuesta.']
       ],
-      note: 'La línea máxima se expresa en dólares estadounidenses. Los montos en MXN del formulario son una referencia de tu necesidad, no una conversión ni una autorización. Centralia te acompaña a revisar el costo total.'
+      note: 'El importe que ingresas es una referencia de tu compra, no una línea autorizada. Centralia te acompaña a revisar el monto, el plazo, los cargos aplicables y la forma de pago antes de contratar.'
     },
     orientacion: {
       title: 'Financiamiento para mi empresa',
