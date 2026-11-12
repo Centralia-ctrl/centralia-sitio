@@ -39,20 +39,26 @@ for(const file of ['index.html','preguntas-frecuentes.html','blog/factoraje-con-
  assert.equal(p.calls[0].body.context.hutk,undefined);assert.equal(p.d.activeElement,p.$('.sim-success'));assert.equal(p.$('.sim-success').hidden,false);assert.equal(p.$('#sim-results').hidden,true);
  assert.match(p.$('.sim-confirmed-scenario').textContent,/1,200,000.00.*36 meses/);assert.match(p.calls[0].url,/1da292ee-7ccc-42e4-a427-ece646e13e65$/);p.close();
 });
-test('Supplier case CTA preserves amount and dates; invalid scenario stays on page and focuses the error',()=>{
- const p=setup('pago-a-proveedores.html');p.w.eval(read('supplier-calendar-preview.js'));
- p.$('#supplier-amount').value='8700000';p.$('#supplier-payment').value='2030-12-20';p.$('#supplier-collection').value='2031-01-10';
+test('Supplier case CTA preserves amount and requested term; invalid scenario stays on page and focuses the error',()=>{
+ const p=setup('pago-a-proveedores.html');p.w.eval(read('supplier-simulator-preview.js'));
+ p.$('#cp-amount').value='8700000';p.$('#cp-days').value='21';
  const link=p.$('.cx-case-link');link.click();assert.equal(p.$('#simulator-dialog').open,true);assert.match(p.$('#sim-summary').textContent,/8,700,000.00.*21 días/);assert.equal(p.w.location.pathname,'/pago-a-proveedores.html');
- p.$('#sim-back').click();assert.equal(p.d.activeElement,link);p.$('#supplier-amount').value='0';link.click();assert.equal(p.$('#simulator-dialog').open,false);assert.equal(p.d.activeElement,p.$('#supplier-amount'));assert.equal(p.calls.length,0);p.close();
+ p.$('#sim-back').click();assert.equal(p.d.activeElement,link);p.$('#cp-amount').value='0';link.click();assert.equal(p.$('#simulator-dialog').open,false);assert.equal(p.d.activeElement,p.$('#cp-amount'));assert.equal(p.calls.length,0);p.close();
 });
-test('Supplier calendar distinguishes the payment cycle from the maximum financing term',()=>{
- const p=setup('pago-a-proveedores.html');p.w.eval(read('supplier-calendar-preview.js'));
- p.$('#supplier-payment').value='2030-01-01';
- for(const [date,expected,overTerm] of [['2030-01-31','30 días',false],['2030-02-07','37 días',false],['2030-02-08','38 días',true]]){
-  p.$('#supplier-collection').value=date;p.$('#supplier-collection').dispatchEvent(new p.w.Event('input'));
-  assert.equal(p.$('[data-calendar-days]').textContent,expected);
-  assert.equal(p.$('[data-calendar-detail]').textContent.includes('después del plazo de hasta 37 días'),overTerm);
+test('Supplier estimate uses confirmed rate and term range without implying tax-inclusive or approved pricing',()=>{
+ const p=setup('pago-a-proveedores.html');p.w.eval(read('supplier-simulator-preview.js'));
+ for(const [days,expected] of [[15,'$10,075,000'],[30,'$10,150,000'],[60,'$10,300,000']]){
+  p.$('#cp-days').value=String(days);p.$('#cp-days').dispatchEvent(new p.w.Event('input'));
+  assert.equal(p.$('[data-out=total]').textContent,expected);
+  assert.match(p.$('.cp-demo').textContent,/Sin comisión de apertura.*Sujeto a evaluación/);
+  assert.match(p.$('.cp-pending').textContent,/Antes de impuestos y otros cargos/);
+  assert.equal(p.$('.cp-total dt').textContent,'Capital + interés estimado');
   assert.equal(p.$('[data-calendar-review]').disabled,false);
  }
+ const graph=JSON.parse(p.$('script[type="application/ld+json"]').textContent);
+ const faq=graph['@graph'].find(node=>node['@type']==='FAQPage');
+ const visible=[...p.d.querySelectorAll('.product-faq details')].map(detail=>({question:detail.querySelector('summary').textContent.trim(),answer:detail.querySelector('p').textContent.trim()}));
+ assert.deepEqual(faq.mainEntity.map(item=>({question:item.name,answer:item.acceptedAnswer.text})),visible);
+ assert.doesNotMatch(p.d.body.textContent,/US\$5 millones|hasta 37 días/);
  assert.equal(p.calls.length,0);p.close();
 });

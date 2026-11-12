@@ -182,6 +182,36 @@ Pago a proveedores explica el pago de la compra y la liquidación posterior del 
 
 Validación de esta vista local: 37 pruebas aprobadas, compilación de 73 archivos sin referencias faltantes y 530 enlaces internos sin destinos rotos. Las consultas se verificaron sin enviar nuevos contactos reales.
 
+## Pago a proveedores · integración local del 11 de noviembre de 2026
+
+Miguel Ángel pidió integrar y pulir la muestra de monto y plazo que revisó en conversación. Rama local `codex/proveedores-simulador-20261111`, desde main `a3eb8e2`; no fusionada ni publicada. Se conserva la rueda original, su reproducción y los demás productos.
+
+El simulador usa 1.5% mensual simple sobre base de 30 días y un rango de 15 a 60 días SOLO como demostración autorizada, NO como condiciones comerciales. Miguel Ángel confirmó que tasa, comisiones e impuestos todavía no están confirmados. La interfaz dice «Tasa del ejemplo» y «Condiciones por confirmar; no es una cotización». No publicar estos supuestos sin confirmación comercial. El interés se redondea a centavos y el resultado excluye comisiones e impuestos, indicados como pendientes.
+
+El formulario mantiene sus campos, endpoint y consentimientos. Recibe únicamente el monto y el plazo que se quiere revisar, identificados como una consulta desde una demostración; no inventa fechas de cobro ni envía el interés de ejemplo como condición autorizada. No se activa la medición. Las afirmaciones locales de US$5 millones y 37 días se sustituyen por condiciones sujetas a revisión, incluidas sus preguntas y datos estructurados, porque siguen pendientes de confirmación.
+
+Archivos nuevos: `supplier-simulator-preview.js` y `supplier-simulator-preview.css`. El calendario anterior permanece guardado sin modificaciones. La vista local utiliza un servidor con conexiones externas bloqueadas para no crear contactos de prueba reales.
+
+Validación: 40 pruebas aprobadas con envíos interceptados; construcción de 72 archivos y 5.1 MB sin referencias faltantes. Chrome sin desbordes a 320, 360, 390 y 1440 px; botón, resumen y vuelta a editar comprobados. El arte y el script de la rueda son idénticos a main. Título, descripción, canonical y metadatos sociales conservados; preguntas y datos estructurados sincronizados. Sin cambios en portada, HTML de Crédito o Factoraje, medición ni encabezados. Pendiente exclusivamente revisión visual y confirmación de condiciones antes de cualquier publicación.
+
+Después de revisar la integración, Miguel Ángel aprobó quitar los botones de $1, $5 y $10 millones para no sugerir un límite de línea. Se conserva $10 millones como valor inicial editable. Un importe de $50 millones se puede explorar y llevar a la consulta como necesidad a evaluar, sin presentarlo como línea disponible ni autorizada. Continúa sin publicar.
+
+Revisión posterior autorizada: el resultado se identifica como «Capital + interés del ejemplo» y muestra junto a la cifra que no incluye comisiones ni impuestos. Los tres casos de compra tienen situaciones y datos concretos (materiales para un pedido, importación y vencimientos previos al cobro). El título conserva sus palabras, con dos líneas equilibradas en escritorio y ajuste natural en móvil. Se conservan cálculo, valores de demostración, formulario, diseño y rueda; no se publica.
+
+Archivos de esta revisión: `pago-a-proveedores.html`, `supplier-simulator-preview.css`, `supplier-simulator-preview.js`, `experience-v26.js`, `product-tools.test.cjs`, `site.css` generado y este documento. Verificación: 40 pruebas aprobadas; compilación sin referencias faltantes; Chrome a 360, 390 y 1440 px sin desbordes. Los tres casos actualizan su explicación y datos, y el formulario conserva monto y plazo. Sin consultas reales enviadas. Quedan pendientes la aprobación visual y la confirmación de las condiciones comerciales antes de publicar.
+
 ## Cierre móvil autorizado · 6 de noviembre de 2026
 
 Miguel Ángel autorizó terminar los dos ajustes de conversión y actualizar la versión privada. Las barras de monto de Crédito y Factoraje tienen una zona táctil de 44 px en móvil y conservan una línea visible de 5 px. La portada presenta las necesidades «Invertir en mi empresa», «Anticipar mis facturas» y «Financiar una compra» con los valores de producto existentes para HubSpot. Se incluyen los ajustes locales anteriores de portada, Factoraje y proveedores.
+
+## Pago a proveedores: condiciones confirmadas · 11 de noviembre de 2026
+
+Miguel Ángel confirmó «sin comision por apertura - tasa la misma - los dias estan bien» en respuesta a la revisión que identificó expresamente 1.5% mensual y 15 a 60 días. Se consideran confirmados: sin comisión de apertura, 1.5% mensual y rango de 15 a 60 días. Sustituye el estado anterior de demostración sin condiciones confirmadas para esos tres datos. Se conserva el cálculo simple sobre base de 30 días, sin cambios de importes.
+
+No equivale a confirmar impuestos ni ausencia de todas las demás comisiones/cargos. La cifra se presenta como capital más interés estimado, antes de impuestos y otros cargos. Los importes finales y la aprobación se confirman en la propuesta. No se confirma ningún máximo de línea, incluido $50 millones o US$5 millones. Monto libre con $10 millones como ejemplo inicial.
+
+Actualizados el simulador, la respuesta visible y su FAQ estructurada, y el contexto de consulta (sin modificar campos, endpoint o consentimientos). Se conservan diseño y rueda. Archivos de esta revisión: pago-a-proveedores.html, supplier-simulator-preview.js, simulator.js, product-tools.test.cjs, experience.test.cjs y CLAUDE.md. En ese momento la revisión seguía local, sin publicar; no se activa medición ni se envían consultas reales.
+
+## Publicación de Pago a proveedores autorizada · 12 de noviembre de 2026
+
+Miguel Ángel autorizó publicar la versión revisada: «dale publícalo y que mejorarias?». Se publica el simulador de monto y plazo con las condiciones confirmadas, el resultado aclarado, los tres ejemplos y el título equilibrado. El diseño y la rueda permanecen como se aprobaron; Crédito, Factoraje y la portada no se rediseñan. Los impuestos y otros cargos siguen excluidos del resultado. No se modifica la medición ni la configuración de acceso de Netlify. La publicación se tramita mediante un único pull request con las fuentes y site.css generado; dist/ continúa fuera del repositorio. Validación previa: 40 pruebas y construcción de 72 archivos sin referencias faltantes.
