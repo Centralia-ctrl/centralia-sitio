@@ -2413,3 +2413,91 @@ body.credit-simulator-preview #como-funciona li p {
  body.credit-simulator-preview #como-funciona li+li{padding-top:24px}
 }
 @media(prefers-reduced-motion:reduce){.credit-project-choice,.credit-project-choice::after{transition:none}.credit-project-story.is-entering{animation:none}}
+
+/* supplier-simulator-preview.css */
+/* Supplier calculator; all rules are scoped to this product. */
+body.product-tools-unified.supplier-calculator-page .product-tool-welcome{grid-template-columns:minmax(270px,.72fr) minmax(0,1.28fr);gap:clamp(32px,4vw,64px);align-items:center;padding-block:44px 72px}
+body.supplier-calculator-page .supplier-calendar-copy{padding:0}
+body.supplier-calculator-page .supplier-calendar-headline{font-size:clamp(36px,3.2vw,48px);line-height:1.08;text-wrap:balance}
+body.supplier-calculator-page .supplier-headline-line{display:block;white-space:nowrap}
+body.supplier-calculator-page .supplier-calendar-intro{max-width:390px;margin-top:24px}
+body.supplier-calculator-page .supplier-calendar-profile{margin-top:28px}
+#calendario-proveedores.supplier-calculator{padding:0;border:1px solid #e4e7ee;border-radius:12px;background:#fff;box-shadow:none;min-width:0;container-type:inline-size;scroll-margin-top:110px}
+#calendario-proveedores .cp-demo{padding:11px 24px;border-bottom:1px solid #e4e7ee;background:#f8f9fa;color:#5d6470;font-size:12px;line-height:1.5;border-radius:12px 12px 0 0}
+#calendario-proveedores .cp-columns{display:grid;grid-template-columns:1fr 1fr}
+#calendario-proveedores .cp-inputs{padding:28px 24px;min-width:0}
+#calendario-proveedores .cp-section-title{font-size:24px;line-height:1.2;font-weight:500;letter-spacing:-.04em;margin:0 0 24px}
+#calendario-proveedores .cp-label{display:block;font-size:14px;line-height:1.5;font-weight:500;color:#303647;margin:0 0 9px}
+#calendario-proveedores .cp-amount-wrap{display:flex;align-items:center;gap:7px;padding:12px;border:1px solid #e4e7ee;border-radius:8px;min-width:0}
+#calendario-proveedores .cp-amount-wrap input{min-width:0;width:100%;border:0;border-radius:0;padding:0;margin:0;background:transparent;color:#1b224e;font:inherit;font-size:26px;font-weight:500;line-height:1.35;letter-spacing:-.04em}
+#calendario-proveedores .cp-currency{font-size:12px;color:#5d6470}
+#calendario-proveedores .cp-term{margin-top:25px}
+#calendario-proveedores .cp-term-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+#calendario-proveedores .cp-term-head label{margin:0;font-size:13px}
+#calendario-proveedores .cp-term-head output{font-size:22px;line-height:1.4;letter-spacing:-.03em;font-weight:500;white-space:nowrap}
+#calendario-proveedores #cp-days{display:block;width:100%;height:44px;margin:2px 0 0;padding:0;appearance:none;background:transparent;cursor:pointer;accent-color:#315de8;border:0;box-shadow:none}
+#calendario-proveedores #cp-days::-webkit-slider-runnable-track{height:5px;border:0;border-radius:9px;background:linear-gradient(to right,#315de8 var(--supplier-range-fill,33.333%),#e4e7ee var(--supplier-range-fill,33.333%))}
+#calendario-proveedores #cp-days::-webkit-slider-thumb{appearance:none;width:20px;height:20px;background:#315de8;border:0;border-radius:50%;margin-top:-7.5px;box-shadow:0 0 0 4px #fff}
+#calendario-proveedores #cp-days::-moz-range-track{height:5px;border:0;border-radius:9px;background:#e4e7ee}
+#calendario-proveedores #cp-days::-moz-range-progress{height:5px;background:#315de8}
+#calendario-proveedores #cp-days::-moz-range-thumb{width:20px;height:20px;background:#315de8;border:0;border-radius:50%}
+#calendario-proveedores .cp-range-labels{display:flex;justify-content:space-between;font-size:12px;line-height:1.5;color:#5d6470}
+#calendario-proveedores .cp-assumption{margin:21px 0 0;font-size:12px;line-height:1.65;color:#5d6470}
+#calendario-proveedores .cp-assumption strong{font-weight:500;color:#303647}
+#calendario-proveedores .cp-error{margin:10px 0 0;font-size:13px;line-height:1.6;color:#1b224e}
+#calendario-proveedores .cp-results{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:28px 24px;background:#f8f9fa;border-left:1px solid #e4e7ee}
+#calendario-proveedores .cp-results dl{margin:0}
+#calendario-proveedores .cp-total{margin:0 0 12px}
+#calendario-proveedores .cp-total dt{font-size:15px;line-height:1.5;color:#303647;font-weight:500}
+#calendario-proveedores .cp-total dd{font-size:clamp(30px,5.8cqi,44px);line-height:1.15;letter-spacing:-.05em;font-weight:500;color:#1b224e;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;margin:11px 0 9px}
+#calendario-proveedores .cp-total small{display:block;font-size:12px;line-height:1.6;color:#5d6470}
+#calendario-proveedores .cp-breakdown{border-top:1px solid #e4e7ee;padding-top:18px}
+#calendario-proveedores .cp-result-line{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 12px;margin:0 0 13px}
+#calendario-proveedores .cp-result-line dt{font-size:13px;line-height:1.6;color:#5d6470}
+#calendario-proveedores .cp-result-line dd{font-size:16px;line-height:1.5;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;margin:0}
+#calendario-proveedores .cp-pending{margin:0 0 24px;color:#5d6470;font-size:12px;line-height:1.6}
+#calendario-proveedores .cp-pending strong{display:block;color:#303647;font-weight:500}
+#calendario-proveedores .cp-footer{padding:20px 24px 24px;border-top:1px solid #e4e7ee}
+#calendario-proveedores .cp-cta{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:52px;padding:14px 17px;gap:12px;border:0;border-radius:8px;background:#1b224e;color:#fff;font:inherit;font-size:14px;font-weight:500;line-height:1.45;text-align:left;cursor:pointer}
+#calendario-proveedores .cp-cta:hover{background:#254bc6}
+#calendario-proveedores .cp-cta:disabled{opacity:.5;cursor:default}
+#calendario-proveedores .cp-next{font-size:12px;line-height:1.6;text-align:center;color:#5d6470;margin:12px 0 0}
+#calendario-proveedores .cp-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#calendario-proveedores :is(button,input):focus-visible{outline:2px solid #315de8;outline-offset:4px}
+body.supplier-calculator-page .supplier-calendar-motion{margin-top:0}
+body.supplier-calculator-page .supplier-terms-review{padding:30px 0;border-top:1px solid #e4e7ee;border-bottom:1px solid #e4e7ee}
+body.supplier-calculator-page .supplier-terms-review>p:last-child{font-size:clamp(20px,2.2vw,28px);line-height:1.45;letter-spacing:-.025em;color:#1b224e;max-width:850px;margin:12px 0 0}
+@media(max-width:1100px){
+ body.product-tools-unified.supplier-calculator-page .product-tool-welcome{grid-template-columns:1fr;gap:26px;padding-top:32px}
+ body.supplier-calculator-page .supplier-calendar-copy{max-width:760px}
+ body.supplier-calculator-page .supplier-headline-line{display:inline;white-space:normal}
+ body.supplier-calculator-page .supplier-calendar-headline{font-size:clamp(38px,6vw,56px)}
+ body.supplier-calculator-page .supplier-calendar-intro{max-width:640px;margin-top:16px}
+ body.supplier-calculator-page .supplier-calendar-profile{margin-top:18px}
+ body.supplier-calculator-page .tool-mobile-entry{display:none}
+ body.supplier-calculator-page .supplier-calendar-copy .supplier-text-link{display:none}
+}
+@container(max-width:570px){
+ #calendario-proveedores .cp-columns{grid-template-columns:1fr}
+ #calendario-proveedores .cp-results{border-left:0;border-top:1px solid #e4e7ee}
+ #calendario-proveedores .cp-total dd{font-size:40px}
+}
+@media(max-width:680px){
+ body.product-tools-unified.supplier-calculator-page .product-tool-welcome{padding:22px 0 44px;gap:24px}
+ body.supplier-calculator-page .supplier-product-name{margin-bottom:14px;font-size:12px}
+ body.supplier-calculator-page .supplier-calendar-headline{font-size:40px}
+ body.supplier-calculator-page .supplier-calendar-intro{font-size:16px;line-height:1.6;margin-top:16px}
+ body.supplier-calculator-page .supplier-calendar-profile{margin:15px 0 0;font-size:13px}
+ #calendario-proveedores .cp-inputs,#calendario-proveedores .cp-results{padding:23px 20px}
+ #calendario-proveedores .cp-demo{padding:11px 20px}
+ #calendario-proveedores .cp-footer{padding:18px 20px 22px}
+ #calendario-proveedores .cp-section-title{font-size:25px}
+ #calendario-proveedores .cp-assumption{margin-top:17px}
+}
+@media(max-width:380px){
+ body.supplier-calculator-page .supplier-calendar-headline{font-size:36px}
+ #calendario-proveedores .cp-inputs,#calendario-proveedores .cp-results,#calendario-proveedores .cp-footer{padding-inline:16px}
+ #calendario-proveedores .cp-total dd{font-size:36px}
+ #calendario-proveedores .cp-amount-wrap input{font-size:25px}
+}
+@media(prefers-reduced-motion:no-preference){#calendario-proveedores .cp-cta{transition:background .18s}}

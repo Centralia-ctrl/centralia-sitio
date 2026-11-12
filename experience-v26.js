@@ -48,9 +48,9 @@
       ['Ya entregaste. Ahora viene otro pedido.','Necesitas materiales para la siguiente entrega antes de cobrar la anterior. La revisión parte de esa factura y de los tiempos del nuevo pedido.']
     ],
     suppliers:[
-      ['Tu compra en México, con fechas claras.','Revisa cuándo debe cobrar el proveedor y cuándo entrarían los ingresos de la operación. El calendario ayuda a explicar la necesidad.'],
-      ['Una compra internacional también tiene tiempos.','Además de las fechas, prepara país, moneda y condiciones del proveedor. La disponibilidad se revisa para cada operación.'],
-      ['Pon tus pagos y cobros en el mismo calendario.','Compara ambas fechas en el calendario. El intervalo es un dato para conversar; no representa un plazo autorizado.']
+      ['Tu proveedor necesita el pago antes de tu próxima entrega.','Ya tienes un pedido de tu cliente, pero necesitas comprar materiales para producirlo. Tu proveedor solicita el pago antes de surtir y tu cliente pagará después de recibir. Revisamos contigo ese periodo entre compra y cobro.',['La compra','Materiales para preparar un pedido confirmado.'],['El cobro','Ingreso previsto después de entregar a tu cliente.'],['El plazo a revisar','Tiempo entre pagar los materiales y recibir ese ingreso.']],
+      ['La mercancía está lista. Falta pagar al proveedor.','Tu proveedor en el extranjero pide el pago para liberar el embarque. Tu empresa recuperará la inversión al vender la mercancía. Revisamos el importe, la moneda y las fechas, incluido el tiempo de traslado.',['La compra','Importe, moneda y país del proveedor.'],['La entrega','Fecha de embarque y llegada prevista de la mercancía.'],['El cobro','Cuándo esperas vender y recibir el pago de tus clientes.']],
+      ['Tus compras vencen antes de tus cobros.','Debes pagar mercancía esta semana, pero cobrarás a tus clientes más adelante. Antes de comprometer un financiamiento, revisamos si tus ingresos previstos permitirían cubrir su liquidación.',['El vencimiento','Fecha en que tu proveedor necesita recibir el pago.'],['Los ingresos','Importes y fechas de los cobros que esperas recibir.'],['La liquidación','Cómo cubrirías el financiamiento si alguno de esos cobros se retrasa.']]
     ]
   };
   const example=document.querySelector('.content-case');

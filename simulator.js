@@ -170,7 +170,7 @@
     });
     if(mode==='suppliers'){
       $('#simulator-title').textContent=next==='contact'?'Revisemos tu compra.':'Tu compra.';
-      $('#simulator-intro').textContent=next==='contact'?'Comparte tus datos para revisar el monto y las fechas con Centralia. No es una cotización ni una aprobación.':'Recibimos tu consulta. Conserva estos datos para la conversación.';
+      $('#simulator-intro').textContent=next==='contact'?(provider?.kind==='term-example'?'Comparte tus datos para revisar la compra y el plazo que necesitas. Las condiciones se confirman después de la evaluación.':'Comparte tus datos para revisar el monto y las fechas con Centralia. No es una cotización ni una aprobación.'):'Recibimos tu consulta. Conserva estos datos para la conversación.';
     }
     if(compactConsultation && next==='contact' && mode!=='suppliers'){
       $('#simulator-title').textContent=mode==='credit'?'Revisemos tu financiamiento.':'Revisemos tus facturas.';
@@ -245,10 +245,14 @@
   document.addEventListener('centralia:provider-scenario', event=>{
     if(sending)return;
     const data=event.detail;
-    if(!data||!/^\d{4}-\d{2}-\d{2}$/.test(data.payment)||!/^\d{4}-\d{2}-\d{2}$/.test(data.collection)||!Number.isFinite(data.days))return;
+    if(!data)return;
+    const isTermExample=data.kind==='term-example';
+    if(isTermExample){
+      if(!Number.isFinite(data.amount)||data.amount<=0||data.amount>999999999999.99||data.currency!=='MXN'||!Number.isInteger(data.days)||data.days<15||data.days>60)return;
+    }else if(!/^\d{4}-\d{2}-\d{2}$/.test(data.payment)||!/^\d{4}-\d{2}-\d{2}$/.test(data.collection)||!Number.isFinite(data.days))return;
     if(mode!=='suppliers')save();
     if(data.amount!==undefined&&(!Number.isFinite(data.amount)||data.amount<=0||data.amount>999999999999.99||data.currency!=='MXN'))return;
-    provider={payment:data.payment,collection:data.collection,days:data.days,amount:data.amount??null};mode='suppliers';
+    provider=isTermExample?{kind:'term-example',amount:data.amount,days:data.days}:{payment:data.payment,collection:data.collection,days:data.days,amount:data.amount??null};mode='suppliers';
     inquiryOnly=false;inlineReview=false;
     opener=data.opener instanceof HTMLElement?data.opener:document.querySelector('[data-calendar-review]')||document.querySelector('[data-payment-planner] button');
     $('#sim-summary').textContent=scenario();$('#sim-send-error').hidden=true;$('#sim-send-status').textContent='';$('.sim-success').hidden=true;$('#sim-request-advice').hidden=false;
@@ -288,6 +292,7 @@
   function scenario() {
     const creditDescription = creditProject ? 'Crédito empresarial · ' + creditProject : 'Crédito empresarial';
     if(inquiryOnly)return (mode==='credit'?creditDescription:'Factoraje')+' · Consulta sin monto definido. Lo revisamos contigo.';
+    if(mode==='suppliers'&&provider.kind==='term-example')return 'Pago a proveedores · Compra por '+new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',currencyDisplay:'code'}).format(provider.amount)+' · Plazo a revisar: '+provider.days+' días. Sujeto a evaluación; no es un plazo autorizado.';
     if(mode==='suppliers')return 'Pago a proveedores'+(provider.amount===null?'':' · Compra por '+new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',currencyDisplay:'code'}).format(provider.amount))+' · Pago: '+new Date(provider.payment+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})+' · Cobro previsto: '+new Date(provider.collection+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})+' · '+(provider.days<0?'Cobro previsto '+Math.abs(provider.days)+' días antes del pago':provider.days===0?'Pago y cobro el mismo día':'Diferencia: '+provider.days+' días')+'. Intervalo de planeación, no plazo autorizado.';
     const amount = parseAmount(amountInput.value);
     return mode === 'credit'
@@ -299,7 +304,7 @@
     const figures = mode === 'credit' && !inquiryOnly ? credit(amount, Number(term.value)) : null;
     return [
       'Solicitud web PYME — Centralia Financiera', scenario(),
-      inquiryOnly ? 'Consulta directa: sin importe, moneda ni plazo indicados por el visitante.' : mode==='suppliers' ? 'Fecha de pago al proveedor: '+provider.payment+'\nFecha prevista de cobro: '+provider.collection+'\nRevisión de compra; sin cálculo de tasa, costo ni monto de financiamiento autorizado.' : figures ? 'Mensualidad ilustrativa: ' + money(figures.monthly) + '. Tasa ilustrativa: 2% mensual. Comisión: ' + (figures.commission===null?'por confirmar, no incluida':money(figures.commission)) + '. Antes de IVA y otros cargos.' : 'Anticipo ilustrativo hasta 85%: ' + money(factoring(amount).advance) + ', antes de costos.',
+      inquiryOnly ? 'Consulta directa: sin importe, moneda ni plazo indicados por el visitante.' : mode==='suppliers' ? (provider.kind==='term-example'?'Consulta desde el simulador de Pago a proveedores. Monto y plazo solicitados sujetos a evaluación. Impuestos y otros cargos, si aplican, se confirman en la propuesta. No es una aprobación.':'Fecha de pago al proveedor: '+provider.payment+'\nFecha prevista de cobro: '+provider.collection+'\nRevisión de compra; sin cálculo de tasa, costo ni monto de financiamiento autorizado.') : figures ? 'Mensualidad ilustrativa: ' + money(figures.monthly) + '. Tasa ilustrativa: 2% mensual. Comisión: ' + (figures.commission===null?'por confirmar, no incluida':money(figures.commission)) + '. Antes de IVA y otros cargos.' : 'Anticipo ilustrativo hasta 85%: ' + money(factoring(amount).advance) + ', antes de costos.',
       'Declara representar una persona moral.',
       'Autorizó guardar datos y escenario en HubSpot y ser contactado para atender su solicitud.',
       'Fecha de autorización: ' + new Date().toISOString(),

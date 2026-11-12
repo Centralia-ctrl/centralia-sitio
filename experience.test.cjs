@@ -19,6 +19,39 @@ function page(name){
 }
 const submit=(w,form)=>form.dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));
 const flush=()=>new Promise(resolve=>setImmediate(resolve));
+
+test('Supplier example calculates simple interest by day, rounds cents and rejects invalid inputs',()=>{
+ const {calculate}=require('./supplier-simulator-preview.js');
+ assert.deepEqual(calculate('10,000,000',40),{amount:10000000,days:40,interest:200000,total:10200000});
+ assert.deepEqual(calculate('50,000,000',30),{amount:50000000,days:30,interest:750000,total:50750000});
+ assert.deepEqual(calculate('1,000,000',15),{amount:1000000,days:15,interest:7500,total:1007500});
+ assert.deepEqual(calculate('750000.50',21),{amount:750000.5,days:21,interest:7875.01,total:757875.51});
+ for(const amount of ['', '0', '-10', '1,20', 'NaN', '1000000000000', '10.123'])assert.equal(calculate(amount,30).field,'amount');
+ for(const days of [0,14,61,30.5,NaN,Infinity])assert.equal(calculate('1000000',days).field,'days');
+});
+
+test('Supplier contact preserves entered details when editing and blocks invalid amounts',()=>{
+ const {dom,w,d,calls}=page('pago-a-proveedores.html');w.eval(read('simulator.js'));w.eval(read('supplier-simulator-preview.js'));
+ const input=d.getElementById('cp-amount'),review=d.querySelector('[data-calendar-review]');
+ input.value='0';input.dispatchEvent(new w.Event('input'));assert.equal(review.disabled,true);assert.equal(d.querySelector('[data-out=total]').textContent,'—');
+ assert.equal(d.querySelectorAll('[data-supplier-simulator] [data-supplier-amount]').length,0,'the purchase amount stays freely editable without amount presets');
+ input.value='50000000';input.dispatchEvent(new w.Event('input'));review.click();
+ assert.match(d.getElementById('sim-summary').textContent,/50,000,000/);
+ d.getElementById('lead-name').value='Prueba Local';d.getElementById('sim-back').click();
+ assert.equal(d.getElementById('simulator-dialog').open,false);
+ input.value='1000000';input.dispatchEvent(new w.Event('input'));review.click();
+ assert.equal(d.getElementById('lead-name').value,'Prueba Local');assert.match(d.getElementById('sim-summary').textContent,/1,000,000/);assert.equal(calls.length,0);
+ dom.window.close();
+});
+
+test('Supplier scenario rejects invalid term or currency before opening the contact form',()=>{
+ const {dom,w,d,calls}=page('pago-a-proveedores.html');w.eval(read('simulator.js'));
+ for(const overrides of [{days:61},{days:30.5},{currency:'USD'},{amount:0},{amount:NaN}]){
+  d.dispatchEvent(new w.CustomEvent('centralia:provider-scenario',{detail:{kind:'term-example',amount:1000000,currency:'MXN',days:30,...overrides}}));
+  assert.equal(d.getElementById('simulator-dialog').open,false);
+ }
+ assert.equal(calls.length,0);dom.window.close();
+});
 test('Calendar arithmetic: month/year boundaries, leap day, same day, reversed and invalid dates',()=>{
  assert.equal(calendarGap('2026-12-20','2027-01-10'),21);
  assert.equal(calendarGap('2028-02-28','2028-03-01'),2);
@@ -51,11 +84,11 @@ test('Home form: failed API keeps values and permits explicit retry',async()=>{
  f('consent').checked=true;submit(w,form);await flush();
  assert.equal(form.hidden,false);assert.equal(f('email').value,'qa@example.invalid');assert.equal(f('submit').disabled,false);assert.equal(f('fallback').hidden,false);dom.window.close();
 });
-test('Provider planner: no network before explicit consent; dates reach only the existing message field',async()=>{
- const {dom,w,d,calls}=page('pago-a-proveedores.html');w.eval(read('simulator.js'));w.eval(read('experience-v26.js'));w.eval(read('supplier-calendar-preview.js'));
- d.querySelector('[name=purchase-amount]').value='750000.50';d.querySelector('[name=payment]').value='2030-12-20';d.querySelector('[name=collection]').value='2031-01-10';d.querySelector('[name=collection]').dispatchEvent(new w.Event('change'));
- assert.match(d.querySelector('[data-calendar-gap]').textContent,/21 días/);assert.equal(calls.length,0);
- d.querySelector('[data-calendar-review]').click();assert.equal(d.querySelector('dialog#simulator-dialog').open,true);assert.match(d.getElementById('sim-summary').textContent,/20 dic 2030/);
+test('Supplier example: no network before explicit consent; amount and requested term reach only the existing message field',async()=>{
+ const {dom,w,d,calls}=page('pago-a-proveedores.html');w.eval(read('simulator.js'));w.eval(read('experience-v26.js'));w.eval(read('supplier-simulator-preview.js'));
+ d.querySelector('[name=purchase-amount]').value='750000.50';d.querySelector('[name=requested-days]').value='21';d.querySelector('[name=requested-days]').dispatchEvent(new w.Event('change'));
+ assert.match(d.querySelector('[data-repayment-label]').textContent,/21 días/);assert.equal(calls.length,0);
+ d.querySelector('[data-calendar-review]').click();assert.equal(d.querySelector('dialog#simulator-dialog').open,true);assert.match(d.getElementById('sim-summary').textContent,/Plazo a revisar: 21 días/);
  const form=d.getElementById('sim-lead-form');submit(w,form);assert.equal(calls.length,0);
  for(const [id,value] of Object.entries({'lead-name':'Prueba Local','lead-company':'Empresa','lead-email':'qa@example.invalid','lead-phone':'5512345678'}))d.getElementById(id).value=value;
  d.getElementById('lead-business').checked=true;submit(w,form);assert.equal(calls.length,0);
@@ -63,7 +96,7 @@ test('Provider planner: no network before explicit consent; dates reach only the
  assert.equal(calls.length,1);assert.match(calls[0].url,/1da292ee-/);
  const fields=Object.fromEntries(calls[0].body.fields.map(x=>[x.name,x.value]));
  assert.deepEqual(Object.keys(fields),['email','firstname','company','phone','message']);
- assert.match(fields.message,/Pago a proveedores/);assert.match(fields.message,/MXN/);assert.match(fields.message,/750,000.50/);assert.match(fields.message,/2031-01-10/);assert.match(fields.message,/21 días/);assert.doesNotMatch(fields.message,/85%|Mensualidad ilustrativa/);
+ assert.match(fields.message,/Pago a proveedores/);assert.match(fields.message,/MXN/);assert.match(fields.message,/750,000.50/);assert.match(fields.message,/Monto y plazo solicitados sujetos a evaluación/);assert.match(fields.message,/21 días/);assert.doesNotMatch(fields.message,/85%|Mensualidad ilustrativa|1\.5%|undefined|Fecha prevista de cobro/);
  assert.equal(d.querySelector('.sim-success').hidden,false);assert.equal(d.querySelector('.sim-steps').hidden,true);dom.window.close();
 });
 test('Credit and factoring arithmetic still uses the existing limits and percentages',()=>{
@@ -136,8 +169,8 @@ async function homeContext(setup,beforeSend=()=>{}){
  assert.equal(p.calls.length,1);assert.equal(f('success').hidden,false);const context=p.calls[0].body.context;p.dom.window.close();return context;
 }
 async function simulatorContext(setup,beforeSend=()=>{}){
- const p=measuredPage('pago-a-proveedores.html',setup);p.w.eval(read('simulator.js'));p.w.eval(read('experience-v26.js'));p.w.eval(read('supplier-calendar-preview.js'));
- const d=p.d;d.querySelector('[name=payment]').value='2030-12-20';d.querySelector('[name=collection]').value='2031-01-10';d.querySelector('[name=collection]').dispatchEvent(new p.w.Event('change'));
+ const p=measuredPage('pago-a-proveedores.html',setup);p.w.eval(read('simulator.js'));p.w.eval(read('experience-v26.js'));p.w.eval(read('supplier-simulator-preview.js'));
+ const d=p.d;d.querySelector('[name=requested-days]').value='21';d.querySelector('[name=requested-days]').dispatchEvent(new p.w.Event('change'));
  d.querySelector('[data-calendar-review]').click();
  for(const [id,value] of Object.entries({'lead-name':'Prueba Local','lead-company':'Empresa','lead-email':'qa@example.invalid','lead-phone':'5512345678'}))d.getElementById(id).value=value;
  d.getElementById('lead-business').checked=true;d.getElementById('lead-consent').checked=true;beforeSend(p);
