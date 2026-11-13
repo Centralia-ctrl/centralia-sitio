@@ -8,14 +8,14 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
 - [ ] Netlify publica `main` en producción de forma automática. Al 9 de noviembre de 2026 las compilaciones automáticas siguen limitadas por créditos; la publicación manual sí funciona (PR #62 el 6 de noviembre; PR #63 el 9 de noviembre, despliegue `6af20b996dad529b18ea4d10`). Mientras no haya créditos, cada cambio en `main` necesita *Publish deploy* manual y comprobarlo en producción.
 - [ ] Todo lo que impide el lanzamiento está integrado en `main`:
   - Aviso de privacidad propio.
-  - Cifras y plazos confirmados. Ya confirmados: Crédito hasta $20 millones MXN a 36 meses, 2% mensual ilustrativo y 5% de apertura; Factoraje hasta 85% antes de costos. Falta confirmar en Pago a proveedores "US$5 millones" y "hasta 37 días".
+  - Cifras y plazos confirmados. Ya confirmados: Crédito hasta $20 millones MXN a 36 meses, 2% mensual ilustrativo y 5% de apertura; Factoraje hasta 85% antes de costos; Pago a proveedores 1.5% mensual, 15 a 60 días y sin comisión de apertura (confirmado el 11 de noviembre de 2026).
   - Video del almacén sin marca de agua (licencia o sustituto).
 - [ ] Prueba en un iPhone real con Safari: portada, las tres soluciones, formularios y animaciones. La emulación de Chrome no la sustituye.
 - [ ] Todos los enlaces "Aviso de privacidad" apuntan a la página nueva y ya no a `https://centraliafinanciera.com/aviso-de-privacidad/` del sitio anterior. Están en las 5 páginas, en `consent.js` y en los formularios.
 - [ ] Las redirecciones 301 del sitio anterior están en `_redirects` (ya en `ALWAYS`). Confirmar que siguen completas.
 - [ ] Existe `/aviso-de-privacidad/` en el sitio nuevo: los formularios enlazan ahí y la página del WordPress desaparece con el cambio de dominio.
 - [ ] Se tiene la lista de direcciones del sitio anterior, por ejemplo de su `sitemap.xml` o de Google Search Console.
-- [ ] Se sabe quién administra el DNS del dominio y se tiene acceso.
+- [ ] Se sabe quién administra el DNS del dominio y se tiene acceso. La guía paso a paso, con lo que no se debe tocar (correo), está en `CAMBIO-DE-DOMINIO.md`.
 - [ ] Se eligió un horario de poco tráfico y está disponible quien pueda revertir el cambio.
 
 ## 2. Conectar el dominio en Netlify
@@ -23,19 +23,20 @@ No se publica: `build.cjs` solo copia a `dist/` las páginas aprobadas.
 - [ ] En Netlify, *Domain management*:
   - Agregar `centraliafinanciera.com` y `www.centraliafinanciera.com`.
   - Dejar `centraliafinanciera.com` como dominio principal, para que `www` redirija ahí. Es el dominio que usan el canonical, el sitemap y `pixel.js`.
-- [ ] Cambiar los registros DNS con los valores que indique Netlify.
+- [ ] Cambiar solo los registros web del DNS (`A` en la raíz y `CNAME` en `www`) con los valores que indique Netlify. No tocar `MX` ni `TXT`: de ellos depende el correo de hola@. Detalle en `CAMBIO-DE-DOMINIO.md`.
 - [ ] Esperar a que Netlify emita el certificado HTTPS y activar *Force HTTPS*.
 - [ ] Quitar la protección con contraseña de la vista previa, solo para el sitio de producción.
 
 ## 3. Probar en el dominio real, en celular y en computadora
 
+- [ ] `node herramientas/verificar-dominio.cjs` termina con 0 fallas: páginas, canónicas, `noindex`, imágenes para redes, `robots.txt`, aviso de privacidad, `http`/`www` y redirecciones del sitio anterior.
 - [ ] Las 5 páginas principales y el blog (`/blog/` y sus artículos) cargan por `https://centraliafinanciera.com/`, sin avisos de certificado.
 - [ ] `http://` y `www.` redirigen a `https://centraliafinanciera.com/`.
 - [ ] Las direcciones del sitio anterior redirigen a su página nueva.
 - [ ] Menú (Soluciones · Blog · Contacto), Preguntas frecuentes desde el pie y "Volver arriba" funcionan.
 - [ ] Factoraje se reproduce, sin sonido y con fondo blanco.
 - [ ] "Agendemos una reunión" abre la agenda de HubSpot.
-- [ ] WhatsApp abre con el mensaje neutral.
+- [ ] WhatsApp abre con el mensaje del producto en Crédito, Factoraje y Pago a proveedores, y con el mensaje general en las demás páginas.
 - [ ] Los botones del pie (Facebook, Instagram y WhatsApp) abren lo que corresponde.
 - [ ] Formulario de la portada:
   - Se envía una prueba en dos pasos y llega a HubSpot.
