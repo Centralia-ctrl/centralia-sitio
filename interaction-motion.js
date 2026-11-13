@@ -12,7 +12,7 @@
     animation.finished.then(() => running.delete(animation), () => running.delete(animation));
     return animation;
   }
-  const enter = element => play(element, [{opacity:.65, transform:'translateY(6px)'}, {opacity:1, transform:'translateY(0)'}], 240);
+  const enter = element => play(element, [{opacity:.3, transform:'translateY(10px)'}, {opacity:1, transform:'translateY(0)'}], 360);
   const stop = () => { running.forEach(a => a.cancel()); running.clear(); timers.forEach(clearTimeout); timers.clear(); };
   reduced.addEventListener('change', () => { if (reduced.matches) stop(); });
   document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
@@ -38,7 +38,7 @@
           if (root.querySelector('[aria-invalid="true"]') || !enabled()) return;
           outputs.forEach(element => {
             const color = getComputedStyle(element).color;
-            play(element, [{color:'#315de8', opacity:.82, transform:'translateY(2px)'}, {color, opacity:1, transform:'translateY(0)'}], 320);
+            play(element, [{color:'#315de8', opacity:.45, transform:'translateY(4px)'}, {color, opacity:1, transform:'translateY(0)'}], 440);
           });
         }, 110);
         timers.add(pending);
@@ -64,11 +64,19 @@
 
     const dialog = document.querySelector('#simulator-dialog');
     if (!dialog) return;
+    const revealResult = () => {
+      const detail = dialog.querySelector('#sim-delivered-details:not([hidden])');
+      if (!detail) { enter(dialog.querySelector('#sim-result-panel')); return; }
+      enter(dialog.querySelector('.sim-success'));
+      play(detail, [{opacity:.15, transform:'translateY(18px)'}, {opacity:1, transform:'translateY(0)'}], 580);
+      play(detail.querySelector('.sim-table-scroll'), [{borderColor:'#1b224e'}, {borderColor:'#e4e7ee'}], 850);
+    };
     let wasOpen = dialog.open, lastStep = dialog.dataset.step, closing = false;
     new MutationObserver(() => {
       if (dialog.open && !wasOpen) enter(dialog);
       else if (dialog.open && dialog.dataset.step !== lastStep) {
-        enter(dialog.querySelector(dialog.dataset.step === 'contact' ? '#sim-contact' : '#sim-result-panel'));
+        if (dialog.dataset.step === 'result') revealResult();
+        else enter(dialog.querySelector('#sim-contact'));
       }
       wasOpen = dialog.open; lastStep = dialog.dataset.step;
     }).observe(dialog, {attributes:true, attributeFilter:['open', 'data-step']});

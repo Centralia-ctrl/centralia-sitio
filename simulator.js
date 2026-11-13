@@ -87,7 +87,15 @@
   delivered.setAttribute('aria-labelledby', 'sim-delivered-title');
   delivered.hidden = true;
   $('.sim-success').after(delivered);
-  const clearDetails = () => { delivered.hidden = true; delivered.replaceChildren(); };
+  const receipt = $('.sim-success');
+  const originalReceipt = [...receipt.childNodes].map(node => node.cloneNode(true));
+  const clearDetails = () => {
+    delivered.hidden = true; delivered.replaceChildren();
+    if (receipt.classList.contains('sim-receipt-brief')) {
+      receipt.replaceChildren(...originalReceipt.map(node => node.cloneNode(true)));
+      receipt.classList.remove('sim-receipt-brief');
+    }
+  };
   function scenarioSnapshot() {
     if (inquiryOnly) return null;
     if (mode === 'suppliers') return provider?.kind === 'term-example' ? {product:mode, currency:'MXN', amount:provider.amount, days:provider.days} : null;
@@ -99,9 +107,20 @@
     const append = (tag, text, parent = delivered) => {
       const node = document.createElement(tag); node.textContent = text; parent.append(node); return node;
     };
+    $('#simulator-title').textContent = snapshot.product === 'credit' ? 'Tu tabla está lista.' : 'Recibimos tu consulta.';
+    $('#simulator-intro').textContent = snapshot.product === 'credit'
+      ? 'Consulta tus pagos estimados y el desglose de tu escenario.'
+      : snapshot.product === 'factoring' ? 'Revisaremos tus facturas y te indicaremos el siguiente paso.' : 'Revisaremos tu compra y el plazo que necesitas.';
+    receipt.replaceChildren(); receipt.classList.add('sim-receipt-brief');
+    const confirmation = append('p', '', receipt);
+    confirmation.append(document.createTextNode('Recibimos tu consulta. Te contactamos a la brevedad desde '));
+    const email = append('a', 'hola@centraliafinanciera.com', confirmation); email.href = 'mailto:hola@centraliafinanciera.com';
+    confirmation.append(document.createTextNode('.'));
+    append('p', scenario(), receipt).className = 'sim-confirmed-scenario';
+    append('p', 'El envío no implica una aprobación de financiamiento.', receipt);
     const format = value => new Intl.NumberFormat('es-MX', {style:'currency', currency:snapshot.currency, currencyDisplay:'code', minimumFractionDigits:2}).format(value);
-    append('h3', 'Detalle de tu estimación').id = 'sim-delivered-title';
-    append('p', 'Conservamos este escenario para revisarlo contigo. Las condiciones finales se confirman en la propuesta.').className = 'sim-delivered-intro';
+    const heading = append('h3', 'Detalle de tu estimación'); heading.id = 'sim-delivered-title';
+    if (snapshot.product === 'credit') heading.className = 'sr-only';
     const breakdown = append('dl', '');
     const addRow = (label, value) => { const row = append('div', '', breakdown); append('dt', label, row); append('dd', value, row); };
     if (snapshot.product === 'credit') {
@@ -113,8 +132,9 @@
       addRow('Apertura del 5% · pago único separado', format(schedule.commission / 100));
       addRow('Mensualidades + apertura, antes de impuestos', format(schedule.total / 100));
       const details = append('details', '');
+      details.open = true;
       breakdown.before(details);
-      append('summary', 'Ver tabla de amortización estimada', details);
+      append('summary', 'Tabla de amortización estimada', details);
       const hint = append('p', 'Desliza la tabla para ver todas las columnas.', details); hint.className = 'sim-table-hint';
       const wrapper = append('div', '', details); wrapper.className = 'sim-table-scroll'; wrapper.tabIndex = 0;
       wrapper.setAttribute('role', 'region'); wrapper.setAttribute('aria-label', 'Tabla de amortización estimada; desplazamiento horizontal');
@@ -293,11 +313,10 @@
       $('#simulator-intro').textContent = 'Centralia te contactará a la brevedad para revisar tu caso.';
     }
     if (next === 'contact' && !inquiryOnly && (mode !== 'suppliers' || provider?.kind === 'term-example')) {
-      $('#simulator-intro').textContent += mode === 'credit'
-        ? ' Al enviar, podrás ver el detalle y tu tabla de amortización estimada.'
-        : ' Al enviar, podrás ver el detalle de tu estimación.';
+      if (mode === 'credit') $('#simulator-intro').textContent = 'Al enviar, verás el detalle y tu tabla de pagos estimada. Centralia te contactará a la brevedad para revisar tu caso.';
+      else $('#simulator-intro').textContent += ' Al enviar, verás el desglose de esta estimación.';
     }
-    $('#sim-lead-submit').firstChild.textContent = mode === 'credit' ? 'Solicitar revisión ' : 'Enviar mi consulta ';
+    $('#sim-lead-submit').firstChild.textContent = mode === 'credit' ? (inquiryOnly ? 'Solicitar revisión ' : 'Enviar y ver mi tabla ') : 'Enviar mi consulta ';
     if(compactConsultation && (inlineReview||inquiryOnly))$('#sim-new').textContent=inquiryOnly?'← Volver a la página':'← Ajustar mi escenario';
     const supplierReceived=mode==='suppliers'&&!!$('[data-supplier-confirmation]');
     if((compactConsultation||supplierReceived) && next==='result' && !$('.sim-success').hidden){

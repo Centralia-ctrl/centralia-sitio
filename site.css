@@ -1666,9 +1666,9 @@ body.home-first-step .capture-success~.capture-value,body.home-first-step form[h
 /* Brief feedback, with the approved composition and spacing unchanged. */
 .cx-steps li{transition:border-color .22s,color .22s}
 .product-process > ol > li.cx-process-step{transform:none;transition:border-color .35s}
-.product-process > ol > li.cx-in-view > div{animation:centralia-process-enter .42s cubic-bezier(.2,.7,.2,1) var(--step-delay,0ms) backwards}
-.product-process > ol > li.cx-in-view > .product-step{animation:centralia-step-enter .42s ease var(--step-delay,0ms) backwards}
-@keyframes centralia-process-enter{from{opacity:.65;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.product-process > ol > li.cx-in-view > div{animation:centralia-process-enter .55s cubic-bezier(.2,.7,.2,1) var(--step-delay,0ms) backwards}
+.product-process > ol > li.cx-in-view > .product-step{animation:centralia-step-enter .55s ease var(--step-delay,0ms) backwards}
+@keyframes centralia-process-enter{from{opacity:.35;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes centralia-step-enter{from{opacity:.45}to{opacity:1}}
 
 /* Delivered only after a confirmed inquiry; never a formal credit offer. */

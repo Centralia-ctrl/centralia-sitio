@@ -52,6 +52,8 @@ test('Credit details unlock only after a consented, accepted submission; failure
     assert.equal(detail.hidden, true, 'pending is not successful');
     p.resolve(); await flush();
     assert.equal(detail.hidden, false); assert.equal(detail.querySelectorAll('tbody tr').length, 36);
+    assert.equal(detail.querySelector('details').open, true, 'the table is delivered open without another click');
+    assert.equal(p.$('#simulator-title').textContent, 'Tu tabla está lista.');
     assert.equal(p.$('.sim-success').contains(detail), false, '36 rows must not enter the live status region');
     assert.equal(p.d.activeElement, p.$('.sim-success'));
     assert.deepEqual(p.calls[1].body.fields.map(x => x.name), ['email','firstname','company','phone','message']);
@@ -66,6 +68,7 @@ test('Changing scenario clears the table; a confirmed repeat needs no duplicate 
   try {
     p.open(); p.fill(); p.submit(); await flush();
     p.open(); assert.equal(p.$('#sim-delivered-details').hidden, true);
+    assert.equal(p.$('.sim-success').classList.contains('sim-receipt-brief'), false);
     p.submit(); await flush();
     assert.equal(p.calls.length, 1); assert.equal(p.$('#sim-delivered-details').hidden, false);
     p.open('credit', {amount:2000000});
@@ -127,6 +130,8 @@ test('A direct inquiry without a chosen amount never inherits a previous amortiz
     p.open(); p.fill(); p.submit(); await flush();
     p.$('#simulator-dialog').close();
     p.d.dispatchEvent(new p.w.CustomEvent('centralia:product-inquiry', {detail:{product:'credit', project:'inventario'}}));
+    assert.match(p.$('#sim-lead-submit').textContent, /Solicitar revisión/);
+    assert.doesNotMatch(p.$('#simulator-intro').textContent, /tu tabla/);
     p.submit(); await flush();
     assert.equal(p.$('.sim-success').hidden, false);
     assert.equal(p.$('#sim-delivered-details').hidden, true);
@@ -183,3 +188,32 @@ test('Simulator feedback respects reduced motion and never submits the form', as
     assert.ok(animations.includes('credit-inline-payment')); assert.equal(p.calls.length, 0);
   } finally { p.close(); }
 });
+
+test('The table benefit appears before contact and the submit action matches a chosen credit scenario', () => {
+  const p = setup();
+  try {
+    assert.match(p.$('#simulador-credito .sales-next-copy').textContent, /Deja tus datos.*tabla de pagos estimada/);
+    p.open(); assert.match(p.$('#sim-lead-submit').textContent, /Enviar y ver mi tabla/);
+    assert.equal(p.$('#sim-delivered-details').children.length, 0);
+    p.open('factoring'); assert.doesNotMatch(p.$('#sim-lead-submit').textContent, /tabla/);
+  } finally { p.close(); }
+});
+
+for (const reduce of [false, true]) {
+  test(`Result entrance follows HubSpot confirmation and respects reduced motion (${reduce})`, async () => {
+    const p = setup();
+    try {
+      const animations = [];
+      p.w.matchMedia = () => ({matches:reduce, addEventListener(){}});
+      p.w.HTMLElement.prototype.getClientRects = () => [{}];
+      p.w.HTMLElement.prototype.animate = function() { animations.push(this.id || this.className); return {cancel(){},finished:Promise.resolve()}; };
+      p.w.eval(read('interaction-motion.js')); await flush();
+      p.open(); p.fill(); p.setResponse('pending'); p.submit(); await flush();
+      assert.ok(!animations.includes('sim-delivered-details'));
+      p.resolve(); await flush();
+      assert.equal(animations.includes('sim-delivered-details'), !reduce);
+      assert.equal(p.$('#sim-delivered-details details').open, true);
+      assert.equal(p.calls.length, 1);
+    } finally { p.close(); }
+  });
+}
