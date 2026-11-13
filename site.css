@@ -2232,6 +2232,20 @@ body.product-tools-unified.factoring-first-preview .factoring-first-actions{grid
  body.unified-contact #sim-credit-costs dd{margin-top:2px}
 }
 
+/* Mobile credit receipt: keep every message and the type sizes, bring the delivered table closer. */
+@media(max-width:760px){
+ #simulator-dialog[data-product="credit"][data-step="result"]:has(.sim-receipt-brief) .dialog-intro{margin-top:8px;margin-bottom:8px}
+ #simulator-dialog[data-product="credit"] .sim-receipt-brief{padding:12px 14px}
+ #simulator-dialog[data-product="credit"] .sim-receipt-brief p{margin-bottom:8px;line-height:1.5}
+ #simulator-dialog[data-product="credit"] .sim-receipt-brief p:last-child{margin-bottom:0}
+ #simulator-dialog[data-product="credit"] .sim-receipt-brief .sim-confirmed-scenario{padding-block:6px}
+ #simulator-dialog[data-product="credit"] .sim-receipt-brief + .sim-delivered-details{margin-top:12px;padding-top:0}
+ #simulator-dialog[data-product="credit"] .sim-receipt-brief + .sim-delivered-details details{margin-top:0}
+ #simulator-dialog[data-product="credit"] .sim-receipt-brief + .sim-delivered-details summary{padding-block:8px}
+ #simulator-dialog[data-product="credit"] .sim-receipt-brief + .sim-delivered-details .sim-table-hint{margin-top:4px}
+ #simulator-dialog[data-product="credit"] .sim-receipt-brief + .sim-delivered-details .sim-table-scroll{margin-top:8px}
+}
+
 /* credit-project-scenes.css */
 /* Credit welcome, calculator and approved project artwork. */
 body.product-tools-unified.credit-simulator-preview .credit-calculator-welcome {
