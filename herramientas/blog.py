@@ -291,6 +291,16 @@ def page(tpl, path, title, description, image, og_type, graph, main):
             return m.group(0)
         return f'{attr}={quote}../{value}{quote}'
     s = re.sub(r'\b(src|href|poster)=(["\'])([^"\']*)\2', fix, s)
+    # srcset lists several URLs; each one climbs one level the same way.
+    def fix_srcset(m):
+        parts = []
+        for item in m.group(2).split(','):
+            url, _, size = item.strip().partition(' ')
+            if not re.match(r'(?:[a-z]+:|//|/|data:|\.\./|\./)', url, re.I):
+                url = '../' + url
+            parts.append((url + ' ' + size).strip())
+        return f'srcset={m.group(1)}{", ".join(parts)}{m.group(1)}'
+    s = re.sub(r'\bsrcset=(["\'])([^"\']*)\1', fix_srcset, s)
     # RSS feed for readers and aggregators; added after the path fix because it lives in blog/.
     s = s.replace('</head>', '<link rel="alternate" type="application/rss+xml" title="Blog de Centralia Financiera" href="feed.xml">\n</head>', 1)
     # The header marks the blog as the current section.
