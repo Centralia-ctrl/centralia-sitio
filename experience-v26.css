@@ -146,3 +146,47 @@ body.home-first-step .capture-value ul{display:grid;gap:6px;margin:0;padding:0;l
 body.home-first-step .capture-value li{position:relative;padding-left:22px;font-size:13px;line-height:1.55;color:#303647}
 body.home-first-step .capture-value li::before{content:"";position:absolute;left:2px;top:.45em;width:10px;height:6px;border-left:2px solid #1b224e;border-bottom:2px solid #1b224e;transform:rotate(-45deg)}
 body.home-first-step .capture-success~.capture-value,body.home-first-step form[hidden] .capture-value{display:none}
+
+/* Brief feedback, with the approved composition and spacing unchanged. */
+.cx-steps li{transition:border-color .22s,color .22s}
+.product-process > ol > li.cx-process-step{transform:none;transition:border-color .35s}
+.product-process > ol > li.cx-in-view > div{animation:centralia-process-enter .42s cubic-bezier(.2,.7,.2,1) var(--step-delay,0ms) backwards}
+.product-process > ol > li.cx-in-view > .product-step{animation:centralia-step-enter .42s ease var(--step-delay,0ms) backwards}
+@keyframes centralia-process-enter{from{opacity:.65;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes centralia-step-enter{from{opacity:.45}to{opacity:1}}
+
+/* Delivered only after a confirmed inquiry; never a formal credit offer. */
+#sim-delivered-details[hidden]{display:none!important}
+.sim-delivered-details{margin:28px 0 24px;padding-top:24px;border-top:1px solid #e4e7ee;color:#303647;min-width:0}
+.sim-delivered-details h3{margin:0 0 10px;color:#1b224e;font-size:23px;font-weight:500;letter-spacing:-.02em}
+.sim-delivered-intro{font-size:15px;line-height:1.65;margin:0 0 20px;color:#5d6470}
+.sim-delivered-details dl{margin:0}
+.sim-delivered-details dl>div{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid #e4e7ee;font-size:14px;line-height:1.5}
+.sim-delivered-details dt{flex:1;min-width:0}
+.sim-delivered-details dd{margin:0;text-align:right;color:#1b224e;font-weight:500;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;max-width:58%}
+.sim-delivered-details details{margin:12px 0 18px}
+.sim-delivered-details summary{color:#1b224e;font-size:15px;font-weight:500;cursor:pointer;padding:12px 0;min-height:44px;box-sizing:border-box}
+.sim-delivered-details summary:focus-visible,.sim-table-scroll:focus-visible{outline:2px solid #315de8;outline-offset:3px}
+.sim-table-scroll{max-width:100%;max-height:360px;overflow:auto;overscroll-behavior-inline:contain;border:1px solid #e4e7ee;border-radius:12px;margin-top:12px}
+.sim-table-scroll table{width:100%;min-width:560px;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;color:#303647}
+.sim-table-scroll caption{text-align:left;padding:14px;font-size:13px;line-height:1.5;color:#5d6470}
+.sim-table-scroll th,.sim-table-scroll td{text-align:right;padding:11px 12px;border-top:1px solid #e4e7ee;white-space:nowrap}
+.sim-table-scroll th:first-child{text-align:left}
+.sim-table-scroll thead{background:#f5f6fa;color:#1b224e}
+.sim-table-scroll thead th{position:sticky;top:0;background:#f5f6fa;z-index:1}
+.sim-table-scroll th:first-child{position:sticky;left:0;background:#fff}
+.sim-table-scroll thead th:first-child{background:#f5f6fa;z-index:2}
+.sim-table-scroll th{font-weight:500}
+.sim-delivered-note{margin:18px 0 0;font-size:13px;line-height:1.7;color:#5d6470}
+.sim-table-hint{display:none}
+@media(max-width:760px){
+ .sim-delivered-details{margin-top:22px;padding-top:20px}
+ .sim-delivered-details h3{font-size:21px}
+ .sim-delivered-details dl>div{gap:12px}
+ .sim-delivered-details dd{max-width:52%}
+ .sim-table-hint{display:block;font-size:13px;color:#5d6470;margin:8px 0 0;line-height:1.5}
+}
+@media(prefers-reduced-motion:reduce){
+ .cx-steps li,.product-process > ol > li.cx-process-step{transition:none}
+ .product-process > ol > li.cx-in-view > div,.product-process > ol > li.cx-in-view > .product-step{animation:none}
+}

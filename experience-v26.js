@@ -100,9 +100,13 @@
     button.addEventListener('click',()=>{update();if(button.disabled)return;document.dispatchEvent(new CustomEvent('centralia:provider-scenario',{detail:{payment:payment.value,collection:collection.value,days:calendarGap(payment.value,collection.value)}}));emit('calendar_consultation','suppliers');});
     update();
   }
-  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   if('IntersectionObserver' in window){
-    const observer=new IntersectionObserver(entries=>entries.forEach(e=>e.target.classList.toggle('cx-in-view',e.isIntersecting&&!reduced.matches)),{threshold:.6});
-    document.querySelectorAll('.product-process>li').forEach(el=>{el.classList.add('cx-process-step');observer.observe(el);});
+    const steps=[...document.querySelectorAll('.product-process > ol > li')];
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(!entry.isIntersecting || entry.intersectionRatio < .35) return;
+      entry.target.classList.add('cx-in-view');
+      observer.unobserve(entry.target);
+    }),{threshold:[0,.35],rootMargin:'0px 0px -8% 0px'});
+    steps.forEach((el,index)=>{el.classList.add('cx-process-step');el.style.setProperty('--step-delay',(index*65)+'ms');observer.observe(el);});
   }
 })();

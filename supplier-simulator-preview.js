@@ -23,10 +23,10 @@
   if (!root) return;
   const $ = selector => root.querySelector(selector);
   const amount = $('#cp-amount'), days = $('#cp-days'), error = $('#cp-error');
-  const review = $('[data-calendar-review]'), reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const review = $('[data-calendar-review]');
   const money = value => new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',minimumFractionDigits:Number.isInteger(value)?0:2,maximumFractionDigits:2}).format(value);
-  let current = null, announcement = null, feedback = null;
-  function update(animate=false) {
+  let current = null, announcement = null;
+  function update() {
     current = calculate(amount.value,Number(days.value));
     error.hidden = !current.error; error.textContent = current.error || '';
     amount.setAttribute('aria-invalid',String(current.field==='amount'));
@@ -44,10 +44,6 @@
     // Relación visible entre plazo e interés: lo que suma cada día con la misma tasa.
     $('[data-per-day]').textContent = current.error ? '' : 'Cada día de plazo suma '+money(Math.round(current.amount*100*MONTHLY_RATE/30)/100)+' de interés.';
     $('[data-repayment-label]').textContent = 'MXN · plazo de '+term+' días';
-    if (animate && !reduced.matches && typeof $('[data-out=total]').animate === 'function') {
-      feedback?.cancel();
-      feedback=$('[data-out=total]').animate([{transform:'translateY(2px)',opacity:.65},{transform:'translateY(0)',opacity:1}],{duration:180,easing:'ease-out'});
-    }
     clearTimeout(announcement);
     announcement=setTimeout(()=>{$('[data-live]').textContent=current.error?'':'Estimación a '+term+' días. Capital: '+money(current.amount)+'. Interés: '+money(current.interest)+'. Capital más interés estimado: '+money(current.total)+'. Sin comisión de apertura. Antes de impuestos y otros cargos.';},300);
   }
@@ -58,7 +54,7 @@
     update();
   });
   days.addEventListener('input',()=>update());
-  days.addEventListener('change',()=>update(true));
+  days.addEventListener('change',()=>update());
   function requestReview(opener=review) {
     update();
     if(current.error){(current.field==='amount'?amount:days).focus();return;}
