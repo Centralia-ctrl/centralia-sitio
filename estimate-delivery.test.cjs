@@ -198,9 +198,9 @@ test('The chart follows table cents for every selected month and makes no extra 
       slider.value=String(month);slider.dispatchEvent(new p.w.Event('input',{bubbles:true}));
       const row=p.$(`#sim-delivered-details tbody tr[data-month="${month}"]`), cells=row.querySelectorAll('td');
       assert.equal(p.$('[data-chart-value="payment"]').dataset.cents,cells[0].dataset.cents);
-      assert.equal(p.$('[data-chart-value="interest"]').dataset.cents,cells[1].dataset.cents);
+      assert.equal(p.$('[data-chart-value="interest"]').dataset.cents,cells[3].dataset.cents);
       assert.equal(p.$('[data-chart-value="principal"]').dataset.cents,cells[2].dataset.cents);
-      assert.equal(p.$('#sim-chart-balance').dataset.cents,cells[3].dataset.cents);
+      assert.equal(p.$('#sim-chart-balance').dataset.cents,cells[1].dataset.cents);
       assert.equal(p.$('#sim-delivered-details tr.is-chart-month'),row);
       assert.match(slider.getAttribute('aria-valuetext'),new RegExp('Mes '+month+' de 36'));
     }
@@ -221,7 +221,7 @@ test('Tapping the curve selects the nearest payment; a different confirmed scena
     assert.equal(p.$('#sim-chart-range').value,'36');
     p.open('credit',{amount:20000000});p.submit();await flush();
     assert.equal(p.$('#sim-chart-range').value,'1');
-    assert.equal(p.$('#sim-chart-balance').dataset.cents,p.$('#sim-delivered-details tbody tr td:last-child').dataset.cents);
+    assert.equal(p.$('#sim-chart-balance').dataset.cents,p.$('#sim-delivered-details tbody tr td:nth-of-type(2)').dataset.cents);
     p.open('factoring');p.submit();await flush();assert.equal(p.$('#sim-credit-chart'),null);
     p.open('suppliers');p.submit();await flush();assert.equal(p.$('#sim-credit-chart'),null);
   } finally {p.close();}

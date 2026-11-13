@@ -204,12 +204,12 @@
       const table = append('table', '', wrapper);
       append('caption', snapshot.months + ' pagos estimados · MXN · antes de impuestos y otros cargos', table);
       const header = append('tr', '', append('thead', '', table));
-      ['Mes', 'Pago', 'Interés', 'Capital', 'Saldo'].forEach(label => { append('th', label, header).scope = 'col'; });
+      ['Mes', 'Pago', 'Saldo', 'Capital', 'Intereses'].forEach(label => { append('th', label, header).scope = 'col'; });
       const body = append('tbody', '', table);
       for (const row of schedule.rows) {
         const tr = append('tr', '', body); tr.dataset.month = String(row.month);
         append('th', String(row.month), tr).scope = 'row';
-        for (const key of ['payment','interest','principal','balance']) {
+        for (const key of ['payment','balance','principal','interest']) {
           const cell = append('td', new Intl.NumberFormat('es-MX', {minimumFractionDigits:2, maximumFractionDigits:2}).format(row[key] / 100), tr);
           cell.dataset.cents = String(row[key]);
         }
