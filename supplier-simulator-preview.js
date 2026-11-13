@@ -41,6 +41,8 @@
     days.setAttribute('aria-valuetext',term+' días');
     days.style.setProperty('--supplier-range-fill',((term-15)/45*100)+'%');
     $('[data-interest-days]').textContent = '('+term+' días)';
+    // Relación visible entre plazo e interés: lo que suma cada día con la misma tasa.
+    $('[data-per-day]').textContent = current.error ? '' : 'Cada día de plazo suma '+money(Math.round(current.amount*100*MONTHLY_RATE/30)/100)+' de interés.';
     $('[data-repayment-label]').textContent = 'MXN · plazo de '+term+' días';
     if (animate && !reduced.matches && typeof $('[data-out=total]').animate === 'function') {
       feedback?.cancel();
