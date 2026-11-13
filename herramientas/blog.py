@@ -230,6 +230,21 @@ RELATED = {
 
 # The blog index opens with the main guide; the rest keep the ARTICLES order (newest first).
 INDEX_FIRST = 'opciones-de-financiamiento-para-pymes'
+# Índice del blog agrupado por necesidad; cada grupo lleva a su herramienta.
+INDEX_GROUPS = [
+    {'id': 'empezar', 'title': 'Para empezar', 'text': 'Compara tus opciones antes de decidir.', 'tool': None,
+     'slugs': ['opciones-de-financiamiento-para-pymes', 'factoraje-o-credito-empresarial', 'como-comparar-propuestas-de-financiamiento']},
+    {'id': 'invertir', 'title': 'Invertir en tu empresa', 'text': 'Crédito empresarial: modalidades, requisitos y qué revisan.',
+     'tool': ('../credito-empresarial.html#simulador-credito', 'Simular mi crédito'),
+     'slugs': ['credito-simple-o-revolvente', 'credito-con-o-sin-garantia', 'documentos-para-credito-empresarial',
+               'estados-financieros-para-credito', 'historial-crediticio-de-tu-empresa']},
+    {'id': 'anticipar', 'title': 'Anticipar tus facturas', 'text': 'Factoraje: cómo funciona, cuánto recibes y qué te piden.',
+     'tool': ('../factoraje.html#simulador-factoraje', 'Calcular mi anticipo'),
+     'slugs': ['que-es-el-factoraje', 'que-es-el-aforo-en-factoraje', 'requisitos-para-factoraje', 'factoraje-con-recurso-y-sin-recurso']},
+    {'id': 'flujo', 'title': 'Financiar compras y cuidar tu flujo', 'text': 'Pago a proveedores, capital de trabajo y cobranza.',
+     'tool': ('../pago-a-proveedores.html#calendario-proveedores', 'Simular el pago a proveedores'),
+     'slugs': ['pago-a-proveedores-en-el-extranjero', 'capital-de-trabajo', 'flujo-de-efectivo-13-semanas', 'como-reducir-dias-de-cobranza']},
+]
 
 INDEX = {
     'title': 'Blog de financiamiento empresarial | Centralia Financiera',
@@ -318,7 +333,7 @@ def main():
     org = {'@type': 'Organization', '@id': BASE + '#organizacion', 'name': 'Centralia Financiera', 'url': BASE,
            'logo': {'@type': 'ImageObject', 'url': BASE + 'assets/centralia-logo.png'}}
     os.makedirs(os.path.join(ROOT, 'blog'), exist_ok=True)
-    cards = []
+    cards = {}
     for a in ARTICLES:
         url = blog_url + a['slug'] + '.html'
         body = open(os.path.join(ROOT, 'herramientas', 'blog-articulos', a['slug'] + '.html'), encoding='utf-8').read()
@@ -341,15 +356,15 @@ def main():
         html = page(tpl, 'blog/' + a['slug'] + '.html', a['title'], a['description'], a['image'], 'article', graph, main_html)
         html = html.replace('<meta name="description"', f'<meta name="author" content="{AUTHOR["name"]}">\n  <meta name="description"', 1)
         open(os.path.join(ROOT, 'blog', a['slug'] + '.html'), 'w', encoding='utf-8', newline='').write(html)
-        cards.append((a['slug'] != INDEX_FIRST, f'<li><a class="blog-card" href="{a["slug"]}.html"><span class="blog-card-tag">{a["tag"]}</span>'
+        cards[a['slug']] = (f'<li><a class="blog-card" href="{a["slug"]}.html"><span class="blog-card-tag">{a["tag"]}</span>'
                      f'<span class="blog-card-title">{a["headline"]}</span><span class="blog-card-text">{a["description"]}</span>'
-                     f'<span class="blog-card-meta"><time datetime="{a["date"]}">{a["date_text"]}</time> · {a["minutes"]} min</span></a></li>'))
+                     f'<span class="blog-card-meta"><time datetime="{a["date"]}">{a["date_text"]}</time> · {a["minutes"]} min</span></a></li>')
         print('blog/' + a['slug'] + '.html')
     index_main = ('<main id="contenido" class="product-page direction-faq blog-page"><div class="shell">'
                   + crumb(['<a href="../index.html">Inicio</a>', '<span aria-current="page">Blog</span>'])
                   + '<header class="company-intro"><p class="eyebrow">BLOG</p><h1>Financiamiento empresarial,<br><span>explicado con claridad.</span></h1>'
                   + '<p>Guías para entender tus opciones antes de la primera conversación.</p></header>'
-                  + '<ul class="blog-index">' + ''.join(c for _, c in sorted(cards, key=lambda c: c[0])) + '</ul>' + CTA + '</div></main>')
+                  + index_groups(cards) + CTA + '</div></main>')
     graph = [
         {'@type': 'Blog', '@id': blog_url + '#blog', 'name': 'Blog de Centralia Financiera', 'url': blog_url, 'inLanguage': 'es-MX',
          'description': INDEX['description'], 'publisher': {'@id': BASE + '#organizacion'},
@@ -363,6 +378,22 @@ def main():
     print('blog/index.html')
     open(os.path.join(ROOT, 'blog', 'feed.xml'), 'w', encoding='utf-8', newline='').write(feed())
     print('blog/feed.xml')
+
+
+def index_groups(cards):
+    """Índice agrupado: navegación por necesidad y una lista de guías por grupo."""
+    listed = [slug for g in INDEX_GROUPS for slug in g['slugs']]
+    assert sorted(listed) == sorted(cards), 'Cada guía debe estar exactamente en un grupo del índice'
+    nav = ('<nav class="blog-groups-nav" aria-label="Temas del blog"><ul>'
+           + ''.join(f'<li><a href="#{g["id"]}">{g["title"]}</a></li>' for g in INDEX_GROUPS) + '</ul></nav>')
+    out = []
+    for g in INDEX_GROUPS:
+        tool = (f'<a class="blog-group-tool" href="{g["tool"][0]}">{g["tool"][1]} <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>'
+                if g['tool'] else '')
+        out.append(f'<section class="blog-group" id="{g["id"]}" aria-labelledby="{g["id"]}-titulo">'
+                   f'<div class="blog-group-head"><div><h2 id="{g["id"]}-titulo">{g["title"]}</h2><p>{g["text"]}</p></div>{tool}</div>'
+                   '<ul class="blog-index">' + ''.join(cards[slug] for slug in g['slugs']) + '</ul></section>')
+    return nav + ''.join(out)
 
 
 if __name__ == '__main__':
