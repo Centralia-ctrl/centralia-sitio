@@ -88,3 +88,11 @@
 .blog-author{margin-top:36px;padding-top:22px;border-top:1px solid #e4e7ee}
 .blog-page .blog-article .blog-author p{margin-top:6px;font-size:15px;line-height:1.7;color:#5d6470}
 .blog-page .blog-article .blog-author .blog-author-name{margin-top:0;color:#1b224e;font-size:16px;font-weight:600}
+/* Aviso de privacidad (aviso-de-privacidad/index.html, generado por herramientas/aviso-privacidad.py). */
+.aviso-datos{display:grid;gap:0;margin:8px 0 28px;border-top:1px solid #e4e7ee}
+.aviso-datos>div{display:grid;grid-template-columns:minmax(140px,220px) minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid #e4e7ee}
+.aviso-datos dt{font-size:13px;color:#5d6470}
+.aviso-datos dd{margin:0;color:#1b224e;overflow-wrap:anywhere}
+.aviso-pendiente{padding:12px 16px;border:1px dashed #e4e7ee;border-radius:12px;color:#5d6470;font-size:14px}
+.aviso-borrador{margin:0 0 24px;padding:12px 16px;border-radius:12px;background:#f4f6fa;color:#1b224e;font-size:14px;font-weight:500}
+@media(max-width:560px){.aviso-datos>div{grid-template-columns:1fr;gap:2px}}
