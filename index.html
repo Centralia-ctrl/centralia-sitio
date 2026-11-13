@@ -85,8 +85,9 @@
       <label for="capture-company">Empresa<input id="capture-company" name="company" type="text" autocomplete="organization" placeholder="Razón social o nombre comercial" minlength="2" maxlength="150" required></label>
       <label for="capture-email">Correo electrónico<input id="capture-email" name="email" type="email" autocomplete="email" placeholder="nombre@empresa.com" maxlength="254" required></label>
       <label for="capture-phone">Teléfono de contacto<input id="capture-phone" name="phone" type="tel" autocomplete="tel" placeholder="55 1234 5678" maxlength="25" required></label>
-      <label for="capture-amount">Monto aproximado <span class="capture-unit">MXN</span><input id="capture-amount" name="cul_es_el_monto_que_requiere_tu_empresa" type="text" inputmode="decimal" placeholder="Ej. 1,000,000" maxlength="20" required></label>
       <label for="capture-purpose">¿Qué necesitas?<select id="capture-purpose" name="para_que_necesitas_el_financiamiento" required><option value="" disabled selected>Selecciona una opción</option><option value="Crédito empresarial">Invertir en mi empresa</option><option value="Factoraje">Anticipar mis facturas</option><option value="Pago a proveedores">Financiar una compra</option></select></label>
+      <label for="capture-amount">Monto aproximado <span class="capture-unit">MXN</span><input id="capture-amount" name="cul_es_el_monto_que_requiere_tu_empresa" type="text" inputmode="decimal" placeholder="Ej. 1,000,000" maxlength="20" required></label>
+      <label class="capture-unknown" for="capture-amount-unknown"><input id="capture-amount-unknown" type="checkbox"><span>Todavía no sé cuánto necesito</span></label>
      </div>
      <label class="capture-consent" for="capture-consent"><input id="capture-consent" type="checkbox" required><span>Autorizo a Centralia a usar mis datos para atender esta consulta y contactarme. He leído el <a href="https://centraliafinanciera.com/aviso-de-privacidad/" target="_blank" rel="noopener noreferrer">aviso de privacidad</a>.</span></label>
      <p id="capture-error" class="capture-error" role="alert" hidden></p>
