@@ -97,3 +97,6 @@ body.supplier-calculator-page .supplier-terms-review>p:last-child{font-size:clam
  #calendario-proveedores .cp-amount-wrap input{font-size:25px}
 }
 @media(prefers-reduced-motion:no-preference){#calendario-proveedores .cp-cta{transition:background .18s}}
+
+/* La nota del plazo es un dd propio para que la lista sea válida; conserva su aspecto anterior. */
+#calendario-proveedores .cp-total dd.cp-total-note{margin:0;font-size:inherit;line-height:inherit;letter-spacing:normal;font-weight:400;color:inherit}
