@@ -192,7 +192,7 @@
       addRow('Mensualidades + apertura, antes de impuestos', format(schedule.total / 100));
       const details = append('details', '');
       details.open = true;
-      breakdown.before(details);
+      chart.element.before(details);
       append('summary', 'Tabla de amortización estimada', details);
       const hint = append('p', 'Desliza la tabla para ver todas las columnas.', details); hint.className = 'sim-table-hint';
       const wrapper = append('div', '', details); wrapper.className = 'sim-table-scroll'; wrapper.tabIndex = 0;
@@ -373,7 +373,7 @@
       $('#simulator-intro').textContent = 'Centralia te contactará a la brevedad para revisar tu caso.';
     }
     if (next === 'contact' && !inquiryOnly && (mode !== 'suppliers' || provider?.kind === 'term-example')) {
-      if (mode === 'credit') $('#simulator-intro').textContent = 'Al enviar, verás el detalle y tu tabla de pagos estimada. Centralia te contactará a la brevedad para revisar tu caso.';
+      if (mode === 'credit') $('#simulator-intro').textContent = 'Al enviar tus datos, podrás consultar tu tabla de pagos estimada y explorar cómo baja tu saldo. Centralia te contactará a la brevedad para revisar tu caso.';
       else $('#simulator-intro').textContent += ' Al enviar, verás el desglose de esta estimación.';
     }
     $('#sim-lead-submit').firstChild.textContent = mode === 'credit' ? (inquiryOnly ? 'Solicitar revisión ' : 'Enviar y ver mi tabla ') : 'Enviar mi consulta ';
