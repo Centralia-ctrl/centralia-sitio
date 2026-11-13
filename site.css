@@ -1497,6 +1497,22 @@ body.centralia-v23 .footer-caption .footer-address{display:block;margin-top:8px;
 .blog-page .blog-article .blog-author p{margin-top:6px;font-size:15px;line-height:1.7;color:#5d6470}
 .blog-page .blog-article .blog-author .blog-author-name{margin-top:0;color:#1b224e;font-size:16px;font-weight:600}
 
+/* Índice del blog agrupado por necesidad (muestra pendiente de aprobación). */
+.blog-groups-nav{max-width:860px;margin:0 0 40px}
+.blog-groups-nav ul{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+.blog-groups-nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid #e4e7ee;border-radius:12px;color:#1b224e;font-size:14px;font-weight:500;text-decoration:none}
+.blog-groups-nav a:hover{border-color:#1b224e}
+.blog-groups-nav a:focus-visible,.blog-group-tool:focus-visible{outline:3px solid #315de8;outline-offset:3px}
+.blog-group{max-width:860px;scroll-margin-top:96px}
+.blog-group+.blog-group{margin-top:8px}
+.blog-group-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;margin:0 0 20px;padding-top:24px;border-top:1px solid #e4e7ee}
+.blog-page .blog-group-head h2{margin:0;color:#1b224e;font-size:clamp(24px,2.4vw,30px);font-weight:500;line-height:1.2;letter-spacing:-.02em}
+.blog-page .blog-group-head p{margin:6px 0 0;font-size:15px;line-height:1.6;color:#5d6470}
+.blog-group-tool{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:#1b224e;font-size:15px;font-weight:500;text-decoration:underline;text-underline-offset:4px}
+.blog-group-tool .icon{width:16px;height:16px}
+.blog-group .blog-index{margin-bottom:48px}
+@media(max-width:760px){.blog-groups-nav{margin-bottom:28px}.blog-groups-nav a{font-size:13px;padding:0 12px}.blog-group .blog-index{margin-bottom:36px}}
+
 /* experience-v26.css */
 /* Interaction layer. Keeps the approved hero, type and palette. */
 /* Scoped Credit interactions: native buttons cover each card, including its title. */
