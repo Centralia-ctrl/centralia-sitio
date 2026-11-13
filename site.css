@@ -2144,6 +2144,16 @@ body.product-tools-unified.factoring-first-preview .factoring-first-actions{grid
  body.product-tools-unified.factoring-first-preview .factoring-calculator-disclosure{order:11}
 }
 
+/* Muestra móvil (pendiente de aprobación): resumen de Crédito más compacto antes de los campos.
+   Mensualidad y apertura van lado a lado cuando caben completas; si no caben, cada una baja a su línea. */
+@media(max-width:460px){
+ body.unified-contact .simulator-dialog[data-product="credit"] #sim-contact-overview.has-credit-costs{padding:12px 14px;margin:12px 0 16px}
+ body.unified-contact .simulator-dialog[data-product="credit"] #sim-contact-overview.has-credit-costs #sim-summary{margin-bottom:8px}
+ body.unified-contact #sim-credit-costs{display:flex;flex-wrap:wrap;gap:8px 20px;padding-top:10px}
+ body.unified-contact #sim-credit-costs>div{flex:1 1 0;min-width:auto;display:flex;flex-direction:column;justify-content:space-between}
+ body.unified-contact #sim-credit-costs dd{margin-top:2px}
+}
+
 /* credit-project-scenes.css */
 /* Credit welcome, calculator and approved project artwork. */
 body.product-tools-unified.credit-simulator-preview .credit-calculator-welcome {
