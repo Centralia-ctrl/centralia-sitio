@@ -100,3 +100,6 @@ body.supplier-calculator-page .supplier-terms-review>p:last-child{font-size:clam
 
 /* La nota del plazo es un dd propio para que la lista sea válida; conserva su aspecto anterior. */
 #calendario-proveedores .cp-total dd.cp-total-note{margin:0;font-size:inherit;line-height:inherit;letter-spacing:normal;font-weight:400;color:inherit}
+
+/* Muestra (pendiente de aprobación): lo que suma cada día de plazo. */
+#calendario-proveedores .cp-per-day{margin:8px 0 0;font-size:13px;line-height:1.5;color:#5d6470}
