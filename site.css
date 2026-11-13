@@ -2175,6 +2175,14 @@ body.product-tools-unified.factoring-first-preview .factoring-first-actions{grid
  body.unified-contact #sim-credit-costs dd{margin-top:2px}
 }
 
+/* Muestra (pendiente de aprobación): compartir la estimación con un socio o contador. */
+.estimate-share-wrap{order:10;display:flex;flex-direction:column;align-items:center;margin-top:6px;text-align:center}
+.estimate-share{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 8px;background:none;border:0;color:#1b224e;font:inherit;font-size:14px;font-weight:500;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.estimate-share:hover{color:#254bc6}
+.estimate-share:focus-visible{outline:3px solid #315de8;outline-offset:2px;border-radius:6px}
+.estimate-share-status{margin:0;min-height:0;font-size:12px;line-height:1.5;color:#5d6470}
+.estimate-share-status:empty{display:none}
+
 /* credit-project-scenes.css */
 /* Credit welcome, calculator and approved project artwork. */
 body.product-tools-unified.credit-simulator-preview .credit-calculator-welcome {

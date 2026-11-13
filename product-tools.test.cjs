@@ -62,3 +62,17 @@ test('Supplier estimate uses confirmed rate and term range without implying tax-
  assert.doesNotMatch(p.d.body.textContent,/US\$5 millones|hasta 37 días/);
  assert.equal(p.calls.length,0);p.close();
 });
+test('Compartir esta estimación: resumen sin datos personales, con la aclaración y sin llamadas de red',()=>{
+ const share=require('./share-estimate.js');
+ const cases=[['credito-empresarial.html','credit','#simulador-credito',/Pago mensual estimado: \$39,232\.85/],
+  ['factoraje.html','factoring','#simulador-factoraje',/Anticipo estimado de hasta 85%: MXN 425,000\.00/],
+  ['pago-a-proveedores.html','suppliers','[data-supplier-simulator]',/Capital \+ interés estimado: \$10,150,000 MXN/]];
+ for(const [file,kind,root,expected] of cases){
+  const dom=new JSDOM(read(file)),d=dom.window.document,button=d.querySelector('[data-share-estimate="'+kind+'"]');
+  assert.ok(button,file);assert.equal(button.type,'button',file);assert.equal(button.dataset.shareRoot,root,file);
+  const text=share.summary(kind,d.querySelector(root),'https://centraliafinanciera.com/'+file);
+  assert.match(text,expected,file);assert.ok(text.includes(share.NOTE),file);assert.doesNotMatch(text,/@|lead-|firstname/,file);
+  dom.window.close();
+ }
+ assert.doesNotMatch(read('share-estimate.js'),/fetch\(|hsforms|localStorage|sendBeacon/);
+});
