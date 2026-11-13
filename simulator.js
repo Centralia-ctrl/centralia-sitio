@@ -65,11 +65,32 @@
 
   function updateContactOverview() {
     const showsCredit = mode === 'credit' && step === 'contact' && !inquiryOnly;
-    contactCosts.hidden = !showsCredit;
-    contactCostNote.hidden = !showsCredit;
+    // Pago a proveedores: muestra en el formulario el interés y el total que el visitante acaba de calcular.
+    // Solo se muestran; el mensaje que llega a HubSpot no cambia.
+    const showsSupplier = mode === 'suppliers' && step === 'contact' && provider?.kind === 'term-example';
+    contactCosts.hidden = !(showsCredit || showsSupplier);
+    contactCostNote.hidden = !(showsCredit || showsSupplier);
     contactCosts.replaceChildren();
-    contactOverview.classList.toggle('has-credit-costs', showsCredit);
+    contactOverview.classList.toggle('has-credit-costs', showsCredit || showsSupplier);
     backButton.classList.toggle('sim-summary-edit', showsCredit);
+    if (showsSupplier) {
+      const capitalCents = Math.round(provider.amount * 100);
+      const interestCents = Math.round(capitalCents * 0.015 * provider.days / 30);
+      const mxn = value => new Intl.NumberFormat('es-MX', {style:'currency', currency:'MXN', currencyDisplay:'code', minimumFractionDigits:2}).format(value);
+      for (const [label, value] of [['Interés estimado · ' + provider.days + ' días', interestCents / 100], ['Capital + interés estimado', (capitalCents + interestCents) / 100]]) {
+        const row = document.createElement('div');
+        const name = document.createElement('dt');
+        const amount = document.createElement('dd');
+        name.textContent = label;
+        amount.textContent = mxn(value);
+        row.append(name, amount);
+        contactCosts.append(row);
+      }
+      contactCostNote.textContent = '1.5% mensual, sin comisión de apertura. Antes de impuestos y otros cargos.';
+      $('#sim-lead-submit').after(backButton);
+      return;
+    }
+    contactCostNote.textContent = 'Importes antes de IVA y otros cargos.';
     if (!showsCredit) {
       $('#sim-lead-submit').after(backButton);
       return;
