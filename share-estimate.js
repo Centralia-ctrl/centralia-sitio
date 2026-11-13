@@ -50,7 +50,7 @@
       try { await env.navigator.share({title: 'Estimación · Centralia Financiera', text: body}); say(''); return; }
       catch (error) { if (error?.name === 'AbortError') return; }
     }
-    try { await env.navigator.clipboard.writeText(body); say('Copiamos el resumen. Pégalo en WhatsApp o en un correo.'); }
+    try { await env.navigator.clipboard.writeText(body); say('Estimación copiada. Lista para compartir.'); }
     catch { env.open('https://wa.me/?text=' + encodeURIComponent(body), '_blank', 'noopener'); say(''); }
   }
 
