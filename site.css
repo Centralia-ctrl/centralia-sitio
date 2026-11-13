@@ -1635,7 +1635,7 @@ body.home-first-step .capture-review-title{margin:22px 0 8px;font-size:18px;font
  body.home-first-step .capture-fields{grid-template-columns:1fr}
 }
 
-/* Muestra móvil (pendiente de aprobación): acerca el primer paso del formulario.
+/* Aprobado y publicado (13 de noviembre de 2026): acerca el primer paso del formulario.
    Solo cambia espacios por debajo de 761 px; textos, colores y escritorio no cambian. */
 @media(max-width:760px){
  body.home-first-step .hero.shell{padding-block:22px 40px}
@@ -1650,10 +1650,18 @@ body.home-first-step .capture-review-title{margin:22px 0 8px;font-size:18px;font
  body.home-first-step .capture-submit{margin-top:16px}
 }
 
-/* Muestra (pendiente de aprobación): "Todavía no sé cuánto necesito" bajo el monto. */
+/* Aprobado y publicado (13 de noviembre de 2026): "Todavía no sé cuánto necesito" bajo el monto. */
 body.home-first-step .capture-fields label.capture-unknown{grid-column:1/-1;display:flex;align-items:center;gap:10px;min-height:44px;margin-top:-8px;font-size:14px;font-weight:400;color:#303647;cursor:pointer}
 body.home-first-step .capture-fields label.capture-unknown input{-webkit-appearance:auto;appearance:auto;width:20px;min-width:20px;height:20px;min-height:0;margin:0;padding:0;flex:none;border:0;box-shadow:none;outline-offset:3px;accent-color:#1b224e;background:none}
 body.home-first-step .capture-fields label.is-unknown input{opacity:.45}
+
+/* Aprobado y publicado (13 de noviembre de 2026): qué obtiene la empresa al contactar a Centralia, bajo el botón. */
+body.home-first-step .capture-value{margin-top:16px;padding-top:14px;border-top:1px solid #e4e7ee}
+body.home-first-step .capture-value-title{margin:0 0 8px;font-size:13px;font-weight:600;color:#1b224e}
+body.home-first-step .capture-value ul{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+body.home-first-step .capture-value li{position:relative;padding-left:22px;font-size:13px;line-height:1.55;color:#303647}
+body.home-first-step .capture-value li::before{content:"";position:absolute;left:2px;top:.45em;width:10px;height:6px;border-left:2px solid #1b224e;border-bottom:2px solid #1b224e;transform:rotate(-45deg)}
+body.home-first-step .capture-success~.capture-value,body.home-first-step form[hidden] .capture-value{display:none}
 
 /* credit-simulator-preview.css */
 /* Isolated preview: the complete credit page keeps its existing brand and content. */
