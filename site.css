@@ -1927,6 +1927,11 @@ body.credit-simulator-preview.sales-preview .credit-inline-assumptions .credit-i
 @media(max-width:380px){.sales-preview .factoring-calculator-grid{padding:18px 14px}.sales-preview .factoring-calculator-result{padding:20px 14px}.sales-preview .factoring-advance-value{font-size:32px}.sales-preview .sales-confidence strong{font-size:22px}body.credit-simulator-preview.sales-preview .credit-inline-calculator{padding:23px 17px}.sales-preview .factoring-inline-pair{grid-template-columns:1fr}.sales-preview .factoring-calculator-heading h2{font-size:30px}}
 @media(prefers-reduced-motion:no-preference){.sales-preview .sales-range::-webkit-slider-thumb{transition:box-shadow .15s}.sales-preview .sales-range:hover::-webkit-slider-thumb{box-shadow:0 0 0 5px #e4e7ee}.sales-preview .sales-section-link .icon{transition:transform .2s}.sales-preview .sales-section-link:hover .icon{transform:translateX(4px)}}
 
+/* Muestra (pendiente de aprobación): factura → anticipo → remanente en el mismo resultado. */
+.sales-preview .factoring-ratio-legend .factoring-remainder{text-align:right}
+.sales-preview .factoring-ratio-legend .factoring-remainder strong{display:block;margin-top:2px;font-size:15px;font-weight:500;color:#1b224e;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sales-preview .factoring-before-costs #factoring-inline-invoices{color:#303647;font-variant-numeric:tabular-nums;white-space:nowrap}
+
 /* unified-tools-preview.css */
 /* Approved local preview: one visual system for the three tools and contact forms. */
 /* Preview: only vertical spacing between Factoraje and supplier sections. */

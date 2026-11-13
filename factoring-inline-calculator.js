@@ -15,6 +15,7 @@
   const figures=window.CENTRALIA_SIMULATION.factoring(principal);
   root.querySelector('#factoring-inline-advance').textContent=format(figures.advance);
   root.querySelector('#factoring-inline-retained').textContent=format(figures.retained);
+  root.querySelector('#factoring-inline-invoices').textContent=format(principal);
   root.querySelector('#factoring-inline-horizon').textContent='Cobro previsto en '+term+' '+(term===1?'día':'días');
   range.value=String(Math.min(principal,Number(range.max)));
   range.setAttribute('aria-valuetext',format(Number(range.value)));
