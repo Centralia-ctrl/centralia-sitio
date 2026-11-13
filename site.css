@@ -1619,6 +1619,21 @@ body.home-first-step .capture-review-title{margin:22px 0 8px;font-size:18px;font
  body.home-first-step .capture-fields{grid-template-columns:1fr}
 }
 
+/* Muestra móvil (pendiente de aprobación): acerca el primer paso del formulario.
+   Solo cambia espacios por debajo de 761 px; textos, colores y escritorio no cambian. */
+@media(max-width:760px){
+ body.home-first-step .hero.shell{padding-block:22px 40px}
+ body.home-first-step .hero .hero-copy{gap:22px}
+ body.home-first-step .hero h1{margin-top:14px}
+ body.home-first-step .hero-purpose{margin-top:12px;line-height:1.6}
+ body.home-first-step .capture-panel{padding:18px 18px 20px}
+ body.home-first-step .capture-form-meta{margin-bottom:14px}
+ body.home-first-step .capture-form-meta h2{margin-bottom:4px}
+ body.home-first-step .cx-steps{margin-bottom:16px}
+ body.home-first-step .capture-fields{gap:14px}
+ body.home-first-step .capture-submit{margin-top:16px}
+}
+
 /* credit-simulator-preview.css */
 /* Isolated preview: the complete credit page keeps its existing brand and content. */
 body.credit-simulator-preview .credit-calculator-welcome{display:grid;grid-template-columns:minmax(0,1.13fr) minmax(0,1fr);align-items:center;gap:clamp(40px,6vw,100px);padding:64px 0 58px;margin:0}
