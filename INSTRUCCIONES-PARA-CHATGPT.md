@@ -77,17 +77,14 @@ Cuando se active, hace falta:
 
 ## PARTE B · Pendiente de decisión de Miguel Ángel (no aplicar)
 
-1. **Cifras y condiciones.** Deben confirmarse con los fondeadores:
-   - Crédito con garantía: hasta $50 M MXN, comisión por disposición de 1%, 2% o 4%.
-   - Crédito sin garantía: hasta $15 M MXN, comisión de apertura de 4.5%.
-   - Factoraje: anticipo de hasta 85% del valor de facturas elegibles, antes de costos. **Confirmado.**
-   - Pago a proveedores: hasta US$5 M, 37 días, más de 150 países.
-   - Tasa ilustrativa del simulador: 2% mensual. **Confirmada.**
-   - Plazos: hasta 36 meses. **Confirmado.** `app.js` dice "Modalidades de 6 a 36 meses" y el simulador ofrece 12, 18, 24, 30 y 36 meses.
-2. **Símbolo ® y razón social.** Dependen de la constitución de la persona moral y del registro ante el IMPI.
+1. **Cifras y condiciones.** Confirmadas por Miguel Ángel (actualizado el 13 de noviembre de 2026; sustituyen las cifras anteriores de $15 M, $50 M, 4.5%, US$5 M y 37 días, que ya no se presentan como condiciones):
+   - Crédito empresarial: hasta $20 M MXN, 36 meses, sin garantía, sin penalización por pago anticipado y tasa fija sobre saldos insolutos. Simulador con 2% mensual ilustrativo y apertura del 5% antes de IVA, por separado.
+   - Factoraje: anticipo de hasta 85% del valor de facturas elegibles, antes de costos.
+   - Pago a proveedores: 1.5% mensual simple sobre base de 30 días, de 15 a 60 días y sin comisión de apertura. Impuestos, otros cargos y máximo de línea siguen sin confirmar.
+2. **Razón social.** El ® se conserva (marca registrada, confirmado el 10 de noviembre de 2026). Falta decidir si el nombre del operador aparece en el pie; va en el aviso de privacidad.
 3. **Formulario único en HubSpot.** Hoy hay dos: portada `68d091a6-…` y simulador `1da292ee-…`. No cambies los endpoints hasta que exista el formulario nuevo y su ID.
-4. **Mensaje de éxito.** Falta definir en cuánto tiempo y por qué medio se contacta al prospecto.
-5. **Simulador arriba de $15 M.** Elegir entre agregar un escenario con garantía o avisar del límite antes de que el usuario escriba el monto.
+4. **Mensaje de éxito.** Decidido: "a la brevedad", sin prometer un plazo (Miguel Ángel, 27 de octubre y 5 de noviembre de 2026).
+5. **Límite del simulador de Crédito.** Resuelto: el límite es $20 M MXN, sin modalidad con garantía.
 6. **Video del almacén.** `assets/centralia-almacen-preview.mp4` y su póster tienen marca de agua de iStock. Miguel Ángel comprará la licencia; el video se queda y se reemplaza por la versión licenciada cuando llegue. No se publica en producción con la marca de agua.
 7. **Animaciones de Crédito y Pago a proveedores.** Decidir si se rehacen con la línea de Factoraje antes o después del lanzamiento.
 8. **Titulares de producto.** Resuelto para Pago a proveedores: "Tus compras, pagadas a tiempo." (PR #12). Crédito y Factoraje sin cambios.
