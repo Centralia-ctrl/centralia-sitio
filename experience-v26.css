@@ -155,6 +155,16 @@ body.home-first-step .capture-success~.capture-value,body.home-first-step form[h
 @keyframes centralia-process-enter{from{opacity:.35;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes centralia-step-enter{from{opacity:.45}to{opacity:1}}
 
+/* A reading guide follows the existing three-step layout; all copy stays visible. */
+.product-process ol.cx-journey{position:relative}
+.product-process ol.cx-journey::before,.product-process ol.cx-journey::after{content:"";position:absolute;left:var(--journey-left,18px);top:var(--journey-top,18px);height:var(--journey-height,0px);width:2px;transform:translateX(-50%);background:#e4e7ee;pointer-events:none}
+.product-process ol.cx-journey::after{background:#315de8;transform:translateX(-50%) scaleY(var(--journey-progress,0));transform-origin:top;transition:transform .14s linear}
+.product-process ol.cx-journey>li{position:relative}
+.product-process ol.cx-journey>li::before{display:none}
+.product-process ol.cx-journey .product-step{position:relative;z-index:1;transition:background-color .25s,border-color .25s,color .25s,box-shadow .25s}
+.product-process ol.cx-journey .cx-current-step>.product-step{background:#1b224e;border-color:#1b224e;color:#fff;box-shadow:0 0 0 4px #f3f6ff}
+.product-process ol.cx-journey .cx-past-step>.product-step{background:#f3f6ff;border-color:#315de8;color:#1b224e}
+
 /* Delivered only after a confirmed inquiry; never a formal credit offer. */
 #sim-delivered-details[hidden]{display:none!important}
 .sim-delivered-details{margin:28px 0 24px;padding-top:24px;border-top:1px solid #e4e7ee;color:#303647;min-width:0}
@@ -177,16 +187,48 @@ body.home-first-step .capture-success~.capture-value,body.home-first-step form[h
 .sim-table-scroll th:first-child{position:sticky;left:0;background:#fff}
 .sim-table-scroll thead th:first-child{background:#f5f6fa;z-index:2}
 .sim-table-scroll th{font-weight:500}
+.sim-table-scroll tr.is-chart-month>*{background:#f3f6ff}
+.sim-table-scroll tr.is-chart-month>th{box-shadow:inset 2px 0 #315de8}
 .sim-delivered-note{margin:18px 0 0;font-size:13px;line-height:1.7;color:#5d6470}
 .sim-table-hint{display:none}
+
+/* The curve reads the same cent-rounded schedule as the delivered table. */
+#sim-credit-chart{margin:16px 0 20px;padding:16px;border:1px solid #e4e7ee;border-radius:12px;background:#fff}
+#sim-credit-chart h3{font-size:18px;line-height:1.3;margin:0 0 10px;letter-spacing:-.01em}
+.sim-chart-summary{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:4px}
+.sim-chart-summary p{font-size:13px;line-height:1.5;color:#5d6470;margin:0}
+.sim-chart-summary strong{font-size:22px;font-weight:500;color:#1b224e;line-height:1.3;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sim-balance-plot{width:100%;height:auto;display:block;overflow:visible;cursor:crosshair}
+.sim-chart-grid{fill:none;stroke:#e4e7ee;stroke-width:1;vector-effect:non-scaling-stroke}
+.sim-chart-area{fill:#f3f6ff}
+.sim-chart-line{fill:none;stroke:#315de8;stroke-width:2.5;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;animation:centralia-balance-draw 1s cubic-bezier(.2,.7,.2,1) both}
+.sim-chart-guide{stroke:#5d6470;stroke-width:1;stroke-dasharray:3 4;vector-effect:non-scaling-stroke}
+.sim-chart-dot{fill:#315de8;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
+.sim-chart-axis{display:flex;justify-content:space-between;gap:12px;font-size:12px;line-height:1.5;color:#5d6470}
+#sim-chart-range{width:100%;height:36px;margin:0;accent-color:#315de8;cursor:pointer;display:block}
+#sim-chart-range:focus-visible{outline:2px solid #315de8;outline-offset:3px;border-radius:4px}
+#sim-chart-hint{font-size:12px;line-height:1.5;color:#5d6470;margin:0 0 10px}
+#sim-chart-month-details{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0;padding-top:10px;border-top:1px solid #e4e7ee}
+#sim-chart-month-details>div{display:block;min-width:0;border:0;padding:0}
+#sim-chart-month-details dt{font-size:12px;line-height:1.5;color:#5d6470}
+#sim-chart-month-details dd{font-size:14px;line-height:1.5;text-align:left;max-width:none;margin:2px 0 0;overflow-wrap:normal}
+@keyframes centralia-balance-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @media(max-width:760px){
  .sim-delivered-details{margin-top:22px;padding-top:20px}
  .sim-delivered-details h3{font-size:21px}
  .sim-delivered-details dl>div{gap:12px}
  .sim-delivered-details dd{max-width:52%}
  .sim-table-hint{display:block;font-size:13px;color:#5d6470;margin:8px 0 0;line-height:1.5}
+ #sim-credit-chart{padding:12px;margin-top:12px}
+ .sim-chart-summary strong{font-size:18px}
+ #sim-chart-range{height:44px}
+ #sim-chart-month-details{gap:8px 12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+ #sim-chart-month-details>div:first-child{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:12px}
+ #sim-chart-month-details>div:first-child dd{margin:0}
 }
 @media(prefers-reduced-motion:reduce){
  .cx-steps li,.product-process > ol > li.cx-process-step{transition:none}
  .product-process > ol > li.cx-in-view > div,.product-process > ol > li.cx-in-view > .product-step{animation:none}
+ .product-process ol.cx-journey::after,.product-process ol.cx-journey .product-step{transition:none}
+ .sim-chart-line{animation:none}
 }

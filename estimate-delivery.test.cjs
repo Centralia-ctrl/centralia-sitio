@@ -54,6 +54,8 @@ test('Credit details unlock only after a consented, accepted submission; failure
     assert.equal(detail.hidden, false); assert.equal(detail.querySelectorAll('tbody tr').length, 36);
     assert.equal(detail.querySelector('details').open, true, 'the table is delivered open without another click');
     assert.equal(p.$('#simulator-title').textContent, 'Tu tabla está lista.');
+    assert.equal(p.$('.sim-receipt-brief a[href^="mailto:"]'), null);
+    assert.match(p.$('.sim-receipt-brief').textContent, /Recibimos tu consulta\. Te contactamos a la brevedad\./);
     assert.equal(p.$('.sim-success').contains(detail), false, '36 rows must not enter the live status region');
     assert.equal(p.d.activeElement, p.$('.sim-success'));
     assert.deepEqual(p.calls[1].body.fields.map(x => x.name), ['email','firstname','company','phone','message']);
@@ -151,22 +153,77 @@ test('Older simulator entry points show a basic estimate, not the full interest 
   } finally { p.close(); }
 });
 
-test('How it works observes the actual three steps and reveals each once', () => {
-  const p = setup();
+for (const file of ['credito-empresarial.html','factoraje.html','pago-a-proveedores.html']) {
+  test(`How it works: reading position moves forward/back without hiding content or submitting (${file})`, () => {
+    const p = setup(file);
+    try {
+      const list=p.$('.product-process > ol'), steps=[...list.children], copy=list.textContent;
+      const frames=new Map(); let callback, top=380, serial=0;
+      p.w.innerHeight=800;
+      p.w.requestAnimationFrame=fn=>{frames.set(++serial,fn);return serial;};
+      p.w.cancelAnimationFrame=id=>frames.delete(id);
+      const tick=()=>{const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn());};
+      list.getBoundingClientRect=()=>({top,left:0,height:640,width:500});
+      steps.forEach((step,index)=>{
+        step.getBoundingClientRect=()=>({top:top+[0,210,440][index],height:170});
+        step.querySelector('.product-step').getBoundingClientRect=()=>({top:top+[0,210,440][index],left:0,width:36,height:36});
+      });
+      p.w.IntersectionObserver=class {constructor(cb){callback=cb;} observe(node){assert.equal(node,list);}};
+      p.w.eval(read('experience-v26.js'));
+      callback([{target:list,isIntersecting:true}]); tick();
+      assert.equal(steps[0].getAttribute('aria-current'),'step');
+      top=140;p.w.dispatchEvent(new p.w.Event('scroll'));tick();
+      assert.equal(steps[1].getAttribute('aria-current'),'step');
+      assert.equal(list.style.getPropertyValue('--journey-progress'),'0.5','reduced motion has discrete progress');
+      top=-90;p.w.dispatchEvent(new p.w.Event('scroll'));tick();
+      assert.equal(steps[2].getAttribute('aria-current'),'step');
+      top=380;p.w.dispatchEvent(new p.w.Event('scroll'));tick();
+      assert.equal(steps[0].getAttribute('aria-current'),'step');
+      assert.equal(steps.filter(s=>s.hasAttribute('aria-current')).length,1);
+      callback([{target:list,isIntersecting:false}]);p.w.dispatchEvent(new p.w.Event('scroll'));assert.equal(frames.size,0);
+      assert.equal(list.textContent,copy);assert.ok(steps.every(s=>!s.hidden));assert.equal(p.calls.length,0);
+    } finally {p.close();}
+  });
+}
+
+test('The chart follows table cents for every selected month and makes no extra requests', async () => {
+  const p=setup();
   try {
-    const observed = [], removed = []; let callback;
-    p.w.IntersectionObserver = class {
-      constructor(cb) { callback = cb; }
-      observe(node) { observed.push(node); }
-      unobserve(node) { removed.push(node); }
-    };
-    p.w.eval(read('experience-v26.js'));
-    assert.equal(observed.length, 3);
-    callback(observed.map(target => ({target, isIntersecting:true, intersectionRatio:.1})));
-    assert.equal(removed.length, 0);
-    callback(observed.map(target => ({target, isIntersecting:true, intersectionRatio:.6})));
-    assert.equal(removed.length, 3); assert.ok(observed.every(node => node.classList.contains('cx-in-view')));
-  } finally { p.close(); }
+    p.open();assert.equal(p.$('#sim-credit-chart'),null);
+    p.fill();p.setResponse('pending');p.submit();await flush();assert.equal(p.$('#sim-credit-chart'),null);
+    p.resolve();await flush();
+    const slider=p.$('#sim-chart-range');
+    for(let month=1;month<=36;month++){
+      slider.value=String(month);slider.dispatchEvent(new p.w.Event('input',{bubbles:true}));
+      const row=p.$(`#sim-delivered-details tbody tr[data-month="${month}"]`), cells=row.querySelectorAll('td');
+      assert.equal(p.$('[data-chart-value="payment"]').dataset.cents,cells[0].dataset.cents);
+      assert.equal(p.$('[data-chart-value="interest"]').dataset.cents,cells[1].dataset.cents);
+      assert.equal(p.$('[data-chart-value="principal"]').dataset.cents,cells[2].dataset.cents);
+      assert.equal(p.$('#sim-chart-balance').dataset.cents,cells[3].dataset.cents);
+      assert.equal(p.$('#sim-delivered-details tr.is-chart-month'),row);
+      assert.match(slider.getAttribute('aria-valuetext'),new RegExp('Mes '+month+' de 36'));
+    }
+    assert.equal(p.$('#sim-chart-balance').dataset.cents,'0');assert.equal(p.calls.length,1);
+    p.open('credit',{amount:2000000});assert.equal(p.$('#sim-credit-chart'),null);
+    p.setResponse(false);p.submit();await flush();assert.equal(p.$('#sim-credit-chart'),null);
+  } finally {p.close();}
+});
+
+test('Tapping the curve selects the nearest payment; a different confirmed scenario redraws it', async () => {
+  const p=setup();
+  try {
+    p.open();p.fill();p.submit();await flush();
+    const plot=p.$('.sim-balance-plot');plot.getBoundingClientRect=()=>({left:0,width:600});
+    plot.dispatchEvent(new p.w.MouseEvent('click',{clientX:300,bubbles:true}));
+    assert.equal(p.$('#sim-chart-range').value,'18');
+    plot.dispatchEvent(new p.w.MouseEvent('click',{clientX:600,bubbles:true}));
+    assert.equal(p.$('#sim-chart-range').value,'36');
+    p.open('credit',{amount:20000000});p.submit();await flush();
+    assert.equal(p.$('#sim-chart-range').value,'1');
+    assert.equal(p.$('#sim-chart-balance').dataset.cents,p.$('#sim-delivered-details tbody tr td:last-child').dataset.cents);
+    p.open('factoring');p.submit();await flush();assert.equal(p.$('#sim-credit-chart'),null);
+    p.open('suppliers');p.submit();await flush();assert.equal(p.$('#sim-credit-chart'),null);
+  } finally {p.close();}
 });
 
 test('Simulator feedback respects reduced motion and never submits the form', async () => {

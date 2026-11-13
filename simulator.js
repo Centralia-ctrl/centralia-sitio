@@ -101,6 +101,62 @@
     if (mode === 'suppliers') return provider?.kind === 'term-example' ? {product:mode, currency:'MXN', amount:provider.amount, days:provider.days} : null;
     return {product:mode, currency:mode === 'credit' ? 'MXN' : activeCurrency, amount:parseAmount(amountInput.value), months:Number(term.value), days:factoringDays};
   }
+  function creditBalanceChart(schedule, append, format) {
+    const chart = append('section', ''); chart.id = 'sim-credit-chart';
+    chart.setAttribute('aria-labelledby', 'sim-chart-title');
+    const title = append('h3', 'Así baja tu saldo.', chart); title.id = 'sim-chart-title';
+    const summary = append('div', '', chart); summary.className = 'sim-chart-summary';
+    const label = append('p', '', summary); label.append('Saldo después del ');
+    const monthText = append('span', 'mes 1', label); monthText.id = 'sim-chart-month';
+    const balance = append('strong', '', summary); balance.id = 'sim-chart-balance';
+    const svgNode = (tag, attrs, parent) => {
+      const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, String(value)));
+      parent.append(node); return node;
+    };
+    const plot = svgNode('svg', {viewBox:'0 0 600 130', 'aria-hidden':'true', focusable:'false', class:'sim-balance-plot'}, chart);
+    const x = month => 12 + month / schedule.rows.length * 576;
+    const y = cents => 12 + (1 - cents / schedule.capital) * 98;
+    const points = [{month:0, balance:schedule.capital}, ...schedule.rows];
+    const line = points.map((row, index) => (index ? 'L' : 'M') + x(row.month).toFixed(2) + ' ' + y(row.balance).toFixed(2)).join(' ');
+    svgNode('path', {d:'M12 12H588 M12 61H588 M12 110H588', class:'sim-chart-grid'}, plot);
+    svgNode('path', {d:line + ' L588 110 L12 110 Z', class:'sim-chart-area'}, plot);
+    svgNode('path', {d:line, pathLength:1, class:'sim-chart-line'}, plot);
+    const guide = svgNode('line', {x1:0,x2:0,y1:12,y2:110,class:'sim-chart-guide'}, plot);
+    const dot = svgNode('circle', {cx:0,cy:0,r:5,class:'sim-chart-dot'}, plot);
+    const axis = append('div', '', chart); axis.className = 'sim-chart-axis';
+    append('span', 'Inicio', axis); append('span', schedule.rows.length + ' meses · saldo $0', axis);
+    const sliderLabel = append('label', 'Elige un mes para ver sus pagos', chart);
+    sliderLabel.htmlFor = 'sim-chart-range'; sliderLabel.className = 'sr-only';
+    const slider = append('input', '', chart);
+    slider.id = 'sim-chart-range'; slider.type = 'range'; slider.min = '1'; slider.max = String(schedule.rows.length); slider.step = '1'; slider.value = '1';
+    slider.setAttribute('aria-controls', 'sim-chart-month-details'); slider.setAttribute('aria-describedby', 'sim-chart-hint');
+    const hint = append('p', 'Desliza para explorar cada mes. Importes en MXN.', chart); hint.id = 'sim-chart-hint';
+    const values = append('dl', '', chart); values.id = 'sim-chart-month-details';
+    const amounts = {};
+    for (const [key, text] of [['payment','Pago del mes'],['principal','A capital'],['interest','Intereses']]) {
+      const row = append('div', '', values); append('dt', text, row); amounts[key] = append('dd', '', row); amounts[key].dataset.chartValue = key;
+    }
+    const compactMoney = cents => new Intl.NumberFormat('es-MX', {style:'currency',currency:'MXN',minimumFractionDigits:2}).format(cents / 100);
+    function selectMonth(value) {
+      const month = Math.max(1, Math.min(schedule.rows.length, Math.round(Number(value) || 1)));
+      const row = schedule.rows[month - 1];
+      slider.value = String(month); chart.dataset.month = String(month); monthText.textContent = 'mes ' + month;
+      balance.textContent = compactMoney(row.balance); balance.dataset.cents = String(row.balance);
+      for (const key of Object.keys(amounts)) { amounts[key].textContent = compactMoney(row[key]); amounts[key].dataset.cents = String(row[key]); }
+      guide.setAttribute('x1', x(month)); guide.setAttribute('x2', x(month));
+      dot.setAttribute('cx', x(month)); dot.setAttribute('cy', y(row.balance));
+      slider.setAttribute('aria-valuetext', 'Mes ' + month + ' de ' + schedule.rows.length + '. Pago ' + format(row.payment / 100) + '; capital ' + format(row.principal / 100) + '; intereses ' + format(row.interest / 100) + '; saldo ' + format(row.balance / 100));
+      delivered.querySelectorAll('tbody tr[data-month]').forEach(tr => tr.classList.toggle('is-chart-month', Number(tr.dataset.month) === month));
+    }
+    slider.addEventListener('input', () => selectMonth(slider.value));
+    plot.addEventListener('click', event => {
+      const rect = plot.getBoundingClientRect();
+      if (!rect.width) return;
+      selectMonth(((event.clientX - rect.left) / rect.width * 600 - 12) / 576 * schedule.rows.length);
+    });
+    return {element:chart, selectMonth};
+  }
   function showConfirmedDetails(snapshot) {
     clearDetails();
     if (!snapshot) return;
@@ -112,10 +168,12 @@
       ? 'Consulta tus pagos estimados y el desglose de tu escenario.'
       : snapshot.product === 'factoring' ? 'Revisaremos tus facturas y te indicaremos el siguiente paso.' : 'Revisaremos tu compra y el plazo que necesitas.';
     receipt.replaceChildren(); receipt.classList.add('sim-receipt-brief');
-    const confirmation = append('p', '', receipt);
-    confirmation.append(document.createTextNode('Recibimos tu consulta. Te contactamos a la brevedad desde '));
-    const email = append('a', 'hola@centraliafinanciera.com', confirmation); email.href = 'mailto:hola@centraliafinanciera.com';
-    confirmation.append(document.createTextNode('.'));
+    const confirmation = append('p', 'Recibimos tu consulta. Te contactamos a la brevedad', receipt);
+    if (snapshot.product !== 'credit') {
+      confirmation.append(' desde ');
+      const email = append('a', 'hola@centraliafinanciera.com', confirmation); email.href = 'mailto:hola@centraliafinanciera.com';
+    }
+    confirmation.append('.');
     append('p', scenario(), receipt).className = 'sim-confirmed-scenario';
     append('p', 'El envío no implica una aprobación de financiamiento.', receipt);
     const format = value => new Intl.NumberFormat('es-MX', {style:'currency', currency:snapshot.currency, currencyDisplay:'code', minimumFractionDigits:2}).format(value);
@@ -125,6 +183,7 @@
     const addRow = (label, value) => { const row = append('div', '', breakdown); append('dt', label, row); append('dd', value, row); };
     if (snapshot.product === 'credit') {
       const schedule = amortization(snapshot.amount, snapshot.months);
+      const chart = creditBalanceChart(schedule, append, format); breakdown.before(chart.element);
       addRow('Crédito solicitado', format(schedule.capital / 100));
       addRow('Plazo', snapshot.months + ' meses');
       addRow('Intereses estimados del plazo', format(schedule.interest / 100));
@@ -151,6 +210,7 @@
           cell.dataset.cents = String(row[key]);
         }
       }
+      chart.selectMonth(1);
       append('p', '2% mensual sobre el saldo pendiente. La apertura se paga por separado y no se financia. La última mensualidad ajusta el redondeo de centavos. No incluye IVA, seguros ni otros cargos; no equivale al CAT ni a una cotización aprobada.').className = 'sim-delivered-note';
     } else if (snapshot.product === 'factoring') {
       const result = factoring(snapshot.amount);
