@@ -100,9 +100,49 @@
     button.addEventListener('click',()=>{update();if(button.disabled)return;document.dispatchEvent(new CustomEvent('centralia:provider-scenario',{detail:{payment:payment.value,collection:collection.value,days:calendarGap(payment.value,collection.value)}}));emit('calendar_consultation','suppliers');});
     update();
   }
-  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-  if('IntersectionObserver' in window){
-    const observer=new IntersectionObserver(entries=>entries.forEach(e=>e.target.classList.toggle('cx-in-view',e.isIntersecting&&!reduced.matches)),{threshold:.6});
-    document.querySelectorAll('.product-process>li').forEach(el=>{el.classList.add('cx-process-step');observer.observe(el);});
-  }
+  if('IntersectionObserver' in window) document.querySelectorAll('.product-process > ol').forEach(list => {
+    const steps=[...list.children].filter(node=>node.tagName==='LI');
+    const markers=steps.map(step=>step.querySelector('.product-step'));
+    if(steps.length<2 || markers.some(marker=>!marker)) return;
+    const reduced=matchMedia('(prefers-reduced-motion:reduce)');
+    let visible=false, frame=0;
+    const clamp=value=>Math.max(0,Math.min(1,value));
+    function paint(){
+      frame=0;
+      if(!visible || document.hidden) return;
+      const rect=list.getBoundingClientRect(), boxes=markers.map(marker=>marker.getBoundingClientRect());
+      const centers=boxes.map(box=>box.top+box.height/2);
+      const distance=centers[centers.length-1]-centers[0];
+      if(distance<=0) return;
+      const readingLine=window.innerHeight*.48;
+      let active=0;
+      centers.forEach((center,index)=>{if(center<=readingLine)active=index;});
+      list.style.setProperty('--journey-top',(centers[0]-rect.top)+'px');
+      list.style.setProperty('--journey-left',(boxes[0].left+boxes[0].width/2-rect.left)+'px');
+      list.style.setProperty('--journey-height',distance+'px');
+      list.style.setProperty('--journey-progress',String(reduced.matches?active/(steps.length-1):clamp((readingLine-centers[0])/distance)));
+      steps.forEach((step,index)=>{
+        step.classList.toggle('cx-current-step',index===active);
+        step.classList.toggle('cx-past-step',index<active);
+        if(index===active)step.setAttribute('aria-current','step');else step.removeAttribute('aria-current');
+        if(step.getBoundingClientRect().top<window.innerHeight*.9)step.classList.add('cx-in-view');
+      });
+    }
+    const queue=()=>{if(visible&&!document.hidden&&!frame)frame=requestAnimationFrame(paint);};
+    steps.forEach(step=>step.classList.add('cx-process-step'));
+    list.classList.add('cx-journey');
+    const observer=new IntersectionObserver(entries=>{
+      visible=entries.some(entry=>entry.isIntersecting);
+      if(visible)queue();else{cancelAnimationFrame(frame);frame=0;}
+    },{rootMargin:'80px 0px',threshold:0});
+    observer.observe(list);
+    window.addEventListener('scroll',queue,{passive:true});
+    window.addEventListener('resize',queue);
+    window.addEventListener('pageshow',queue);
+    window.addEventListener('pagehide',()=>{cancelAnimationFrame(frame);frame=0;});
+    document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else queue();});
+    reduced.addEventListener('change',queue);
+    if('ResizeObserver' in window)new ResizeObserver(queue).observe(list);
+    document.fonts?.ready.then(queue);
+  });
 })();

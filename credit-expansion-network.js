@@ -57,8 +57,12 @@ export function createExpansionNetwork(renderer) {
     const pivot = makeGroup(group);
     pivot.position.set(start[0], 0.112, start[1]);
     pivot.rotation.y = -Math.atan2(end[1] - start[1], end[0] - start[0]);
-    box(pivot, distance, 0.012, width, distance / 2, 0, 0, aluminum, 0.003);
-    return progress => { pivot.scale.x = Math.max(0.001, progress); };
+    const material=aluminum.clone();
+    const accent=new THREE.Color(0x315de8);
+    box(pivot, distance, 0.012, width, distance / 2, 0, 0, material, 0.003);
+    const reveal=progress => { pivot.scale.x = Math.max(0.001, progress); };
+    reveal.illuminate=strength=>material.color.copy(aluminum.color).lerp(accent,strength*.62);
+    return reveal;
   }
   function revealVertically(building, height) {
     const plane = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0.1);
@@ -132,6 +136,7 @@ export function createExpansionNetwork(renderer) {
     scene,
     camera,
     duration:10,
+    continuous:true,
     exposure:1.02,
     resize(aspect) {
       const halfHeight = Math.max(framing.vertical, framing.horizontal / aspect) * 1.1;
@@ -148,6 +153,16 @@ export function createExpansionNetwork(renderer) {
         cross(phase(time, start, start + 0.13));
         approach(phase(time, start + 0.1, start + 0.21));
         reveal(phase(time, start + 0.16, start + 0.4));
+      });
+      // The same connections remain assembled and carry a quiet, sequential highlight.
+      const cycle=Math.max(0,seconds-10)%12;
+      const local=cycle%4;
+      const pulse=(start,end)=>Math.sin(Math.PI*phase(local,start,end))**2;
+      trunk.illuminate(seconds>10?pulse(.1,1.5):0);
+      branches.forEach(({cross,approach},index)=>{
+        const selected=seconds>10&&Math.floor(cycle/4)===index;
+        cross.illuminate(selected?pulse(.8,2.5):0);
+        approach.illuminate(selected?pulse(1.9,3.7):0);
       });
     }
   };

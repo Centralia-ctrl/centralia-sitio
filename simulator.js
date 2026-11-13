@@ -18,6 +18,22 @@
     const commission = amount * OPENING_FEE;
     return { monthly, payments, interest: payments - amount, commission, partialTotal: payments + commission };
   }
+  function amortization(amount, months) {
+    const estimate = credit(amount, months);
+    const capital = Math.round(amount * 100), payment = Math.round(estimate.monthly * 100);
+    let balance = capital;
+    const rows = [];
+    for (let month = 1; month <= months; month++) {
+      const interest = Math.round(balance * CALCULATION_RATE);
+      const paid = month === months ? balance + interest : Math.min(payment, balance + interest);
+      const principal = paid - interest;
+      balance -= principal;
+      rows.push({month, payment:paid, interest, principal, balance});
+    }
+    const payments = rows.reduce((sum, row) => sum + row.payment, 0);
+    const commission = Math.round(capital * OPENING_FEE);
+    return {rows, capital, payments, interest:payments - capital, commission, total:payments + commission};
+  }
   const $ = selector => document.querySelector(selector);
   const dialog = $('#simulator-dialog'), amountInput = $('#sim-amount'), term = $('#sim-term'), currency = $('#sim-currency');
   let creditProject = null;
@@ -30,7 +46,7 @@
   const compactConsultation = document.body.classList.contains('unified-contact') || document.body.classList.contains('sales-preview');
   let inquiryOnly = false, inlineReview = false;
   let mode = 'credit', opener = null, step = 'scenario', sending = false;
-  const received = new Set();
+  const received = new Map();
   const FORM_ENDPOINT = 'https://api.hsforms.com/submissions/v3/integration/submit/9145352/1da292ee-7ccc-42e4-a427-ece646e13e65';
   const drafts = {credit: '5,000,000', MXN: '1,000,000', USD: '100,000'};
   let activeCurrency = 'MXN';
@@ -62,6 +78,164 @@
   contactCostNote.hidden = true;
   contactOverview.append(contactCostNote);
   const backButton = $('#sim-back');
+
+  // The full estimate is generated only after HubSpot accepts this exact inquiry.
+  // It is kept in this tab's memory, without contact data in storage or URLs.
+  const delivered = document.createElement('section');
+  delivered.id = 'sim-delivered-details';
+  delivered.className = 'sim-delivered-details';
+  delivered.setAttribute('aria-labelledby', 'sim-delivered-title');
+  delivered.hidden = true;
+  $('.sim-success').after(delivered);
+  const receipt = $('.sim-success');
+  const originalReceipt = [...receipt.childNodes].map(node => node.cloneNode(true));
+  const clearDetails = () => {
+    delivered.hidden = true; delivered.replaceChildren();
+    $('#simulator-title').removeAttribute('tabindex');
+    if (receipt.classList.contains('sim-receipt-brief')) {
+      receipt.replaceChildren(...originalReceipt.map(node => node.cloneNode(true)));
+      receipt.classList.remove('sim-receipt-brief');
+    }
+  };
+  function scenarioSnapshot() {
+    if (inquiryOnly) return null;
+    if (mode === 'suppliers') return provider?.kind === 'term-example' ? {product:mode, currency:'MXN', amount:provider.amount, days:provider.days} : null;
+    return {product:mode, currency:mode === 'credit' ? 'MXN' : activeCurrency, amount:parseAmount(amountInput.value), months:Number(term.value), days:factoringDays};
+  }
+  function creditBalanceChart(schedule, append, format) {
+    const chart = append('section', ''); chart.id = 'sim-credit-chart';
+    chart.setAttribute('aria-labelledby', 'sim-chart-title');
+    const title = append('h3', 'Así baja tu saldo.', chart); title.id = 'sim-chart-title';
+    const summary = append('div', '', chart); summary.className = 'sim-chart-summary';
+    const label = append('p', '', summary); label.append('Saldo después del ');
+    const monthText = append('span', 'mes 1', label); monthText.id = 'sim-chart-month';
+    const balance = append('strong', '', summary); balance.id = 'sim-chart-balance';
+    const svgNode = (tag, attrs, parent) => {
+      const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, String(value)));
+      parent.append(node); return node;
+    };
+    const plot = svgNode('svg', {viewBox:'0 0 600 130', 'aria-hidden':'true', focusable:'false', class:'sim-balance-plot'}, chart);
+    const x = month => 12 + month / schedule.rows.length * 576;
+    const y = cents => 12 + (1 - cents / schedule.capital) * 98;
+    const points = [{month:0, balance:schedule.capital}, ...schedule.rows];
+    const line = points.map((row, index) => (index ? 'L' : 'M') + x(row.month).toFixed(2) + ' ' + y(row.balance).toFixed(2)).join(' ');
+    svgNode('path', {d:'M12 12H588 M12 61H588 M12 110H588', class:'sim-chart-grid'}, plot);
+    svgNode('path', {d:line + ' L588 110 L12 110 Z', class:'sim-chart-area'}, plot);
+    svgNode('path', {d:line, pathLength:1, class:'sim-chart-line'}, plot);
+    const guide = svgNode('line', {x1:0,x2:0,y1:12,y2:110,class:'sim-chart-guide'}, plot);
+    const dot = svgNode('circle', {cx:0,cy:0,r:5,class:'sim-chart-dot'}, plot);
+    const axis = append('div', '', chart); axis.className = 'sim-chart-axis';
+    append('span', 'Inicio', axis); append('span', schedule.rows.length + ' meses · saldo $0', axis);
+    const sliderLabel = append('label', 'Elige un mes para ver sus pagos', chart);
+    sliderLabel.htmlFor = 'sim-chart-range'; sliderLabel.className = 'sr-only';
+    const slider = append('input', '', chart);
+    slider.id = 'sim-chart-range'; slider.type = 'range'; slider.min = '1'; slider.max = String(schedule.rows.length); slider.step = '1'; slider.value = '1';
+    slider.setAttribute('aria-controls', 'sim-chart-month-details'); slider.setAttribute('aria-describedby', 'sim-chart-hint');
+    const hint = append('p', 'Desliza para explorar cada mes. Importes en MXN.', chart); hint.id = 'sim-chart-hint';
+    const values = append('dl', '', chart); values.id = 'sim-chart-month-details';
+    const amounts = {};
+    for (const [key, text] of [['payment','Pago del mes'],['principal','A capital'],['interest','Intereses']]) {
+      const row = append('div', '', values); append('dt', text, row); amounts[key] = append('dd', '', row); amounts[key].dataset.chartValue = key;
+    }
+    const compactMoney = cents => new Intl.NumberFormat('es-MX', {style:'currency',currency:'MXN',minimumFractionDigits:2}).format(cents / 100);
+    function selectMonth(value) {
+      const month = Math.max(1, Math.min(schedule.rows.length, Math.round(Number(value) || 1)));
+      const row = schedule.rows[month - 1];
+      slider.value = String(month); chart.dataset.month = String(month); monthText.textContent = 'mes ' + month;
+      balance.textContent = compactMoney(row.balance); balance.dataset.cents = String(row.balance);
+      for (const key of Object.keys(amounts)) { amounts[key].textContent = compactMoney(row[key]); amounts[key].dataset.cents = String(row[key]); }
+      guide.setAttribute('x1', x(month)); guide.setAttribute('x2', x(month));
+      dot.setAttribute('cx', x(month)); dot.setAttribute('cy', y(row.balance));
+      slider.setAttribute('aria-valuetext', 'Mes ' + month + ' de ' + schedule.rows.length + '. Pago ' + format(row.payment / 100) + '; capital ' + format(row.principal / 100) + '; intereses ' + format(row.interest / 100) + '; saldo ' + format(row.balance / 100));
+      delivered.querySelectorAll('tbody tr[data-month]').forEach(tr => tr.classList.toggle('is-chart-month', Number(tr.dataset.month) === month));
+    }
+    slider.addEventListener('input', () => selectMonth(slider.value));
+    plot.addEventListener('click', event => {
+      const rect = plot.getBoundingClientRect();
+      if (!rect.width) return;
+      selectMonth(((event.clientX - rect.left) / rect.width * 600 - 12) / 576 * schedule.rows.length);
+    });
+    return {element:chart, selectMonth};
+  }
+  function showConfirmedDetails(snapshot) {
+    clearDetails();
+    if (!snapshot) return;
+    const append = (tag, text, parent = delivered) => {
+      const node = document.createElement(tag); node.textContent = text; parent.append(node); return node;
+    };
+    $('#simulator-title').textContent = snapshot.product === 'credit' ? 'Tu tabla está lista.' : 'Recibimos tu consulta.';
+    $('#simulator-intro').textContent = snapshot.product === 'credit'
+      ? 'Consulta tus pagos estimados y el desglose de tu escenario.'
+      : snapshot.product === 'factoring' ? 'Revisaremos tus facturas y te indicaremos el siguiente paso.' : 'Revisaremos tu compra y el plazo que necesitas.';
+    receipt.replaceChildren(); receipt.classList.add('sim-receipt-brief');
+    receipt.hidden = snapshot.product === 'credit';
+    if (snapshot.product === 'credit') {
+      $('#simulator-title').tabIndex = -1;
+    } else {
+      const confirmation = append('p', 'Recibimos tu consulta. Te contactamos a la brevedad', receipt);
+      confirmation.append(' desde ');
+      const email = append('a', 'hola@centraliafinanciera.com', confirmation); email.href = 'mailto:hola@centraliafinanciera.com';
+      confirmation.append('.');
+      append('p', scenario(), receipt).className = 'sim-confirmed-scenario';
+      append('p', 'El envío no implica una aprobación de financiamiento.', receipt);
+    }
+    const format = value => new Intl.NumberFormat('es-MX', {style:'currency', currency:snapshot.currency, currencyDisplay:'code', minimumFractionDigits:2}).format(value);
+    const heading = append('h3', 'Detalle de tu estimación'); heading.id = 'sim-delivered-title';
+    if (snapshot.product === 'credit') heading.className = 'sr-only';
+    const breakdown = append('dl', '');
+    const addRow = (label, value) => { const row = append('div', '', breakdown); append('dt', label, row); append('dd', value, row); };
+    if (snapshot.product === 'credit') {
+      const schedule = amortization(snapshot.amount, snapshot.months);
+      const chart = creditBalanceChart(schedule, append, format); breakdown.before(chart.element);
+      addRow('Crédito solicitado', format(schedule.capital / 100));
+      addRow('Plazo', snapshot.months + ' meses');
+      addRow('Intereses estimados del plazo', format(schedule.interest / 100));
+      addRow('Suma de mensualidades', format(schedule.payments / 100));
+      addRow('Apertura del 5% · pago único separado', format(schedule.commission / 100));
+      addRow('Mensualidades + apertura, antes de impuestos', format(schedule.total / 100));
+      const details = append('details', '');
+      details.open = true;
+      chart.element.before(details);
+      append('summary', 'Tabla de amortización estimada', details);
+      const hint = append('p', 'Desliza la tabla para ver todas las columnas.', details); hint.className = 'sim-table-hint';
+      const wrapper = append('div', '', details); wrapper.className = 'sim-table-scroll'; wrapper.tabIndex = 0;
+      wrapper.setAttribute('role', 'region'); wrapper.setAttribute('aria-label', 'Tabla de amortización estimada; desplazamiento horizontal');
+      const table = append('table', '', wrapper);
+      append('caption', snapshot.months + ' pagos estimados · MXN · antes de impuestos y otros cargos', table);
+      const header = append('tr', '', append('thead', '', table));
+      ['Mes', 'Pago', 'Saldo', 'Capital', 'Intereses'].forEach(label => { append('th', label, header).scope = 'col'; });
+      const body = append('tbody', '', table);
+      for (const row of schedule.rows) {
+        const tr = append('tr', '', body); tr.dataset.month = String(row.month);
+        append('th', String(row.month), tr).scope = 'row';
+        for (const key of ['payment','balance','principal','interest']) {
+          const cell = append('td', new Intl.NumberFormat('es-MX', {minimumFractionDigits:2, maximumFractionDigits:2}).format(row[key] / 100), tr);
+          cell.dataset.cents = String(row[key]);
+        }
+      }
+      chart.selectMonth(1);
+      append('p', '2% mensual sobre el saldo pendiente. La apertura se paga por separado y no se financia. La última mensualidad ajusta el redondeo de centavos. No incluye IVA, seguros ni otros cargos; no equivale al CAT ni a una cotización aprobada.').className = 'sim-delivered-note';
+    } else if (snapshot.product === 'factoring') {
+      const result = factoring(snapshot.amount);
+      addRow('Valor de las facturas', format(snapshot.amount));
+      addRow('Hasta 85% de anticipo, antes de costos', format(result.advance));
+      addRow('15% remanente al cobro, antes de costos', format(result.retained));
+      if (snapshot.days) addRow('Cobro previsto', snapshot.days + ' días');
+      append('p', 'El 15% es un remanente, no una comisión. El monto neto, los costos y la liberación del remanente se confirman al evaluar las facturas y la propuesta. No se incluye una tabla de amortización: esta operación depende del cobro de las facturas.').className = 'sim-delivered-note';
+    } else {
+      const capital = Math.round(snapshot.amount * 100);
+      const interest = Math.round(capital * .015 * snapshot.days / 30);
+      addRow('Compra a financiar', format(capital / 100));
+      addRow('Plazo solicitado', snapshot.days + ' días');
+      addRow('Tasa del cálculo', '1.5% mensual simple · base de 30 días');
+      addRow('Interés estimado', format(interest / 100));
+      addRow('Comisión de apertura', 'Sin comisión');
+      addRow('Capital + interés estimado', format((capital + interest) / 100));
+      append('p', 'Antes de impuestos y otros cargos. Con la línea aprobada, tu empresa instruye el pago al proveedor. Después devuelve el capital y los intereses a la financiera, por transferencia y en la fecha que confirme la propuesta. El cálculo no autoriza el monto ni el plazo.').className = 'sim-delivered-note';
+    }
+    delivered.hidden = false;
+  }
 
   function updateContactOverview() {
     const showsCredit = mode === 'credit' && step === 'contact' && !inquiryOnly;
@@ -144,8 +318,7 @@
       add('p','sim-payment-label',`Mensualidad estimada · ${term.value} meses`);
       add('p','sim-payment',money(result.monthly));
       add('p','sim-result-note','Estimación con 2% mensual y 5% de apertura por separado. Antes de IVA, seguros y otros cargos. Las condiciones finales se confirman en la propuesta.');
-      rows.push(['Capital solicitado',amount],['Intereses estimados del plazo',result.interest],['Suma de mensualidades',result.payments]);
-      if(result.commission !== null)rows.push(['Comisión de apertura, antes de IVA',result.commission],['Total parcial: pagos + comisión, antes de IVA',result.partialTotal]);
+      rows.push(['Capital solicitado',amount],['Apertura del 5% · pago único separado',result.commission]);
     } else {
       const result = factoring(amount);
       add('p','sim-payment-label','Anticipo estimado de hasta 85%');
@@ -172,6 +345,7 @@
     setStep('scenario');
   }
   function setStep(next) {
+    clearDetails();
     step = next;
     dialog.dataset.product = mode;
     dialog.dataset.step = next;
@@ -202,7 +376,11 @@
       $('#simulator-title').textContent = 'Revisemos tu crédito.';
       $('#simulator-intro').textContent = 'Centralia te contactará a la brevedad para revisar tu caso.';
     }
-    $('#sim-lead-submit').firstChild.textContent = mode === 'credit' ? 'Solicitar revisión ' : 'Enviar mi consulta ';
+    if (next === 'contact' && !inquiryOnly && (mode !== 'suppliers' || provider?.kind === 'term-example')) {
+      if (mode === 'credit') $('#simulator-intro').textContent = 'Al enviar tus datos, podrás consultar tu tabla de pagos estimada y explorar cómo baja tu saldo. Centralia te contactará a la brevedad para revisar tu caso.';
+      else $('#simulator-intro').textContent += ' Al enviar, verás el desglose de esta estimación.';
+    }
+    $('#sim-lead-submit').firstChild.textContent = mode === 'credit' ? (inquiryOnly ? 'Solicitar revisión ' : 'Enviar y ver mi tabla ') : 'Enviar mi consulta ';
     if(compactConsultation && (inlineReview||inquiryOnly))$('#sim-new').textContent=inquiryOnly?'← Volver a la página':'← Ajustar mi escenario';
     const supplierReceived=mode==='suppliers'&&!!$('[data-supplier-confirmation]');
     if((compactConsultation||supplierReceived) && next==='result' && !$('.sim-success').hidden){
@@ -373,8 +551,9 @@
     $('#sim-send-error').hidden = true;
     const values = { email: $('#lead-email').value, firstname: $('#lead-name').value, company: $('#lead-company').value, phone: phone.value, message: scenarioMessage() };
     const key = JSON.stringify([values.email.toLowerCase(),values.firstname,values.company,values.phone,scenario()]);
-    const focusReceipt=()=>{const target=$('.sim-success:not([hidden])[tabindex]');(target||$('#sim-results')).focus({preventScroll:true});};
-    if (received.has(key)) { $('.sim-success').hidden = false; $('#sim-request-advice').hidden = true; setStep('result'); focusReceipt(); return; }
+    const submittedScenario = scenarioSnapshot();
+    const focusReceipt=()=>{const target=!delivered.hidden && mode==='credit' ? $('#simulator-title') : $('.sim-success:not([hidden])[tabindex]');(target||$('#sim-results')).focus({preventScroll:true});};
+    if (received.has(key)) { $('.sim-success').hidden = false; $('#sim-request-advice').hidden = true; setStep('result'); showConfirmedDetails(received.get(key)); focusReceipt(); return; }
     sending = true; $('#sim-lead-fields').disabled = true; backButton.disabled = true;
     form.setAttribute('aria-busy','true');
     $('#sim-send-status').textContent = 'Guardando tu solicitud…';
@@ -399,9 +578,10 @@
         })
       });
       if (!response.ok) throw new Error('submission_failed');
-      received.add(key); $('.sim-success').hidden = false; $('#sim-request-advice').hidden = true; $('#sim-send-status').textContent = '';
+      received.set(key, submittedScenario); $('.sim-success').hidden = false; $('#sim-request-advice').hidden = true; $('#sim-send-status').textContent = '';
       try { document.dispatchEvent(new CustomEvent('centralia:lead-confirmed', {detail: {source: mode === 'credit' ? 'simulator-credit' : mode==='suppliers'?'supplier-calendar':'simulator-factoring', submissionId: 'simulator-' + received.size}})); } catch { /* Optional measurement must never affect form success. */ }
       setStep('result'); dialog.scrollTop = 0;
+      showConfirmedDetails(submittedScenario);
       if (dialog.open) focusReceipt();
     } catch (error) {
       $('#sim-send-status').textContent = '';
@@ -413,5 +593,5 @@
   });
   render();
   // Only pure arithmetic is exposed. Contact details stay in memory and are submitted solely with visitor consent.
-  window.CENTRALIA_SIMULATION = Object.freeze({credit, factoring});
+  window.CENTRALIA_SIMULATION = Object.freeze({credit, factoring, amortization});
 })();
