@@ -63,8 +63,9 @@ test('Calendar arithmetic: month/year boundaries, leap day, same day, reversed a
 test('Home form: no submission on step one, missing consent, or invalid contact; back preserves values',async()=>{
  const {dom,w,d,calls}=page('index.html');capture.init(d,w);
  const f=n=>d.getElementById('capture-'+n), form=d.getElementById('centralia-contact-form');
- submit(w,form);assert.equal(calls.length,0);assert.match(f('error').textContent,/monto/);
- f('amount').value='1,000,000';f('purpose').value='Factoraje';submit(w,form);
+ submit(w,form);assert.equal(calls.length,0);assert.match(f('error').textContent,/solución/,'the need is asked first');
+ f('purpose').value='Factoraje';submit(w,form);assert.equal(calls.length,0);assert.match(f('error').textContent,/monto/);
+ f('amount').value='1,000,000';submit(w,form);
  assert.equal(calls.length,0);assert.equal(f('name').closest('label').hidden,false);
  f('name').value='Prueba Local';f('company').value='Empresa de prueba';f('email').value='invalid';f('phone').value='5512345678';
  submit(w,form);assert.equal(calls.length,0);assert.match(f('error').textContent,/correo/);
@@ -147,6 +148,17 @@ test('Home form: HubSpot visitor token travels only when its cookie exists',()=>
  assert.equal(capture.hubspotToken(''),'');
  assert.equal(capture.payload(values,'https://example.invalid/',token).context.hutk,token);
  assert.equal('hutk' in capture.payload(values,'https://example.invalid/','').context,false);
+});
+
+test('Home form: "Todavía no sé cuánto necesito" sends "Por definir" and needs no amount',()=>{
+ const base={name:'Ana Pérez',company:'Empresa SA',email:'ana@example.invalid',phone:'5512345678',amount:'',purpose:'Crédito empresarial',consent:true};
+ assert.equal(capture.validate(base)[0],'amount','without the option an amount is still required');
+ const unknown={...base,'amount-unknown':true};
+ assert.equal(capture.validate(unknown),null);
+ const field=capture.payload(unknown,'https://example.invalid/','').fields.find(f=>f.name==='cul_es_el_monto_que_requiere_tu_empresa');
+ assert.equal(field.value,'Por definir');
+ assert.deepEqual(capture.summary(unknown),{purpose:'Crédito empresarial',amount:'Por definir'});
+ assert.equal(capture.validate({...base,purpose:''})[0],'purpose','the need is asked first');
 });
 
 // HubSpot visitor cookie (hutk): only with measurement on, current analytics consent and a valid cookie.

@@ -4,6 +4,8 @@
   'use strict';
   const ENDPOINT = 'https://api.hsforms.com/submissions/v3/integration/submit/9145352/68d091a6-92e3-4ca4-af92-9f87c41d140e';
   const PURPOSES = ['Crédito empresarial', 'Factoraje', 'Pago a proveedores'];
+  // Who does not know the amount yet still reaches HubSpot: the amount property is free text, so it receives this value.
+  const AMOUNT_UNKNOWN = 'Por definir';
   const CONSENT = 'Autorizo a Centralia a usar mis datos para atender esta consulta y contactarme. He leído el aviso de privacidad.';
   const parseAmount = value => /^(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{1,2})?$/.test(value.trim()) ? Number(value.replaceAll(',', '')) : NaN;
   const isEditableAmount = value => value === '' || /^(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{0,2})?$/.test(value);
@@ -30,9 +32,9 @@
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) return ['email', 'Escribe un correo electrónico válido.'];
     const digits = values.phone.replace(/\D/g, '');
     if (!/^\+?[\d() .-]+$/.test(values.phone.trim()) || digits.length < 10 || digits.length > 15) return ['phone', 'Escribe un teléfono de 10 dígitos o incluye el código de tu país.'];
-    const amount = parseAmount(values.amount);
-    if (!Number.isFinite(amount) || amount <= 0 || amount > 999999999999.99) return ['amount', 'Indica un monto mayor a cero. Por ejemplo: 1,000,000.'];
     if (!PURPOSES.includes(values.purpose)) return ['purpose', 'Selecciona la solución que te interesa.'];
+    const amount = parseAmount(values.amount);
+    if (!values['amount-unknown'] && (!Number.isFinite(amount) || amount <= 0 || amount > 999999999999.99)) return ['amount', 'Indica un monto mayor a cero o marca "Todavía no sé cuánto necesito".'];
     if (!values.consent) return ['consent', 'Autoriza el uso de tus datos para que podamos atender tu consulta.'];
     return null;
   }
@@ -49,6 +51,7 @@
   }
   // What the confirmation repeats back: only what the person just sent, never a link onward.
   function summary(values) {
+    if (values['amount-unknown']) return {purpose: values.purpose, amount: AMOUNT_UNKNOWN};
     return {purpose: values.purpose, amount: '$' + new Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(parseAmount(values.amount)) + ' MXN'};
   }
   function payload(values, pageUri, hutk) {
@@ -56,7 +59,7 @@
       fields: [
         ['firstname', values.name.trim()], ['company', values.company.trim()], ['email', values.email.trim()],
         ['phone', values.phone.trim()],
-        ['cul_es_el_monto_que_requiere_tu_empresa', String(parseAmount(values.amount))],
+        ['cul_es_el_monto_que_requiere_tu_empresa', values['amount-unknown'] ? AMOUNT_UNKNOWN : String(parseAmount(values.amount))],
         ['para_que_necesitas_el_financiamiento', values.purpose]
       ].map(([name, value]) => ({objectTypeId: '0-1', name, value})),
       context: {pageUri, pageName: 'Centralia | Consulta de financiamiento', ...(hutk ? {hutk} : {})},
@@ -67,7 +70,7 @@
     const form = doc.getElementById('centralia-contact-form');
     if (!form) return;
     const field = name => doc.getElementById('capture-' + name);
-    const controls = ['name', 'company', 'email', 'phone', 'amount', 'purpose', 'consent'].map(field);
+    const controls = ['name', 'company', 'email', 'phone', 'purpose', 'amount', 'amount-unknown', 'consent'].map(field).filter(Boolean);
     const button = field('submit'), buttonText = field('submit-text');
     const error = field('error'), fallback = field('fallback'), success = field('success');
     let sending = false, accepted = false, step = 'need';
@@ -76,7 +79,11 @@
     for (const text of ['1 · Tu necesidad','2 · Tus datos']) {const li=doc.createElement('li');li.textContent=text;group.append(li);}
     form.querySelector('.capture-form-meta').after(group);
     const personal=['name','company','email','phone'].map(name=>field(name).closest('label'));
-    const need=['amount','purpose'].map(name=>field(name).closest('label'));
+    const need=['purpose','amount','amount-unknown'].map(field).filter(Boolean).map(control=>control.closest('label'));
+    // "Todavía no sé cuánto necesito": the amount field steps aside but keeps what was written.
+    const unknown=field('amount-unknown');
+    const syncUnknown=()=>{if(!unknown)return;const off=unknown.checked;field('amount').disabled=off;field('amount').closest('label').classList.toggle('is-unknown',off);};
+    if(unknown)unknown.addEventListener('change',()=>{syncUnknown();clearErrors();if(!unknown.checked)field('amount').focus();});
     const back=doc.createElement('button');back.type='button';back.className='cx-back';back.textContent='← Volver a mi necesidad';button.after(back);
     function showStep(next,focus=true) {
       step=next; clearErrors();
@@ -85,7 +92,7 @@
       field('consent').closest('label').hidden=next!=='contact';
       back.hidden=next!=='contact';buttonText.textContent=next==='need'?'Continuar':'Enviar mi consulta';
       [...group.children].forEach((li,index)=>{if(index===(next==='need'?0:1))li.setAttribute('aria-current','step');else li.removeAttribute('aria-current');});
-      if(focus)field(next==='need'?'amount':'name').focus();
+      if(focus)field(next==='need'?'purpose':'name').focus();
     }
     back.addEventListener('click',()=>{if(!sending)showStep('need');});
     doc.addEventListener('centralia:open-consultation',()=>{if(!sending&&!accepted)showStep('need',false);});
@@ -136,13 +143,13 @@
       clearErrors(); fallback.hidden = true;
       const values = Object.fromEntries(controls.map(control => [control.id.replace('capture-', ''), control.type === 'checkbox' ? control.checked : control.value]));
       if(step==='need') {
-        const amount=parseAmount(values.amount);
-        if(!Number.isFinite(amount)||amount<=0||amount>999999999999.99){fail('Indica un monto mayor a cero. Por ejemplo: 1,000,000.',field('amount'));return;}
         if(!PURPOSES.includes(values.purpose)){fail('Selecciona la solución que te interesa.',field('purpose'));return;}
+        const amount=parseAmount(values.amount);
+        if(!values['amount-unknown']&&(!Number.isFinite(amount)||amount<=0||amount>999999999999.99)){fail('Indica un monto mayor a cero o marca "Todavía no sé cuánto necesito".',field('amount'));return;}
         showStep('contact');emit('form_step_completed');return;
       }
       const invalid = validate(values);
-      if (invalid) {if(['amount','purpose'].includes(invalid[0]))showStep('need',false);fail(invalid[1], field(invalid[0])); return;}
+      if (invalid) {if(['amount','purpose'].includes(invalid[0]))showStep('need',false);syncUnknown();fail(invalid[1], field(invalid[0])); return;}
       if (!form.checkValidity()) {form.reportValidity(); return;}
       sending = true; back.disabled=true; button.disabled = true; controls.forEach(control => {control.disabled = true;});
       form.setAttribute('aria-busy', 'true'); buttonText.textContent = 'Enviando tu consulta…';
@@ -167,6 +174,7 @@
       } finally {
         env.clearTimeout(timeout); sending = false; form.removeAttribute('aria-busy');
         controls.forEach(control => {control.disabled = false;});
+        syncUnknown();
         back.disabled=false; button.disabled = accepted; buttonText.textContent = 'Enviar mi consulta';
       }
     });
