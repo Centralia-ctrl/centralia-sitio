@@ -55,9 +55,10 @@ test('Credit details unlock only after a consented, accepted submission; failure
     assert.equal(detail.querySelector('details').open, true, 'the table is delivered open without another click');
     assert.equal(p.$('#simulator-title').textContent, 'Tu tabla está lista.');
     assert.equal(p.$('.sim-receipt-brief a[href^="mailto:"]'), null);
-    assert.match(p.$('.sim-receipt-brief').textContent, /Recibimos tu consulta\. Te contactamos a la brevedad\./);
+    assert.equal(p.$('.sim-receipt-brief').hidden, true);
+    assert.equal(p.$('.sim-receipt-brief').textContent, '');
     assert.equal(p.$('.sim-success').contains(detail), false, '36 rows must not enter the live status region');
-    assert.equal(p.d.activeElement, p.$('.sim-success'));
+    assert.equal(p.d.activeElement, p.$('#simulator-title'));
     assert.deepEqual(p.calls[1].body.fields.map(x => x.name), ['email','firstname','company','phone','message']);
     assert.equal(p.calls[1].body.context.hutk, undefined);
     assert.match(p.calls[1].url, /9145352\/1da292ee-7ccc-42e4-a427-ece646e13e65$/);

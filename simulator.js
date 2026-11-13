@@ -91,6 +91,7 @@
   const originalReceipt = [...receipt.childNodes].map(node => node.cloneNode(true));
   const clearDetails = () => {
     delivered.hidden = true; delivered.replaceChildren();
+    $('#simulator-title').removeAttribute('tabindex');
     if (receipt.classList.contains('sim-receipt-brief')) {
       receipt.replaceChildren(...originalReceipt.map(node => node.cloneNode(true)));
       receipt.classList.remove('sim-receipt-brief');
@@ -168,14 +169,17 @@
       ? 'Consulta tus pagos estimados y el desglose de tu escenario.'
       : snapshot.product === 'factoring' ? 'Revisaremos tus facturas y te indicaremos el siguiente paso.' : 'Revisaremos tu compra y el plazo que necesitas.';
     receipt.replaceChildren(); receipt.classList.add('sim-receipt-brief');
-    const confirmation = append('p', 'Recibimos tu consulta. Te contactamos a la brevedad', receipt);
-    if (snapshot.product !== 'credit') {
+    receipt.hidden = snapshot.product === 'credit';
+    if (snapshot.product === 'credit') {
+      $('#simulator-title').tabIndex = -1;
+    } else {
+      const confirmation = append('p', 'Recibimos tu consulta. Te contactamos a la brevedad', receipt);
       confirmation.append(' desde ');
       const email = append('a', 'hola@centraliafinanciera.com', confirmation); email.href = 'mailto:hola@centraliafinanciera.com';
+      confirmation.append('.');
+      append('p', scenario(), receipt).className = 'sim-confirmed-scenario';
+      append('p', 'El envío no implica una aprobación de financiamiento.', receipt);
     }
-    confirmation.append('.');
-    append('p', scenario(), receipt).className = 'sim-confirmed-scenario';
-    append('p', 'El envío no implica una aprobación de financiamiento.', receipt);
     const format = value => new Intl.NumberFormat('es-MX', {style:'currency', currency:snapshot.currency, currencyDisplay:'code', minimumFractionDigits:2}).format(value);
     const heading = append('h3', 'Detalle de tu estimación'); heading.id = 'sim-delivered-title';
     if (snapshot.product === 'credit') heading.className = 'sr-only';
@@ -548,7 +552,7 @@
     const values = { email: $('#lead-email').value, firstname: $('#lead-name').value, company: $('#lead-company').value, phone: phone.value, message: scenarioMessage() };
     const key = JSON.stringify([values.email.toLowerCase(),values.firstname,values.company,values.phone,scenario()]);
     const submittedScenario = scenarioSnapshot();
-    const focusReceipt=()=>{const target=$('.sim-success:not([hidden])[tabindex]');(target||$('#sim-results')).focus({preventScroll:true});};
+    const focusReceipt=()=>{const target=!delivered.hidden && mode==='credit' ? $('#simulator-title') : $('.sim-success:not([hidden])[tabindex]');(target||$('#sim-results')).focus({preventScroll:true});};
     if (received.has(key)) { $('.sim-success').hidden = false; $('#sim-request-advice').hidden = true; setStep('result'); showConfirmedDetails(received.get(key)); focusReceipt(); return; }
     sending = true; $('#sim-lead-fields').disabled = true; backButton.disabled = true;
     form.setAttribute('aria-busy','true');

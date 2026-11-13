@@ -168,6 +168,7 @@ body.home-first-step .capture-success~.capture-value,body.home-first-step form[h
 /* Delivered only after a confirmed inquiry; never a formal credit offer. */
 #sim-delivered-details[hidden]{display:none!important}
 .sim-delivered-details{margin:28px 0 24px;padding-top:24px;border-top:1px solid #e4e7ee;color:#303647;min-width:0}
+#simulator-dialog[data-product="credit"][data-step="result"] .sim-receipt-brief[hidden]+.sim-delivered-details{margin-top:12px;padding-top:0;border-top:0}
 .sim-delivered-details h3{margin:0 0 10px;color:#1b224e;font-size:23px;font-weight:500;letter-spacing:-.02em}
 .sim-delivered-intro{font-size:15px;line-height:1.65;margin:0 0 20px;color:#5d6470}
 .sim-delivered-details dl{margin:0}

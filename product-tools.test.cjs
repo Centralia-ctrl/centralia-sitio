@@ -28,7 +28,7 @@ test('Credit uses 36 months and 5% opening; visible FAQs match structured answer
   assert.ok(answer);assert.ok(d.body.textContent.includes(answer),f);assert.match(answer,/36 meses/);assert.match(answer,/apertura del 5% por separado, antes de IVA/);dom.window.close();
  }
 });
-for(const file of ['index.html','preguntas-frecuentes.html','blog/factoraje-con-recurso-y-sin-recurso.html'])test(file+': shared dialog calculates, requests consent, confirms the scenario and focuses its visible receipt',async()=>{
+for(const file of ['index.html','preguntas-frecuentes.html','blog/factoraje-con-recurso-y-sin-recurso.html'])test(file+': shared dialog calculates, requests consent, delivers the table and focuses its visible title',async()=>{
  const p=setup(file);p.$('[data-simulate="credit"]').click();p.$('#sim-amount').value='1200000';
  assert.equal(p.$('#sim-term').disabled,true);assert.deepEqual([...p.$('#sim-term').options].map(option=>option.value),['36']);
  p.$('#simulator-form').dispatchEvent(new p.w.Event('submit',{bubbles:true,cancelable:true}));
@@ -36,8 +36,8 @@ for(const file of ['index.html','preguntas-frecuentes.html','blog/factoraje-con-
  for(const [id,v] of Object.entries({'lead-name':'Prueba Local','lead-company':'Empresa local','lead-email':'qa@example.invalid','lead-phone':'5512345678'}))p.$('#'+id).value=v;
  p.$('#lead-business').checked=true;const submit=()=>p.$('#sim-lead-form').dispatchEvent(new p.w.Event('submit',{bubbles:true,cancelable:true}));
  submit();await flush();assert.equal(p.calls.length,0);p.$('#lead-consent').checked=true;submit();await flush();assert.equal(p.calls.length,1);
- assert.equal(p.calls[0].body.context.hutk,undefined);assert.equal(p.d.activeElement,p.$('.sim-success'));assert.equal(p.$('.sim-success').hidden,false);assert.equal(p.$('#sim-results').hidden,true);
- assert.match(p.$('.sim-confirmed-scenario').textContent,/1,200,000.00.*36 meses/);assert.match(p.calls[0].url,/1da292ee-7ccc-42e4-a427-ece646e13e65$/);p.close();
+ assert.equal(p.calls[0].body.context.hutk,undefined);assert.equal(p.d.activeElement,p.$('#simulator-title'));assert.equal(p.$('.sim-success').hidden,true);assert.equal(p.$('#sim-results').hidden,true);
+ assert.equal(p.$('#sim-delivered-details details').open,true);assert.match(p.$('#sim-delivered-details').textContent,/1,200,000.00/);assert.match(p.calls[0].url,/1da292ee-7ccc-42e4-a427-ece646e13e65$/);p.close();
 });
 test('Supplier case CTA preserves amount and requested term; invalid scenario stays on page and focuses the error',()=>{
  const p=setup('pago-a-proveedores.html');p.w.eval(read('supplier-simulator-preview.js'));
