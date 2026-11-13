@@ -1650,6 +1650,14 @@ body.home-first-step .capture-review-title{margin:22px 0 8px;font-size:18px;font
  body.home-first-step .capture-submit{margin-top:16px}
 }
 
+/* Muestra (pendiente de aprobación): qué obtiene la empresa al contactar a Centralia, bajo el botón. */
+body.home-first-step .capture-value{margin-top:16px;padding-top:14px;border-top:1px solid #e4e7ee}
+body.home-first-step .capture-value-title{margin:0 0 8px;font-size:13px;font-weight:600;color:#1b224e}
+body.home-first-step .capture-value ul{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+body.home-first-step .capture-value li{position:relative;padding-left:22px;font-size:13px;line-height:1.55;color:#303647}
+body.home-first-step .capture-value li::before{content:"";position:absolute;left:2px;top:.45em;width:10px;height:6px;border-left:2px solid #1b224e;border-bottom:2px solid #1b224e;transform:rotate(-45deg)}
+body.home-first-step .capture-success~.capture-value,body.home-first-step form[hidden] .capture-value{display:none}
+
 /* credit-simulator-preview.css */
 /* Isolated preview: the complete credit page keeps its existing brand and content. */
 body.credit-simulator-preview .credit-calculator-welcome{display:grid;grid-template-columns:minmax(0,1.13fr) minmax(0,1fr);align-items:center;gap:clamp(40px,6vw,100px);padding:64px 0 58px;margin:0}
