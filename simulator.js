@@ -89,7 +89,17 @@
   $('.sim-success').after(delivered);
   const receipt = $('.sim-success');
   const originalReceipt = [...receipt.childNodes].map(node => node.cloneNode(true));
+  const scheduleNext = dialog.querySelector('.sim-next');
+  const scheduleAnchor = document.createComment('Original meeting action position');
+  scheduleNext.before(scheduleAnchor);
+  const scheduleIntro = scheduleNext.querySelector('p');
+  const scheduleLink = scheduleNext.querySelector('a[data-schedule]');
+  const scheduleLabel = scheduleLink.firstChild.textContent;
   const clearDetails = () => {
+    // Restore the existing action before removing delivered content or switching products.
+    scheduleAnchor.after(scheduleNext);
+    scheduleIntro.hidden = false;
+    scheduleLink.firstChild.textContent = scheduleLabel;
     delivered.hidden = true; delivered.replaceChildren();
     $('#simulator-title').removeAttribute('tabindex');
     if (receipt.classList.contains('sim-receipt-brief')) {
@@ -197,6 +207,9 @@
       const details = append('details', '');
       details.open = true;
       chart.element.before(details);
+      details.after(scheduleNext);
+      scheduleIntro.hidden = true;
+      scheduleLink.firstChild.textContent = 'Revisar esta estimación con Centralia ';
       append('summary', 'Tabla de amortización estimada', details);
       const hint = append('p', 'Desliza para ver Capital e Intereses.', details); hint.className = 'sim-table-hint';
       const wrapper = append('div', '', details); wrapper.className = 'sim-table-scroll'; wrapper.tabIndex = 0;
@@ -379,7 +392,7 @@
       $('#simulator-intro').textContent = 'Centralia te contactará a la brevedad para revisar tu caso.';
     }
     if (next === 'contact' && !inquiryOnly && (mode !== 'suppliers' || provider?.kind === 'term-example')) {
-      if (mode === 'credit') $('#simulator-intro').textContent = 'Al enviar tus datos, podrás consultar tu tabla de pagos estimada y explorar cómo baja tu saldo. Centralia te contactará a la brevedad para revisar tu caso.';
+      if (mode === 'credit') $('#simulator-intro').textContent = 'Deja tus datos para ver tu tabla de pagos estimada.';
       else $('#simulator-intro').textContent += ' Al enviar, verás el desglose de esta estimación.';
     }
     $('#sim-lead-submit').firstChild.textContent = mode === 'credit' ? (inquiryOnly ? 'Solicitar revisión ' : 'Enviar y ver mi tabla ') : 'Enviar mi consulta ';

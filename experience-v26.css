@@ -184,6 +184,7 @@ body.home-first-step .capture-success~.capture-value,body.home-first-step form[h
 .sim-table-scroll th,.sim-table-scroll td{text-align:right;padding:11px 12px;border-top:1px solid #e4e7ee;white-space:nowrap}
 .sim-table-scroll th:first-child{text-align:left}
 .sim-table-scroll thead{background:#f5f6fa;color:#1b224e}
+.sim-table-scroll thead th:not(:first-child){text-align:center}
 .sim-table-scroll thead th{position:sticky;top:0;background:#f5f6fa;z-index:1}
 .sim-table-scroll th:first-child{position:sticky;left:0;background:#fff}
 .sim-table-scroll thead th:first-child{background:#f5f6fa;z-index:2}
@@ -220,11 +221,13 @@ body.home-first-step .capture-success~.capture-value,body.home-first-step form[h
  .sim-delivered-details dl>div{gap:12px}
  .sim-delivered-details dd{max-width:52%}
  .sim-table-hint{display:block;font-size:13px;color:#5d6470;margin:8px 0 0;line-height:1.5}
+ .sim-table-scroll{scroll-snap-type:x mandatory;scroll-padding-inline-start:36px}
+ .sim-table-scroll thead th:nth-child(2),.sim-table-scroll thead th:nth-child(4){scroll-snap-align:start}
  /* The first three columns occupy exactly the visible table width. */
  .sim-table-scroll table{table-layout:fixed;min-width:0;width:calc(200% - 36px)}
  .sim-table-scroll col:first-child{width:36px}
  .sim-table-scroll th,.sim-table-scroll td{padding-inline:4px}
- .sim-table-scroll caption{box-sizing:border-box;width:calc(50% + 18px);padding:12px 8px}
+ .sim-table-scroll caption{position:sticky;left:0;box-sizing:border-box;width:calc(50% + 18px);padding:12px 8px}
  #sim-credit-chart{padding:12px;margin-top:12px}
  .sim-chart-summary strong{font-size:18px}
  #sim-chart-range{height:44px}
