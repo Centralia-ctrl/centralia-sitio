@@ -198,11 +198,13 @@
       details.open = true;
       chart.element.before(details);
       append('summary', 'Tabla de amortización estimada', details);
-      const hint = append('p', 'Desliza la tabla para ver todas las columnas.', details); hint.className = 'sim-table-hint';
+      const hint = append('p', 'Desliza para ver Capital e Intereses.', details); hint.className = 'sim-table-hint';
       const wrapper = append('div', '', details); wrapper.className = 'sim-table-scroll'; wrapper.tabIndex = 0;
       wrapper.setAttribute('role', 'region'); wrapper.setAttribute('aria-label', 'Tabla de amortización estimada; desplazamiento horizontal');
       const table = append('table', '', wrapper);
       append('caption', snapshot.months + ' pagos estimados · MXN · antes de impuestos y otros cargos', table);
+      const columns = append('colgroup', '', table);
+      for (let i = 0; i < 5; i++) append('col', '', columns);
       const header = append('tr', '', append('thead', '', table));
       ['Mes', 'Pago', 'Saldo', 'Capital', 'Intereses'].forEach(label => { append('th', label, header).scope = 'col'; });
       const body = append('tbody', '', table);
