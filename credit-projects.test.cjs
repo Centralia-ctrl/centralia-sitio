@@ -8,6 +8,72 @@ const site = __dirname;
 const read = name => fs.readFileSync(path.join(site, name), 'utf8');
 const flush = () => new Promise(resolve => setImmediate(resolve));
 
+test('Credit artwork prepares before entering the viewport, loads once, and plays only when visible', async () => {
+  const dom = new JSDOM(read('credito-empresarial.html'), { runScripts: 'outside-only', pretendToBeVisual: true });
+  const { window } = dom, observers = [], playback = [], selected = [];
+  let imports = 0, renderers = 0;
+  window.matchMedia = () => ({ matches: false, addEventListener() {} });
+  window.IntersectionObserver = class {
+    constructor(callback, options) { this.callback = callback; this.options = options; observers.push(this); }
+    observe(target) { this.target = target; }
+    disconnect() { this.disconnected = true; }
+  };
+  window.loadTestArtwork = async () => {
+    imports++;
+    return { createProjectArtwork() {
+      renderers++;
+      return { setScene(key) { selected.push(key); }, setVisible(value) { playback.push(value); } };
+    } };
+  };
+  try {
+    window.eval(read('credit-project-scenes.js').replace(/import\('\.\/credit-project-artwork\.js[^']*'\)/, 'window.loadTestArtwork()'));
+    const preparation = observers.find(o => o.options.rootMargin);
+    const visibility = observers.find(o => !o.options.rootMargin);
+    assert.equal(imports, 0, 'distant artwork must not compete with the initial page load');
+    assert.ok(parseInt(preparation.options.rootMargin, 10) > 0, 'preparation starts before the art is onscreen');
+    preparation.callback([{ isIntersecting: true }]);
+    window.document.querySelector('[data-project="inventario"]').click();
+    const art = window.document.querySelector('.credit-project-art');
+    assert.match(art.querySelector('.credit-project-fallback img').src, /inventario-poster-desktop/);
+    assert.match(art.querySelector('.credit-project-fallback source').srcset, /inventario-poster-mobile/);
+    assert.equal(art.classList.contains('is-ready'), false, 'keep the selected image during preparation');
+    await flush();
+    assert.equal(imports, 1); assert.equal(renderers, 1);
+    assert.equal(preparation.disconnected, true);
+    assert.deepEqual(selected, ['inventario'], 'the most recent selection survives preparation');
+    assert.equal(art.classList.contains('is-ready'), true, 'replace the image only when the renderer is available');
+    assert.deepEqual(playback, [false], 'preparation must not advance the animation offscreen');
+    visibility.callback([{ isIntersecting: true, intersectionRatio: 0.4 }]);
+    await flush();
+    assert.equal(imports, 1); assert.equal(playback.at(-1), true);
+    visibility.callback([{ isIntersecting: false, intersectionRatio: 0 }]);
+    assert.equal(playback.at(-1), false, 'the artwork still pauses when the visitor leaves it');
+  } finally { window.close(); }
+});
+
+test('A failed artwork download keeps the selected image and the project choices usable', async () => {
+  const dom = new JSDOM(read('credito-empresarial.html'), { runScripts: 'outside-only' });
+  const { window } = dom;
+  window.matchMedia = () => ({ matches: false, addEventListener() {} });
+  window.IntersectionObserver = class { observe() {} };
+  window.loadTestArtwork = () => Promise.reject(new Error('offline'));
+  try {
+    window.eval(read('credit-project-scenes.js').replace(/import\('\.\/credit-project-artwork\.js[^']*'\)/, 'window.loadTestArtwork()'));
+    window.document.querySelector('[data-project="inventario"]').click();
+    await flush();
+    const art = window.document.querySelector('.credit-project-art');
+    assert.equal(art.classList.contains('is-ready'), false);
+    assert.match(art.querySelector('img').src, /inventario-poster-desktop/);
+    window.document.querySelector('[data-project="equipo"]').click();
+    await flush();
+    assert.equal(art.classList.contains('is-ready'), false);
+    assert.match(art.querySelector('source').srcset, /equipo-poster-mobile/);
+    assert.match(art.querySelector('img').src, /equipo-poster-desktop/);
+    assert.equal(window.document.querySelector('#credit-project-panel-equipo').hidden, false);
+    assert.match(window.document.querySelector('#credit-project-inquiry').textContent, /equipo y operación/);
+  } finally { window.close(); }
+});
+
 function setup() {
   const dom = new JSDOM(read('credito-empresarial.html'), {
     url: 'https://centraliafinanciera.com/credito-empresarial.html',
