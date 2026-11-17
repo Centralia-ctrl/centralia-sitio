@@ -1743,7 +1743,7 @@ body.home-first-step .capture-success~.capture-value,body.home-first-step form[h
  .sim-table-scroll table{table-layout:fixed;min-width:0;width:calc(200% - 36px)}
  .sim-table-scroll col:first-child{width:36px}
  .sim-table-scroll th,.sim-table-scroll td{padding-inline:4px}
- .sim-table-scroll caption{box-sizing:border-box;width:calc(50% + 18px);padding:12px 8px}
+ .sim-table-scroll caption{position:sticky;left:0;box-sizing:border-box;width:calc(50% + 18px);padding:12px 8px}
  #sim-credit-chart{padding:12px;margin-top:12px}
  .sim-chart-summary strong{font-size:18px}
  #sim-chart-range{height:44px}
