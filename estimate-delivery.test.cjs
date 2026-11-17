@@ -135,6 +135,23 @@ for (const amount of [0.01, 750000.50, 1000000, 20000000]) {
   });
 }
 
+test('Every displayed installment amount preserves cents and trailing zeros, including the final zero balance', async () => {
+  const p = setup();
+  try {
+    for (const amount of [1000000, 20000000]) {
+      p.open('credit', {amount}); p.fill(); p.submit(); await flush();
+      const cells = [...p.d.querySelectorAll('#sim-delivered-details tbody td')];
+      assert.equal(cells.length, 36 * 4);
+      for (const cell of cells) {
+        assert.match(cell.textContent, /^\d{1,3}(,\d{3})*\.\d{2}$/);
+        assert.equal(Math.round(Number(cell.textContent.replaceAll(',', '')) * 100), Number(cell.dataset.cents));
+        if (Number(cell.dataset.cents) % 100 === 0) assert.match(cell.textContent, /\.00$/);
+      }
+      assert.equal(p.$('#sim-delivered-details tbody tr:last-child td:nth-of-type(2)').textContent, '0.00');
+    }
+  } finally { p.close(); }
+});
+
 test('Factoraje delivers the chosen currency and remnant without inventing costs or installments', async () => {
   const p = setup('factoraje.html');
   try {
