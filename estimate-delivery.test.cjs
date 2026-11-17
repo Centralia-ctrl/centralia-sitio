@@ -81,6 +81,37 @@ test('Changing scenario clears the table; a confirmed repeat needs no duplicate 
   } finally { p.close(); }
 });
 
+test('The existing meeting action follows the confirmed credit table and survives repeat and other-product flows', async () => {
+  const p = setup();
+  try {
+    const action = p.$('.sim-next'), originalParent = action.parentNode;
+    const link = action.querySelector('a[data-schedule]'), originalLabel = link.textContent;
+    const href = link.getAttribute('href'), icon = link.querySelector('svg');
+    p.open(); p.fill(); p.submit(); await flush();
+    assert.equal(p.$('#sim-delivered-details details').nextElementSibling, action);
+    assert.equal(action.nextElementSibling, p.$('#sim-credit-chart'));
+    assert.equal(action.querySelector('a'), link, 'keep the original link and its bound handlers');
+    assert.equal(link.getAttribute('href'), href);
+    assert.equal(link.querySelector('svg'), icon);
+    assert.match(link.textContent, /Revisar esta estimación con Centralia/);
+    assert.equal(action.querySelector('p').hidden, true);
+    p.open();
+    assert.equal(action.parentNode, originalParent);
+    assert.equal(link.textContent, originalLabel);
+    p.submit(); await flush();
+    assert.equal(p.calls.length, 1);
+    assert.equal(p.d.querySelectorAll('.sim-next').length, 1);
+    assert.equal(p.$('#sim-delivered-details details').nextElementSibling, action);
+    for (const product of ['factoring', 'suppliers']) {
+      p.open(product); p.fill(); p.submit(); await flush();
+      assert.equal(action.parentNode, originalParent);
+      assert.equal(action.querySelector('p').hidden, false);
+      assert.equal(link.textContent, originalLabel);
+      assert.equal(p.d.querySelectorAll('.sim-next').length, 1);
+    }
+  } finally { p.close(); }
+});
+
 for (const amount of [0.01, 750000.50, 1000000, 20000000]) {
   test(`Amortization ${amount}: exact principal, zero final balance, opening fee separate`, () => {
     const p = setup();
