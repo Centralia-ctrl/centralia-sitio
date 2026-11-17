@@ -65,3 +65,6 @@
   window.addEventListener('pageshow', queuePaint);
   setup();
 })();
+
+// Presentation only: no form submission, storage or measurement.
+import('./interaction-motion.js').catch(() => {});

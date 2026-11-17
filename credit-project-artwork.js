@@ -197,7 +197,7 @@ export function createProjectArtwork(host, onState = () => {}) {
     const screenFace=box(machine,.39,.22,.016,1.75,1.5,.907,soft,.015); screenFace.rotation.y=-.2;
     const displayLine=box(machine,.22,.018,.008,1.75,1.52,.922,silver,.003);displayLine.rotation.y=-.2;
     const displayLine2=box(machine,.14,.018,.008,1.71,1.47,.932,graphite,.003);displayLine2.rotation.y=-.2;
-    return {g,update(t){
+    return {g,continuous:true,update(t){
       const ready=phase(t,0,2.7); machine.position.y=(1-ready)*.18;
       const operation=phase(t,2.7,8.6);
       gantry.position.x=-1.22+2.44*operation;
@@ -208,6 +208,15 @@ export function createProjectArtwork(host, onState = () => {}) {
       consoleStand.visible=screen.visible=screenFace.visible=displayLine.visible=displayLine2.visible=t>1;
       displayLine2.scale.x=.35+.65*operation;
       g.rotation.y=-.04+.11*phase(t,0,8.8);
+      // Continue the approved machine's work, without restarting its assembly.
+      if(t>10){
+        const cycle=(t-10)%12;
+        const travel=(1-Math.cos(cycle*Math.PI/6))/2;
+        gantry.position.x=1.22-2.44*travel;
+        head.position.y=.22*(1-Math.pow(Math.sin(cycle*Math.PI/12),2));
+        head.position.z=Math.sin(travel*Math.PI*4)*.28;
+        displayLine2.scale.x=.92+.08*Math.cos(cycle*Math.PI/6);
+      }
     }};
   }
 
@@ -222,10 +231,10 @@ export function createProjectArtwork(host, onState = () => {}) {
     if(!visible||!playing)return;
     if(previous){
       const next=elapsed+Math.min(.1,(now-previous)/1000);
-      elapsed=active.loop?next%duration():Math.min(duration(),next);
+      elapsed=active.loop?next%duration():active.continuous?next:Math.min(duration(),next);
     }
     previous=now; render();
-    if(!active.loop&&elapsed>=duration()){playing=false;previous=0;onState('finished');}
+    if(!active.loop&&!active.continuous&&elapsed>=duration()){playing=false;previous=0;onState('finished');}
     else frame=requestAnimationFrame(tick);
   }
   function schedule(){if(visible&&playing&&!frame)frame=requestAnimationFrame(tick);}

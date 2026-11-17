@@ -82,12 +82,16 @@
     }));
   });
   new IntersectionObserver(entries => {
-    visible = entries[0].isIntersecting;
-    if (visible) ensureArt();
+    visible = entries[0].isIntersecting && entries[0].intersectionRatio >= .35;
+    if (entries[0].isIntersecting) ensureArt();
     controller?.setVisible(visible && !document.hidden);
-  }, { threshold: 0.08 }).observe(art);
+  }, { threshold: [0,.35] }).observe(art);
   document.addEventListener('visibilitychange', () => controller?.setVisible(visible && !document.hidden));
-  reduced.addEventListener('change', () => { if (reduced.matches) {transitionRevision++;transition?.cancel();controller?.setScene(active, false);} });
+  reduced.addEventListener('change', () => {
+    transitionRevision++;transition?.cancel();
+    controller?.setScene(active, !reduced.matches);
+    controller?.setVisible(visible && !document.hidden);
+  });
   window.addEventListener('pagehide', () => controller?.setVisible(false));
   window.addEventListener('pageshow', () => controller?.setVisible(visible && !document.hidden));
 })();
