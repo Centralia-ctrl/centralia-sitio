@@ -5,6 +5,12 @@
   const buttons = [...section.querySelectorAll('[data-project]')];
   const stories = [...section.querySelectorAll('.credit-project-story')];
   const art = section.querySelector('.credit-project-art');
+  const poster = art.querySelector('.credit-project-fallback');
+  const posters = {
+    expansion: ['assets/centralia-credito-expansion-poster-desktop-20261117.webp', 'assets/centralia-credito-expansion-poster-mobile-20261117.webp'],
+    inventario: ['assets/centralia-credito-inventario-poster-desktop-20261117.webp', 'assets/centralia-credito-inventario-poster-mobile-20261117.webp'],
+    equipo: ['assets/centralia-credito-equipo-doble-poster-desktop-20261118-v2.webp', 'assets/centralia-credito-equipo-doble-poster-mobile-20261118-v2.webp']
+  };
   const inquiry = section.querySelector('#credit-project-inquiry');
   const inquiryLabel = inquiry.querySelector('.credit-project-cta-label');
   const inquiryLabels = {
@@ -16,22 +22,19 @@
   const descriptions = {
     expansion: 'Una sede abre conexiones hacia tres nuevas sucursales, que se incorporan una por una.',
     inventario: 'Mercancía de acabado perlado avanza continuamente sobre una plataforma, con entradas y salidas suaves por los extremos.',
-    equipo: 'Un equipo de precisión se pone en marcha y trabaja sobre una pieza.'
+    equipo: 'Una línea satinada se divide en dos recorridos. Tres piezas avanzan con separación uniforme y entradas y salidas suaves.'
   };
   let active = 'expansion', controller, loading, visible = false, transition, transitionRevision=0;
   async function ensureArt() {
     if (controller) return controller;
     if (loading) return loading;
-    loading = import('./credit-project-artwork.js?v=20261106-clean-controls').then(({ createProjectArtwork }) => {
+    loading = import('./credit-project-artwork.js?v=20261118-doble-trayectoria-v2').then(({ createProjectArtwork }) => {
       controller = createProjectArtwork(art);
       art.classList.add('is-ready');
       controller.setScene(active, !reduced.matches);
       controller.setVisible(visible && !document.hidden);
       return controller;
-    }).catch(() => {
-      art.querySelector('.credit-project-fallback p').textContent = 'Elige un proyecto para conocer el ejemplo.';
-      return null;
-    });
+    }).catch(() => null); // Keep the selected scene's image if the animation cannot start.
     return loading;
   }
   function changeScene(key) {
@@ -60,7 +63,8 @@
       story.classList.toggle('is-entering', !story.hidden);
     });
     art.setAttribute('aria-label', descriptions[key]);
-    art.querySelector('.credit-project-fallback p').textContent = section.querySelector('.credit-project-story:not([hidden]) h3').textContent;
+    poster.querySelector('source').srcset = posters[key][1];
+    poster.querySelector('img').src = posters[key][0];
     section.querySelector('[role="status"]').textContent = `${buttons.find(b => b.dataset.project === key).querySelector('.credit-project-choice-title>span').textContent}: ${section.querySelector('.credit-project-story:not([hidden]) h3').textContent}`;
     if (controller) changeScene(key);
     else ensureArt();
@@ -81,6 +85,14 @@
       detail: { product: 'credit', opener: inquiry }
     }));
   });
+  // Prepare the renderer shortly before the artwork enters the viewport.
+  // The visibility observer below remains the only control for playback.
+  const prepareArt = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    prepareArt.disconnect();
+    ensureArt();
+  }, { rootMargin: '600px 0px', threshold: 0 });
+  prepareArt.observe(art);
   new IntersectionObserver(entries => {
     visible = entries[0].isIntersecting && entries[0].intersectionRatio >= .35;
     if (entries[0].isIntersecting) ensureArt();

@@ -2,6 +2,7 @@ import * as THREE from './assets/vendor/three/three.module.min.js';
 import { RoundedBoxGeometry } from './assets/vendor/three/RoundedBoxGeometry.js';
 import { RoomEnvironment } from './assets/vendor/three/RoomEnvironment.js';
 import { createExpansionNetwork } from './credit-expansion-network.js';
+import { createDoubleTrajectory } from './credit-double-trajectory.js';
 
 // Local study: restrained sequences with a pace suited to each business need.
 export function createProjectArtwork(host, onState = () => {}) {
@@ -220,7 +221,7 @@ export function createProjectArtwork(host, onState = () => {}) {
     }};
   }
 
-  const scenes={expansion:createExpansionNetwork(renderer),inventario:inventory(),equipo:equipment()};
+  const scenes={expansion:createExpansionNetwork(renderer),inventario:inventory(),equipo:createDoubleTrajectory(environment.texture)};
   let active=scenes.expansion, elapsed=10, visible=false, playing=false, frame=0, previous=0;
   const duration=()=>active.duration??10;
   Object.values(scenes).forEach(item=>{item.g.visible=false;item.update(item.duration??10);}); active.g.visible=true;
