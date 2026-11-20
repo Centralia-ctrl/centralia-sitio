@@ -67,8 +67,8 @@ test('A failed artwork download keeps the selected image and the project choices
     window.document.querySelector('[data-project="equipo"]').click();
     await flush();
     assert.equal(art.classList.contains('is-ready'), false);
-    assert.match(art.querySelector('source').srcset, /equipo-poster-mobile/);
-    assert.match(art.querySelector('img').src, /equipo-poster-desktop/);
+    assert.match(art.querySelector('source').srcset, /equipo-doble-poster-mobile/);
+    assert.match(art.querySelector('img').src, /equipo-doble-poster-desktop/);
     assert.equal(window.document.querySelector('#credit-project-panel-equipo').hidden, false);
     assert.match(window.document.querySelector('#credit-project-inquiry').textContent, /equipo y operación/);
   } finally { window.close(); }

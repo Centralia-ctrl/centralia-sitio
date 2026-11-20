@@ -9,7 +9,7 @@
   const posters = {
     expansion: ['assets/centralia-credito-expansion-poster-desktop-20261117.webp', 'assets/centralia-credito-expansion-poster-mobile-20261117.webp'],
     inventario: ['assets/centralia-credito-inventario-poster-desktop-20261117.webp', 'assets/centralia-credito-inventario-poster-mobile-20261117.webp'],
-    equipo: ['assets/centralia-credito-equipo-poster-desktop-20261117.webp', 'assets/centralia-credito-equipo-poster-mobile-20261117.webp']
+    equipo: ['assets/centralia-credito-equipo-doble-poster-desktop-20261118-v2.webp', 'assets/centralia-credito-equipo-doble-poster-mobile-20261118-v2.webp']
   };
   const inquiry = section.querySelector('#credit-project-inquiry');
   const inquiryLabel = inquiry.querySelector('.credit-project-cta-label');
@@ -22,13 +22,13 @@
   const descriptions = {
     expansion: 'Una sede abre conexiones hacia tres nuevas sucursales, que se incorporan una por una.',
     inventario: 'Mercancía de acabado perlado avanza continuamente sobre una plataforma, con entradas y salidas suaves por los extremos.',
-    equipo: 'Un equipo de precisión se pone en marcha y trabaja sobre una pieza.'
+    equipo: 'Una línea satinada se divide en dos recorridos. Tres piezas avanzan con separación uniforme y entradas y salidas suaves.'
   };
   let active = 'expansion', controller, loading, visible = false, transition, transitionRevision=0;
   async function ensureArt() {
     if (controller) return controller;
     if (loading) return loading;
-    loading = import('./credit-project-artwork.js?v=20261106-clean-controls').then(({ createProjectArtwork }) => {
+    loading = import('./credit-project-artwork.js?v=20261118-doble-trayectoria-v2').then(({ createProjectArtwork }) => {
       controller = createProjectArtwork(art);
       art.classList.add('is-ready');
       controller.setScene(active, !reduced.matches);
