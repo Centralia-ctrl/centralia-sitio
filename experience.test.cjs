@@ -241,3 +241,11 @@ test('Home confirmation never appears when HubSpot does not confirm (error or ne
   assert.equal(f('error').hidden,false);assert.equal(f('submit').disabled,false);dom.window.close();
  }
 });
+
+test('Home form: steps and step-two fields are in the HTML from the start, so the form does not jump',()=>{
+ const {JSDOM:J}=require('jsdom'),d=new J(fs.readFileSync('index.html','utf8')).window.document;
+ const form=d.getElementById('centralia-contact-form');
+ assert.equal(form.querySelectorAll('.cx-steps li').length,2,'steps rendered in HTML');
+ for(const n of ['name','company','email','phone','consent'])assert.equal(d.getElementById('capture-'+n).closest('label').hidden,true,n+' starts hidden');
+ for(const n of ['purpose','amount','amount-unknown'])assert.equal(d.getElementById('capture-'+n).closest('label').hidden,false,n+' starts visible');
+});
