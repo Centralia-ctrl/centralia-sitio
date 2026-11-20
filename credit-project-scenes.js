@@ -24,31 +24,46 @@
     inventario: 'Mercancía de acabado perlado avanza continuamente sobre una plataforma, con entradas y salidas suaves por los extremos.',
     equipo: 'Una línea satinada se divide en dos recorridos. Tres piezas avanzan con separación uniforme y entradas y salidas suaves.'
   };
-  let active = 'expansion', controller, loading, visible = false, transition, transitionRevision=0;
+  let active = 'expansion', controller, loading, visible = false, transitionRevision = 0, idleJob;
+  const canPrepare = () => visible && !document.hidden && !reduced.matches && !document.querySelector('dialog[open]');
+  const yieldToPage = () => new Promise(resolve => setTimeout(resolve, 0));
+  function cancelPreparation() {
+    if (idleJob === undefined) return;
+    if ('cancelIdleCallback' in window) cancelIdleCallback(idleJob);
+    else clearTimeout(idleJob);
+    idleJob = undefined;
+  }
+  function queuePreparation() {
+    if (!canPrepare() || idleJob !== undefined) return;
+    const prepare = () => {
+      idleJob = undefined;
+      if (canPrepare()) ensureArt();
+    };
+    idleJob = 'requestIdleCallback' in window ? requestIdleCallback(prepare, { timeout: 1200 }) : setTimeout(prepare, 80);
+  }
   async function ensureArt() {
-    if (controller) return controller;
+    if (!canPrepare()) return;
+    if (controller) return changeScene(active);
     if (loading) return loading;
-    loading = import('./credit-project-artwork.js?v=20261118-doble-trayectoria-v2').then(({ createProjectArtwork }) => {
-      controller = createProjectArtwork(art);
-      art.classList.add('is-ready');
-      controller.setScene(active, !reduced.matches);
-      controller.setVisible(visible && !document.hidden);
+    loading = import('./credit-project-artwork.js?v=20261120-carga-visible').then(async ({ createProjectArtwork }) => {
+      await yieldToPage();
+      if (!canPrepare()) return;
+      controller = await createProjectArtwork(art);
+      await changeScene(active);
       return controller;
-    }).catch(() => null); // Keep the selected scene's image if the animation cannot start.
+    }).catch(() => null).finally(() => { loading = null; });
     return loading;
   }
-  function changeScene(key) {
-    const revision=++transitionRevision;
-    const canvas=art.querySelector('canvas');
-    const opacity=canvas?getComputedStyle(canvas).opacity:1;
-    transition?.cancel();
-    if(reduced.matches||!canvas){controller.setScene(key,false);return;}
-    transition=canvas.animate([{opacity},{opacity:0}],{duration:140,easing:'ease-out',fill:'forwards'});
-    transition.finished.then(()=>{
-      if(revision!==transitionRevision)return;
-      controller.setScene(key,true);transition.cancel();
-      transition=canvas.animate([{opacity:0},{opacity:1}],{duration:360,easing:'cubic-bezier(.2,.7,.2,1)'});
-    }).catch(()=>{});
+  async function changeScene(key) {
+    const revision = ++transitionRevision;
+    art.classList.remove('is-ready');
+    controller.setVisible(false);
+    try {
+      await controller.setScene(key, !reduced.matches);
+      if (revision !== transitionRevision || key !== active || reduced.matches) return;
+      art.classList.add('is-ready');
+      controller.setVisible(visible && !document.hidden);
+    } catch { art.classList.remove('is-ready'); }
   }
   function select(key) {
     document.dispatchEvent(new CustomEvent('centralia:credit-project-selected', {
@@ -66,8 +81,9 @@
     poster.querySelector('source').srcset = posters[key][1];
     poster.querySelector('img').src = posters[key][0];
     section.querySelector('[role="status"]').textContent = `${buttons.find(b => b.dataset.project === key).querySelector('.credit-project-choice-title>span').textContent}: ${section.querySelector('.credit-project-story:not([hidden]) h3').textContent}`;
-    if (controller) changeScene(key);
-    else ensureArt();
+    art.classList.remove('is-ready');
+    controller?.setVisible(false);
+    queuePreparation();
   }
   buttons.forEach((button, index) => {
     button.addEventListener('click', () => select(button.dataset.project));
@@ -85,25 +101,27 @@
       detail: { product: 'credit', opener: inquiry }
     }));
   });
-  // Prepare the renderer shortly before the artwork enters the viewport.
-  // The visibility observer below remains the only control for playback.
-  const prepareArt = new IntersectionObserver(entries => {
-    if (!entries.some(entry => entry.isIntersecting)) return;
-    prepareArt.disconnect();
-    ensureArt();
-  }, { rootMargin: '600px 0px', threshold: 0 });
-  prepareArt.observe(art);
+  // The poster is the initial state. Do not allocate WebGL while the visitor
+  // is using the calculator above, or when reduced motion is preferred.
   new IntersectionObserver(entries => {
     visible = entries[0].isIntersecting && entries[0].intersectionRatio >= .35;
-    if (entries[0].isIntersecting) ensureArt();
-    controller?.setVisible(visible && !document.hidden);
+    if (visible && !art.classList.contains('is-ready')) queuePreparation();
+    if (!visible) cancelPreparation();
+    controller?.setVisible(visible && !document.hidden && !reduced.matches);
   }, { threshold: [0,.35] }).observe(art);
-  document.addEventListener('visibilitychange', () => controller?.setVisible(visible && !document.hidden));
-  reduced.addEventListener('change', () => {
-    transitionRevision++;transition?.cancel();
-    controller?.setScene(active, !reduced.matches);
-    controller?.setVisible(visible && !document.hidden);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelPreparation();
+    else if (!art.classList.contains('is-ready')) queuePreparation();
+    controller?.setVisible(visible && !document.hidden && !reduced.matches);
   });
-  window.addEventListener('pagehide', () => controller?.setVisible(false));
-  window.addEventListener('pageshow', () => controller?.setVisible(visible && !document.hidden));
+  reduced.addEventListener('change', () => {
+    transitionRevision++;
+    cancelPreparation();
+    controller?.setVisible(false);
+    art.classList.remove('is-ready');
+    queuePreparation();
+  });
+  document.querySelectorAll('dialog').forEach(dialog => dialog.addEventListener('close', queuePreparation));
+  window.addEventListener('pagehide', () => { cancelPreparation(); controller?.setVisible(false); });
+  window.addEventListener('pageshow', () => { if (!art.classList.contains('is-ready')) queuePreparation(); else controller?.setVisible(visible && !document.hidden && !reduced.matches); });
 })();
