@@ -104,3 +104,6 @@
 .blog-group-tool .icon{width:16px;height:16px}
 .blog-group .blog-index{margin-bottom:48px}
 @media(max-width:760px){.blog-groups-nav{margin-bottom:28px}.blog-groups-nav a{font-size:13px;padding:0 12px}.blog-group .blog-index{margin-bottom:36px}}
+
+/* Ruta de navegación de los artículos en celular: una sola línea, para que no empuje el contenido al cargar la tipografía. */
+@media(max-width:760px){.blog-page .product-breadcrumb{flex-wrap:nowrap;min-width:0}.blog-page .product-breadcrumb>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
