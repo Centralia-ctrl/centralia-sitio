@@ -1411,6 +1411,7 @@ body.centralia-v23 .footer-bottom>div>a,body.centralia-v23 .footer-bottom>div>bu
 body.home-v23.home-first-step{--home-section-title:clamp(2.25rem,3.34vw,3rem);--home-subtitle:2rem;--home-copy:1rem;--home-label:.875rem}
 .home-v23.home-first-step :is(.hero-heading>.eyebrow,.business-story-copy>.eyebrow,.showcase-heading .eyebrow,.footer-caption>span){font-size:var(--home-label);line-height:1.6;font-weight:500;letter-spacing:.08em;color:#5d6470}
 .home-v23.home-first-step :is(.business-story-copy h2,.showcase-heading h2,.closing-inner h2){font-size:var(--home-section-title);font-weight:500;line-height:1.15;letter-spacing:-.04em;color:#1b224e;text-wrap:balance}
+.home-v23.home-first-step .business-story-copy{max-width:560px}
 .home-v23.home-first-step :is(.capture-form-meta h2,.solution-tile h3){font-size:var(--home-subtitle);font-weight:500;line-height:1.15;letter-spacing:-.035em}
 .home-v23.home-first-step :is(.hero-purpose,.business-story-copy>p:not(.eyebrow),.showcase-heading>p,.solution-description,.capture-form-meta p,.cx-recommendation){font-size:var(--home-copy);line-height:1.7}
 .home-v23.home-first-step :is(.capture-fields input,.capture-fields select,.capture-submit,.first-step-meeting,.solution-primary-link,.cx-choice,.closing-inner .closing-cta){font-size:1rem}
@@ -1432,7 +1433,7 @@ body.home-v23.home-first-step{--home-section-title:clamp(2.25rem,3.34vw,3rem);--
 }
 @media(max-width:760px){
  body.home-v23.home-first-step{--home-section-title:2.125rem;--home-subtitle:1.875rem}
- .home-v23.home-first-step :is(.business-story-copy h2,.showcase-heading h2,.closing-inner h2) br{display:none}
+ .home-v23.home-first-step :is(.business-story-copy h2,.closing-inner h2) br{display:none}
  .home-v23.home-first-step .closing-inner{gap:24px;padding:40px 20px}
  .home-v23.home-first-step .closing-inner p:not(.eyebrow){font-size:var(--home-copy);margin-top:20px}
  .home-v23.home-first-step .closing-inner p.closing-note{font-size:var(--home-label);margin-top:12px}
