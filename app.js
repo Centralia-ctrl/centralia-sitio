@@ -41,10 +41,13 @@
   ['facebook', 'instagram'].forEach(key => {
     const url = verifiedDestination(key);
     if (!url) return;
+    // Pages without the footer social block (the home page) skip this step.
     const link = $(`[data-social="${key}"]`);
+    if (!link) return;
     link.href = url;
     link.hidden = false;
-    $('.social-links').hidden = false;
+    const group = link.closest('.social-links');
+    if (group) group.hidden = false;
   });
   const onlineDestination = verifiedDestination('hubspot');
   if (onlineDestination) {
