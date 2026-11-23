@@ -16,6 +16,24 @@
     return (parse(collection)-parse(payment))/86400000;
   }
   if (typeof module !== 'undefined' && module.exports) { module.exports={calendarGap,products}; return; }
+  // Result feedback is presentation only; calculations and submissions remain unchanged.
+  {
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('.product-tool').forEach(tool=>{
+    const result=tool.querySelector('.credit-inline-result,.factoring-calculator-result,.cp-results');
+    if(!result)return;
+    let timer;
+    tool.addEventListener('input',event=>{
+      if(reduced.matches||!event.target.matches('input,select'))return;
+      clearTimeout(timer);
+      timer=setTimeout(()=>{
+        result.classList.remove('premium-result-change');
+        requestAnimationFrame(()=>result.classList.add('premium-result-change'));
+      },120);
+    });
+    result.addEventListener('animationend',()=>result.classList.remove('premium-result-change'));
+  });
+  }
   const chooser = document.querySelector('[data-need-chooser]');
   if (chooser) {
     chooser.hidden = false;
