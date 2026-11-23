@@ -130,3 +130,38 @@ body.home-v23.home-first-step{--home-section-title:clamp(2.25rem,3.34vw,3rem);--
  .home-v23.home-first-step .closing-inner .closing-cta{width:100%;max-width:360px;padding-inline:16px}
 }
 @media(max-width:360px){body.home-v23.home-first-step{--home-section-title:2rem}}
+
+/* Home spacing review: distinguish sections, ideas and actions without changing the composition. */
+.home-v23.home-first-step .home-proof.home-proof-editorial{padding-block:48px;margin-bottom:0}
+.home-v23.home-first-step .business-stories{padding-block:80px 96px}
+.home-v23.home-first-step .business-story-copy h2{margin-top:20px}
+.home-v23.home-first-step .business-story-copy>p:not(.eyebrow){margin-top:24px}
+.home-v23.home-first-step .solution-showcase{padding-block:96px}
+.home-v23.home-first-step .showcase-heading{margin-bottom:40px}
+.home-v23.home-first-step .showcase-heading .eyebrow{margin-bottom:20px}
+.home-v23.home-first-step .cx-chooser{margin:40px 0;padding-block:32px}
+.home-v23.home-first-step .cx-chooser h3{margin-bottom:20px}
+.home-v23.home-first-step .solution-collection{gap:24px}
+.home-v23.home-first-step .direction-home .solution-tile-heading{padding:32px 28px 0}
+.home-v23.home-first-step .direction-home .solution-tile-content{padding:24px 28px}
+.home-v23.home-first-step .solution-description{margin:18px 0 28px}
+.home-v23.home-first-step .solution-metric{padding-top:24px;margin-bottom:24px}
+.home-v23.home-first-step .solution-metric>p{margin-top:14px}
+.home-v23.home-first-step .solution-secondary-actions{margin-top:8px}
+.home-v23.home-first-step .showcase-note{margin-top:32px}
+.home-v23.home-first-step .closing-section{padding-block:40px 80px}
+.home-v23.home-first-step .closing-inner{padding-block:72px;gap:32px}
+@media(max-width:760px){
+ .home-v23.home-first-step .home-proof.home-proof-editorial{padding-block:40px;row-gap:32px}
+ .home-v23.home-first-step .business-stories{padding-block:48px 64px;row-gap:40px}
+ .home-v23.home-first-step .solution-showcase{padding-block:72px}
+ .home-v23.home-first-step .showcase-heading>p{margin-top:24px}
+ .home-v23.home-first-step .cx-chooser{margin-block:32px;padding-block:28px}
+ .home-v23.home-first-step .solution-collection{gap:28px}
+ .home-v23.home-first-step .direction-home .solution-tile-heading{padding:28px 24px 0}
+ .home-v23.home-first-step .direction-home .solution-tile-content{padding:24px}
+ .home-v23.home-first-step .closing-section{padding-block:24px 64px}
+ .home-v23.home-first-step .closing-inner{padding-block:48px;gap:28px}
+ .home-v23.home-first-step .closing-inner p:not(.eyebrow){margin-top:24px}
+ .home-v23.home-first-step .closing-inner p.closing-note{margin-top:16px}
+}
