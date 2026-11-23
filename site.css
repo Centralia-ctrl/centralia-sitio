@@ -1385,10 +1385,10 @@ body.centralia-v23 .footer-caption .footer-address{display:block;margin-top:8px;
 body.centralia-v23 .footer-bottom>div>a,body.centralia-v23 .footer-bottom>div>button{display:inline-flex;align-items:center;min-height:24px}
 
 /* Franja editorial aprobada por Miguel Ángel, 23 nov 2026. */
-.home-v23 .home-proof.home-proof-editorial{display:grid;grid-template-columns:.8fr 1fr 1.4fr;align-items:center;gap:32px;padding:42px 0;background:#fff;color:#1b224e;border-top:0;border-bottom:1px solid #e4e7ee;text-align:left}
+.home-v23 .home-proof.home-proof-editorial{display:grid;grid-template-columns:.8fr 1fr 1.4fr;align-items:center;gap:clamp(32px,4.5vw,64px);padding:42px 0;background:#fff;color:#1b224e;border-top:0;border-bottom:1px solid #e4e7ee;text-align:left}
 .home-v23 .home-proof-editorial p{margin:0}
 .home-v23 .home-proof-editorial .proof-title{grid-column:auto;font-size:.875rem;line-height:1.6;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#5d6470}
-.home-v23 .home-proof-editorial .proof-metric{min-width:0;display:grid;grid-template-rows:1.5rem auto 3rem;row-gap:8px}
+.home-v23 .home-proof-editorial .proof-metric{min-width:0;display:grid;grid-template-rows:1.5rem auto 3rem;row-gap:12px}
 .home-v23 .home-proof-editorial .proof-over{display:block;margin:0;font-size:1rem;line-height:1.5;color:#5d6470;font-weight:400}
 .home-v23 .home-proof-editorial .proof-value{display:flex;align-items:baseline;gap:10px;white-space:nowrap;font-size:clamp(4rem,5.3vw,4.75rem);line-height:1.08;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
 .home-v23 .home-proof-editorial .proof-value strong{display:inline;font:inherit;font-weight:500;color:inherit;letter-spacing:inherit}
@@ -1440,7 +1440,7 @@ body.home-v23.home-first-step{--home-section-title:clamp(2.25rem,3.34vw,3rem);--
 @media(max-width:360px){body.home-v23.home-first-step{--home-section-title:2rem}}
 
 /* Home spacing review: distinguish sections, ideas and actions without changing the composition. */
-.home-v23.home-first-step .home-proof.home-proof-editorial{padding-block:48px;margin-bottom:0}
+.home-v23.home-first-step .home-proof.home-proof-editorial{padding-block:64px;margin-bottom:0}
 .home-v23.home-first-step .business-stories{padding-block:80px 96px}
 .home-v23.home-first-step .business-story-copy h2{margin-top:20px}
 .home-v23.home-first-step .business-story-copy>p:not(.eyebrow){margin-top:24px}
@@ -1460,7 +1460,7 @@ body.home-v23.home-first-step{--home-section-title:clamp(2.25rem,3.34vw,3rem);--
 .home-v23.home-first-step .closing-section{padding-block:40px 80px}
 .home-v23.home-first-step .closing-inner{padding-block:72px;gap:32px}
 @media(max-width:760px){
- .home-v23.home-first-step .home-proof.home-proof-editorial{padding-block:40px;row-gap:32px}
+ .home-v23.home-first-step .home-proof.home-proof-editorial{padding-block:56px;row-gap:48px}
  .home-v23.home-first-step .business-stories{padding-block:48px 64px;row-gap:40px}
  .home-v23.home-first-step .solution-showcase{padding-block:72px}
  .home-v23.home-first-step .showcase-heading>p{margin-top:24px}
