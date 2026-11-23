@@ -4,6 +4,7 @@ const TZ = 'America/Mexico_City';
 const SLUG = 'miguelmeza1';
 const DURATION = 1800000; // HubSpot's configured duration is in milliseconds.
 const BASE = 'https://api.hubapi.com/scheduler/2026-09/meetings/meeting-links';
+const NEEDS = new Set(['Crédito empresarial', 'Factoraje', 'Pago a proveedores']);
 export class AgendaError extends Error {
   constructor(code, message, status = 503) { super(message); this.code = code; this.status = status; }
 }
@@ -27,7 +28,15 @@ export function validate(input, now) {
   if (![firstName,lastName].every(v=>typeof v==='string'&&v.trim().length>0&&v.length<=100&&!/[\r\n<>]/.test(v)) || typeof email!=='string' || email.length>254 || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email.trim()) || !Number.isSafeInteger(start) || start<=now || consent!==true || typeof requestId!=='string' || !/^[a-zA-Z0-9-]{16,80}$/.test(requestId) || (website!==undefined&&website!=='')) {
     throw new AgendaError('INVALID','Revisa tus datos y confirma que podemos usarlos para agendar.',400);
   }
-  return {firstName:firstName.trim(),lastName:lastName.trim(),email:email.trim().toLowerCase(),start,requestId};
+  const need=input.need??'',amount=input.amount??null,formFields=[];
+  if ((need!==''&&!NEEDS.has(need)) || (amount!==null&&(!need||(amount!=='unknown'&&(typeof amount!=='number'||!Number.isFinite(amount)||amount<=0||amount>999999999999.99))))) {
+    throw new AgendaError('INVALID','Revisa la necesidad y el monto que elegiste.',400);
+  }
+  // Existing CRM properties only. Omission preserves a contact's previous values;
+  // Por definir is sent only when the visitor explicitly chose that option.
+  if(need)formFields.push({name:'para_que_necesitas_el_financiamiento',value:need});
+  if(amount!==null)formFields.push({name:'cul_es_el_monto_que_requiere_tu_empresa',value:amount==='unknown'?'Por definir':String(amount)});
+  return {firstName:firstName.trim(),lastName:lastName.trim(),email:email.trim().toLowerCase(),start,requestId,formFields};
 }
 export function createAgenda({token,store,fetchImpl=fetch,now=()=>Date.now()}) {
   const hash=value=>createHmac('sha256',token).update(value).digest('hex');
@@ -46,15 +55,38 @@ export function createAgenda({token,store,fetchImpl=fetch,now=()=>Date.now()}) {
     if(offset>0){const page=await api(`/book/availability-page/${SLUG}?timezone=${encodeURIComponent(TZ)}&monthOffset=${offset}`);info.linkAvailability=page.linkAvailability;if(page.allUsersBusyTimes?.some(u=>u.isOffline))info.isOffline=true;}
     return normalize(info,now());
   }
+  async function saveContext(requestKey, record) {
+    if(!record.pendingContext)return record.result;
+    const {contactId,properties}=record.pendingContext;
+    if(!/^\d+$/.test(String(contactId)))return {...record.result,contextSaved:false};
+    // The scheduling link accepts only its configured form fields. Save the two
+    // existing CRM properties separately, on the contact returned by HubSpot.
+    // A retry of this PATCH is safe; the confirmed booking is never repeated.
+    for(let attempt=0;attempt<2;attempt++){
+      try {
+        const r=await fetchImpl(`https://api.hubapi.com/crm/v3/objects/contacts/${contactId}`,{method:'PATCH',headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify({properties}),signal:AbortSignal.timeout(6000)});
+        if(r.ok){
+          const result={...record.result,contextSaved:true};
+          await store.setJSON(requestKey,{state:'confirmed',fingerprint:record.fingerprint,createdAt:record.createdAt,result});
+          return result;
+        }
+        if(r.status<500&&r.status!==429)break;
+      }catch{}
+    }
+    // Keep the pending CRM context private for recovery; never imply that a
+    // second booking is necessary when the calendar event already exists.
+    console.warn('AGENDA_CONTEXT_PENDING',requestKey);
+    return {...record.result,contextSaved:false};
+  }
   async function book(input) {
     if(!token||!store)throw new AgendaError('NOT_CONFIGURED','La agenda no está disponible en este momento.');
     const v=validate(input,now());
-    const fingerprint=hash(JSON.stringify([v.firstName,v.lastName,v.email,v.start]));
+    const fingerprint=hash(JSON.stringify([v.firstName,v.lastName,v.email,v.start,...(v.formFields.length?[v.formFields]:[])]));
     const requestKey='requests/'+hash(v.requestId);
     const prior=await store.get(requestKey,{type:'json'});
     if(prior){
       if(prior.fingerprint!==fingerprint)throw new AgendaError('CONFLICT','Vuelve a elegir tu horario.',409);
-      if(prior.state==='confirmed')return prior.result;
+      if(prior.state==='confirmed')return saveContext(requestKey,prior);
       throw uncertain();
     }
     const live=await availability(offsetFor(v.start,now()));
@@ -73,9 +105,10 @@ export function createAgenda({token,store,fetchImpl=fetch,now=()=>Date.now()}) {
       if(response.isOffline!==false||!response.calendarEventId||Date.parse(response.start)!==v.start||Date.parse(response.end)!==v.start+DURATION)throw uncertain();
       let location='';try{const u=new URL(response.location);if(u.protocol==='https:'&&u.hostname==='meet.google.com')location=u.href;}catch{}
       const result={confirmed:true,start:response.start,end:response.end,timezone:TZ,location};
-      const saved=await store.setJSON(requestKey,{...record,state:'confirmed',result},{onlyIfMatch:claim.etag});
+      const confirmed={...record,state:'confirmed',result,...(v.formFields.length?{pendingContext:{contactId:response.contactId,properties:Object.fromEntries(v.formFields.map(f=>[f.name,f.value]))}}:{})};
+      const saved=await store.setJSON(requestKey,confirmed,{onlyIfMatch:claim.etag});
       if(!saved.modified)throw uncertain();
-      return result;
+      return saveContext(requestKey,confirmed);
     }catch {throw uncertain();}
   }
   return {availability,book};
