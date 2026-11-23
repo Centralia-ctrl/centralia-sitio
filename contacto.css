@@ -289,3 +289,25 @@ body{margin:0;background:#fff;font-size:14px}button{cursor:pointer}button:disabl
 #centralia-contacto-calendario .cp-honeypot{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 #centralia-contacto-calendario #cp-time-continue{scroll-margin-bottom:20px}
 @media(max-width:700px){#centralia-contacto-calendario .cp-time-list{grid-template-columns:repeat(2,minmax(0,1fr))}#centralia-contacto-calendario #cp-change-date{padding:10px 12px;font-size:13px}#centralia-contacto-calendario .cp-booking-summary{min-height:0;margin:8px 0 12px}#centralia-contacto-calendario .cp-panel input{font-size:16px}}
+
+/* Mobile refinement: less scrolling, a readable appointment and an easy change action. */
+#centralia-contacto-calendario .cp-reservation-separator{font-style:normal}
+@media(max-width:700px){
+  #centralia-contacto-calendario .cp-main{padding-top:23px}
+  #centralia-contacto-calendario h1{margin-top:12px}
+  #centralia-contacto-calendario .cp-lead{margin-top:12px}
+  #centralia-contacto-calendario .cp-module{margin-top:20px}
+  #centralia-contacto-calendario #cp-consulta{padding-top:28px}
+  #centralia-contacto-calendario #cp-consulta .cp-panel-heading{gap:10px;margin-bottom:20px}
+  #centralia-contacto-calendario .cp-booking-intro{gap:6px;margin-bottom:13px}
+  #centralia-contacto-calendario .cp-booking-intro .cp-timezone{line-height:1.5}
+  #centralia-contacto-calendario .cp-context{margin-bottom:14px}
+  #centralia-contacto-calendario .cp-date-picker{padding-bottom:10px;margin-bottom:10px}
+  #centralia-contacto-calendario .cp-booking-layout{gap:14px}
+  #centralia-contacto-calendario .cp-hours{padding-top:12px}
+  #centralia-contacto-calendario .cp-reservation-strip{gap:10px}
+  #centralia-contacto-calendario #cp-final-time{display:grid;gap:4px;line-height:1.45}
+  #centralia-contacto-calendario .cp-reservation-separator{display:none}
+  #centralia-contacto-calendario #cp-final-hour{white-space:nowrap}
+  #centralia-contacto-calendario #cp-change-time{min-height:44px;padding:10px 12px;border:1px solid var(--cp-line);border-radius:8px;background:#fff;font-size:13px;line-height:1.3}
+}

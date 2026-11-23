@@ -69,7 +69,13 @@
     const daily=slots.filter(s=>key(s.start)===dateKey),list=$('.cp-time-list'),date=loading?'Consultando disponibilidad…':daily.length?dayText(daily[0].start):'Elige un día disponible';list.replaceChildren();$('#cp-selected-date').textContent=date;$('#cp-mobile-date').textContent=date;
     daily.slice(page*6,page*6+6).forEach(slot=>{const b=document.createElement('button');b.className='cp-time';b.type='button';b.textContent=timeText(slot.start);b.setAttribute('aria-label',`${timeText(slot.start)}, ${dayText(slot.start)}`);b.setAttribute('aria-pressed',String(slot.start===selected?.start));b.disabled=submitting||uncertain||booked;b.addEventListener('click',()=>{resetSelection();selected=slot;requestId=crypto.randomUUID();times();$('.cp-time[aria-pressed="true"]')?.focus({preventScroll:true});if(matchMedia('(max-width:700px)').matches)$('#cp-time-continue').scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});});list.append(b);});
     $('#cp-times-prev').hidden=page===0;$('#cp-times-next').hidden=(page+1)*6>=daily.length;$('#cp-time-continue').disabled=!selected||loading||submitting||uncertain||booked;
-    $('#cp-booking-summary').textContent=loading?'Consultando horarios disponibles.':selected?`${timeText(selected.start)} · 30 minutos`:'Selecciona un horario para continuar.';$('#cp-final-time').textContent=selected?`${dayText(selected.start)} · ${timeText(selected.start)}`:'';
+    $('#cp-booking-summary').textContent=loading?'Consultando horarios disponibles.':selected?`${timeText(selected.start)} · 30 minutos`:'Selecciona un horario para continuar.';
+    $('#cp-final-date').textContent=selected?dayText(selected.start):'';
+    $('#cp-final-hour').textContent=selected?timeText(selected.start):'';
+    for(const selector of ['#cp-final-date','#cp-final-hour']){
+      if(selected)$(selector).dateTime=new Date(selected.start).toISOString();
+      else $(selector).removeAttribute('datetime');
+    }
   }
   async function getAvailability(){const res=await fetch(`/api/agenda/availability?monthOffset=${offset}`,{cache:'no-store'}),data=await res.json();if(!res.ok)throw new Error(data.message);return data;}
   async function load(){
