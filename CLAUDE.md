@@ -243,3 +243,9 @@ Validación de esta muestra: 40 pruebas aprobadas; construcción de 72 archivos 
 ## Publicación autorizada de la revisión móvil · 12 de noviembre de 2026
 
 Miguel Ángel aprobó publicar estos ajustes de portada, Factoraje y Pago a proveedores en Netlify después de revisar la muestra. Se integran únicamente las condiciones de Proveedores de la portada y su ventana de costos, el título y desglose de Proveedores y la proximidad del resultado de Factoraje al monto en móvil. Se conservan el diseño aprobado, las animaciones, el video, los cálculos y formularios. La medición permanece apagada y el acceso de Netlify no se modifica. Validación previa a la integración: 40 pruebas aprobadas y construcción de 72 archivos (5.1 MB), sin referencias faltantes. Se tramita en un único pull request; dist/ no se sube al repositorio.
+
+## Trayectoria: franja editorial aprobada · 23 de noviembre de 2026
+
+Miguel Ángel eligió la muestra «Franja editorial», aprobó pulirla y después indicó «publícalo». La portada presenta las cifras alineadas, unidades discretas y una cifra debajo de la otra en celular. En esa misma muestra indicó $5,000 millones de pesos colocados, que sustituye los $4,500 millones anteriores para la comunicación vigente de la portada. Se mantiene «Más de 10 años de experiencia»; no se afirma que las cifras estén auditadas.
+
+Cambio independiente del borrador #96: index.html, release-v24.css y site.css generado con node build.cjs, además de esta nota. No integra el resto de la propuesta premium. Formularios, agenda, cálculos, figuras, videos y medición apagada se conservan.
