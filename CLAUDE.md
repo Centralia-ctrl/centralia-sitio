@@ -20,7 +20,8 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - Blog en `blog/` (aprobado por Miguel Ángel). Sus páginas se generan con `python3 herramientas/blog.py` desde `herramientas/blog-articulos/<slug>.html` y la plantilla de `preguntas-frecuentes.html`. No las edites a mano. Para publicar un artículo: agrega su cuerpo y sus datos en `ARTICLES`, ejecuta el script, agrega la página a `PAGES` en `build.cjs` y a `sitemap.xml`, y ejecuta `node build.cjs`. Cada artículo sigue las reglas del sitio: sin instituciones ni cifras no confirmadas.
 - Datos estructurados de preguntas frecuentes (`FAQPage`) en la portada, las páginas de producto y Preguntas frecuentes. Se generan desde las preguntas visibles con `python3 herramientas/datos-faq.py`; ejecútalo cada vez que cambie una pregunta o respuesta.
 - Las páginas de producto tienen una sección "Guías" con tres artículos del blog, y cada artículo cierra con "Sigue leyendo" (`RELATED` en `herramientas/blog.py`). El blog publica `blog/feed.xml` (RSS).
-- La vista previa es https://centralia-sitio.netlify.app. Es privada y requiere la cuenta de Netlify de Miguel Ángel.
+- La dirección temporal es https://centralia-sitio.netlify.app y sus páginas públicas abren sin iniciar sesión (comprobado el 13 de noviembre de 2026). No cambies la privacidad de las vistas previas.
+- Mientras Netlify no tenga créditos, producción no se construye sola: cada cambio aprobado se publica restaurando la vista previa de su PR (*Publish deploy*), después de comprobar que es idéntica a `main` archivo por archivo. Por eso Netlify inyecta su barra de vista previa (`/.netlify/scripts/hud`), que la CSP bloquea y produce dos errores de consola; Miguel Ángel puede apagarla en *Deploy Previews → Netlify Drawer*.
 
 ## Reglas que no se negocian
 
@@ -89,7 +90,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
   - Títulos de hasta 60 caracteres y descripciones de hasta 155 en el blog.
 
 - **Acabado de marca** (PR #33, inspirado en la referencia de Brex del PR #32): redondeo único de 12 px, superficies sin sombra y franja navy `#1b224e` de borde a borde en la parte inferior del pie, corta y solo con derechos y ligas (el aviso legal largo del pie se quitó por decisión de Miguel Ángel, PR #51), en todas las páginas; arriba, contacto y redes quedan en blanco. Está al final de `release-v24.css`. Preguntas frecuentes de la portada sigue en blanco.
-- **Guías precisadas** (PR #34): tablas, secuencia de factoraje y listas de comprobación en `blog.css`; Opciones de financiamiento va primero en el índice (`INDEX_FIRST` en `herramientas/blog.py`). Fuentes en la descripción del PR. Las guías las firma Miguel Ángel Meza Badillo, director general (`AUTHOR` en `herramientas/blog.py`, PR #39); la ficha solo lleva datos confirmados.
+- **Guías precisadas** (PR #34): tablas, secuencia de factoraje y listas de comprobación en `blog.css`; Opciones de financiamiento va primero en el índice. Desde el PR #75 el índice se agrupa por necesidad (`INDEX_GROUPS` en `herramientas/blog.py`): cada guía va en exactamente un grupo y cada grupo de producto enlaza a su simulador. Fuentes en la descripción del PR. Las guías las firma Miguel Ángel Meza Badillo, director general (`AUTHOR` en `herramientas/blog.py`, PR #39); la ficha solo lleva datos confirmados.
 - **Contacto sin duplicar y WhatsApp sin tapar** (PR #35): los artículos cierran solo con su invitación contextual; `contact-visibility.js` oculta el botón flotante sobre bloques de contacto y sobre cualquier control.
 - **Contacto directo del pie** (PR #36): sin correo; WhatsApp es un botón junto a Facebook e Instagram, con el mismo mensaje neutral.
 
@@ -102,6 +103,16 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - **Mensaje de éxito** (27 de octubre de 2026, decisión de Miguel Ángel): portada: "Recibimos tu consulta. Te contactamos a la brevedad desde hola@centraliafinanciera.com."; simulador en todas las páginas: "Recibimos tu solicitud. Te contactamos a la brevedad."
 - **Confirmación con revisión de Centralia** (PR #55): tras la respuesta correcta de HubSpot, la portada muestra el mensaje aprobado, el resumen de necesidad y monto, "Ahora, lo revisamos contigo." y la nota de no aprobación. No lleva botón ni redirección al registro: la invitación al registro se comparte solo después de que una persona de Centralia revisa el caso.
 
+- **Mejoras del 13 de noviembre de 2026** (publicadas con aprobación de Miguel Ángel):
+  - Portada en celular: espacios menores hasta 760 px para que el primer paso del formulario quede más arriba (PR #71).
+  - Crédito en celular: resumen del formulario compacto, con mensualidad y apertura lado a lado cuando caben completas (PR #72).
+  - Factoraje: el resultado muestra el valor de las facturas, el anticipo y el "15% remanente al cobro" con su importe; el desplegable se llama "Ver costos y condiciones" (PR #73).
+  - WhatsApp con mensaje del producto en Crédito, Factoraje y Pago a proveedores; portada, Preguntas frecuentes y blog conservan el general (PR #74).
+  - Índice del blog agrupado por necesidad (PR #75) y lista de resultados válida en Pago a proveedores, accesibilidad 100 (PR #76).
+  - Caché de un día en `/assets/*` (PR #77): si se reemplaza un archivo de `assets/`, el nuevo lleva otro nombre.
+  - Logo del encabezado en SVG desde el original de Illustrator, mismo encuadre de 600×137 (PR #78). Los `.ai` originales están en `assets/logo-original/`; no se publican. Una versión reducida del WebP se descartó porque perdía nitidez.
+  - Lighthouse (celular simulado, sitio publicado): rendimiento 95–100, accesibilidad y SEO 100, CLS 0. Buenas prácticas 93 solo por la barra de Netlify.
+
 ## Decidido no hacer
 
 - Página 404 propia (PR #10 cerrado).
@@ -111,7 +122,10 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - Aviso de privacidad: se hará cuando se constituya la persona moral.
 - Razón social: CENTRALIA FINANCIERA® es una marca comercial operada por Martha Patricia Meza Badillo, persona física con actividad empresarial (dato de Miguel Ángel, 10 de noviembre de 2026). El símbolo ® se conserva: Miguel Ángel confirmó que la marca está registrada. Falta decidir si el nombre del operador aparece en el pie; va en el aviso de privacidad.
 - **Domicilio** (10 de noviembre de 2026): Av. Popocatépetl 415, Sta. Cruz Atoyac, Benito Juárez, 03310, Ciudad de México. Está en el pie de todas las páginas y en `Organization` de la portada.
-- Cifras y condiciones. Ya confirmado por Miguel Ángel: tasa ilustrativa del simulador de 2% mensual, plazo máximo de 36 meses (el simulador ofrece 12, 18, 24, 30 y 36) y anticipo de factoraje de hasta 85% del valor de facturas elegibles, antes de costos (26 de octubre de 2026).
+- Cifras y condiciones confirmadas por Miguel Ángel y vigentes:
+  - Crédito empresarial: hasta $20 millones MXN, 36 meses, sin garantía, sin penalización por pago anticipado, tasa fija sobre saldos insolutos, 2% mensual como tasa ilustrativa del simulador y apertura del 5% antes de IVA, mostrada por separado (5 de noviembre de 2026).
+  - Factoraje: anticipo de hasta 85% del valor de facturas elegibles, antes de costos (26 de octubre de 2026).
+  - Pago a proveedores: 1.5% mensual simple sobre base de 30 días, de 15 a 60 días y sin comisión de apertura (11 de noviembre de 2026). No confirma impuestos ni otros cargos, ni un máximo de línea.
 - Formulario único de HubSpot.
 - Simulador arriba de $15 M.
 - Nuevas animaciones de Crédito y Pago a proveedores.
@@ -124,7 +138,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - Google Search Console: dominio `centraliafinanciera.com` verificado por DNS (26 de octubre de 2026). El sitemap nuevo se envía el día del cambio de dominio, no antes, porque hoy el dominio sigue mostrando el WordPress.
 - Ficha de Google Business Profile: falta saber si hay oficina o solo atención en línea.
 - Meta: el Pixel 1375879946116372 está activo y hoy lo dispara el WordPress; no está conectado a HubSpot. Si hay anuncios en diciembre, conviene activar la medición desde el lanzamiento suave para no perder datos.
-- Las cifras del diálogo de costos y del simulador ($50 M, $15 M, US$5 M, 37 días y 4.5%) aparecen en todas las páginas y siguen sin confirmar. Están confirmados la tasa de 2%, el plazo de 36 meses y el anticipo de hasta 85%.
+- Revisión del 13 de noviembre de 2026: el sitio ya no presenta como condiciones $15 M, $50 M, US$5 M, 37 días ni 4.5%; fueron sustituidas por las condiciones confirmadas de arriba. Lo que sigue apareciendo son referencias, no límites: los rangos de ventas anuales del formulario (por ejemplo, "De $10 a $50 millones") y los montos rápidos del simulador (incluido "US$5 millones" en dólares). No vuelvas a presentarlos como condiciones.
 
 ## Publicación aprobada · 4 de noviembre de 2026
 
