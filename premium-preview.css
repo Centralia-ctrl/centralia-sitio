@@ -1,0 +1,71 @@
+/* Local design study. Keep approved colors, content, figures and calculations. */
+.centralia-v23 .site-header{border-bottom:1px solid #e4e7ee;background:#fff;box-shadow:0 4px 24px #1b224e04}
+.centralia-v23 .desktop-nav{gap:24px}
+.centralia-v23 .desktop-nav>a[href*="contacto"]{border:1px solid #d8deec;border-radius:8px;padding:11px 20px;color:#1b224e;transition:background .2s,border-color .2s}
+.centralia-v23 .desktop-nav>a[href*="contacto"]:hover{background:#f5f7fc;border-color:#315de8}
+.site-header .desktop-nav .solutions-nav-panel{width:368px;max-width:calc(100vw - 32px);padding:12px;border-radius:16px;box-shadow:0 18px 55px #1b224e14}
+.site-header .desktop-nav .solutions-nav-panel a{padding:18px 16px;gap:16px;white-space:normal;border-radius:10px}
+.site-header .nav-solution-copy{display:grid;gap:5px}
+.site-header .nav-solution-copy strong{font-size:16px;font-weight:600;line-height:1.35}
+.site-header .nav-solution-copy small{font-size:14px;line-height:1.4;color:#5d6470}
+.site-header .nav-solution-icon{width:42px;height:42px;border-radius:11px;background:#f3f6fc;display:grid;place-items:center;flex-shrink:0}
+.site-header .solutions-nav-panel a[aria-current=page]{background:#f3f6fc}
+.site-header .mobile-nav{max-height:calc(100dvh - 90px);overflow:auto;overscroll-behavior:contain}
+html:has(.menu-toggle[aria-expanded=true]){overflow:hidden}
+.centralia-v23 :is(.button,button,a,input,select):focus-visible{outline:3px solid #1b224e;outline-offset:4px}
+.centralia-v23 :is(.button,.product-tool button,.capture-submit){transition:background .2s,box-shadow .2s,transform .2s}
+@media(hover:hover){.centralia-v23 .button:hover{box-shadow:0 7px 20px #1b224e14;transform:translateY(-1px)}}
+.centralia-v23 .button:active{transform:translateY(0);box-shadow:none}
+.centralia-v23 .product-tool{border:1px solid #dce2ee;box-shadow:0 14px 44px #1b224e09;border-radius:18px}
+.centralia-v23 :is(.credit-inline-amount,.factoring-calculator-inputs input,.cp-amount-wrap){font-variant-numeric:tabular-nums}
+.centralia-v23 :is(.credit-payment,.factoring-calculator-result strong,.cp-results strong){font-variant-numeric:tabular-nums;letter-spacing:-.035em}
+.centralia-v23 :is(.credit-inline-result,.factoring-calculator-result,.cp-results){border-color:#dce2ee}
+.centralia-v23 :is(.credit-inline-result,.factoring-calculator-result,.cp-results).premium-result-change{animation:premium-result-in .3s ease-out}
+.centralia-v23 :is(input,select){transition:border-color .18s,box-shadow .18s}
+.centralia-v23 :is(input:not([type=checkbox]):not([type=range]),select):focus{border-color:#315de8;box-shadow:0 0 0 3px #315de80c}
+.centralia-v23 :is(.capture-panel,.sim-lead){box-shadow:0 12px 40px #1b224e08}
+.centralia-v23 .cx-steps{gap:12px}
+.centralia-v23 .sim-table-scroll{border:1px solid #e4e7ee;border-radius:10px;scrollbar-gutter:stable}
+.centralia-v23 .sim-table-scroll thead th{position:sticky;top:0;background:#f5f7fc;z-index:2}
+.centralia-v23 .sim-table-scroll tbody tr:nth-child(even){background:#fafbfe}
+.centralia-v23 .sim-table-scroll tbody tr.is-chart-month{background:#edf2ff;box-shadow:inset 3px 0 #315de8}
+.centralia-v23 .sim-table-scroll tbody tr{transition:background .2s}
+.centralia-v23 .credit-project-choices{gap:16px}
+.centralia-v23 .credit-project-choice{border:1px solid #e4e7ee;border-radius:12px;padding:23px 22px;transition:background .2s,border-color .2s,box-shadow .2s}
+.centralia-v23 .credit-project-choice[aria-pressed=true]{border-color:#b7c7f4;background:#f7f9ff;box-shadow:inset 0 3px #315de8}
+.centralia-v23 .credit-project-choice-title{font-weight:600;line-height:1.3}
+.centralia-v23 .credit-project-choice-note{margin-top:10px;line-height:1.65}
+.centralia-v23 .credit-project-layout{column-gap:52px}
+.centralia-v23 .credit-project-story h3{line-height:1.2;letter-spacing:-.035em}
+.centralia-v23 .credit-project-copy{line-height:1.75}
+.centralia-v23 .product-process .cx-process-step{padding-top:25px;padding-bottom:25px;border-bottom:1px solid #e4e7ee}
+.centralia-v23 .product-process .cx-process-step:last-child{border-bottom:0}
+.centralia-v23 .product-process .cx-current-step h3{color:#315de8}
+.centralia-v23 .product-process .cx-current-step .product-step{box-shadow:0 0 0 5px #315de80a}
+.centralia-v23 .product-section h2{letter-spacing:-.035em;line-height:1.16}
+.centralia-v23 .related-guides-list a{transition:background .2s,padding .2s}
+.centralia-v23 .related-guides-list a:hover{background:#f7f9fd}
+.centralia-v23 .blog-card{border-color:#e4e7ee;box-shadow:none;transition:box-shadow .2s,border-color .2s}
+.centralia-v23 .blog-card:hover{border-color:#b7c7f4;box-shadow:0 10px 32px #1b224e09}
+.centralia-v23 #empezar .blog-card:first-child{border-color:#cbd5eb;background:linear-gradient(130deg,#fff,#f7f9fe)}
+.centralia-v23 #empezar .blog-card:first-child .blog-card-title{font-size:clamp(23px,2.1vw,30px);line-height:1.2;letter-spacing:-.025em}
+.centralia-v23 .blog-groups-nav a{min-height:44px;display:inline-flex;align-items:center;border-radius:8px}
+.centralia-v23 .footer-main{border-top:1px solid #e4e7ee;padding-top:38px;gap:40px}
+.centralia-v23 .footer-bottom{gap:24px}
+.centralia-v23 .footer-address{max-width:430px;line-height:1.65}
+@keyframes premium-result-in{from{opacity:.7;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:1000px){
+ .centralia-v23 .product-process>div:first-child{position:sticky;top:120px;align-self:start}
+ .home-v23 .hero-purpose{max-width:42ch;line-height:1.7}
+}
+@media(max-width:760px){
+ .centralia-v23 .product-tool{border-radius:14px;box-shadow:0 8px 28px #1b224e07}
+ .centralia-v23 .credit-project-choices{gap:10px}
+ .centralia-v23 .credit-project-choice{padding:18px 16px}
+ .centralia-v23 .credit-project-layout{gap:24px}
+ .centralia-v23 .product-process .cx-process-step{padding-top:20px;padding-bottom:20px}
+ .centralia-v23 .footer-main{gap:24px;padding-top:28px}
+ .site-header .mobile-nav .solutions-nav-panel{padding-left:0;border:0}
+ .site-header .mobile-nav .solutions-nav-panel a{padding:14px 12px;gap:12px}
+}
+@media(prefers-reduced-motion:reduce){.centralia-v23 :is(.button,.product-tool button,.capture-submit,input,select,.credit-project-choice,.blog-card,.sim-table-scroll tbody tr){transition:none}.centralia-v23 .premium-result-change{animation:none!important}}

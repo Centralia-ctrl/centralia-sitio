@@ -311,3 +311,70 @@ body{margin:0;background:#fff;font-size:14px}button{cursor:pointer}button:disabl
   #centralia-contacto-calendario #cp-final-hour{white-space:nowrap}
   #centralia-contacto-calendario #cp-change-time{min-height:44px;padding:10px 12px;border:1px solid var(--cp-line);border-radius:8px;background:#fff;font-size:13px;line-height:1.3}
 }
+/* Preview refinement: one coherent contact surface, readable controls and calm transitions. */
+#centralia-contacto-calendario .cp-main{max-width:1080px;padding-top:46px}
+#centralia-contacto-calendario .cp-eyebrow{justify-content:center}
+#centralia-contacto-calendario h1{text-align:center;max-width:none;font-size:clamp(38px,4.3vw,58px);line-height:1.1;letter-spacing:-.045em}
+#centralia-contacto-calendario .cp-lead{text-align:center;max-width:620px;margin:18px auto 0;font-size:16px;line-height:1.65}
+#centralia-contacto-calendario .cp-module{margin-top:34px;border-color:#dce2ee;border-radius:20px;box-shadow:0 18px 60px #1b224e08}
+#centralia-contacto-calendario .cp-channels{background:#fff;padding:10px 18px 0;gap:8px}
+#centralia-contacto-calendario .cp-channel{font-size:15px;min-height:64px;border-radius:9px 9px 0 0;transition:background .2s,color .2s}
+#centralia-contacto-calendario .cp-channel[aria-pressed=true]{background:#f7f9ff}
+#centralia-contacto-calendario .cp-channel:after{height:2px;left:18px;right:18px}
+#centralia-contacto-calendario .cp-panel{padding:34px 40px}
+#centralia-contacto-calendario #cp-consulta{padding:42px 40px 36px}
+#centralia-contacto-calendario #cp-consulta .cp-panel-heading{gap:14px;margin-bottom:28px}
+#centralia-contacto-calendario #cp-consulta .cp-choice{font-size:15px;min-height:82px;border-color:#dce2ee;padding:18px 24px;border-radius:12px;transition:border-color .2s,background .2s,box-shadow .2s}
+#centralia-contacto-calendario #cp-consulta .cp-choice[aria-pressed=true]{background:#f7f9ff;box-shadow:inset 0 3px #315de8;border-color:#b7c7f4;color:#1b224e}
+#centralia-contacto-calendario #cp-consulta .cp-bottom{max-width:450px;margin-top:28px}
+#centralia-contacto-calendario #cp-consulta #cp-amount{font-size:24px;min-height:60px;font-variant-numeric:tabular-nums}
+#centralia-contacto-calendario label.cp-field,#centralia-contacto-calendario #cp-consulta .cp-bottom .cp-field{font-size:14px}
+#centralia-contacto-calendario .cp-check,#centralia-contacto-calendario #cp-consulta .cp-bottom .cp-check{font-size:13px}
+#centralia-contacto-calendario .cp-step,#centralia-contacto-calendario #cp-consulta .cp-step{font-size:12px}
+#centralia-contacto-calendario .cp-action-note,#centralia-contacto-calendario .cp-location{font-size:12px}
+#centralia-contacto-calendario .cp-primary{min-height:52px;font-size:15px;border-radius:9px}
+#centralia-contacto-calendario input:focus{border-color:#315de8;box-shadow:0 0 0 3px #315de80c}
+#centralia-contacto-calendario .cp-booking-intro{margin-bottom:30px}
+#centralia-contacto-calendario .cp-booking-layout{grid-template-columns:1.15fr 1fr;gap:40px}
+#centralia-contacto-calendario .cp-hours{padding-left:36px}
+#centralia-contacto-calendario .cp-timezone{font-size:13px}
+#centralia-contacto-calendario .cp-weekdays span{font-size:12px}
+#centralia-contacto-calendario .cp-time{min-height:49px;font-size:15px}
+#centralia-contacto-calendario .cp-booking-summary{font-size:14px}
+#centralia-contacto-calendario .cp-day{font-variant-numeric:tabular-nums}
+#centralia-contacto-calendario .cp-wa-body{margin-top:24px}
+#centralia-contacto-calendario .cp-wa-body>p{font-size:16px}
+#centralia-contacto-calendario .cp-message-label{font-size:12px}
+#centralia-contacto-calendario .cp-location{max-width:620px;margin:20px auto 0;text-align:center;justify-content:center}
+@media(max-width:700px){
+ #centralia-contacto-calendario .cp-main{padding:28px 18px}
+ #centralia-contacto-calendario h1{font-size:40px;margin-top:15px}
+ #centralia-contacto-calendario .cp-lead{font-size:16px;margin-top:14px}
+ #centralia-contacto-calendario .cp-module{margin-top:24px;border-radius:15px}
+ #centralia-contacto-calendario .cp-channels{padding:4px 5px 0;gap:2px}
+ #centralia-contacto-calendario .cp-channel{font-size:13px;min-height:80px;padding:13px 4px;gap:8px}
+ #centralia-contacto-calendario .cp-channel:after{left:8px;right:8px}
+ #centralia-contacto-calendario .cp-panel,#centralia-contacto-calendario #cp-consulta{padding:25px 18px}
+ #centralia-contacto-calendario #cp-consulta .cp-panel-heading{gap:10px;margin-bottom:20px}
+ #centralia-contacto-calendario h2{font-size:25px;line-height:1.25}
+ #centralia-contacto-calendario #cp-consulta .cp-choice{min-height:54px;font-size:14px;padding:14px 28px}
+ #centralia-contacto-calendario #cp-consulta .cp-bottom{margin-top:22px}
+ #centralia-contacto-calendario #cp-consulta #cp-amount{font-size:22px;min-height:54px}
+ #centralia-contacto-calendario .cp-booking-layout{grid-template-columns:1fr;gap:16px}
+ #centralia-contacto-calendario .cp-booking-intro{margin-bottom:16px}
+ #centralia-contacto-calendario .cp-hours{padding:16px 0 0}
+ #centralia-contacto-calendario .cp-booking-intro h2{font-size:25px}
+ #centralia-contacto-calendario .cp-contact-grid{gap:16px}
+ #centralia-contacto-calendario .cp-location{line-height:1.6}
+}
+@media(max-width:350px){#centralia-contacto-calendario .cp-main{padding-inline:12px}#centralia-contacto-calendario h1{font-size:36px}#centralia-contacto-calendario .cp-panel,#centralia-contacto-calendario #cp-consulta{padding-inline:14px}#centralia-contacto-calendario .cp-channel{font-size:12px}}
+@media(max-width:700px){
+ #centralia-contacto-calendario .cp-main{padding-top:20px}
+ #centralia-contacto-calendario .cp-module{margin-top:20px}
+ #centralia-contacto-calendario .cp-channel{min-height:72px;padding-block:10px}
+ #centralia-contacto-calendario #cp-consulta{padding-top:22px}
+ #centralia-contacto-calendario #cp-consulta .cp-panel-heading{margin-bottom:16px}
+ #centralia-contacto-calendario #cp-consulta .cp-choice{min-height:50px;padding-block:12px}
+ #centralia-contacto-calendario #cp-consulta .cp-bottom{margin-top:20px}
+}
+#centralia-contacto-calendario .cp-timezone,#centralia-contacto-calendario .cp-small-label,#centralia-contacto-calendario .cp-booking-summary{letter-spacing:normal}
