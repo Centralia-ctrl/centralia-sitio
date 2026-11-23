@@ -1,6 +1,7 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),{JSDOM}=require('jsdom');
 const read=f=>fs.readFileSync(f,'utf8');
-const pages=Function('return '+read('build.cjs').match(/const PAGES=(\[[^;]+\]);/)[1])();
+// Contacto has its own approved form/calendar, covered by contacto.test.cjs.
+const pages=Function('return '+read('build.cjs').match(/const PAGES=(\[[^;]+\]);/)[1])().filter(file=>file!=='contacto.html');
 function setup(file){
  const dom=new JSDOM(read(file),{url:'https://centraliafinanciera.com/'+file,runScripts:'outside-only'}),w=dom.window,d=w.document,calls=[];
  w.matchMedia=()=>({matches:true,addEventListener(){}});w.HTMLElement.prototype.scrollIntoView=function(){};
