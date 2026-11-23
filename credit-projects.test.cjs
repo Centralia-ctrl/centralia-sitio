@@ -8,11 +8,13 @@ const site = __dirname;
 const read = name => fs.readFileSync(path.join(site, name), 'utf8');
 const flush = () => new Promise(resolve => setImmediate(resolve));
 
-test('Credit artwork prepares before entering the viewport, loads once, and plays only when visible', async () => {
+test('Credit artwork waits for visibility and idle time, keeps the latest choice, and pauses offscreen', async () => {
   const dom = new JSDOM(read('credito-empresarial.html'), { runScripts: 'outside-only', pretendToBeVisual: true });
-  const { window } = dom, observers = [], playback = [], selected = [];
+  const { window } = dom, observers = [], playback = [], selected = [], idle = [];
   let imports = 0, renderers = 0;
   window.matchMedia = () => ({ matches: false, addEventListener() {} });
+  window.requestIdleCallback = callback => { idle.push(callback); return idle.length; };
+  window.cancelIdleCallback = () => {};
   window.IntersectionObserver = class {
     constructor(callback, options) { this.callback = callback; this.options = options; observers.push(this); }
     observe(target) { this.target = target; }
@@ -27,22 +29,22 @@ test('Credit artwork prepares before entering the viewport, loads once, and play
   };
   try {
     window.eval(read('credit-project-scenes.js').replace(/import\('\.\/credit-project-artwork\.js[^']*'\)/, 'window.loadTestArtwork()'));
-    const preparation = observers.find(o => o.options.rootMargin);
-    const visibility = observers.find(o => !o.options.rootMargin);
+    const visibility = observers[0];
     assert.equal(imports, 0, 'distant artwork must not compete with the initial page load');
-    assert.ok(parseInt(preparation.options.rootMargin, 10) > 0, 'preparation starts before the art is onscreen');
-    preparation.callback([{ isIntersecting: true }]);
+    assert.equal(observers.some(o => parseInt(o.options.rootMargin, 10) > 0), false);
+    visibility.callback([{ isIntersecting: true, intersectionRatio: 0.4 }]);
+    assert.equal(imports, 0, 'visibility alone must not start synchronous preparation');
     window.document.querySelector('[data-project="inventario"]').click();
     const art = window.document.querySelector('.credit-project-art');
     assert.match(art.querySelector('.credit-project-fallback img').src, /inventario-poster-desktop/);
     assert.match(art.querySelector('.credit-project-fallback source').srcset, /inventario-poster-mobile/);
     assert.equal(art.classList.contains('is-ready'), false, 'keep the selected image during preparation');
-    await flush();
+    idle[0]();
+    await new Promise(resolve => setTimeout(resolve, 20));
     assert.equal(imports, 1); assert.equal(renderers, 1);
-    assert.equal(preparation.disconnected, true);
     assert.deepEqual(selected, ['inventario'], 'the most recent selection survives preparation');
     assert.equal(art.classList.contains('is-ready'), true, 'replace the image only when the renderer is available');
-    assert.deepEqual(playback, [false], 'preparation must not advance the animation offscreen');
+    assert.equal(playback.at(-1), true, 'play only after the selected scene is ready and visible');
     visibility.callback([{ isIntersecting: true, intersectionRatio: 0.4 }]);
     await flush();
     assert.equal(imports, 1); assert.equal(playback.at(-1), true);
@@ -52,15 +54,21 @@ test('Credit artwork prepares before entering the viewport, loads once, and play
 });
 
 test('A failed artwork download keeps the selected image and the project choices usable', async () => {
-  const dom = new JSDOM(read('credito-empresarial.html'), { runScripts: 'outside-only' });
-  const { window } = dom;
+  const dom = new JSDOM(read('credito-empresarial.html'), { runScripts: 'outside-only', pretendToBeVisual: true });
+  const { window } = dom, observers = [], idle = [];
+  let imports = 0;
   window.matchMedia = () => ({ matches: false, addEventListener() {} });
-  window.IntersectionObserver = class { observe() {} };
-  window.loadTestArtwork = () => Promise.reject(new Error('offline'));
+  window.IntersectionObserver = class { constructor(callback) { observers.push(callback); } observe() {} };
+  window.requestIdleCallback = callback => { idle.push(callback); return idle.length; };
+  window.cancelIdleCallback = () => {};
+  window.loadTestArtwork = () => { imports++; return Promise.reject(new Error('offline')); };
   try {
     window.eval(read('credit-project-scenes.js').replace(/import\('\.\/credit-project-artwork\.js[^']*'\)/, 'window.loadTestArtwork()'));
     window.document.querySelector('[data-project="inventario"]').click();
+    observers[0]([{ isIntersecting: true, intersectionRatio: 0.8 }]);
+    idle.shift()();
     await flush();
+    assert.equal(imports, 1, 'exercise an actual failed download');
     const art = window.document.querySelector('.credit-project-art');
     assert.equal(art.classList.contains('is-ready'), false);
     assert.match(art.querySelector('img').src, /inventario-poster-desktop/);
