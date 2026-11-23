@@ -290,6 +290,20 @@ body{margin:0;background:#fff;font-size:14px}button{cursor:pointer}button:disabl
 #centralia-contacto-calendario #cp-time-continue{scroll-margin-bottom:20px}
 @media(max-width:700px){#centralia-contacto-calendario .cp-time-list{grid-template-columns:repeat(2,minmax(0,1fr))}#centralia-contacto-calendario #cp-change-date{padding:10px 12px;font-size:13px}#centralia-contacto-calendario .cp-booking-summary{min-height:0;margin:8px 0 12px}#centralia-contacto-calendario .cp-panel input{font-size:16px}}
 
+/* Contact details moved from the home page; the inquiry and booking panels remain unchanged. */
+#centralia-contacto-calendario .cp-contact-details{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:start;gap:32px 64px;margin-top:48px;padding-top:32px;border-top:1px solid var(--cp-line)}
+#centralia-contacto-calendario .cp-contact-label{font-size:14px;line-height:1.6;letter-spacing:.08em;text-transform:uppercase;color:var(--cp-muted);margin:0 0 12px}
+#centralia-contacto-calendario .cp-contact-details h2{font-size:24px;line-height:1.3;margin:0 0 16px;font-weight:500;color:var(--cp-ink)}
+#centralia-contacto-calendario .cp-contact-details h2 sup{font-size:12px}
+#centralia-contacto-calendario .cp-contact-details address{max-width:42ch;font-size:16px;line-height:1.7;font-style:normal;color:var(--cp-muted)}
+#centralia-contacto-calendario .cp-social-links{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:12px 24px}
+#centralia-contacto-calendario .cp-social-links a{display:inline-flex;align-items:center;gap:9px;min-height:44px;color:var(--cp-ink);font-size:14px;text-decoration:none}
+#centralia-contacto-calendario .cp-social-links a:hover{text-decoration:underline;text-underline-offset:4px}
+#centralia-contacto-calendario .cp-social-links :is(svg,img){width:22px;height:22px;flex:none}
+@media(max-width:700px){
+ #centralia-contacto-calendario .cp-contact-details{grid-template-columns:minmax(0,1fr);gap:24px;margin-top:32px;padding-top:28px}
+ #centralia-contacto-calendario .cp-social-links{justify-content:flex-start;gap:8px 20px}
+}
 /* Mobile refinement: less scrolling, a readable appointment and an easy change action. */
 #centralia-contacto-calendario .cp-reservation-separator{font-style:normal}
 @media(max-width:700px){
