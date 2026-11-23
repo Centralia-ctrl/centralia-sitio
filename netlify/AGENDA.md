@@ -13,6 +13,15 @@ de ejemplo. Los demás diseños, figuras, simuladores y estilos no cambian.
 - Agenda: enlace existente miguelmeza1, 30 minutos, America/Mexico_City.
   Las funciones usan Scheduler API de HubSpot y `HUBSPOT_AGENDA_TOKEN`.
   Nunca introducir la clave en el código, archivos públicos, logs ni Git.
+- Al reservar, la necesidad y el monto confirmado se guardan en las dos
+  propiedades existentes del contacto devuelto por Scheduler. No se añaden
+  campos al calendario. Sin elección se omite la propiedad; «Por definir»
+  requiere selección explícita. Nunca se importa el monto de la URL.
+- Scheduler rechaza esas propiedades en formFields si no forman parte de su
+  página de reserva. Por eso se actualiza el contacto después de confirmar la
+  cita, con el permiso de escritura de contactos ya autorizado. Un fallo de
+  esa actualización conserva la cita y el contexto pendiente en el registro
+  privado; un reintento del mismo identificador no vuelve a reservar.
 - Medición: sigue apagada. El consentimiento de consulta o agenda no autoriza
   analítica. La página no carga rastreadores.
 
@@ -39,3 +48,8 @@ es lectura. Para otra reserva real de prueba, confirmar primero fecha y correo.
 La reserva real previamente autorizada fue el 24/11/2026 a las 09:00 CDMX;
 no repetirla. Los avisos de formularios a hola@ son un pendiente independiente
 y no quedan comprobados por la prueba de calendario.
+
+Prueba adicional autorizada: 24/11/2026, 09:45–10:15 CDMX, marcada como prueba.
+Se verificaron necesidad, monto, responsable y próxima actividad en HubSpot.
+No repetir la cita. La confirmación al participante llegó a spam; eso no
+demuestra recepción del aviso interno al organizador, todavía sin comprobar.
