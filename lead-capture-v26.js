@@ -75,9 +75,13 @@
     const error = field('error'), fallback = field('fallback'), success = field('success');
     let sending = false, accepted = false, step = 'need';
     const emit = action => doc.dispatchEvent(new env.CustomEvent('centralia:interaction', {detail:{action,product:'home'}}));
-    const group = doc.createElement('ol'); group.className='cx-steps'; group.setAttribute('aria-label','Pasos de tu consulta');
-    for (const text of ['1 · Tu necesidad','2 · Tus datos']) {const li=doc.createElement('li');li.textContent=text;group.append(li);}
-    form.querySelector('.capture-form-meta').after(group);
+    // The steps are in the HTML so the form does not jump when this script runs; create them only if missing.
+    let group = form.querySelector('.cx-steps');
+    if (!group) {
+      group = doc.createElement('ol'); group.className='cx-steps'; group.setAttribute('aria-label','Pasos de tu consulta');
+      for (const text of ['1 · Tu necesidad','2 · Tus datos']) {const li=doc.createElement('li');li.textContent=text;group.append(li);}
+      form.querySelector('.capture-form-meta').after(group);
+    }
     const personal=['name','company','email','phone'].map(name=>field(name).closest('label'));
     const need=['purpose','amount','amount-unknown'].map(field).filter(Boolean).map(control=>control.closest('label'));
     // "Todavía no sé cuánto necesito": the amount field steps aside but keeps what was written.

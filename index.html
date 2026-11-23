@@ -79,17 +79,17 @@
       <div class="hero-heading"><p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> FINANCIAMIENTO PARA EMPRESAS</p><h1 id="hero-title">Financiamiento para las empresas que <span class="hero-emphasis">mueven a <span class="hero-mexico">México</span>.</span></h1><p class="hero-purpose">Te acompañamos a encontrar, comparar y contratar financiamiento para tu empresa. Exclusivo para personas morales.</p></div>
       <div class="hero-conversation"><div class="capture-panel" id="consulta" aria-labelledby="first-step-title">
     <form id="centralia-contact-form" method="post" aria-label="Consulta de financiamiento">
-     <div class="capture-form-meta"><h2 id="first-step-title">Tu primer paso.</h2><p>Cuéntanos qué necesita tu empresa.</p></div>
+     <div class="capture-form-meta"><h2 id="first-step-title">Tu primer paso.</h2><p>Cuéntanos qué necesita tu empresa.</p></div><ol class="cx-steps" aria-label="Pasos de tu consulta"><li aria-current="step">1 · Tu necesidad</li><li>2 · Tus datos</li></ol>
      <div class="capture-fields">
-      <label for="capture-name">Nombre completo<input id="capture-name" name="firstname" type="text" autocomplete="name" placeholder="Tu nombre y apellidos" minlength="2" maxlength="100" required></label>
-      <label for="capture-company">Empresa<input id="capture-company" name="company" type="text" autocomplete="organization" placeholder="Razón social o nombre comercial" minlength="2" maxlength="150" required></label>
-      <label for="capture-email">Correo electrónico<input id="capture-email" name="email" type="email" autocomplete="email" placeholder="nombre@empresa.com" maxlength="254" required></label>
-      <label for="capture-phone">Teléfono de contacto<input id="capture-phone" name="phone" type="tel" autocomplete="tel" placeholder="55 1234 5678" maxlength="25" required></label>
+      <label for="capture-name" hidden>Nombre completo<input id="capture-name" name="firstname" type="text" autocomplete="name" placeholder="Tu nombre y apellidos" minlength="2" maxlength="100" required></label>
+      <label for="capture-company" hidden>Empresa<input id="capture-company" name="company" type="text" autocomplete="organization" placeholder="Razón social o nombre comercial" minlength="2" maxlength="150" required></label>
+      <label for="capture-email" hidden>Correo electrónico<input id="capture-email" name="email" type="email" autocomplete="email" placeholder="nombre@empresa.com" maxlength="254" required></label>
+      <label for="capture-phone" hidden>Teléfono de contacto<input id="capture-phone" name="phone" type="tel" autocomplete="tel" placeholder="55 1234 5678" maxlength="25" required></label>
       <label for="capture-purpose">¿Qué necesitas?<select id="capture-purpose" name="para_que_necesitas_el_financiamiento" required><option value="" disabled selected>Selecciona una opción</option><option value="Crédito empresarial">Invertir en mi empresa</option><option value="Factoraje">Anticipar mis facturas</option><option value="Pago a proveedores">Financiar una compra</option></select></label>
       <label for="capture-amount">Monto aproximado <span class="capture-unit">MXN</span><input id="capture-amount" name="cul_es_el_monto_que_requiere_tu_empresa" type="text" inputmode="decimal" placeholder="Ej. 1,000,000" maxlength="20" required></label>
       <label class="capture-unknown" for="capture-amount-unknown"><input id="capture-amount-unknown" type="checkbox"><span>Todavía no sé cuánto necesito</span></label>
      </div>
-     <label class="capture-consent" for="capture-consent"><input id="capture-consent" type="checkbox" required><span>Autorizo a Centralia a usar mis datos para atender esta consulta y contactarme. He leído el <a href="https://centraliafinanciera.com/aviso-de-privacidad/" target="_blank" rel="noopener noreferrer">aviso de privacidad</a>.</span></label>
+     <label class="capture-consent" for="capture-consent" hidden><input id="capture-consent" type="checkbox" required><span>Autorizo a Centralia a usar mis datos para atender esta consulta y contactarme. He leído el <a href="https://centraliafinanciera.com/aviso-de-privacidad/" target="_blank" rel="noopener noreferrer">aviso de privacidad</a>.</span></label>
      <p id="capture-error" class="capture-error" role="alert" hidden></p>
      <button id="capture-submit" class="capture-submit" type="submit" disabled><span id="capture-submit-text">Enviar mi consulta</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
      <p class="capture-note">Sin documentos en este paso. Esta consulta no implica una aprobación de financiamiento.</p>
