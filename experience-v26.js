@@ -67,7 +67,7 @@
       link.addEventListener('click',event=>{event.preventDefault();document.dispatchEvent(new CustomEvent('centralia:consult-supplier',{detail:{opener:link}}));});
     }
     document.querySelectorAll('.product-uses article').forEach((article,index)=>{
-      const button=document.createElement('button'); button.type='button'; button.className='cx-case-button'; button.textContent='Ver este caso'; button.setAttribute('aria-pressed','false'); button.setAttribute('aria-controls','context-title'); button.setAttribute('aria-label','Ver caso: '+article.querySelector('h3').textContent);
+      const button=document.createElement('button'); button.type='button'; button.className='cx-case-button'; button.textContent='Ver este caso'; button.setAttribute('aria-pressed','false'); button.setAttribute('aria-controls','context-title'); button.setAttribute('aria-label','Ver este caso: '+article.querySelector('h3').textContent);
       button.addEventListener('click',()=>{
         const data=cases[current][index]; heading.textContent=data[0]; copy.textContent=data[1];
         if (data.length>2) example.querySelectorAll('.content-facts>div').forEach((row,i)=>{row.querySelector('dt').textContent=data[i+2][0];row.querySelector('dd').textContent=data[i+2][1];});
