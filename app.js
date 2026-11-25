@@ -42,17 +42,16 @@
     const url = verifiedDestination(key);
     if (!url) return;
     const link = $(`[data-social="${key}"]`);
-    // La portada ya no muestra redes en el pie (los datos de contacto viven en Contacto).
+    // Pages without the footer social block (the home page) skip this step.
     if (!link) return;
     link.href = url;
     link.hidden = false;
-    const group = $('.social-links');
+    const group = link.closest('.social-links');
     if (group) group.hidden = false;
   });
   const onlineDestination = verifiedDestination('hubspot');
   if (onlineDestination) {
     $$('[data-hubspot]').forEach(link => { link.href = onlineDestination; link.hidden = false; });
-    $$('[data-schedule]').forEach(link => { link.href = onlineDestination; link.target = '_blank'; link.rel = 'noopener noreferrer'; });
   }
   const routes = {
     capital: {
@@ -226,6 +225,7 @@
   $$('[data-start]').forEach(button => button.addEventListener('click', () => startBrief(button.dataset.start, button)));
   $$('[data-schedule]').forEach(link => link.addEventListener('click', event => {
     if (onlineDestination) return;
+    if (new URL(link.href, location.href).pathname.endsWith('/contacto.html')) return;
     event.preventDefault();
     startBrief('orientacion', link);
   }));

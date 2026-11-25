@@ -225,7 +225,7 @@ test('Home confirmation: summary of what was sent, human review next, and no way
  assert.match(text,/Ahora, lo revisamos contigo\./);assert.match(text,/te compartiremos una invitación al registro/);
  assert.match(text,/El envío no implica una aprobación de financiamiento\./);
  assert.equal(f('success').querySelector('a[href^="mailto:"]').getAttribute('href'),'mailto:hola@centraliafinanciera.com');
- assert.equal(d.querySelector('.first-step-meeting').getAttribute('href'),'https://meetings.hubspot.com/miguelmeza1');
+ assert.equal(d.querySelector('.first-step-meeting').getAttribute('href'),'contacto.html?canal=agenda');
  assert.equal(d.querySelectorAll('#consulta a[href*="registro"],#consulta button[data-registro]').length,0);
  assert.equal(opened.length,0);assert.equal(w.location.href,'https://centraliafinanciera.com/index.html');
  assert.ok(!/registro/i.test(read('lead-capture-v26.js')));dom.window.close();
