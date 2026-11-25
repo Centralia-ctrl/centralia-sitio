@@ -42,9 +42,12 @@
     const url = verifiedDestination(key);
     if (!url) return;
     const link = $(`[data-social="${key}"]`);
+    // Pages without the footer social block (the home page) skip this step.
+    if (!link) return;
     link.href = url;
     link.hidden = false;
-    $('.social-links').hidden = false;
+    const group = link.closest('.social-links');
+    if (group) group.hidden = false;
   });
   const onlineDestination = verifiedDestination('hubspot');
   if (onlineDestination) {
