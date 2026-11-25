@@ -311,3 +311,29 @@ body{margin:0;background:#fff;font-size:14px}button{cursor:pointer}button:disabl
   #centralia-contacto-calendario #cp-final-hour{white-space:nowrap}
   #centralia-contacto-calendario #cp-change-time{min-height:44px;padding:10px 12px;border:1px solid var(--cp-line);border-radius:8px;background:#fff;font-size:13px;line-height:1.3}
 }
+
+#centralia-contacto-calendario .cp-eyebrow{justify-content:center}
+#centralia-contacto-calendario h1{text-align:center;margin-inline:auto}
+#centralia-contacto-calendario .cp-lead{text-align:center;max-width:720px;margin-inline:auto}
+#centralia-contacto-calendario .cp-direct{margin-top:36px;border-top:1px solid var(--cp-line);padding-top:25px}
+#centralia-contacto-calendario .cp-direct-heading{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:20px}
+#centralia-contacto-calendario .cp-direct-heading .cp-small-label{font-size:10px;letter-spacing:.12em;color:var(--cp-muted)}
+#centralia-contacto-calendario .cp-direct-heading h2{font-size:19px;font-weight:500;letter-spacing:-.025em}
+#centralia-contacto-calendario .cp-direct-heading sup{font-size:9px;margin-left:2px}
+#centralia-contacto-calendario .cp-direct-grid{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:20px}
+#centralia-contacto-calendario .cp-direct-item{display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-width:0;border-top:1px solid var(--cp-line);padding-top:12px;text-decoration:none;color:var(--cp-ink)}
+#centralia-contacto-calendario .cp-direct-item>span{font-size:11px;color:var(--cp-muted)}
+#centralia-contacto-calendario .cp-direct-item strong,#centralia-contacto-calendario .cp-direct-item address{font-size:13px;font-weight:500;line-height:1.55;font-style:normal;overflow-wrap:anywhere}
+#centralia-contacto-calendario .cp-direct-item:hover strong{color:var(--cp-blue)}
+#centralia-contacto-calendario .cp-direct-social{display:flex;align-items:center;gap:18px;margin-top:18px;font-size:11px}
+#centralia-contacto-calendario .cp-direct-social>span{color:var(--cp-muted);margin-right:3px}
+#centralia-contacto-calendario .cp-direct-social a{color:var(--cp-ink);text-underline-offset:3px}
+@media(max-width:700px){
+  #centralia-contacto-calendario .cp-direct{margin-top:27px;padding-top:21px}
+  #centralia-contacto-calendario .cp-direct-heading{display:block;margin-bottom:15px}
+  #centralia-contacto-calendario .cp-direct-heading h2{font-size:18px;margin-top:8px}
+  #centralia-contacto-calendario .cp-direct-grid{grid-template-columns:1fr 1fr;gap:14px 18px}
+  #centralia-contacto-calendario .cp-direct-address{grid-column:1/-1}
+  #centralia-contacto-calendario .cp-direct-social{gap:15px;flex-wrap:wrap}
+}
+@media(max-width:400px){#centralia-contacto-calendario .cp-direct-grid{grid-template-columns:1fr;gap:10px}#centralia-contacto-calendario .cp-direct-address{grid-column:auto}}
