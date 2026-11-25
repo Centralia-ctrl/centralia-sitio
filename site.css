@@ -1222,7 +1222,7 @@ dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contai
 /* Homepage: help undecided visitors explore the existing guides. */
 .home-v23 .home-guides{padding:76px 0 84px;background:#fff;border-top:1px solid #e4e7ee}
 .home-v23 .home-guides-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.7fr);gap:56px;align-items:end}
-.home-v23 .home-guides-head h2{max-width:680px;margin:0;color:#1b224e;font-size:clamp(28px,3vw,40px);line-height:1.14;letter-spacing:-.035em;font-weight:500}
+.home-v23 .home-guides-head h2{max-width:680px;margin:0;color:#1b224e;font-size:clamp(28px,3vw,40px);line-height:1.14;letter-spacing:-.035em;font-weight:500;text-wrap:balance}
 .home-v23 .home-guides-head>div:last-child>p{max-width:500px;font-size:15px;line-height:1.7;color:#5d6470}
 .home-v23 .home-guides-all{display:inline-flex;align-items:center;gap:8px;margin-top:18px;min-height:44px;color:#1b224e;text-underline-offset:4px}
 .home-v23 .home-guides-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px;margin:44px 0 0;padding:0;list-style:none}
@@ -1234,6 +1234,7 @@ dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contai
 .home-v23 .home-guides-list a:focus-visible,.home-v23 .home-guides-all:focus-visible{outline:2px solid #315de8;outline-offset:4px}
 @media(max-width:900px){.home-v23 .home-guides-head{grid-template-columns:1fr;gap:20px}.home-v23 .home-guides-head>div:last-child>p{max-width:620px}.home-v23 .home-guides-list{grid-template-columns:1fr;gap:0}.home-v23 .home-guides-list a{min-height:0;padding:22px 0}}
 @media(max-width:760px){.home-v23 .home-guides{padding:54px 0 58px}.home-v23 .home-guides-head h2{font-size:29px}.home-v23 .home-guides-head>div:last-child>p{font-size:14px}.home-v23 .home-guides-list{margin-top:30px}.home-v23 .home-guide-copy strong{font-size:16px}}
+@media(min-width:1101px){.home-v23 .home-guides-head>div:last-child>p,.home-v23 .home-guide-copy>span,.home-v23 .home-process-list p,.home-v23 .home-contact-cta-copy p:not(.eyebrow){font-size:16px}}
 
 /* Homepage: clarify the review path and keep direct channels on Contact. */
 .home-v23 .home-process{padding-block:80px 72px;background:#fff;border-top:1px solid #e4e7ee}
