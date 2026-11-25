@@ -2755,3 +2755,31 @@ body.supplier-calculator-page .supplier-terms-review>p:last-child{font-size:clam
 
 /* Muestra (pendiente de aprobación): lo que suma cada día de plazo. */
 #calendario-proveedores .cp-per-day{margin:8px 0 0;font-size:13px;line-height:1.5;color:#5d6470}
+
+/* brand-color-discipline.css */
+/* Muestra local · azul #315de8 solo para la acción principal (paleta de CLAUDE.md, 25 de noviembre de 2026).
+   Tipografía, números y ligas secundarias pasan a navy #1b224e o gris #5d6470 (5.96:1 sobre blanco).
+   No se tocan: el texto dentro de las animaciones aprobadas (.film-accent), el punto del hero de la portada,
+   ni los estados de los controles de formulario (barras, opciones elegidas, foco), que forman parte de la acción. */
+
+/* 1. Titulares en dos tonos: navy y gris secundario (Preguntas frecuentes y blog). */
+.company-intro h1 span{color:#5d6470}
+
+/* 2. Página actual del menú principal (Blog, Contacto): navy y subrayada.
+   Las opciones del menú Soluciones conservan su tratamiento aprobado, sin subrayado. */
+.centralia-v23 .desktop-nav>a[aria-current="page"]{color:#1b224e;font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:8px}
+
+/* 3. Números de pasos y de temas en gris secundario, como 01–03 de la portada. */
+.direction-product .product-step{color:#5d6470}
+.faq-topics a{color:#5d6470}
+.faq-topics a:hover span{color:#1b224e;text-decoration:underline;text-underline-offset:4px}
+
+/* 4. Ligas secundarias: navy subrayado; el hover engrosa la línea. */
+.centralia-v23 .product-related a{color:#1b224e;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.centralia-v23 .product-related a:hover{color:#1b224e;text-decoration-thickness:2px}
+.home-v23 .solution-primary-link{color:#1b224e;text-decoration-color:#1b224e}
+.home-v23 .solution-primary-link:hover{color:#1b224e;text-decoration-thickness:2px}
+
+/* 5. Pago a proveedores: botón principal en azul, como en Crédito y Factoraje. */
+#calendario-proveedores .cp-cta{background:#315de8}
+#calendario-proveedores .cp-cta:hover{background:#254bc6}
