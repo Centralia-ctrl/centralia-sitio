@@ -42,9 +42,12 @@
     const url = verifiedDestination(key);
     if (!url) return;
     const link = $(`[data-social="${key}"]`);
+    // La portada ya no muestra redes en el pie (los datos de contacto viven en Contacto).
+    if (!link) return;
     link.href = url;
     link.hidden = false;
-    $('.social-links').hidden = false;
+    const group = $('.social-links');
+    if (group) group.hidden = false;
   });
   const onlineDestination = verifiedDestination('hubspot');
   if (onlineDestination) {

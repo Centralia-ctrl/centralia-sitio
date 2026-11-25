@@ -249,3 +249,12 @@ Miguel Ángel aprobó publicar estos ajustes de portada, Factoraje y Pago a prov
 Miguel Ángel eligió la muestra «Franja editorial», aprobó pulirla y después indicó «publícalo». La portada presenta las cifras alineadas, unidades discretas y una cifra debajo de la otra en celular. En esa misma muestra indicó $5,000 millones de pesos colocados, que sustituye los $4,500 millones anteriores para la comunicación vigente de la portada. Se mantiene «Más de 10 años de experiencia»; no se afirma que las cifras estén auditadas.
 
 Cambio independiente del borrador #96: index.html, release-v24.css y site.css generado con node build.cjs, además de esta nota. No integra el resto de la propuesta premium. Formularios, agenda, cálculos, figuras, videos y medición apagada se conservan.
+
+## Revisión integral · 25 de noviembre de 2026
+
+Revisión de portada, Contacto, Crédito, Factoraje, Pago a proveedores, FAQ y blog a 320, 390, 768 y 1440 px, desde main `e28073e`. Sin publicar ni fusionar.
+
+- Corregido: `app.js` fallaba en la portada desde que el pie dejó de mostrar redes (PR #101). El error detenía el script: el menú móvil no abría y «Costos y condiciones» no mostraba su ventana. Prueba de regresión en `loading-audit.test.cjs`.
+- Corregido: en móvil, el párrafo de «Soluciones para tu empresa» de la portada quedaba corrido a la derecha en Chrome (`justify-self:end` en bloque). Ahora se alinea con el título (`visual-system.css`).
+- Contacto: se agregaron `og:locale`, `og:site_name`, medidas y texto alternativo de `og:image`, `twitter:card`, `theme-color` e íconos 192 y Apple, como en las demás páginas. `lastmod` de portada y Contacto al 24 de noviembre.
+- Sin cambios en cifras, condiciones, formularios, endpoints, animaciones, medición ni Netlify.

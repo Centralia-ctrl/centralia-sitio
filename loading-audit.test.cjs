@@ -24,3 +24,17 @@ for(const reduced of [true,false])test(`Credit loading is cancelled offscreen; r
   }finally{w.close()}
 });
 
+
+test('Home page app.js initializes without footer social links (mobile menu works)',()=>{
+  const dom=new JSDOM(read('index.html'),{runScripts:'outside-only',pretendToBeVisual:true});
+  const w=dom.window;
+  w.matchMedia=()=>({matches:false,addEventListener(){}});
+  try{
+    w.eval(read('connections.js'));
+    assert.equal(w.document.querySelector('[data-social]'),null);
+    w.eval(read('app.js'));
+    const toggle=w.document.querySelector('.menu-toggle');
+    toggle.click();
+    assert.equal(w.document.querySelector('#mobile-nav').hidden,false);
+  }finally{w.close()}
+});
