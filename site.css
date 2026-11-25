@@ -1321,14 +1321,14 @@ dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contai
 .home-v23 .hero{min-height:560px}
 .solution-page .film-artwork{background:var(--solution-paper)}
 .factoraje-page .film-artwork{background:var(--factoraje-paper)}
-.centralia-v23 .footer-bottom>div{flex-wrap:wrap;row-gap:12px}
+.centralia-v23 .footer-bottom>div{flex-wrap:wrap;row-gap:8px}
 .privacy-notice-link{display:inline-block;margin-top:20px;color:var(--blue);text-decoration:underline;text-underline-offset:4px}
 .terms-in-view .whatsapp-float,.footer-in-view .whatsapp-float,.contact-in-view .whatsapp-float,.float-over-control .whatsapp-float,.modal-open .whatsapp-float{visibility:hidden;pointer-events:none}
 @media(max-width:760px){
  .home-v23 .hero{min-height:0}
  .home-v23 .hero-purpose{font-size:15px;line-height:1.75;margin-top:22px;max-width:34em}
  .centralia-v23 .showcase-note,.centralia-v23 .direction-terms>small,.centralia-v23 .capture-note,.centralia-v23 .legal-note,.centralia-v23 .solution-secondary-actions>.solution-conditions,.centralia-v23 .solution-metric>span,.centralia-v23 .content-case-story>small,.centralia-v23 .sim-consent,.centralia-v23 .sim-data-info,.centralia-v23 .sim-lead-grid small,.centralia-v23 .product-text-link,.centralia-v23 .welcome-secondary .product-text-link{font-size:14px}
- .centralia-v23 .footer-bottom>div{display:flex;flex-wrap:wrap;gap:14px 20px}
+ .centralia-v23 .footer-bottom>div{display:flex;flex-wrap:wrap;gap:8px 20px}
 }
 
 /* The welcome's main action is visible from the first frame. The other welcome animations stay. */
@@ -1362,11 +1362,21 @@ body.centralia-v23 .whatsapp-float,body.centralia-v23 .business-stories *,body.c
 body.centralia-v23 .desktop-nav .solutions-nav-panel{border-radius:var(--finish-radius)!important;box-shadow:none!important}
 body.centralia-v23 .site-footer{padding-bottom:0}
 body.centralia-v23 .footer-bottom,body.centralia-v23 .legal-note{background:#1b224e;border-image:conic-gradient(#1b224e 0 0) fill 0/0/0 100vmax}
-body.centralia-v23 .footer-bottom{border-top:0;padding:18px 0 20px}
+body.centralia-v23 .footer-bottom{border-top:0;padding:10px 0 12px}
 body.centralia-v23 .legal-note{max-width:none;margin:-1px 0 0;padding:21px 0 40px}
 body.centralia-v23 .footer-bottom,body.centralia-v23 .footer-bottom>span,body.centralia-v23 .footer-bottom>div>a,
-body.centralia-v23 .footer-bottom>div>button,body.centralia-v23 .legal-note{color:var(--finish-on-navy)}
-body.centralia-v23 .footer-bottom>div>a:hover,body.centralia-v23 .footer-bottom>div>button:hover{color:#fff}
+body.centralia-v23 .footer-more>summary,body.centralia-v23 .legal-note{color:var(--finish-on-navy)}
+body.centralia-v23 .footer-bottom>div>a:hover,body.centralia-v23 .footer-more>summary:hover{color:#fff}
+
+/* Group secondary footer actions without hiding the direct privacy notice. */
+body.centralia-v23 .footer-more{position:relative}
+body.centralia-v23 .footer-more>summary{display:inline-flex;align-items:center;min-height:24px;cursor:pointer;list-style:none}
+body.centralia-v23 .footer-more>summary::-webkit-details-marker{display:none}
+body.centralia-v23 .footer-more>summary::after{content:"+";margin-left:6px;font-size:14px;line-height:1}
+body.centralia-v23 .footer-more[open]>summary::after{content:"−"}
+body.centralia-v23 .footer-more>div{position:absolute;right:0;bottom:calc(100% + 10px);z-index:50;display:grid;gap:4px;width:max-content;min-width:220px;max-width:calc(100vw - 32px);padding:8px;background:#fff;color:#1b224e;border:1px solid #e4e7ee;border-radius:12px}
+body.centralia-v23 .footer-more>div>button{display:flex;align-items:center;width:100%;min-height:36px!important;padding:8px 10px!important;border:0;border-radius:12px;background:transparent;color:#1b224e;text-align:left;cursor:pointer}
+body.centralia-v23 .footer-more>div>button:hover{background:#f4f6fa;color:#1b224e}
 
 /* Footer contact: WhatsApp sits with the social links, in its brand green. */
 .social-links [data-social=whatsapp] .social-brand{background:var(--whatsapp)}
@@ -1382,7 +1392,7 @@ body.centralia-v23 .footer-bottom>div>a:hover,body.centralia-v23 .footer-bottom>
 body.centralia-v23 .footer-caption .footer-address{display:block;margin-top:8px;font-style:normal;font-size:13px;line-height:1.6;color:#5d6470}
 
 /* Área de toque de al menos 24 px en los enlaces del pie (WCAG 2.5.8), sin cambiar su aspecto. */
-body.centralia-v23 .footer-bottom>div>a,body.centralia-v23 .footer-bottom>div>button{display:inline-flex;align-items:center;min-height:24px}
+body.centralia-v23 .footer-bottom>div>a,body.centralia-v23 .footer-more>summary{display:inline-flex;align-items:center;min-height:24px}
 
 /* Centro sereno de trayectoria, con entrada breve y cifras equilibradas. */
 .home-v23 .home-proof.home-proof-centered{display:block;padding:40px 0 36px;margin-bottom:26px;background:#fff;color:#1b224e;border:0;text-align:center}
