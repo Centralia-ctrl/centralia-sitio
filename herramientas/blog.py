@@ -15,6 +15,30 @@ AUTHOR = {'name': 'Miguel Ángel Meza Badillo', 'role': 'Director general',
 
 ARTICLES = [
     {
+        'slug': 'financiar-compras-a-proveedores-nacionales',
+        'title': 'Financiar compras a proveedores nacionales | Centralia',
+        'headline': 'Cómo financiar compras a proveedores nacionales',
+        'h1': ('Cómo financiar compras', 'a proveedores nacionales.'),
+        'crumb': 'Financiar compras a proveedores',
+        'eyebrow': 'PAGO A PROVEEDORES · GUÍA',
+        'tag': 'Pago a proveedores · Guía',
+        'description': 'Cómo funciona el financiamiento de compras a proveedores, cuándo conviene, cómo se calcula su costo y qué preguntar antes de contratar.',
+        'date': '2026-11-25', 'date_text': '25 de noviembre de 2026', 'minutes': 5,
+        'image': 'og-pago-a-proveedores.png',
+    },
+    {
+        'slug': 'pagar-al-proveedor-hoy-y-cobrar-despues',
+        'title': 'Pagar hoy al proveedor y cobrar después | Centralia',
+        'headline': 'Pagar hoy al proveedor y cobrar después: cómo cuidar tu flujo',
+        'h1': ('Pagar hoy al proveedor y cobrar después:', 'cómo cuidar tu flujo.'),
+        'crumb': 'Pagar hoy y cobrar después',
+        'eyebrow': 'PAGO A PROVEEDORES · GUÍA',
+        'tag': 'Pago a proveedores · Guía',
+        'description': 'Cómo medir el hueco entre pagar a tu proveedor y cobrar a tu cliente, cómo alinear el plazo del financiamiento y qué solución conviene.',
+        'date': '2026-11-25', 'date_text': '25 de noviembre de 2026', 'minutes': 5,
+        'image': 'og-pago-a-proveedores.png',
+    },
+    {
         'slug': 'estados-financieros-para-credito',
         'title': 'Estados financieros para un crédito | Centralia',
         'headline': 'Qué revisan en tus estados financieros al pedir un crédito',
@@ -210,6 +234,8 @@ ARTICLES = [
 
 # Three related reads shown at the end of each article (internal links help readers and search engines).
 RELATED = {
+    'financiar-compras-a-proveedores-nacionales': ['pagar-al-proveedor-hoy-y-cobrar-despues', 'pago-a-proveedores-en-el-extranjero', 'capital-de-trabajo'],
+    'pagar-al-proveedor-hoy-y-cobrar-despues': ['financiar-compras-a-proveedores-nacionales', 'flujo-de-efectivo-13-semanas', 'como-reducir-dias-de-cobranza'],
     'estados-financieros-para-credito': ['documentos-para-credito-empresarial', 'historial-crediticio-de-tu-empresa', 'credito-simple-o-revolvente'],
     'como-reducir-dias-de-cobranza': ['flujo-de-efectivo-13-semanas', 'que-es-el-factoraje', 'capital-de-trabajo'],
     'flujo-de-efectivo-13-semanas': ['capital-de-trabajo', 'como-reducir-dias-de-cobranza', 'opciones-de-financiamiento-para-pymes'],
@@ -223,7 +249,7 @@ RELATED = {
     'como-comparar-propuestas-de-financiamiento': ['opciones-de-financiamiento-para-pymes', 'credito-con-o-sin-garantia', 'documentos-para-credito-empresarial'],
     'capital-de-trabajo': ['que-es-el-factoraje', 'pago-a-proveedores-en-el-extranjero', 'opciones-de-financiamiento-para-pymes'],
     'documentos-para-credito-empresarial': ['historial-crediticio-de-tu-empresa', 'credito-con-o-sin-garantia', 'como-comparar-propuestas-de-financiamiento'],
-    'pago-a-proveedores-en-el-extranjero': ['capital-de-trabajo', 'que-es-el-factoraje', 'opciones-de-financiamiento-para-pymes'],
+    'pago-a-proveedores-en-el-extranjero': ['financiar-compras-a-proveedores-nacionales', 'pagar-al-proveedor-hoy-y-cobrar-despues', 'capital-de-trabajo'],
     'credito-con-o-sin-garantia': ['documentos-para-credito-empresarial', 'como-comparar-propuestas-de-financiamiento', 'opciones-de-financiamiento-para-pymes'],
     'que-es-el-factoraje': ['capital-de-trabajo', 'como-comparar-propuestas-de-financiamiento', 'opciones-de-financiamiento-para-pymes'],
 }
@@ -243,7 +269,8 @@ INDEX_GROUPS = [
      'slugs': ['que-es-el-factoraje', 'que-es-el-aforo-en-factoraje', 'requisitos-para-factoraje', 'factoraje-con-recurso-y-sin-recurso']},
     {'id': 'flujo', 'title': 'Financiar compras y cuidar tu flujo', 'text': 'Pago a proveedores, capital de trabajo y cobranza.',
      'tool': ('../pago-a-proveedores.html#calendario-proveedores', 'Simular el pago a proveedores'),
-     'slugs': ['pago-a-proveedores-en-el-extranjero', 'capital-de-trabajo', 'flujo-de-efectivo-13-semanas', 'como-reducir-dias-de-cobranza']},
+     'slugs': ['financiar-compras-a-proveedores-nacionales', 'pagar-al-proveedor-hoy-y-cobrar-despues', 'pago-a-proveedores-en-el-extranjero',
+               'capital-de-trabajo', 'flujo-de-efectivo-13-semanas', 'como-reducir-dias-de-cobranza']},
 ]
 
 INDEX = {
