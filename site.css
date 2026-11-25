@@ -2765,8 +2765,9 @@ body.supplier-calculator-page .supplier-terms-review>p:last-child{font-size:clam
 /* 1. Titulares en dos tonos: navy y gris secundario (Preguntas frecuentes y blog). */
 .company-intro h1 span{color:#5d6470}
 
-/* 2. Página actual del menú: navy y subrayada, para no depender solo del color. */
-.centralia-v23 .desktop-nav>a[aria-current="page"],.centralia-v23 .solutions-nav-panel a[aria-current="page"]{color:#1b224e;font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:8px}
+/* 2. Página actual del menú principal (Blog, Contacto): navy y subrayada.
+   Las opciones del menú Soluciones conservan su tratamiento aprobado, sin subrayado. */
+.centralia-v23 .desktop-nav>a[aria-current="page"]{color:#1b224e;font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:8px}
 
 /* 3. Números de pasos y de temas en gris secundario, como 01–03 de la portada. */
 .direction-product .product-step{color:#5d6470}
