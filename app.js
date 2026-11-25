@@ -49,7 +49,6 @@
   const onlineDestination = verifiedDestination('hubspot');
   if (onlineDestination) {
     $$('[data-hubspot]').forEach(link => { link.href = onlineDestination; link.hidden = false; });
-    $$('[data-schedule]').forEach(link => { link.href = onlineDestination; link.target = '_blank'; link.rel = 'noopener noreferrer'; });
   }
   const routes = {
     capital: {
@@ -223,6 +222,7 @@
   $$('[data-start]').forEach(button => button.addEventListener('click', () => startBrief(button.dataset.start, button)));
   $$('[data-schedule]').forEach(link => link.addEventListener('click', event => {
     if (onlineDestination) return;
+    if (new URL(link.href, location.href).pathname.endsWith('/contacto.html')) return;
     event.preventDefault();
     startBrief('orientacion', link);
   }));

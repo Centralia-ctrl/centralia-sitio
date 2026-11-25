@@ -8,7 +8,7 @@ import json, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = 'https://centraliafinanciera.com/'
-MEETING = 'https://meetings.hubspot.com/miguelmeza1'
+MEETING = '../contacto.html?canal=agenda'
 # Every guide is signed by its author. The bio states only confirmed facts.
 AUTHOR = {'name': 'Miguel Ángel Meza Badillo', 'role': 'Director general',
           'bio': 'Director general de Centralia Financiera. Acompaña a empresas en México a encontrar, comparar y contratar financiamiento.'}
