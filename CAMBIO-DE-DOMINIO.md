@@ -41,7 +41,7 @@ El correo `hola@centraliafinanciera.com` funciona con Google Workspace y depende
    node herramientas/verificar-dominio.cjs
    ```
 
-   Revisa las 22 páginas del sitemap (respuesta 200, canónica correcta, sin `noindex` y un H1), las imágenes para redes, `robots.txt`, el aviso de privacidad, la redirección de `http` y `www` hacia `https://centraliafinanciera.com/`, y las redirecciones del sitio anterior que están en `_redirects`. Debe terminar con **0 fallas**.
+   Revisa las páginas del sitemap (25 al 26 de noviembre) (respuesta 200, canónica correcta, sin `noindex` y un H1), las imágenes para redes, `robots.txt`, el aviso de privacidad, la redirección de `http` y `www` hacia `https://centraliafinanciera.com/`, y las redirecciones del sitio anterior que están en `_redirects`. Debe terminar con **0 fallas**.
 
    Si la red usa proxy, se ejecuta con `NODE_USE_ENV_PROXY=1`.
 5. Seguir la sección 3 de `LANZAMIENTO.md` para las pruebas manuales en celular y computadora.
@@ -60,4 +60,4 @@ El mismo script se puede correr hoy contra la dirección de Netlify. Revisa todo
 node herramientas/verificar-dominio.cjs https://centralia-sitio.netlify.app
 ```
 
-Ensayo del 13 de noviembre de 2026: las 22 páginas, las 5 imágenes para redes y `robots.txt` están correctos. La única falla es que `/aviso-de-privacidad/` todavía no existe (borrador en PR #68, en espera del texto legal).
+Ensayo del 26 de noviembre de 2026 contra https://centralia-sitio.netlify.app: las 25 páginas, las imágenes para redes y `robots.txt` están correctos. La única falla es que `/aviso-de-privacidad/` todavía no existe; la resuelve el PR #110 (página nueva y redirección desde esa dirección), en espera de la revisión legal.
