@@ -72,11 +72,38 @@ test('Agenda receives only a confirmed amount; editing it clears confirmation, n
     assert.equal(JSON.stringify(calls).includes('hutk'),false);d.window.close();
   }
 });
-test('Agenda shows a clear message, never a raw parser or network error, when availability fails',async()=>{
- const cases=[async()=>({ok:false,status:404,json:async()=>{throw new SyntaxError("Unexpected token 'N', \"Not found\" is not valid JSON");}}),async()=>{throw new TypeError('Failed to fetch');}];
- for(const impl of cases){const d=new JSDOM(fs.readFileSync('contacto.html','utf8'),{url:'https://centralia-sitio.netlify.app/contacto.html?canal=agenda',runScripts:'outside-only'}),w=d.window;w.matchMedia=()=>({matches:true,addEventListener(){}});w.HTMLElement.prototype.scrollIntoView=function(){};w.fetch=async(url)=>String(url).includes('/api/agenda/availability')?impl():({ok:true,status:200,json:async()=>({})});w.eval(fs.readFileSync('contacto-form.js','utf8'));w.eval(fs.readFileSync('contacto.js','utf8'));const doc=w.document;
+test('Agenda failure shows a clear message, keeps retry and the WhatsApp tab, and never shows a raw error',async()=>{
+ // Fallos reales: respuesta no JSON, red caída y la respuesta de la vista previa sin agenda configurada.
+ const cases=[
+  async()=>({ok:false,status:404,json:async()=>{throw new SyntaxError("Unexpected token 'N', \"Not found\" is not valid JSON");}}),
+  async()=>{throw new TypeError('Failed to fetch');},
+  async()=>({ok:false,status:503,json:async()=>({code:'NOT_CONFIGURED',message:'La agenda no está disponible en este momento.'})})
+ ];
+ for(const impl of cases){
+  const requests=[],opened=[];
+  const d=new JSDOM(fs.readFileSync('contacto.html','utf8'),{url:'https://centralia-sitio.netlify.app/contacto.html?canal=agenda&solucion=factoring',runScripts:'outside-only'}),w=d.window;
+  w.matchMedia=()=>({matches:true,addEventListener(){}});w.HTMLElement.prototype.scrollIntoView=function(){};w.open=(...args)=>{opened.push(args);return null;};
+  w.fetch=async(url,opts)=>{requests.push({url:String(url),method:opts?.method||'GET'});return String(url).includes('/api/agenda/availability')?impl():({ok:true,status:200,json:async()=>({})});};
+  w.eval(fs.readFileSync('contacto-form.js','utf8'));w.eval(fs.readFileSync('contacto.js','utf8'));const doc=w.document;
   await new Promise(r=>setTimeout(r,30));
-  const text=doc.querySelector('#cp-booking-summary').textContent;
-  assert.match(text,/No pudimos consultar la agenda/);assert.doesNotMatch(text,/Unexpected token|Failed to fetch|JSON/);
-  assert.equal(doc.querySelector('#cp-agenda-fallback').hidden,false);d.window.close();}
+  const summary=()=>doc.querySelector('#cp-booking-summary').textContent;
+  assert.match(summary(),/No pudimos consultar la agenda|La agenda no está disponible en este momento\./);assert.doesNotMatch(summary(),/Unexpected token|Failed to fetch|JSON|NOT_CONFIGURED/);
+  // Opción 1: reintentar en la misma agenda.
+  const retry=doc.querySelector('#cp-retry');assert.equal(retry.hidden,false);
+  // El respaldo de la agenda abre la agenda de HubSpot; no es WhatsApp.
+  const fallback=doc.querySelector('#cp-agenda-fallback a');assert.equal(doc.querySelector('#cp-agenda-fallback').hidden,false);
+  assert.equal(fallback.textContent.trim(),'Abrir la agenda de Centralia ↗');assert.match(fallback.href,/^https:\/\/meetings\.hubspot\.com\//);assert.doesNotMatch(fallback.href,/wa\.me/);
+  // Reintentar vuelve a pedir horarios y conserva un mensaje claro.
+  const before=requests.filter(r=>r.url.includes('/api/agenda/availability')).length;retry.click();await new Promise(r=>setTimeout(r,30));
+  assert.equal(requests.filter(r=>r.url.includes('/api/agenda/availability')).length,before+1);
+  assert.doesNotMatch(summary(),/Unexpected token|Failed to fetch|JSON|NOT_CONFIGURED/);assert.equal(retry.hidden,false);
+  // Opción 2: la pestaña superior de WhatsApp sigue disponible y forma el enlace con el producto, sin abrirlo.
+  const tab=doc.querySelector('[data-channel="whatsapp"]');assert.ok(tab);assert.equal(tab.disabled,false);
+  tab.click();assert.equal(tab.getAttribute('aria-pressed'),'true');assert.equal(doc.querySelector('#cp-whatsapp').hidden,false);assert.equal(doc.querySelector('#cp-agenda').hidden,true);
+  const wa=new URL(doc.querySelector('#cp-whatsapp-link').href);assert.equal(wa.origin+wa.pathname,'https://wa.me/525548092849');
+  assert.equal(wa.searchParams.get('text'),'Hola, me gustaría revisar opciones de factoraje para mi empresa.');
+  // Nada se abrió ni se envió: solo consultas GET de disponibilidad.
+  assert.equal(opened.length,0);assert.ok(requests.every(r=>r.method==='GET'&&r.url.includes('/api/agenda/availability')));
+  d.window.close();
+ }
 });
