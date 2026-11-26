@@ -77,11 +77,11 @@
       else $(selector).removeAttribute('datetime');
     }
   }
-  async function getAvailability(){const res=await fetch(`/api/agenda/availability?monthOffset=${offset}`,{cache:'no-store'}),data=await res.json();if(!res.ok)throw new Error(data.message);return data;}
+  async function getAvailability(){const res=await fetch(`/api/agenda/availability?monthOffset=${offset}`,{cache:'no-store'});let data=null;try{data=await res.json();}catch{}if(!res.ok||!data){const error=new Error(data&&typeof data.message==='string'?data.message:'');error.fromServer=true;throw error;}return data;}
   async function load(){
     if(submitting||uncertain||booked)return;const current=++serial;loading=true;slots=[];dateKey='';page=0;resetSelection();$('#cp-retry').hidden=true;$('#cp-agenda-fallback').hidden=true;calendar();times();
     try{const data=await getAvailability();if(current!==serial)return;slots=data.slots;hasMore=data.hasMore;dateKey=slots.length?key(slots[0].start):'';loaded=true;}
-    catch(err){if(current!==serial)return;loading=false;calendar();$('#cp-booking-summary').textContent=err.message||'No pudimos consultar la agenda.';$('#cp-mobile-date').textContent='Agenda no disponible';$('#cp-selected-date').textContent='No se pudieron cargar los horarios';$('#cp-time-continue').disabled=true;$('#cp-retry').hidden=false;$('#cp-agenda-fallback').hidden=false;return;}
+    catch(err){if(current!==serial)return;loading=false;calendar();$('#cp-booking-summary').textContent=(err&&err.fromServer&&err.message)||'No pudimos consultar la agenda. Intenta de nuevo o escríbenos por WhatsApp.';$('#cp-mobile-date').textContent='Agenda no disponible';$('#cp-selected-date').textContent='No se pudieron cargar los horarios';$('#cp-time-continue').disabled=true;$('#cp-retry').hidden=false;$('#cp-agenda-fallback').hidden=false;return;}
     loading=false;calendar();times();if(!slots.length){$('#cp-booking-summary').textContent='No hay horarios disponibles en este mes. Prueba el siguiente.';$('#cp-calendar').classList.add('is-open');$('#cp-change-date').setAttribute('aria-expanded','true');}
   }
   $('#cp-change-date').addEventListener('click',()=>$('#cp-change-date').setAttribute('aria-expanded',String($('#cp-calendar').classList.toggle('is-open'))));
