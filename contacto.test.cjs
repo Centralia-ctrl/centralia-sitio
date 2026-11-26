@@ -72,3 +72,11 @@ test('Agenda receives only a confirmed amount; editing it clears confirmation, n
     assert.equal(JSON.stringify(calls).includes('hutk'),false);d.window.close();
   }
 });
+test('Agenda shows a clear message, never a raw parser or network error, when availability fails',async()=>{
+ const cases=[async()=>({ok:false,status:404,json:async()=>{throw new SyntaxError("Unexpected token 'N', \"Not found\" is not valid JSON");}}),async()=>{throw new TypeError('Failed to fetch');}];
+ for(const impl of cases){const d=new JSDOM(fs.readFileSync('contacto.html','utf8'),{url:'https://centralia-sitio.netlify.app/contacto.html?canal=agenda',runScripts:'outside-only'}),w=d.window;w.matchMedia=()=>({matches:true,addEventListener(){}});w.HTMLElement.prototype.scrollIntoView=function(){};w.fetch=async(url)=>String(url).includes('/api/agenda/availability')?impl():({ok:true,status:200,json:async()=>({})});w.eval(fs.readFileSync('contacto-form.js','utf8'));w.eval(fs.readFileSync('contacto.js','utf8'));const doc=w.document;
+  await new Promise(r=>setTimeout(r,30));
+  const text=doc.querySelector('#cp-booking-summary').textContent;
+  assert.match(text,/No pudimos consultar la agenda/);assert.doesNotMatch(text,/Unexpected token|Failed to fetch|JSON/);
+  assert.equal(doc.querySelector('#cp-agenda-fallback').hidden,false);d.window.close();}
+});
