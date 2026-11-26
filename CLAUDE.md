@@ -14,7 +14,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 ## Cómo se publica
 
 - Netlify ejecuta `node build.cjs` y publica solo `dist/`. `dist/` no se versiona (`.gitignore`).
-- Páginas públicas: las 5 principales (`index.html`, `credito-empresarial.html`, `factoraje.html`, `pago-a-proveedores.html` y `preguntas-frecuentes.html`) y el blog (`blog/index.html` y 16 artículos). Para publicar otra, agrégala a `PAGES` en `build.cjs`, y solo con aprobación de Miguel Ángel.
+- Páginas públicas (25 al 26 de noviembre de 2026): las 5 principales (`index.html`, `credito-empresarial.html`, `factoraje.html`, `pago-a-proveedores.html` y `preguntas-frecuentes.html`), `contacto.html` y el blog (`blog/index.html` y 18 artículos). Para publicar otra, agrégala a `PAGES` en `build.cjs`, y solo con aprobación de Miguel Ángel.
 - `site.css` se genera desde las capas de estilo listadas en `build.cjs`. No lo edites a mano: edita la capa y vuelve a construir.
 - Las muestras, los estudios y los recursos originales (`muestra-*`, `por-que-centralia.html`, los videos de prueba de factoraje y otros) se quedan en el repositorio como referencia. No los borres y no los publiques.
 - Blog en `blog/` (aprobado por Miguel Ángel). Sus páginas se generan con `python3 herramientas/blog.py` desde `herramientas/blog-articulos/<slug>.html` y la plantilla de `preguntas-frecuentes.html`. No las edites a mano. Para publicar un artículo: agrega su cuerpo y sus datos en `ARTICLES`, ejecuta el script, agrega la página a `PAGES` en `build.cjs` y a `sitemap.xml`, y ejecuta `node build.cjs`. Cada artículo sigue las reglas del sitio: sin instituciones ni cifras no confirmadas.
@@ -108,7 +108,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 
 ## En espera (no hacer sin instrucción)
 
-- Aviso de privacidad: se hará cuando se constituya la persona moral.
+- Aviso de privacidad: borrador en el PR #110 (página `aviso-de-privacidad.html` y redirección desde `/aviso-de-privacidad/`), a petición de Miguel Ángel el 25 de noviembre de 2026. Responsable: Martha Patricia Meza Badillo, persona física. Espera revisión legal y la confirmación de Miguel Ángel; se actualizará cuando se constituya la persona moral.
 - Razón social: CENTRALIA FINANCIERA® es una marca comercial operada por Martha Patricia Meza Badillo, persona física con actividad empresarial (dato de Miguel Ángel, 10 de noviembre de 2026). El símbolo ® se conserva: Miguel Ángel confirmó que la marca está registrada. Falta decidir si el nombre del operador aparece en el pie; va en el aviso de privacidad.
 - **Domicilio** (10 de noviembre de 2026): Av. Popocatépetl 415, Sta. Cruz Atoyac, Benito Juárez, 03310, Ciudad de México. Está en el pie de todas las páginas y en `Organization` de la portada.
 - Cifras y condiciones. Ya confirmado por Miguel Ángel: tasa ilustrativa del simulador de 2% mensual, plazo máximo de 36 meses (el simulador ofrece 12, 18, 24, 30 y 36) y anticipo de factoraje de hasta 85% del valor de facturas elegibles, antes de costos (26 de octubre de 2026).
