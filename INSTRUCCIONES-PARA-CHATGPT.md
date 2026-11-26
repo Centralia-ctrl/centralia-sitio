@@ -15,7 +15,7 @@ Trabaja siempre con cambios pequeños y revisables: un tema por propuesta, con v
 
 1. No uses la palabra "broker".
 2. No inventes instituciones aliadas, certificaciones, membresías, testimonios, garantías ni cifras.
-3. "Más de 10 años de experiencia" y "$4,500 millones de pesos colocados" son datos confirmados de Centralia. No los presentes como cifras auditadas.
+3. "Más de 10 años de experiencia" y "$5,000 millones de pesos colocados" son datos confirmados de Centralia. No los presentes como cifras auditadas.
 4. Nunca menciones nombres de fondeadores o instituciones en el sitio.
 5. Conserva el diseño aprobado y las animaciones actuales. No cambies colores, tipografía, composición ni animaciones sin aprobación.
 6. La portada sigue siendo amplia y protagonista.

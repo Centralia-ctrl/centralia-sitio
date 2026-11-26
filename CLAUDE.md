@@ -27,7 +27,7 @@ Dueño y quien aprueba todo: Miguel Ángel Meza Badillo. Escríbele en español,
 - No uses la palabra "broker".
 - No menciones fondeadores ni instituciones.
 - No inventes cifras, testimonios, certificaciones, alianzas ni garantías.
-- "Más de 10 años" y "$4,500 millones de pesos colocados" son datos confirmados, pero no auditados.
+- "Más de 10 años" y "$5,000 millones de pesos colocados" son datos confirmados, pero no auditados. La cifra de $5,000 millones sustituyó a $4,500 millones el 23 de noviembre de 2026 (PR #97, aprobada por Miguel Ángel).
 - Conserva el diseño y las animaciones aprobados. Cualquier cambio visual va con vista previa y aprobación.
 - Paleta: navy `#1b224e`, azul `#315de8` (solo para la acción principal), hover `#254bc6`, texto `#303647`, secundario `#5d6470` y líneas `#e4e7ee`.
 - Factoraje es la referencia de las animaciones: fondo blanco, sin sonido, sin logo dentro y texto en HTML.
