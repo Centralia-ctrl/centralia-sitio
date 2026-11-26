@@ -249,3 +249,7 @@ Miguel Ángel aprobó publicar estos ajustes de portada, Factoraje y Pago a prov
 Miguel Ángel eligió la muestra «Franja editorial», aprobó pulirla y después indicó «publícalo». La portada presenta las cifras alineadas, unidades discretas y una cifra debajo de la otra en celular. En esa misma muestra indicó $5,000 millones de pesos colocados, que sustituye los $4,500 millones anteriores para la comunicación vigente de la portada. Se mantiene «Más de 10 años de experiencia»; no se afirma que las cifras estén auditadas.
 
 Cambio independiente del borrador #96: index.html, release-v24.css y site.css generado con node build.cjs, además de esta nota. No integra el resto de la propuesta premium. Formularios, agenda, cálculos, figuras, videos y medición apagada se conservan.
+
+## Pago a proveedores: línea reutilizable y crédito revolvente · 26 de noviembre de 2026
+
+Miguel Ángel confirmó («si») que la línea de Pago a proveedores se puede volver a usar en varias compras y que Centralia ofrece crédito revolvente. Las guías del PR #109 los mencionan sin cifras ni condiciones adicionales. El descuento por pronto pago sigue siendo condicional: solo si el proveedor lo ofrece y el ahorro supera el costo del financiamiento.
